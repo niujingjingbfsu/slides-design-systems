@@ -6,7 +6,7 @@
 <title>NOUVEAU — Slide Template</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Noto+Serif+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #F0E6D3;
@@ -15,11 +15,11 @@
     --gold: #B8944F;
     --purple: #7D5A6E;
     --muted: #6B6352;
-    --font-display: 'Playfair Display', Georgia, serif;
-    --font-body: 'Cormorant Garamond', Georgia, serif;
+    --font-display: 'Playfair Display', 'Noto Serif SC', Georgia, serif
+    --font-body: 'Cormorant Garamond', 'Noto Serif SC', Georgia, serif
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  html, body { height: 100%; background: #1a1a1a; font-family: var(--font-body); overflow: hidden; }
+  html, body { height: 100%; background: #1a1a1a; font-family: var(--font-body) overflow: hidden }
   .deck { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; }
   .slide {
     position: absolute; top: 50%; left: 50%; width: 1280px; height: 720px; background: var(--bg); color: var(--fg);
@@ -40,7 +40,7 @@
 
   .footer {
     margin-top: auto; display: flex; justify-content: space-between; align-items: center;
-    font-family: var(--font-body); font-size: 13px; letter-spacing: 0.25em; text-transform: uppercase;
+    font-family: var(--font-body) font-size: 13px letter-spacing: 0.25em; text-transform: uppercase;
     color: var(--muted); padding-top: 12px; z-index: 2; position: relative;
   }
   .footer .ornament { color: var(--gold); font-size: 16px; }
@@ -50,75 +50,104 @@
   .ornament-divider { display: flex; align-items: center; gap: 16px; color: var(--gold); }
   .ornament-divider::before, .ornament-divider::after { content:''; flex: 1; height: 1px; background: var(--gold); opacity: 0.5; }
 
-  .label { font-family: var(--font-body); font-size: 12px; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); font-weight: 600; }
+  .label { font-family: var(--font-body) font-size: 12px letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); font-weight: 600; }
 
   .title-slide { justify-content: center; align-items: center; text-align: center; }
   .title-slide .medallion { position: absolute; right: 60px; top: 50%; transform: translateY(-50%); width: 320px; height: 320px; z-index: 0; }
   .title-slide .medallion svg { width: 100%; height: 100%; }
   .title-slide .label { margin-bottom: 20px; }
-  .title-slide h1 { font-family: var(--font-display); font-size: 108px; font-weight: 900; line-height: 1; letter-spacing: 0.02em; color: var(--green); }
+  .title-slide h1 { font-family: var(--font-display) font-size: 108px font-weight: 900; line-height: 1.15; letter-spacing: 0.02em; color: var(--green); }
   .title-slide h1 em { font-style: italic; font-weight: 400; color: var(--gold); }
   .title-slide .subtitle { margin-top: 20px; font-size: 18px; font-style: italic; color: var(--muted); max-width: 420px; line-height: 1.6; }
   .title-slide .ornament-divider { margin: 24px 0; width: 200px; }
 
   .section-slide { justify-content: center; align-items: center; text-align: center; }
   .section-slide .deco { left: 50%; top: 50%; transform: translate(-50%,-50%); width: 500px; height: 500px; opacity: 0.08; }
-  .section-slide .num { font-family: var(--font-body); font-size: 13px; letter-spacing: 0.4em; color: var(--gold); margin-bottom: 16px; }
-  .section-slide h2 { font-family: var(--font-display); font-size: 80px; font-weight: 700; line-height: 1.1; color: var(--green); }
+  .section-slide .num { font-family: var(--font-body) font-size: 13px letter-spacing: 0.4em; color: var(--gold); margin-bottom: 16px; }
+  .section-slide h2 { font-family: var(--font-display) font-size: 80px font-weight: 700; line-height: 1.15; color: var(--green); }
   .section-slide h2 em { font-style: italic; font-weight: 400; color: var(--purple); }
   .section-slide .ornament-divider { margin: 20px 0; width: 160px; }
   .section-slide p { font-size: 17px; font-style: italic; color: var(--muted); max-width: 440px; line-height: 1.7; }
 
   .content-slide .header { text-align: center; margin-bottom: 36px; }
   .content-slide .label { margin-bottom: 10px; }
-  .content-slide h2 { font-family: var(--font-display); font-size: 40px; font-weight: 700; color: var(--green); }
+  .content-slide h2 { font-family: var(--font-display) font-size: 40px font-weight: 700; color: var(--green); }
   .content-slide h2 em { font-style: italic; color: var(--gold); }
   .content-slide .cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 32px; flex: 1; }
   .content-slide .card { text-align: center; padding: 32px 24px; display: flex; flex-direction: column; align-items: center; }
-  .content-slide .card .ornament-circle { width: 64px; height: 64px; border: 1.5px solid var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; color: var(--green); font-size: 24px; font-family: var(--font-display); }
-  .content-slide .card h3 { font-family: var(--font-display); font-size: 22px; font-weight: 700; color: var(--green); margin-bottom: 10px; }
+  .content-slide .card .ornament-circle { width: 64px; height: 64px; border: 1.5px solid var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; color: var(--green); font-size: 24px; font-family: var(--font-display) }
+  .content-slide .card h3 { font-family: var(--font-display) font-size: 22px font-weight: 700; color: var(--green); margin-bottom: 10px; }
   .content-slide .card h3 em { font-style: italic; color: var(--purple); }
   .content-slide .card p { font-size: 15px; line-height: 1.7; color: var(--muted); }
   .content-slide .card .divider { width: 40px; height: 1px; background: var(--gold); margin: 16px 0; opacity: 0.5; }
 
   .two-col .header { text-align: center; margin-bottom: 28px; }
-  .two-col h2 { font-family: var(--font-display); font-size: 38px; font-weight: 700; color: var(--green); }
+  .two-col h2 { font-family: var(--font-display) font-size: 38px font-weight: 700; color: var(--green); }
   .two-col .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; flex: 1; }
   .two-col .col { padding: 36px; display: flex; flex-direction: column; border-top: 1px solid var(--gold); border-bottom: 1px solid var(--gold); }
   .two-col .col.a { border-right: 1px solid rgba(184,148,79,0.3); padding-right: 40px; }
   .two-col .col .tag { font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
-  .two-col .col h3 { font-family: var(--font-display); font-size: 26px; font-weight: 700; color: var(--green); margin-bottom: 12px; }
+  .two-col .col h3 { font-family: var(--font-display) font-size: 26px font-weight: 700; color: var(--green); margin-bottom: 12px; }
   .two-col .col h3 em { font-style: italic; color: var(--purple); }
   .two-col .col p { font-size: 15px; line-height: 1.8; color: var(--muted); }
-  .two-col .col .stat { margin-top: auto; padding-top: 16px; font-family: var(--font-display); font-size: 48px; font-weight: 700; color: var(--gold); }
+  .two-col .col .stat { margin-top: auto; padding-top: 16px; font-family: var(--font-display) font-size: 48px font-weight: 700; color: var(--gold); }
   .two-col .col .stat em { font-style: italic; font-weight: 400; font-size: 20px; color: var(--muted); }
 
   .quote-slide { justify-content: center; align-items: center; text-align: center; }
   .quote-slide .quote-frame { max-width: 860px; padding: 48px 64px; position: relative; }
-  .quote-slide blockquote { font-family: var(--font-display); font-size: 40px; font-weight: 400; font-style: italic; line-height: 1.4; color: var(--green); }
+  .quote-slide blockquote { font-family: var(--font-display) font-size: 40px font-weight: 400; font-style: italic; line-height: 1.4; color: var(--green); }
   .quote-slide blockquote strong { font-weight: 700; font-style: normal; color: var(--purple); }
   .quote-slide cite { display: block; margin-top: 28px; font-size: 13px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); font-style: normal; }
-  .quote-slide .big-quote { font-family: var(--font-display); font-size: 120px; color: var(--gold); opacity: 0.3; line-height: 0.5; margin-bottom: 10px; }
+  .quote-slide .big-quote { font-family: var(--font-display) font-size: 120px color: var(--gold); opacity: 0.3; line-height: 0.5; margin-bottom: 10px; }
 
   .data-slide .header { text-align: center; margin-bottom: 28px; }
-  .data-slide h2 { font-family: var(--font-display); font-size: 38px; font-weight: 700; color: var(--green); }
+  .data-slide h2 { font-family: var(--font-display) font-size: 38px font-weight: 700; color: var(--green); }
   .data-slide .metrics { display: grid; grid-template-columns: repeat(4,1fr); gap: 0; flex: 1; align-content: center; }
   .data-slide .metric { text-align: center; padding: 32px 16px; position: relative; }
   .data-slide .metric:not(:last-child)::after { content:''; position: absolute; right: 0; top: 20%; bottom: 20%; width: 1px; background: var(--gold); opacity: 0.4; }
-  .data-slide .metric .value { font-family: var(--font-display); font-size: 52px; font-weight: 700; color: var(--green); line-height: 1; }
+  .data-slide .metric .value { font-family: var(--font-display) font-size: 52px font-weight: 700; color: var(--green); line-height: 1; }
   .data-slide .metric .value em { font-style: italic; font-weight: 400; color: var(--gold); }
   .data-slide .metric .label { margin-top: 10px; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); line-height: 1.5; }
 
   .closing-slide { justify-content: center; align-items: center; text-align: center; }
   .closing-slide .deco { left: 50%; top: 50%; transform: translate(-50%,-50%); width: 400px; height: 400px; opacity: 0.1; }
-  .closing-slide h2 { font-family: var(--font-display); font-size: 88px; font-weight: 900; color: var(--green); }
+  .closing-slide h2 { font-family: var(--font-display) font-size: 88px font-weight: 900; color: var(--green); }
   .closing-slide h2 em { font-style: italic; font-weight: 400; color: var(--gold); }
   .closing-slide .ornament-divider { margin: 20px 0; width: 200px; }
   .closing-slide p { font-size: 18px; font-style: italic; color: var(--muted); }
-  .closing-slide .btn { margin-top: 28px; display: inline-block; border: 1.5px solid var(--gold); color: var(--green); padding: 12px 36px; font-family: var(--font-body); font-size: 13px; letter-spacing: 0.25em; text-transform: uppercase; background: transparent; }
+  .closing-slide .btn { margin-top: 28px; display: inline-block; border: 1.5px solid var(--gold); color: var(--green); padding: 12px 36px; font-family: var(--font-body) font-size: 13px letter-spacing: 0.25em; text-transform: uppercase; background: transparent; }
 
-  .nav-hint { position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%); color: rgba(0,0,0,0.25); font-family: var(--font-body); font-size: 11px; letter-spacing: 0.2em; z-index: 100; pointer-events: none; }
-  .counter { position: absolute; bottom: 16px; right: 24px; color: rgba(0,0,0,0.4); font-family: var(--font-body); font-size: 12px; letter-spacing: 0.15em; z-index: 100; }
+  .nav-hint { position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%); color: rgba(0,0,0,0.25); font-family: var(--font-body) font-size: 11px letter-spacing: 0.2em; z-index: 100; pointer-events: none; }
+  .counter { position: absolute; bottom: 16px; right: 24px; color: rgba(0,0,0,0.4); font-family: var(--font-body) font-size: 12px letter-spacing: 0.15em; z-index: 100; }
+
+    /* CJK readability fixes */
+    h1, h2, h3, h4 { line-height: 1.2; }
+    .title-slide h1 { line-height: 1.18; }
+    .content-slide .header, .two-col .header, .data-slide .header { margin-bottom: 40px; }
+    .content-slide .body { gap: 32px; }
+    .two-col .cols { gap: 32px; }
+    .data-slide .metrics { gap: 24px; }
+    .content-slide ul { gap: 4px; }
+    .content-slide li { padding: 20px 0; }
+    .two-col .col { padding: 36px 40px; }
+    .data-slide .metric { padding: 32px 28px; }
+    
+
+    /* CJK readability fixes */
+    h1, h2, h3, h4 { line-height: 1.2; }
+    .title-slide h1 { line-height: 1.18; font-weight: 900; }
+    .section-slide h2 { font-weight: 900; }
+    .content-slide h2, .two-col h2, .data-slide h2 { font-weight: 900; }
+    .content-slide .header, .two-col .header, .data-slide .header { margin-bottom: 40px; }
+    .content-slide .body { gap: 32px; }
+    .two-col .cols { gap: 32px; }
+    .data-slide .metrics { gap: 24px; }
+    .content-slide ul { gap: 4px; }
+    .content-slide li { padding: 20px 0; }
+    .two-col .col { padding: 36px 40px; }
+    .data-slide .metric { padding: 32px 28px; }
+    .content-slide .card, .two-col .col { margin-bottom: 0; }
+    
 </style>
 </head>
 <body>

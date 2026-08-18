@@ -6,7 +6,7 @@
 <title>Soft Space — Slide Template</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #FAF6EF;
@@ -20,7 +20,7 @@
     --shadow-lg: 0 20px 60px rgba(61, 53, 48, 0.08), 0 4px 16px rgba(61, 53, 48, 0.05);
     --radius: 20px;
     --radius-lg: 28px;
-    --font: 'Plus Jakarta Sans', -apple-system, sans-serif;
+    --font: 'Plus Jakarta Sans', 'Noto Sans SC', -apple-system, sans-serif
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -28,8 +28,8 @@
   html, body {
     height: 100%;
     background: #E8E2D9;
-    font-family: var(--font);
-    overflow: hidden;
+    font-family: var(--font)
+    overflow: hidden
     }
 
   .deck { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; }
@@ -101,7 +101,7 @@
     font-size: 88px;
     font-weight: 800;
     letter-spacing: -0.03em;
-    line-height: 1.05;
+    line-height: 1.15;
   }
   .title-slide h1 .soft { color: #C49A8F; font-weight: 300; }
   .title-slide .subtitle {
@@ -141,7 +141,7 @@
     font-size: 80px;
     font-weight: 800;
     letter-spacing: -0.03em;
-    line-height: 1.1;
+    line-height: 1.15;
   }
   .section-slide h2 .light { font-weight: 300; color: var(--muted); }
   .section-slide p {
@@ -333,8 +333,8 @@
     left: 50%;
     transform: translateX(-50%);
     color: rgba(255,255,255,0.4);
-    font-family: var(--font);
-    font-size: 11px;
+    font-family: var(--font)
+    font-size: 11px
     font-weight: 500;
     letter-spacing: 0.1em;
     z-index: 100;
@@ -345,11 +345,40 @@
     bottom: 16px;
     right: 24px;
     color: rgba(255,255,255,0.5);
-    font-family: var(--font);
-    font-size: 12px;
+    font-family: var(--font)
+    font-size: 12px
     font-weight: 600;
     z-index: 100;
   }
+
+    /* CJK readability fixes */
+    h1, h2, h3, h4 { line-height: 1.2; }
+    .title-slide h1 { line-height: 1.18; }
+    .content-slide .header, .two-col .header, .data-slide .header { margin-bottom: 40px; }
+    .content-slide .body { gap: 32px; }
+    .two-col .cols { gap: 32px; }
+    .data-slide .metrics { gap: 24px; }
+    .content-slide ul { gap: 4px; }
+    .content-slide li { padding: 20px 0; }
+    .two-col .col { padding: 36px 40px; }
+    .data-slide .metric { padding: 32px 28px; }
+    
+
+    /* CJK readability fixes */
+    h1, h2, h3, h4 { line-height: 1.2; }
+    .title-slide h1 { line-height: 1.18; font-weight: 900; }
+    .section-slide h2 { font-weight: 900; }
+    .content-slide h2, .two-col h2, .data-slide h2 { font-weight: 900; }
+    .content-slide .header, .two-col .header, .data-slide .header { margin-bottom: 40px; }
+    .content-slide .body { gap: 32px; }
+    .two-col .cols { gap: 32px; }
+    .data-slide .metrics { gap: 24px; }
+    .content-slide ul { gap: 4px; }
+    .content-slide li { padding: 20px 0; }
+    .two-col .col { padding: 36px 40px; }
+    .data-slide .metric { padding: 32px 28px; }
+    .content-slide .card, .two-col .col { margin-bottom: 0; }
+    
 </style>
 </head>
 <body>

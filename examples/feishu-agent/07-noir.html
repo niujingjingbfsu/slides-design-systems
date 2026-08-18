@@ -7,7 +7,7 @@
 <title>聊着天，把活干了 — Slides Design Systems</title>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&amp;family=Inter:wght@300;400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&amp;family=Inter:wght@300;400;500&amp;family=Noto+Serif+SC:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
 <style>
   :root {
     --bg: #0A0A0A;
@@ -16,8 +16,8 @@
     --gold: #C9A96E;
     --gold-dim: rgba(201, 169, 110, 0.3);
     --line: rgba(255, 255, 255, 0.08);
-    --font-serif: 'Cormorant Garamond', 'Times New Roman', serif;
-    --font-sans: 'Inter', -apple-system, sans-serif;
+    --font-serif: 'Cormorant Garamond', 'Noto Serif SC', 'Times New Roman', serif
+    --font-sans: 'Inter', 'Noto Serif SC', -apple-system, sans-serif
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -25,8 +25,8 @@
   html, body {
     height: 100%;
     background: #000;
-    font-family: var(--font-sans);
-    overflow: hidden;
+    font-family: var(--font-sans)
+    overflow: hidden
     }
 
   .deck { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; }
@@ -111,10 +111,10 @@
     margin-bottom: 32px;
   }
   .title-slide h1 {
-    font-family: var(--font-serif);
-    font-size: 140px;
+    font-family: var(--font-serif)
+    font-size: 140px
     font-weight: 300;
-    line-height: 1;
+    line-height: 1.15;
     letter-spacing: 0.08em;
   }
   .title-slide h1 .italic { font-style: italic; font-weight: 300; color: var(--gold); }
@@ -130,18 +130,18 @@
   /* ---- Slide 2: Section ---- */
   .section-slide { justify-content: center; align-items: center; text-align: center; }
   .section-slide .chapter {
-    font-family: var(--font-serif);
-    font-size: 13px;
+    font-family: var(--font-serif)
+    font-size: 13px
     color: var(--gold);
     letter-spacing: 0.4em;
     margin-bottom: 28px;
     font-style: italic;
   }
   .section-slide h2 {
-    font-family: var(--font-serif);
-    font-size: 96px;
+    font-family: var(--font-serif)
+    font-size: 96px
     font-weight: 300;
-    line-height: 1.1;
+    line-height: 1.15;
     letter-spacing: 0.02em;
   }
   .section-slide h2 .gold { color: var(--gold); font-style: italic; }
@@ -168,8 +168,8 @@
     margin-bottom: 16px;
   }
   .content-slide h2 {
-    font-family: var(--font-serif);
-    font-size: 48px;
+    font-family: var(--font-serif)
+    font-size: 48px
     font-weight: 300;
     letter-spacing: 0.02em;
   }
@@ -191,8 +191,8 @@
     align-items: center;
   }
   .content-slide .item .num {
-    font-family: var(--font-serif);
-    font-size: 40px;
+    font-family: var(--font-serif)
+    font-size: 40px
     font-weight: 300;
     color: var(--gold);
     line-height: 1;
@@ -205,8 +205,8 @@
     margin-bottom: 24px;
   }
   .content-slide .item h3 {
-    font-family: var(--font-serif);
-    font-size: 24px;
+    font-family: var(--font-serif)
+    font-size: 24px
     font-weight: 400;
     margin-bottom: 14px;
     letter-spacing: 0.02em;
@@ -232,8 +232,8 @@
     margin-bottom: 16px;
   }
   .two-col h2 {
-    font-family: var(--font-serif);
-    font-size: 44px;
+    font-family: var(--font-serif)
+    font-size: 44px
     font-weight: 300;
   }
   .two-col h2 .italic { font-style: italic; color: var(--gold); }
@@ -261,8 +261,8 @@
     margin-bottom: 20px;
   }
   .two-col .col h3 {
-    font-family: var(--font-serif);
-    font-size: 32px;
+    font-family: var(--font-serif)
+    font-size: 32px
     font-weight: 300;
     margin-bottom: 16px;
   }
@@ -278,8 +278,8 @@
     margin-top: 24px;
     padding-top: 20px;
     border-top: 1px solid var(--line);
-    font-family: var(--font-serif);
-    font-size: 20px;
+    font-family: var(--font-serif)
+    font-size: 20px
     color: var(--gold);
     width: 100%;
     letter-spacing: 0.05em;
@@ -288,16 +288,16 @@
   /* ---- Slide 5: Quote ---- */
   .quote-slide { justify-content: center; align-items: center; text-align: center; }
   .quote-slide .quote-mark {
-    font-family: var(--font-serif);
-    font-size: 80px;
+    font-family: var(--font-serif)
+    font-size: 80px
     color: var(--gold);
     line-height: 0.5;
     margin-bottom: 20px;
     opacity: 0.5;
   }
   .quote-slide blockquote {
-    font-family: var(--font-serif);
-    font-size: 52px;
+    font-family: var(--font-serif)
+    font-size: 52px
     font-weight: 300;
     line-height: 1.4;
     letter-spacing: 0.01em;
@@ -326,8 +326,8 @@
     margin-bottom: 16px;
   }
   .data-slide h2 {
-    font-family: var(--font-serif);
-    font-size: 44px;
+    font-family: var(--font-serif)
+    font-size: 44px
     font-weight: 300;
   }
   .data-slide h2 .italic { font-style: italic; color: var(--gold); }
@@ -352,8 +352,8 @@
     background: var(--line);
   }
   .data-slide .metric .value {
-    font-family: var(--font-serif);
-    font-size: 88px;
+    font-family: var(--font-serif)
+    font-size: 88px
     font-weight: 300;
     line-height: 1;
     color: var(--fg);
@@ -371,15 +371,15 @@
   /* ---- Slide 7: Closing ---- */
   .closing-slide { justify-content: center; align-items: center; text-align: center; }
   .closing-slide .monogram {
-    font-family: var(--font-serif);
-    font-size: 24px;
+    font-family: var(--font-serif)
+    font-size: 24px
     color: var(--gold);
     letter-spacing: 0.3em;
     margin-bottom: 32px;
   }
   .closing-slide h2 {
-    font-family: var(--font-serif);
-    font-size: 100px;
+    font-family: var(--font-serif)
+    font-size: 100px
     font-weight: 300;
     letter-spacing: 0.05em;
   }
@@ -399,8 +399,8 @@
     left: 50%;
     transform: translateX(-50%);
     color: rgba(255,255,255,0.2);
-    font-family: var(--font-sans);
-    font-size: 10px;
+    font-family: var(--font-sans)
+    font-size: 10px
     letter-spacing: 0.2em;
     z-index: 100;
     pointer-events: none;
@@ -410,11 +410,40 @@
     bottom: 16px;
     right: 24px;
     color: rgba(255,255,255,0.35);
-    font-family: var(--font-sans);
-    font-size: 11px;
+    font-family: var(--font-sans)
+    font-size: 11px
     z-index: 100;
     letter-spacing: 0.1em;
   }
+
+    /* CJK readability fixes */
+    h1, h2, h3, h4 { line-height: 1.2; }
+    .title-slide h1 { line-height: 1.18; }
+    .content-slide .header, .two-col .header, .data-slide .header { margin-bottom: 40px; }
+    .content-slide .body { gap: 32px; }
+    .two-col .cols { gap: 32px; }
+    .data-slide .metrics { gap: 24px; }
+    .content-slide ul { gap: 4px; }
+    .content-slide li { padding: 20px 0; }
+    .two-col .col { padding: 36px 40px; }
+    .data-slide .metric { padding: 32px 28px; }
+    
+
+    /* CJK readability fixes */
+    h1, h2, h3, h4 { line-height: 1.2; }
+    .title-slide h1 { line-height: 1.18; font-weight: 900; }
+    .section-slide h2 { font-weight: 900; }
+    .content-slide h2, .two-col h2, .data-slide h2 { font-weight: 900; }
+    .content-slide .header, .two-col .header, .data-slide .header { margin-bottom: 40px; }
+    .content-slide .body { gap: 32px; }
+    .two-col .cols { gap: 32px; }
+    .data-slide .metrics { gap: 24px; }
+    .content-slide ul { gap: 4px; }
+    .content-slide li { padding: 20px 0; }
+    .two-col .col { padding: 36px 40px; }
+    .data-slide .metric { padding: 32px 28px; }
+    .content-slide .card, .two-col .col { margin-bottom: 0; }
+    
 </style>
 </head>
 <body>

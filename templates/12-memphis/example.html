@@ -6,7 +6,7 @@
 <title>MEMPHIS — Slide Template</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;600;800&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #F5F0E8;
@@ -16,11 +16,11 @@
     --yellow: #FFD93D;
     --red: #FF4757;
     --blue: #4ECDC4;
-    --font-display: 'Archivo Black', sans-serif;
-    --font-body: 'Inter', -apple-system, sans-serif;
+    --font-display: 'Archivo Black', 'Noto Sans SC', sans-serif
+    --font-body: 'Inter', 'Noto Sans SC', -apple-system, sans-serif
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  html, body { height: 100%; background: #2a2520; font-family: var(--font-body); overflow: hidden; }
+  html, body { height: 100%; background: #2a2520; font-family: var(--font-body) overflow: hidden }
   .deck { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; }
   .slide {
     position: absolute; top: 50%; left: 50%; width: 1280px; height: 720px; background: var(--bg); color: var(--fg);
@@ -52,7 +52,7 @@
   /* Title */
   .title-slide { justify-content: center; }
   .title-slide .badge { display: inline-block; background: var(--pink); color: #fff; border: 3px solid #000; padding: 6px 18px; font-weight: 800; font-size: 13px; text-transform: uppercase; margin-bottom: 24px; transform: rotate(-2deg); align-self: flex-start; }
-  .title-slide h1 { font-family: var(--font-display); font-size: 120px; line-height: 0.9; text-transform: uppercase; }
+  .title-slide h1 { font-family: var(--font-display) font-size: 120px line-height: 1.15; text-transform: uppercase; }
   .title-slide h1 .pink { color: var(--pink); }
   .title-slide h1 .cyan { color: var(--cyan); -webkit-text-stroke: 3px #000; }
   .title-slide .subtitle { margin-top: 24px; font-size: 17px; font-weight: 600; max-width: 460px; line-height: 1.6; }
@@ -61,25 +61,25 @@
   /* Section */
   .section-slide { justify-content: center; }
   .section-slide .label { display: inline-block; background: var(--cyan); color: #000; border: 3px solid #000; padding: 6px 18px; font-weight: 800; font-size: 13px; text-transform: uppercase; margin-bottom: 20px; transform: rotate(1deg); }
-  .section-slide h2 { font-family: var(--font-display); font-size: 96px; line-height: 0.95; text-transform: uppercase; max-width: 700px; }
+  .section-slide h2 { font-family: var(--font-display) font-size: 96px line-height: 1.15; text-transform: uppercase; max-width: 700px; }
   .section-slide h2 .yellow-bg { background: var(--yellow); padding: 0 12px; border: 3px solid #000; display: inline-block; transform: rotate(-1deg); }
 
   /* Content */
   .content-slide .header { margin-bottom: 32px; }
   .content-slide .label { display: inline-block; background: var(--yellow); border: 3px solid #000; padding: 5px 16px; font-weight: 800; font-size: 12px; text-transform: uppercase; margin-bottom: 12px; }
-  .content-slide h2 { font-family: var(--font-display); font-size: 44px; text-transform: uppercase; line-height: 1; }
+  .content-slide h2 { font-family: var(--font-display) font-size: 44px text-transform: uppercase; line-height: 1.15; }
   .content-slide .cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; flex: 1; }
   .content-slide .card { border: 4px solid #000; padding: 28px; display: flex; flex-direction: column; position: relative; }
   .content-slide .card:nth-child(1) { background: var(--pink); color: #fff; }
   .content-slide .card:nth-child(2) { background: var(--cyan); }
   .content-slide .card:nth-child(3) { background: var(--yellow); }
   .content-slide .card .shape-icon { width: 48px; height: 48px; border: 3px solid #000; margin-bottom: 16px; display: flex; align-items: center; justify-content: center; font-size: 24px; background: #fff; }
-  .content-slide .card h3 { font-family: var(--font-display); font-size: 22px; text-transform: uppercase; margin-bottom: 10px; line-height: 1.1; }
+  .content-slide .card h3 { font-family: var(--font-display) font-size: 22px text-transform: uppercase; margin-bottom: 10px; line-height: 1.1; }
   .content-slide .card p { font-size: 13px; line-height: 1.6; font-weight: 600; }
 
   /* Two col */
   .two-col .header { margin-bottom: 28px; }
-  .two-col h2 { font-family: var(--font-display); font-size: 40px; text-transform: uppercase; }
+  .two-col h2 { font-family: var(--font-display) font-size: 40px text-transform: uppercase; }
   .two-col .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; flex: 1; }
   .two-col .col { border: 4px solid #000; padding: 36px; display: flex; flex-direction: column; }
   .two-col .col.a { background: #fff; }
@@ -87,40 +87,69 @@
   .two-col .col .tag { display: inline-block; padding: 4px 14px; font-weight: 800; font-size: 12px; text-transform: uppercase; margin-bottom: 16px; align-self: flex-start; border: 2px solid currentColor; }
   .two-col .col.a .tag { background: var(--pink); color: #fff; border-color: #000; }
   .two-col .col.b .tag { background: var(--yellow); color: #000; border-color: var(--yellow); }
-  .two-col .col h3 { font-family: var(--font-display); font-size: 28px; text-transform: uppercase; margin-bottom: 14px; }
+  .two-col .col h3 { font-family: var(--font-display) font-size: 28px text-transform: uppercase; margin-bottom: 14px; }
   .two-col .col p { font-size: 14px; line-height: 1.7; font-weight: 500; opacity: 0.85; }
-  .two-col .col .big { margin-top: auto; font-family: var(--font-display); font-size: 56px; padding-top: 16px; }
+  .two-col .col .big { margin-top: auto; font-family: var(--font-display) font-size: 56px padding-top: 16px; }
   .two-col .col.a .big { color: var(--pink); }
   .two-col .col.b .big { color: var(--cyan); }
 
   /* Quote */
   .quote-slide { justify-content: center; align-items: center; text-align: center; }
   .quote-slide .box { background: #fff; border: 4px solid #000; padding: 56px 64px; max-width: 900px; position: relative; transform: rotate(-1deg); box-shadow: 12px 12px 0 var(--pink); }
-  .quote-slide blockquote { font-family: var(--font-display); font-size: 44px; line-height: 1.2; text-transform: uppercase; }
+  .quote-slide blockquote { font-family: var(--font-display) font-size: 44px line-height: 1.2; text-transform: uppercase; }
   .quote-slide blockquote .cyan { color: var(--cyan); }
   .quote-slide cite { display: block; margin-top: 24px; font-size: 13px; font-weight: 800; font-style: normal; text-transform: uppercase; }
 
   /* Data */
   .data-slide .header { margin-bottom: 28px; }
-  .data-slide h2 { font-family: var(--font-display); font-size: 40px; text-transform: uppercase; }
+  .data-slide h2 { font-family: var(--font-display) font-size: 40px text-transform: uppercase; }
   .data-slide .metrics { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; flex: 1; align-content: center; }
   .data-slide .metric { border: 4px solid #000; padding: 28px 16px; text-align: center; }
   .data-slide .metric:nth-child(1) { background: var(--pink); color: #fff; }
   .data-slide .metric:nth-child(2) { background: var(--cyan); }
   .data-slide .metric:nth-child(3) { background: var(--yellow); }
   .data-slide .metric:nth-child(4) { background: var(--red); color: #fff; }
-  .data-slide .metric .value { font-family: var(--font-display); font-size: 52px; line-height: 1; }
+  .data-slide .metric .value { font-family: var(--font-display) font-size: 52px line-height: 1; }
   .data-slide .metric .label { margin-top: 10px; font-size: 11px; font-weight: 800; text-transform: uppercase; line-height: 1.4; }
 
   /* Closing */
   .closing-slide { justify-content: center; align-items: center; text-align: center; }
-  .closing-slide h2 { font-family: var(--font-display); font-size: 100px; text-transform: uppercase; line-height: 0.9; }
+  .closing-slide h2 { font-family: var(--font-display) font-size: 100px text-transform: uppercase; line-height: 1.15; }
   .closing-slide h2 .pink { color: var(--pink); }
   .closing-slide p { margin-top: 16px; font-size: 18px; font-weight: 700; }
-  .closing-slide .btn { margin-top: 28px; display: inline-block; background: var(--cyan); border: 4px solid #000; padding: 12px 36px; font-family: var(--font-display); font-size: 20px; text-transform: uppercase; box-shadow: 6px 6px 0 #000; }
+  .closing-slide .btn { margin-top: 28px; display: inline-block; background: var(--cyan); border: 4px solid #000; padding: 12px 36px; font-family: var(--font-display) font-size: 20px text-transform: uppercase; box-shadow: 6px 6px 0 #000; }
 
-  .nav-hint { position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%); color: rgba(0,0,0,0.3); font-family: var(--font-body); font-size: 11px; font-weight: 800; letter-spacing: 0.1em; z-index: 100; pointer-events: none; }
-  .counter { position: absolute; bottom: 16px; right: 24px; color: rgba(0,0,0,0.5); font-family: var(--font-body); font-size: 12px; font-weight: 800; z-index: 100; }
+  .nav-hint { position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%); color: rgba(0,0,0,0.3); font-family: var(--font-body) font-size: 11px font-weight: 800; letter-spacing: 0.1em; z-index: 100; pointer-events: none; }
+  .counter { position: absolute; bottom: 16px; right: 24px; color: rgba(0,0,0,0.5); font-family: var(--font-body) font-size: 12px font-weight: 800; z-index: 100; }
+
+    /* CJK readability fixes */
+    h1, h2, h3, h4 { line-height: 1.2; }
+    .title-slide h1 { line-height: 1.18; }
+    .content-slide .header, .two-col .header, .data-slide .header { margin-bottom: 40px; }
+    .content-slide .body { gap: 32px; }
+    .two-col .cols { gap: 32px; }
+    .data-slide .metrics { gap: 24px; }
+    .content-slide ul { gap: 4px; }
+    .content-slide li { padding: 20px 0; }
+    .two-col .col { padding: 36px 40px; }
+    .data-slide .metric { padding: 32px 28px; }
+    
+
+    /* CJK readability fixes */
+    h1, h2, h3, h4 { line-height: 1.2; }
+    .title-slide h1 { line-height: 1.18; font-weight: 900; }
+    .section-slide h2 { font-weight: 900; }
+    .content-slide h2, .two-col h2, .data-slide h2 { font-weight: 900; }
+    .content-slide .header, .two-col .header, .data-slide .header { margin-bottom: 40px; }
+    .content-slide .body { gap: 32px; }
+    .two-col .cols { gap: 32px; }
+    .data-slide .metrics { gap: 24px; }
+    .content-slide ul { gap: 4px; }
+    .content-slide li { padding: 20px 0; }
+    .two-col .col { padding: 36px 40px; }
+    .data-slide .metric { padding: 32px 28px; }
+    .content-slide .card, .two-col .col { margin-bottom: 0; }
+    
 </style>
 </head>
 <body>

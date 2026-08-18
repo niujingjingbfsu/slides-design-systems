@@ -7,7 +7,7 @@
 <title>聊着天，把活干了 — Slides Design Systems</title>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&amp;family=Inter:wght@300;400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&amp;family=Inter:wght@300;400;500&amp;family=Noto+Sans+SC:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
 <style>
   :root {
     --bg: #F6F5F2;
@@ -17,8 +17,8 @@
     --accent-soft: rgba(184, 92, 56, 0.10);
     --line: rgba(26, 26, 26, 0.12);
     --grid: rgba(26, 26, 26, 0.035);
-    --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
-    --font-sans: 'Inter', -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', 'Noto Sans SC', ui-monospace, 'SF Mono', Menlo, monospace
+    --font-sans: 'Inter', 'Noto Sans SC', -apple-system, sans-serif
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -26,8 +26,8 @@
   html, body {
     height: 100%;
     background: #2A2926;
-    font-family: var(--font-mono);
-    overflow: hidden;
+    font-family: var(--font-mono)
+    overflow: hidden
     }
 
   .deck { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; }
@@ -72,8 +72,8 @@
   }
 
   .slide-title {
-    font-family: var(--font-mono);
-    font-size: 44px;
+    font-family: var(--font-mono)
+    font-size: 44px
     font-weight: 700;
     letter-spacing: -0.02em;
     line-height: 1.1;
@@ -120,13 +120,13 @@
     font-size: 96px;
     font-weight: 700;
     letter-spacing: -0.03em;
-    line-height: 0.95;
+    line-height: 1.15;
   }
   .title-slide h1 .accent { color: var(--accent); }
   .title-slide .subtitle {
     margin-top: 28px;
-    font-family: var(--font-sans);
-    font-size: 18px;
+    font-family: var(--font-sans)
+    font-size: 18px
     color: var(--muted);
     font-weight: 300;
     max-width: 520px;
@@ -163,7 +163,7 @@
     font-size: 72px;
     font-weight: 700;
     letter-spacing: -0.02em;
-    line-height: 1.05;
+    line-height: 1.15;
     max-width: 700px;
   }
   .section-slide .section-label {
@@ -182,8 +182,8 @@
     flex: 1;
   }
   .content-slide .lead {
-    font-family: var(--font-sans);
-    font-size: 17px;
+    font-family: var(--font-sans)
+    font-size: 17px
     line-height: 1.7;
     color: #44403C;
     font-weight: 300;
@@ -195,8 +195,8 @@
     gap: 20px;
   }
   .content-slide li {
-    font-family: var(--font-sans);
-    font-size: 15px;
+    font-family: var(--font-sans)
+    font-size: 15px
     line-height: 1.6;
     padding-left: 24px;
     position: relative;
@@ -212,8 +212,8 @@
     background: var(--accent);
   }
   .content-slide li strong {
-    font-family: var(--font-mono);
-    font-weight: 500;
+    font-family: var(--font-mono)
+    font-weight: 500
     color: var(--fg);
     display: block;
     font-size: 13px;
@@ -244,14 +244,14 @@
     margin-bottom: 16px;
   }
   .two-col .col h3 {
-    font-family: var(--font-mono);
-    font-size: 22px;
+    font-family: var(--font-mono)
+    font-size: 22px
     font-weight: 700;
     margin-bottom: 16px;
   }
   .two-col .col p {
-    font-family: var(--font-sans);
-    font-size: 14px;
+    font-family: var(--font-sans)
+    font-size: 14px
     line-height: 1.7;
     color: #555049;
     font-weight: 300;
@@ -273,12 +273,12 @@
     line-height: 1.25;
     letter-spacing: -0.01em;
     max-width: 900px;
-    font-family: var(--font-sans);
+    font-family: var(--font-sans)
   }
   .quote-slide blockquote::before {
-    content: '"';
-    font-family: var(--font-mono);
-    color: var(--accent);
+    content: '"'
+    font-family: var(--font-mono)
+    color: var(--accent)
     font-size: 80px;
     line-height: 0;
     position: relative;
@@ -324,8 +324,8 @@
     font-weight: 500;
   }
   .data-slide .metric .label {
-    font-family: var(--font-sans);
-    font-size: 13px;
+    font-family: var(--font-sans)
+    font-size: 13px
     color: var(--muted);
     line-height: 1.5;
     margin-top: 12px;
@@ -347,8 +347,8 @@
   .closing-slide h2 .accent { color: var(--accent); }
   .closing-slide p {
     margin-top: 24px;
-    font-family: var(--font-sans);
-    font-size: 16px;
+    font-family: var(--font-sans)
+    font-size: 16px
     color: var(--muted);
     font-weight: 300;
   }
@@ -370,8 +370,8 @@
     left: 50%;
     transform: translateX(-50%);
     color: rgba(255,255,255,0.35);
-    font-family: var(--font-mono);
-    font-size: 11px;
+    font-family: var(--font-mono)
+    font-size: 11px
     letter-spacing: 0.15em;
     z-index: 100;
     pointer-events: none;
@@ -381,11 +381,40 @@
     bottom: 16px;
     right: 24px;
     color: rgba(255,255,255,0.5);
-    font-family: var(--font-mono);
-    font-size: 12px;
+    font-family: var(--font-mono)
+    font-size: 12px
     z-index: 100;
     letter-spacing: 0.1em;
   }
+
+    /* CJK readability fixes */
+    h1, h2, h3, h4 { line-height: 1.2; }
+    .title-slide h1 { line-height: 1.18; }
+    .content-slide .header, .two-col .header, .data-slide .header { margin-bottom: 40px; }
+    .content-slide .body { gap: 32px; }
+    .two-col .cols { gap: 32px; }
+    .data-slide .metrics { gap: 24px; }
+    .content-slide ul { gap: 4px; }
+    .content-slide li { padding: 20px 0; }
+    .two-col .col { padding: 36px 40px; }
+    .data-slide .metric { padding: 32px 28px; }
+    
+
+    /* CJK readability fixes */
+    h1, h2, h3, h4 { line-height: 1.2; }
+    .title-slide h1 { line-height: 1.18; font-weight: 900; }
+    .section-slide h2 { font-weight: 900; }
+    .content-slide h2, .two-col h2, .data-slide h2 { font-weight: 900; }
+    .content-slide .header, .two-col .header, .data-slide .header { margin-bottom: 40px; }
+    .content-slide .body { gap: 32px; }
+    .two-col .cols { gap: 32px; }
+    .data-slide .metrics { gap: 24px; }
+    .content-slide ul { gap: 4px; }
+    .content-slide li { padding: 20px 0; }
+    .two-col .col { padding: 36px 40px; }
+    .data-slide .metric { padding: 32px 28px; }
+    .content-slide .card, .two-col .col { margin-bottom: 0; }
+    
 </style>
 </head>
 <body>

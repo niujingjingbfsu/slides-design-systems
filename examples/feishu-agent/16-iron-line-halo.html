@@ -70,7 +70,7 @@
 
   /* Title */
   .title-slide .content-area { justify-content: center; }
-  .title-slide h1 { font-family: var(--font-cn); font-size: 120px; font-weight: 900; color: var(--red); line-height: 1; letter-spacing: 0.08em; }
+  .title-slide h1 { font-family: var(--font-cn); font-size: 120px; font-weight: 900; color: var(--red); line-height: 1.15; letter-spacing: 0.08em; }
   .title-slide .gold-accent { width: 120px; height: 3px; margin-top: 20px; background: linear-gradient(90deg, #E8C868, #D4A843, #9A7B1A); position: relative; }
   .title-slide .gold-accent::after { content:''; position: absolute; right: -8px; top: 50%; transform: translateY(-50%) rotate(45deg); width: 10px; height: 10px; background: #D4A843; }
   .title-slide .en { font-family: var(--font-en); font-size: 20px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-top: 16px; font-weight: 700; }
@@ -81,7 +81,7 @@
   /* Section */
   .section-slide .content-area { justify-content: center; align-items: center; text-align: center; }
   .section-slide .num { font-family: var(--font-en); font-size: 13px; letter-spacing: 0.4em; color: var(--gold); margin-bottom: 16px; font-weight: 600; }
-  .section-slide h2 { font-family: var(--font-cn); font-size: 80px; font-weight: 900; color: var(--red); line-height: 1.1; letter-spacing: 0.08em; }
+  .section-slide h2 { font-family: var(--font-cn); font-size: 80px; font-weight: 900; color: var(--red); line-height: 1.15; letter-spacing: 0.08em; }
   .section-slide p { font-size: 16px; color: var(--muted); max-width: 440px; line-height: 1.8; margin-top: 20px; }
   .section-slide .halo { left: 50%; top: 50%; transform: translate(-50%,-50%); width: 400px; height: 400px; opacity: 0.15; }
 
@@ -140,6 +140,35 @@
 
   .nav-hint { position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); color: rgba(184,92,56,0.3); font-family: var(--font-en); font-size: 11px; letter-spacing: 0.2em; z-index: 100; pointer-events: none; }
   .counter { position: absolute; bottom: 8px; right: 24px; color: rgba(184,92,56,0.5); font-family: var(--font-en); font-size: 12px; z-index: 100; }
+
+    /* CJK readability fixes */
+    h1, h2, h3, h4 { line-height: 1.2; }
+    .title-slide h1 { line-height: 1.18; }
+    .content-slide .header, .two-col .header, .data-slide .header { margin-bottom: 40px; }
+    .content-slide .body { gap: 32px; }
+    .two-col .cols { gap: 32px; }
+    .data-slide .metrics { gap: 24px; }
+    .content-slide ul { gap: 4px; }
+    .content-slide li { padding: 20px 0; }
+    .two-col .col { padding: 36px 40px; }
+    .data-slide .metric { padding: 32px 28px; }
+    
+
+    /* CJK readability fixes */
+    h1, h2, h3, h4 { line-height: 1.2; }
+    .title-slide h1 { line-height: 1.18; font-weight: 900; }
+    .section-slide h2 { font-weight: 900; }
+    .content-slide h2, .two-col h2, .data-slide h2 { font-weight: 900; }
+    .content-slide .header, .two-col .header, .data-slide .header { margin-bottom: 40px; }
+    .content-slide .body { gap: 32px; }
+    .two-col .cols { gap: 32px; }
+    .data-slide .metrics { gap: 24px; }
+    .content-slide ul { gap: 4px; }
+    .content-slide li { padding: 20px 0; }
+    .two-col .col { padding: 36px 40px; }
+    .data-slide .metric { padding: 32px 28px; }
+    .content-slide .card, .two-col .col { margin-bottom: 0; }
+    
 </style>
 </head>
 <body>
@@ -221,7 +250,7 @@
 
 <p class="subtitle">在飞书会议里，边聊边干，是一种怎样的体验？</p>
 </div>
-<div class="footer"><span class="cn">FEISHU AGENT</span><span>FEISHU AGENT</span><span>01 / 07</span></div>
+<div class="footer"><span class="cn">敦煌</span><span>FEISHU AGENT</span><span>01 / 07</span></div>
 </section>
 <section class="slide section-slide">
 <div class="border-top"><svg class="border-band" preserveaspectratio="none" viewbox="0 0 1280 32"><rect fill="#D4A843" height="32" opacity="0.12" width="1280"></rect><g fill="#D4A843"><circle cx="40" cy="16" r="3"></circle><path d="M60 16 Q70 6 80 16 Q90 26 100 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="120" cy="16" r="3"></circle><path d="M140 16 Q150 6 160 16 Q170 26 180 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="200" cy="16" r="3"></circle><path d="M220 16 Q230 6 240 16 Q250 26 260 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="280" cy="16" r="3"></circle><path d="M300 16 Q310 6 320 16 Q330 26 340 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="360" cy="16" r="3"></circle><path d="M380 16 Q390 6 400 16 Q410 26 420 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="440" cy="16" r="3"></circle><path d="M460 16 Q470 6 480 16 Q490 26 500 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="520" cy="16" r="3"></circle><path d="M540 16 Q550 6 560 16 Q570 26 580 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="600" cy="16" r="3"></circle><path d="M620 16 Q630 6 640 16 Q650 26 660 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="680" cy="16" r="3"></circle><path d="M700 16 Q710 6 720 16 Q730 26 740 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="760" cy="16" r="3"></circle><path d="M780 16 Q790 6 800 16 Q810 26 820 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="840" cy="16" r="3"></circle><path d="M860 16 Q870 6 880 16 Q890 26 900 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="920" cy="16" r="3"></circle><path d="M940 16 Q950 6 960 16 Q970 26 980 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="1000" cy="16" r="3"></circle><path d="M1020 16 Q1030 6 1040 16 Q1050 26 1060 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="1080" cy="16" r="3"></circle><path d="M1100 16 Q1110 6 1120 16 Q1130 26 1140 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="1160" cy="16" r="3"></circle><path d="M1180 16 Q1190 6 1200 16 Q1210 26 1220 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="1240" cy="16" r="3"></circle></g></svg></div>
@@ -242,7 +271,7 @@
 <h2>先看一个框架</h2>
 
 </div>
-<div class="footer"><span class="cn">FEISHU AGENT</span><span>FEISHU AGENT</span><span>02 / 07</span></div>
+<div class="footer"><span class="cn">敦煌</span><span>FEISHU AGENT</span><span>02 / 07</span></div>
 </section>
 <section class="slide content-slide">
 <div class="border-top"><svg class="border-band" preserveaspectratio="none" viewbox="0 0 1280 32"><rect fill="#D4A843" height="32" opacity="0.12" width="1280"></rect><g fill="#D4A843"><circle cx="40" cy="16" r="3"></circle><path d="M60 16 Q70 6 80 16 Q90 26 100 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="120" cy="16" r="3"></circle><path d="M140 16 Q150 6 160 16 Q170 26 180 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="200" cy="16" r="3"></circle><path d="M220 16 Q230 6 240 16 Q250 26 260 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="280" cy="16" r="3"></circle><path d="M300 16 Q310 6 320 16 Q330 26 340 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="360" cy="16" r="3"></circle><path d="M380 16 Q390 6 400 16 Q410 26 420 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="440" cy="16" r="3"></circle><path d="M460 16 Q470 6 480 16 Q490 26 500 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="520" cy="16" r="3"></circle><path d="M540 16 Q550 6 560 16 Q570 26 580 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="600" cy="16" r="3"></circle><path d="M620 16 Q630 6 640 16 Q650 26 660 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="680" cy="16" r="3"></circle><path d="M700 16 Q710 6 720 16 Q730 26 740 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="760" cy="16" r="3"></circle><path d="M780 16 Q790 6 800 16 Q810 26 820 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="840" cy="16" r="3"></circle><path d="M860 16 Q870 6 880 16 Q890 26 900 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="920" cy="16" r="3"></circle><path d="M940 16 Q950 6 960 16 Q970 26 980 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="1000" cy="16" r="3"></circle><path d="M1020 16 Q1030 6 1040 16 Q1050 26 1060 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="1080" cy="16" r="3"></circle><path d="M1100 16 Q1110 6 1120 16 Q1130 26 1140 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="1160" cy="16" r="3"></circle><path d="M1180 16 Q1190 6 1200 16 Q1210 26 1220 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="1240" cy="16" r="3"></circle></g></svg></div>
@@ -262,7 +291,7 @@
 <div class="card"><div class="num-cn">LEVEL 3</div><h3>边聊边干</h3><p>Agent 加入会议，会上直接处理待办——边聊边干</p></div>
 </div>
 </div>
-<div class="footer"><span class="cn">FEISHU AGENT</span><span>FEISHU AGENT</span><span>03 / 07</span></div>
+<div class="footer"><span class="cn">敦煌</span><span>FEISHU AGENT</span><span>03 / 07</span></div>
 </section>
 <section class="slide two-col">
 <div class="border-top"><svg class="border-band" preserveaspectratio="none" viewbox="0 0 1280 32"><rect fill="#D4A843" height="32" opacity="0.12" width="1280"></rect><g fill="#D4A843"><circle cx="40" cy="16" r="3"></circle><path d="M60 16 Q70 6 80 16 Q90 26 100 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="120" cy="16" r="3"></circle><path d="M140 16 Q150 6 160 16 Q170 26 180 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="200" cy="16" r="3"></circle><path d="M220 16 Q230 6 240 16 Q250 26 260 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="280" cy="16" r="3"></circle><path d="M300 16 Q310 6 320 16 Q330 26 340 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="360" cy="16" r="3"></circle><path d="M380 16 Q390 6 400 16 Q410 26 420 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="440" cy="16" r="3"></circle><path d="M460 16 Q470 6 480 16 Q490 26 500 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="520" cy="16" r="3"></circle><path d="M540 16 Q550 6 560 16 Q570 26 580 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="600" cy="16" r="3"></circle><path d="M620 16 Q630 6 640 16 Q650 26 660 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="680" cy="16" r="3"></circle><path d="M700 16 Q710 6 720 16 Q730 26 740 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="760" cy="16" r="3"></circle><path d="M780 16 Q790 6 800 16 Q810 26 820 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="840" cy="16" r="3"></circle><path d="M860 16 Q870 6 880 16 Q890 26 900 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="920" cy="16" r="3"></circle><path d="M940 16 Q950 6 960 16 Q970 26 980 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="1000" cy="16" r="3"></circle><path d="M1020 16 Q1030 6 1040 16 Q1050 26 1060 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="1080" cy="16" r="3"></circle><path d="M1100 16 Q1110 6 1120 16 Q1130 26 1140 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="1160" cy="16" r="3"></circle><path d="M1180 16 Q1190 6 1200 16 Q1210 26 1220 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="1240" cy="16" r="3"></circle></g></svg></div>
@@ -274,7 +303,7 @@
 <div class="col b"><div class="tag">02</div><h3>说需求，秒执行</h3><p>一句话交代清楚，Agent 会上就动手</p></div>
 </div>
 </div>
-<div class="footer"><span class="cn">FEISHU AGENT</span><span>FEISHU AGENT</span><span>04 / 07</span></div>
+<div class="footer"><span class="cn">敦煌</span><span>FEISHU AGENT</span><span>04 / 07</span></div>
 </section>
 <section class="slide quote-slide">
 <div class="border-top"><svg class="border-band" preserveaspectratio="none" viewbox="0 0 1280 32"><rect fill="#D4A843" height="32" opacity="0.12" width="1280"></rect><g fill="#D4A843"><circle cx="40" cy="16" r="3"></circle><path d="M60 16 Q70 6 80 16 Q90 26 100 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="120" cy="16" r="3"></circle><path d="M140 16 Q150 6 160 16 Q170 26 180 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="200" cy="16" r="3"></circle><path d="M220 16 Q230 6 240 16 Q250 26 260 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="280" cy="16" r="3"></circle><path d="M300 16 Q310 6 320 16 Q330 26 340 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="360" cy="16" r="3"></circle><path d="M380 16 Q390 6 400 16 Q410 26 420 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="440" cy="16" r="3"></circle><path d="M460 16 Q470 6 480 16 Q490 26 500 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="520" cy="16" r="3"></circle><path d="M540 16 Q550 6 560 16 Q570 26 580 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="600" cy="16" r="3"></circle><path d="M620 16 Q630 6 640 16 Q650 26 660 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="680" cy="16" r="3"></circle><path d="M700 16 Q710 6 720 16 Q730 26 740 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="760" cy="16" r="3"></circle><path d="M780 16 Q790 6 800 16 Q810 26 820 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="840" cy="16" r="3"></circle><path d="M860 16 Q870 6 880 16 Q890 26 900 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="920" cy="16" r="3"></circle><path d="M940 16 Q950 6 960 16 Q970 26 980 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="1000" cy="16" r="3"></circle><path d="M1020 16 Q1030 6 1040 16 Q1050 26 1060 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="1080" cy="16" r="3"></circle><path d="M1100 16 Q1110 6 1120 16 Q1130 26 1140 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="1160" cy="16" r="3"></circle><path d="M1180 16 Q1190 6 1200 16 Q1210 26 1220 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="1240" cy="16" r="3"></circle></g></svg></div>
@@ -283,7 +312,7 @@
 <blockquote>找一个舒服漂亮的地方，喝着咖啡，聊着天，让想法碰撞出火花，剩下的，交给 Agent。</blockquote>
 <cite>未来的工作方式 · 2026</cite>
 </div>
-<div class="footer"><span class="cn">FEISHU AGENT</span><span>FEISHU AGENT</span><span>05 / 07</span></div>
+<div class="footer"><span class="cn">敦煌</span><span>FEISHU AGENT</span><span>05 / 07</span></div>
 </section>
 <section class="slide data-slide">
 <div class="border-top"><svg class="border-band" preserveaspectratio="none" viewbox="0 0 1280 32"><rect fill="#D4A843" height="32" opacity="0.12" width="1280"></rect><g fill="#D4A843"><circle cx="40" cy="16" r="3"></circle><path d="M60 16 Q70 6 80 16 Q90 26 100 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="120" cy="16" r="3"></circle><path d="M140 16 Q150 6 160 16 Q170 26 180 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="200" cy="16" r="3"></circle><path d="M220 16 Q230 6 240 16 Q250 26 260 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="280" cy="16" r="3"></circle><path d="M300 16 Q310 6 320 16 Q330 26 340 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="360" cy="16" r="3"></circle><path d="M380 16 Q390 6 400 16 Q410 26 420 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="440" cy="16" r="3"></circle><path d="M460 16 Q470 6 480 16 Q490 26 500 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="520" cy="16" r="3"></circle><path d="M540 16 Q550 6 560 16 Q570 26 580 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="600" cy="16" r="3"></circle><path d="M620 16 Q630 6 640 16 Q650 26 660 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="680" cy="16" r="3"></circle><path d="M700 16 Q710 6 720 16 Q730 26 740 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="760" cy="16" r="3"></circle><path d="M780 16 Q790 6 800 16 Q810 26 820 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="840" cy="16" r="3"></circle><path d="M860 16 Q870 6 880 16 Q890 26 900 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="920" cy="16" r="3"></circle><path d="M940 16 Q950 6 960 16 Q970 26 980 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="1000" cy="16" r="3"></circle><path d="M1020 16 Q1030 6 1040 16 Q1050 26 1060 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="1080" cy="16" r="3"></circle><path d="M1100 16 Q1110 6 1120 16 Q1130 26 1140 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="1160" cy="16" r="3"></circle><path d="M1180 16 Q1190 6 1200 16 Q1210 26 1220 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="1240" cy="16" r="3"></circle></g></svg></div>
@@ -297,7 +326,7 @@
 <div class="metric"><div class="value">3 Level</div><div class="label">从会后排待办到会上直接执行，三级跃迁</div></div>
 </div>
 </div>
-<div class="footer"><span class="cn">FEISHU AGENT</span><span>FEISHU AGENT</span><span>06 / 07</span></div>
+<div class="footer"><span class="cn">敦煌</span><span>FEISHU AGENT</span><span>06 / 07</span></div>
 </section>
 <section class="slide closing-slide">
 <div class="border-top"><svg class="border-band" preserveaspectratio="none" viewbox="0 0 1280 32"><rect fill="#D4A843" height="32" opacity="0.12" width="1280"></rect><g fill="#D4A843"><circle cx="40" cy="16" r="3"></circle><path d="M60 16 Q70 6 80 16 Q90 26 100 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="120" cy="16" r="3"></circle><path d="M140 16 Q150 6 160 16 Q170 26 180 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="200" cy="16" r="3"></circle><path d="M220 16 Q230 6 240 16 Q250 26 260 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="280" cy="16" r="3"></circle><path d="M300 16 Q310 6 320 16 Q330 26 340 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="360" cy="16" r="3"></circle><path d="M380 16 Q390 6 400 16 Q410 26 420 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="440" cy="16" r="3"></circle><path d="M460 16 Q470 6 480 16 Q490 26 500 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="520" cy="16" r="3"></circle><path d="M540 16 Q550 6 560 16 Q570 26 580 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="600" cy="16" r="3"></circle><path d="M620 16 Q630 6 640 16 Q650 26 660 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="680" cy="16" r="3"></circle><path d="M700 16 Q710 6 720 16 Q730 26 740 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="760" cy="16" r="3"></circle><path d="M780 16 Q790 6 800 16 Q810 26 820 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="840" cy="16" r="3"></circle><path d="M860 16 Q870 6 880 16 Q890 26 900 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="920" cy="16" r="3"></circle><path d="M940 16 Q950 6 960 16 Q970 26 980 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="1000" cy="16" r="3"></circle><path d="M1020 16 Q1030 6 1040 16 Q1050 26 1060 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="1080" cy="16" r="3"></circle><path d="M1100 16 Q1110 6 1120 16 Q1130 26 1140 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="1160" cy="16" r="3"></circle><path d="M1180 16 Q1190 6 1200 16 Q1210 26 1220 16" fill="none" stroke="#D4A843" stroke-width="1.5"></path><circle cx="1240" cy="16" r="3"></circle></g></svg></div>
@@ -316,7 +345,7 @@
 <h2>想体验<br/>Level 3?</h2>
 <p>用飞书扫码加入「智能体会」早鸟体验群</p>
 </div>
-<div class="footer"><span class="cn">FEISHU AGENT</span><span>FEISHU AGENT</span><span>07 / 07</span></div>
+<div class="footer"><span class="cn">敦煌</span><span>FEISHU AGENT</span><span>07 / 07</span></div>
 </section>
 <div class="nav-hint">← → ARROWS TO NAVIGATE</div>
 <div class="counter" id="counter">01 / 07</div>

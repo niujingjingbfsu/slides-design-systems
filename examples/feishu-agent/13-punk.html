@@ -7,18 +7,18 @@
 <title>聊着天，把活干了 — Slides Design Systems</title>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&amp;family=JetBrains+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&amp;family=JetBrains+Mono:wght@400;700&amp;family=Noto+Sans+SC:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
 <style>
   :root {
     --bg: #FFFFFF;
     --fg: #000000;
     --red: #E63946;
     --muted: #666;
-    --font: 'Inter', -apple-system, sans-serif;
+    --font: 'Inter', 'Noto Sans SC', -apple-system, sans-serif
     --mono: 'JetBrains Mono', monospace;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  html, body { height: 100%; background: #111; font-family: var(--font); overflow: hidden; }
+  html, body { height: 100%; background: #111; font-family: var(--font) overflow: hidden }
   .deck { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; }
   .slide {
     position: absolute; top: 50%; left: 50%; width: 1280px; height: 720px; background: var(--bg); color: var(--fg);
@@ -41,34 +41,34 @@
   /* Title */
   .title-slide { justify-content: center; }
   .title-slide .stripe { position: absolute; top: 0; left: 0; right: 0; height: 12px; background: var(--red); }
-  .title-slide .label { font-family: var(--mono); font-size: 13px; font-weight: 700; letter-spacing: 0.2em; margin-bottom: 20px; text-transform: uppercase; }
-  .title-slide h1 { font-size: 180px; font-weight: 900; line-height: 0.82; letter-spacing: -0.05em; text-transform: uppercase; }
+  .title-slide .label { font-family: var(--mono) font-size: 13px font-weight: 700; letter-spacing: 0.2em; margin-bottom: 20px; text-transform: uppercase; }
+  .title-slide h1 { font-size: 180px; font-weight: 900; line-height: 1.15; letter-spacing: -0.05em; text-transform: uppercase; }
   .title-slide h1 .red { color: var(--red); }
   .title-slide h1 .outline { -webkit-text-stroke: 4px #000; color: transparent; }
   .title-slide .red-block { position: absolute; right: 0; top: 0; bottom: 0; width: 180px; background: var(--red); display: flex; align-items: center; justify-content: center; }
   .title-slide .red-block .vert { writing-mode: vertical-rl; color: #fff; font-weight: 900; font-size: 20px; letter-spacing: 0.3em; text-transform: uppercase; }
   .title-slide .subtitle { margin-top: 24px; font-size: 16px; font-weight: 700; max-width: 500px; line-height: 1.5; text-transform: uppercase; }
-  .title-slide .meta { margin-top: 32px; display: flex; gap: 32px; font-family: var(--mono); font-size: 12px; font-weight: 700; }
+  .title-slide .meta { margin-top: 32px; display: flex; gap: 32px; font-family: var(--mono) font-size: 12px font-weight: 700; }
 
   /* Section */
   .section-slide { justify-content: center; }
   .section-slide .red-bar { position: absolute; left: 0; top: 100px; bottom: 100px; width: 24px; background: var(--red); }
-  .section-slide .num { font-family: var(--mono); font-size: 14px; font-weight: 700; color: var(--red); letter-spacing: 0.3em; margin-bottom: 16px; margin-left: 48px; }
-  .section-slide h2 { font-size: 110px; font-weight: 900; line-height: 0.9; letter-spacing: -0.04em; text-transform: uppercase; margin-left: 48px; max-width: 800px; }
+  .section-slide .num { font-family: var(--mono) font-size: 14px font-weight: 700; color: var(--red); letter-spacing: 0.3em; margin-bottom: 16px; margin-left: 48px; }
+  .section-slide h2 { font-size: 110px; font-weight: 900; line-height: 1.15; letter-spacing: -0.04em; text-transform: uppercase; margin-left: 48px; max-width: 800px; }
   .section-slide h2 .red { color: var(--red); }
-  .section-slide .rotated { position: absolute; right: 80px; bottom: 100px; transform: rotate(90deg); transform-origin: right bottom; font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: 0.3em; color: var(--muted); white-space: nowrap; }
+  .section-slide .rotated { position: absolute; right: 80px; bottom: 100px; transform: rotate(90deg); transform-origin: right bottom; font-family: var(--mono) font-size: 12px font-weight: 700; letter-spacing: 0.3em; color: var(--muted); white-space: nowrap; }
 
   /* Content */
   .content-slide .header { margin-bottom: 32px; display: flex; align-items: baseline; gap: 20px; border-bottom: 3px solid #000; padding-bottom: 16px; }
-  .content-slide .num { font-family: var(--mono); font-size: 14px; font-weight: 700; color: var(--red); }
-  .content-slide h2 { font-size: 48px; font-weight: 900; text-transform: uppercase; letter-spacing: -0.02em; line-height: 1; }
-  .content-slide .body { display: grid; grid-template-columns: 1fr 2fr; gap: 48px; flex: 1; }
+  .content-slide .num { font-family: var(--mono) font-size: 14px font-weight: 700; color: var(--red); }
+  .content-slide h2 { font-size: 48px; font-weight: 900; text-transform: uppercase; letter-spacing: -0.02em; line-height: 1.15; }
+  .content-slide .body { display: block; flex: 1; }
   .content-slide .lead { font-size: 22px; font-weight: 900; line-height: 1.3; text-transform: uppercase; }
   .content-slide .lead .red { color: var(--red); }
   .content-slide ul { list-style: none; display: flex; flex-direction: column; gap: 0; }
   .content-slide li { display: grid; grid-template-columns: 40px 1fr; gap: 16px; padding: 16px 0; border-bottom: 1px solid #000; align-items: baseline; }
   .content-slide li:first-child { border-top: 1px solid #000; }
-  .content-slide li .n { font-family: var(--mono); font-size: 14px; font-weight: 700; color: var(--red); }
+  .content-slide li .n { font-family: var(--mono) font-size: 14px font-weight: 700; color: var(--red); }
   .content-slide li h4 { font-size: 16px; font-weight: 900; text-transform: uppercase; margin-bottom: 2px; }
   .content-slide li p { font-size: 13px; line-height: 1.5; color: #444; font-weight: 500; }
 
@@ -79,7 +79,7 @@
   .two-col .col { padding: 36px; display: flex; flex-direction: column; }
   .two-col .col.a { background: #fff; border-right: 3px solid #000; }
   .two-col .col.b { background: #000; color: #fff; }
-  .two-col .col .tag { font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: 0.2em; margin-bottom: 16px; }
+  .two-col .col .tag { font-family: var(--mono) font-size: 12px font-weight: 700; letter-spacing: 0.2em; margin-bottom: 16px; }
   .two-col .col.a .tag { color: var(--red); }
   .two-col .col.b .tag { color: var(--red); }
   .two-col .col h3 { font-size: 32px; font-weight: 900; text-transform: uppercase; margin-bottom: 14px; line-height: 1; }
@@ -92,7 +92,7 @@
   .quote-slide { justify-content: center; align-items: flex-start; }
   .quote-slide .red-band { position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%); height: 200px; background: var(--red); z-index: 0; }
   .quote-slide blockquote { font-size: 64px; font-weight: 900; line-height: 1.1; letter-spacing: -0.03em; text-transform: uppercase; max-width: 1000px; color: #fff; mix-blend-mode: difference; }
-  .quote-slide cite { display: block; margin-top: 32px; font-family: var(--mono); font-size: 13px; font-weight: 700; font-style: normal; letter-spacing: 0.2em; text-transform: uppercase; }
+  .quote-slide cite { display: block; margin-top: 32px; font-family: var(--mono) font-size: 13px font-weight: 700; font-style: normal; letter-spacing: 0.2em; text-transform: uppercase; }
 
   /* Data */
   .data-slide .header { margin-bottom: 28px; border-bottom: 3px solid #000; padding-bottom: 16px; }
@@ -108,13 +108,42 @@
   /* Closing */
   .closing-slide { justify-content: center; align-items: center; text-align: center; }
   .closing-slide .stripe { position: absolute; top: 0; left: 0; right: 0; height: 12px; background: var(--red); }
-  .closing-slide h2 { font-size: 130px; font-weight: 900; text-transform: uppercase; line-height: 0.85; letter-spacing: -0.04em; }
+  .closing-slide h2 { font-size: 130px; font-weight: 900; text-transform: uppercase; line-height: 1.15; letter-spacing: -0.04em; }
   .closing-slide h2 .red { color: var(--red); }
   .closing-slide p { margin-top: 20px; font-size: 18px; font-weight: 900; text-transform: uppercase; }
   .closing-slide .btn { margin-top: 28px; display: inline-block; background: var(--red); color: #fff; padding: 14px 40px; font-size: 16px; font-weight: 900; text-transform: uppercase; }
 
-  .nav-hint { position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%); color: rgba(0,0,0,0.3); font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0.1em; z-index: 100; pointer-events: none; }
-  .counter { position: absolute; bottom: 16px; right: 24px; color: rgba(0,0,0,0.5); font-family: var(--mono); font-size: 12px; font-weight: 700; z-index: 100; }
+  .nav-hint { position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%); color: rgba(0,0,0,0.3); font-family: var(--mono) font-size: 11px font-weight: 700; letter-spacing: 0.1em; z-index: 100; pointer-events: none; }
+  .counter { position: absolute; bottom: 16px; right: 24px; color: rgba(0,0,0,0.5); font-family: var(--mono) font-size: 12px font-weight: 700; z-index: 100; }
+
+    /* CJK readability fixes */
+    h1, h2, h3, h4 { line-height: 1.2; }
+    .title-slide h1 { line-height: 1.18; }
+    .content-slide .header, .two-col .header, .data-slide .header { margin-bottom: 40px; }
+    .content-slide .body { gap: 32px; }
+    .two-col .cols { gap: 32px; }
+    .data-slide .metrics { gap: 24px; }
+    .content-slide ul { gap: 4px; }
+    .content-slide li { padding: 20px 0; }
+    .two-col .col { padding: 36px 40px; }
+    .data-slide .metric { padding: 32px 28px; }
+    
+
+    /* CJK readability fixes */
+    h1, h2, h3, h4 { line-height: 1.2; }
+    .title-slide h1 { line-height: 1.18; font-weight: 900; }
+    .section-slide h2 { font-weight: 900; }
+    .content-slide h2, .two-col h2, .data-slide h2 { font-weight: 900; }
+    .content-slide .header, .two-col .header, .data-slide .header { margin-bottom: 40px; }
+    .content-slide .body { gap: 32px; }
+    .two-col .cols { gap: 32px; }
+    .data-slide .metrics { gap: 24px; }
+    .content-slide ul { gap: 4px; }
+    .content-slide li { padding: 20px 0; }
+    .two-col .col { padding: 36px 40px; }
+    .data-slide .metric { padding: 32px 28px; }
+    .content-slide .card, .two-col .col { margin-bottom: 0; }
+    
 </style>
 </head>
 <body>

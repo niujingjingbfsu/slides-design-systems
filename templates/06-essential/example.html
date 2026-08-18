@@ -6,7 +6,7 @@
 <title>ESSENTIAL — Slide Template</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&family=Noto+Serif+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #FFFFFF;
@@ -14,8 +14,8 @@
     --muted: #999999;
     --faint: #CCCCCC;
     --accent: #1A3A5C;
-    --font-serif: 'Cormorant Garamond', 'Times New Roman', serif;
-    --font-sans: 'Inter', -apple-system, sans-serif;
+    --font-serif: 'Cormorant Garamond', 'Noto Serif SC', 'Times New Roman', serif
+    --font-sans: 'Inter', 'Noto Serif SC', -apple-system, sans-serif
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -23,8 +23,8 @@
   html, body {
     height: 100%;
     background: #1A1A1A;
-    font-family: var(--font-sans);
-    overflow: hidden;
+    font-family: var(--font-sans)
+    overflow: hidden
     }
 
   .deck { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; }
@@ -84,10 +84,10 @@
     justify-content: space-between;
   }
   .title-slide h1 {
-    font-family: var(--font-serif);
-    font-size: 168px;
+    font-family: var(--font-serif)
+    font-size: 168px
     font-weight: 300;
-    line-height: 0.9;
+    line-height: 1.15;
     letter-spacing: -0.01em;
     margin-left: -4px;
   }
@@ -113,18 +113,18 @@
   /* ---- Slide 2: Section ---- */
   .section-slide { justify-content: center; }
   .section-slide .section-num {
-    font-family: var(--font-serif);
-    font-size: 14px;
+    font-family: var(--font-serif)
+    font-size: 14px
     color: var(--accent);
     letter-spacing: 0.3em;
     margin-bottom: 32px;
     font-weight: 400;
   }
   .section-slide h2 {
-    font-family: var(--font-serif);
-    font-size: 120px;
+    font-family: var(--font-serif)
+    font-size: 120px
     font-weight: 300;
-    line-height: 0.95;
+    line-height: 1.15;
     letter-spacing: -0.015em;
     max-width: 800px;
   }
@@ -156,8 +156,8 @@
     border-bottom: 1px solid var(--faint);
   }
   .content-slide h2 {
-    font-family: var(--font-serif);
-    font-size: 48px;
+    font-family: var(--font-serif)
+    font-size: 48px
     font-weight: 400;
     letter-spacing: -0.01em;
   }
@@ -169,8 +169,8 @@
     flex: 1;
   }
   .content-slide .lead {
-    font-family: var(--font-serif);
-    font-size: 26px;
+    font-family: var(--font-serif)
+    font-size: 26px
     line-height: 1.5;
     font-weight: 300;
     color: #2A2A2A;
@@ -189,14 +189,14 @@
     align-items: baseline;
   }
   .content-slide li .num {
-    font-family: var(--font-serif);
-    font-size: 18px;
+    font-family: var(--font-serif)
+    font-size: 18px
     color: var(--accent);
     font-weight: 400;
   }
   .content-slide li h4 {
-    font-family: var(--font-serif);
-    font-size: 20px;
+    font-family: var(--font-serif)
+    font-size: 20px
     font-weight: 500;
     margin-bottom: 4px;
   }
@@ -214,8 +214,8 @@
     border-bottom: 1px solid var(--faint);
   }
   .two-col h2 {
-    font-family: var(--font-serif);
-    font-size: 44px;
+    font-family: var(--font-serif)
+    font-size: 44px
     font-weight: 400;
   }
   .two-col h2 .italic { font-style: italic; font-weight: 300; }
@@ -230,15 +230,15 @@
     flex-direction: column;
   }
   .two-col .col .col-num {
-    font-family: var(--font-serif);
-    font-size: 13px;
+    font-family: var(--font-serif)
+    font-size: 13px
     color: var(--accent);
     letter-spacing: 0.2em;
     margin-bottom: 20px;
   }
   .two-col .col h3 {
-    font-family: var(--font-serif);
-    font-size: 32px;
+    font-family: var(--font-serif)
+    font-size: 32px
     font-weight: 400;
     margin-bottom: 16px;
     line-height: 1.2;
@@ -260,16 +260,16 @@
   /* ---- Slide 5: Quote ---- */
   .quote-slide { justify-content: center; }
   .quote-slide .quote-mark {
-    font-family: var(--font-serif);
-    font-size: 120px;
+    font-family: var(--font-serif)
+    font-size: 120px
     color: var(--faint);
     line-height: 0.5;
     margin-bottom: 24px;
     font-weight: 300;
   }
   .quote-slide blockquote {
-    font-family: var(--font-serif);
-    font-size: 56px;
+    font-family: var(--font-serif)
+    font-size: 56px
     font-weight: 300;
     line-height: 1.3;
     letter-spacing: -0.01em;
@@ -294,8 +294,8 @@
     border-bottom: 1px solid var(--faint);
   }
   .data-slide h2 {
-    font-family: var(--font-serif);
-    font-size: 44px;
+    font-family: var(--font-serif)
+    font-size: 44px
     font-weight: 400;
   }
   .data-slide h2 .italic { font-style: italic; font-weight: 300; }
@@ -314,8 +314,8 @@
   .data-slide .metric:first-child { padding-left: 0; }
   .data-slide .metric:last-child { border-right: none; }
   .data-slide .metric .value {
-    font-family: var(--font-serif);
-    font-size: 96px;
+    font-family: var(--font-serif)
+    font-size: 96px
     font-weight: 300;
     line-height: 1;
     letter-spacing: -0.02em;
@@ -343,11 +343,11 @@
     margin-bottom: 48px;
   }
   .closing-slide h2 {
-    font-family: var(--font-serif);
-    font-size: 120px;
+    font-family: var(--font-serif)
+    font-size: 120px
     font-weight: 300;
     letter-spacing: -0.015em;
-    line-height: 1;
+    line-height: 1.15;
   }
   .closing-slide h2 .italic { font-style: italic; }
   .closing-slide p {
@@ -365,8 +365,8 @@
     left: 50%;
     transform: translateX(-50%);
     color: rgba(255,255,255,0.25);
-    font-family: var(--font-sans);
-    font-size: 10px;
+    font-family: var(--font-sans)
+    font-size: 10px
     letter-spacing: 0.2em;
     z-index: 100;
     pointer-events: none;
@@ -376,11 +376,40 @@
     bottom: 16px;
     right: 24px;
     color: rgba(255,255,255,0.4);
-    font-family: var(--font-sans);
-    font-size: 11px;
+    font-family: var(--font-sans)
+    font-size: 11px
     z-index: 100;
     letter-spacing: 0.1em;
   }
+
+    /* CJK readability fixes */
+    h1, h2, h3, h4 { line-height: 1.2; }
+    .title-slide h1 { line-height: 1.18; }
+    .content-slide .header, .two-col .header, .data-slide .header { margin-bottom: 40px; }
+    .content-slide .body { gap: 32px; }
+    .two-col .cols { gap: 32px; }
+    .data-slide .metrics { gap: 24px; }
+    .content-slide ul { gap: 4px; }
+    .content-slide li { padding: 20px 0; }
+    .two-col .col { padding: 36px 40px; }
+    .data-slide .metric { padding: 32px 28px; }
+    
+
+    /* CJK readability fixes */
+    h1, h2, h3, h4 { line-height: 1.2; }
+    .title-slide h1 { line-height: 1.18; font-weight: 900; }
+    .section-slide h2 { font-weight: 900; }
+    .content-slide h2, .two-col h2, .data-slide h2 { font-weight: 900; }
+    .content-slide .header, .two-col .header, .data-slide .header { margin-bottom: 40px; }
+    .content-slide .body { gap: 32px; }
+    .two-col .cols { gap: 32px; }
+    .data-slide .metrics { gap: 24px; }
+    .content-slide ul { gap: 4px; }
+    .content-slide li { padding: 20px 0; }
+    .two-col .col { padding: 36px 40px; }
+    .data-slide .metric { padding: 32px 28px; }
+    .content-slide .card, .two-col .col { margin-bottom: 0; }
+    
 </style>
 </head>
 <body>

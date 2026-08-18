@@ -6,7 +6,7 @@
 <title>Light as Air — Slide Template</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;500;600;700&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg-grad: linear-gradient(135deg, #FFFFFF 0%, #EEF1FA 45%, #E4E9F8 100%);
@@ -22,7 +22,7 @@
     --shadow-lg: 0 24px 64px rgba(30, 42, 94, 0.12);
     --radius: 24px;
     --radius-lg: 32px;
-    --font: 'Sora', -apple-system, sans-serif;
+    --font: 'Sora', 'Noto Sans SC', -apple-system, sans-serif
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -30,8 +30,8 @@
   html, body {
     height: 100%;
     background: #D8DFF0;
-    font-family: var(--font);
-    overflow: hidden;
+    font-family: var(--font)
+    overflow: hidden
     }
 
   .deck { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; }
@@ -118,7 +118,7 @@
     font-size: 92px;
     font-weight: 700;
     letter-spacing: -0.035em;
-    line-height: 1.0;
+    line-height: 1.15;
   }
   .title-slide h1 .light { font-weight: 200; background: linear-gradient(135deg, var(--indigo), var(--lavender)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
   .title-slide .subtitle {
@@ -167,7 +167,7 @@
     font-size: 72px;
     font-weight: 700;
     letter-spacing: -0.03em;
-    line-height: 1.1;
+    line-height: 1.15;
   }
   .section-slide h2 .light { font-weight: 200; }
   .section-slide p {
@@ -358,8 +358,8 @@
     left: 50%;
     transform: translateX(-50%);
     color: rgba(30,42,94,0.35);
-    font-family: var(--font);
-    font-size: 11px;
+    font-family: var(--font)
+    font-size: 11px
     font-weight: 500;
     letter-spacing: 0.1em;
     z-index: 100;
@@ -370,11 +370,40 @@
     bottom: 16px;
     right: 24px;
     color: rgba(30,42,94,0.5);
-    font-family: var(--font);
-    font-size: 12px;
+    font-family: var(--font)
+    font-size: 12px
     font-weight: 600;
     z-index: 100;
   }
+
+    /* CJK readability fixes */
+    h1, h2, h3, h4 { line-height: 1.2; }
+    .title-slide h1 { line-height: 1.18; }
+    .content-slide .header, .two-col .header, .data-slide .header { margin-bottom: 40px; }
+    .content-slide .body { gap: 32px; }
+    .two-col .cols { gap: 32px; }
+    .data-slide .metrics { gap: 24px; }
+    .content-slide ul { gap: 4px; }
+    .content-slide li { padding: 20px 0; }
+    .two-col .col { padding: 36px 40px; }
+    .data-slide .metric { padding: 32px 28px; }
+    
+
+    /* CJK readability fixes */
+    h1, h2, h3, h4 { line-height: 1.2; }
+    .title-slide h1 { line-height: 1.18; font-weight: 900; }
+    .section-slide h2 { font-weight: 900; }
+    .content-slide h2, .two-col h2, .data-slide h2 { font-weight: 900; }
+    .content-slide .header, .two-col .header, .data-slide .header { margin-bottom: 40px; }
+    .content-slide .body { gap: 32px; }
+    .two-col .cols { gap: 32px; }
+    .data-slide .metrics { gap: 24px; }
+    .content-slide ul { gap: 4px; }
+    .content-slide li { padding: 20px 0; }
+    .two-col .col { padding: 36px 40px; }
+    .data-slide .metric { padding: 32px 28px; }
+    .content-slide .card, .two-col .col { margin-bottom: 0; }
+    
 </style>
 </head>
 <body>
