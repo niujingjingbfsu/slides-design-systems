@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>聊着天，把活干了 — Slides Design Systems</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&amp;family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #F0E6D3;
+    --fg: #2D3B2D;
+    --green: #2D4A3E;
+    --gold: #B8944F;
+    --purple: #7D5A6E;
+    --muted: #6B6352;
+    --font-display: 'Playfair Display', Georgia, serif;
+    --font-body: 'Cormorant Garamond', Georgia, serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; background: #1a1a1a; font-family: var(--font-body); overflow: hidden; }
+  .deck { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; }
+  .slide {
+    position: absolute; top: 50%; left: 50%; width: 1280px; height: 720px; background: var(--bg); color: var(--fg);
+    padding: 56px 80px; display: none; flex-direction: column; overflow: hidden; transform: translate(-50%, -50%); transform-origin: center center;
+  }
+  .slide.active { display: flex; }
+  @media (max-aspect-ratio: 16/9) { .slide { transform: translate(-50%, -50%) scale(calc(100vw / 1280)); } }
+  @media (min-aspect-ratio: 16/9) { .slide { transform: translate(-50%, -50%) scale(calc(100vh / 720)); } }
+
+  .border-frame { position: absolute; top: 24px; left: 24px; right: 24px; bottom: 24px; border: 1.5px solid var(--gold); pointer-events: none; z-index: 2; }
+  .border-frame::before { content:''; position: absolute; top: 6px; left: 6px; right: 6px; bottom: 6px; border: 0.5px solid var(--gold); opacity: 0.5; }
+  .corner { position: absolute; width: 40px; height: 40px; z-index: 3; }
+  .corner svg { width: 100%; height: 100%; }
+  .corner.tl { top: 16px; left: 16px; }
+  .corner.tr { top: 16px; right: 16px; transform: scaleX(-1); }
+  .corner.bl { bottom: 16px; left: 16px; transform: scaleY(-1); }
+  .corner.br { bottom: 16px; right: 16px; transform: scale(-1,-1); }
+
+  .footer {
+    margin-top: auto; display: flex; justify-content: space-between; align-items: center;
+    font-family: var(--font-body); font-size: 13px; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--muted); padding-top: 12px; z-index: 2; position: relative;
+  }
+  .footer .ornament { color: var(--gold); font-size: 16px; }
+  .slide > *:not(:where(.border-frame)):not(:where(.corner)):not(:where(.footer)):not(:where(.deco)) { position: relative; z-index: 1; }
+  .deco { position: absolute; z-index: 0; opacity: 0.15; }
+
+  .ornament-divider { display: flex; align-items: center; gap: 16px; color: var(--gold); }
+  .ornament-divider::before, .ornament-divider::after { content:''; flex: 1; height: 1px; background: var(--gold); opacity: 0.5; }
+
+  .label { font-family: var(--font-body); font-size: 12px; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); font-weight: 600; }
+
+  .title-slide { justify-content: center; align-items: center; text-align: center; }
+  .title-slide .medallion { position: absolute; right: 60px; top: 50%; transform: translateY(-50%); width: 320px; height: 320px; z-index: 0; }
+  .title-slide .medallion svg { width: 100%; height: 100%; }
+  .title-slide .label { margin-bottom: 20px; }
+  .title-slide h1 { font-family: var(--font-display); font-size: 108px; font-weight: 900; line-height: 1; letter-spacing: 0.02em; color: var(--green); }
+  .title-slide h1 em { font-style: italic; font-weight: 400; color: var(--gold); }
+  .title-slide .subtitle { margin-top: 20px; font-size: 18px; font-style: italic; color: var(--muted); max-width: 420px; line-height: 1.6; }
+  .title-slide .ornament-divider { margin: 24px 0; width: 200px; }
+
+  .section-slide { justify-content: center; align-items: center; text-align: center; }
+  .section-slide .deco { left: 50%; top: 50%; transform: translate(-50%,-50%); width: 500px; height: 500px; opacity: 0.08; }
+  .section-slide .num { font-family: var(--font-body); font-size: 13px; letter-spacing: 0.4em; color: var(--gold); margin-bottom: 16px; }
+  .section-slide h2 { font-family: var(--font-display); font-size: 80px; font-weight: 700; line-height: 1.1; color: var(--green); }
+  .section-slide h2 em { font-style: italic; font-weight: 400; color: var(--purple); }
+  .section-slide .ornament-divider { margin: 20px 0; width: 160px; }
+  .section-slide p { font-size: 17px; font-style: italic; color: var(--muted); max-width: 440px; line-height: 1.7; }
+
+  .content-slide .header { text-align: center; margin-bottom: 36px; }
+  .content-slide .label { margin-bottom: 10px; }
+  .content-slide h2 { font-family: var(--font-display); font-size: 40px; font-weight: 700; color: var(--green); }
+  .content-slide h2 em { font-style: italic; color: var(--gold); }
+  .content-slide .cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 32px; flex: 1; }
+  .content-slide .card { text-align: center; padding: 32px 24px; display: flex; flex-direction: column; align-items: center; }
+  .content-slide .card .ornament-circle { width: 64px; height: 64px; border: 1.5px solid var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; color: var(--green); font-size: 24px; font-family: var(--font-display); }
+  .content-slide .card h3 { font-family: var(--font-display); font-size: 22px; font-weight: 700; color: var(--green); margin-bottom: 10px; }
+  .content-slide .card h3 em { font-style: italic; color: var(--purple); }
+  .content-slide .card p { font-size: 15px; line-height: 1.7; color: var(--muted); }
+  .content-slide .card .divider { width: 40px; height: 1px; background: var(--gold); margin: 16px 0; opacity: 0.5; }
+
+  .two-col .header { text-align: center; margin-bottom: 28px; }
+  .two-col h2 { font-family: var(--font-display); font-size: 38px; font-weight: 700; color: var(--green); }
+  .two-col .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; flex: 1; }
+  .two-col .col { padding: 36px; display: flex; flex-direction: column; border-top: 1px solid var(--gold); border-bottom: 1px solid var(--gold); }
+  .two-col .col.a { border-right: 1px solid rgba(184,148,79,0.3); padding-right: 40px; }
+  .two-col .col .tag { font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+  .two-col .col h3 { font-family: var(--font-display); font-size: 26px; font-weight: 700; color: var(--green); margin-bottom: 12px; }
+  .two-col .col h3 em { font-style: italic; color: var(--purple); }
+  .two-col .col p { font-size: 15px; line-height: 1.8; color: var(--muted); }
+  .two-col .col .stat { margin-top: auto; padding-top: 16px; font-family: var(--font-display); font-size: 48px; font-weight: 700; color: var(--gold); }
+  .two-col .col .stat em { font-style: italic; font-weight: 400; font-size: 20px; color: var(--muted); }
+
+  .quote-slide { justify-content: center; align-items: center; text-align: center; }
+  .quote-slide .quote-frame { max-width: 860px; padding: 48px 64px; position: relative; }
+  .quote-slide blockquote { font-family: var(--font-display); font-size: 40px; font-weight: 400; font-style: italic; line-height: 1.4; color: var(--green); }
+  .quote-slide blockquote strong { font-weight: 700; font-style: normal; color: var(--purple); }
+  .quote-slide cite { display: block; margin-top: 28px; font-size: 13px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); font-style: normal; }
+  .quote-slide .big-quote { font-family: var(--font-display); font-size: 120px; color: var(--gold); opacity: 0.3; line-height: 0.5; margin-bottom: 10px; }
+
+  .data-slide .header { text-align: center; margin-bottom: 28px; }
+  .data-slide h2 { font-family: var(--font-display); font-size: 38px; font-weight: 700; color: var(--green); }
+  .data-slide .metrics { display: grid; grid-template-columns: repeat(4,1fr); gap: 0; flex: 1; align-content: center; }
+  .data-slide .metric { text-align: center; padding: 32px 16px; position: relative; }
+  .data-slide .metric:not(:last-child)::after { content:''; position: absolute; right: 0; top: 20%; bottom: 20%; width: 1px; background: var(--gold); opacity: 0.4; }
+  .data-slide .metric .value { font-family: var(--font-display); font-size: 52px; font-weight: 700; color: var(--green); line-height: 1; }
+  .data-slide .metric .value em { font-style: italic; font-weight: 400; color: var(--gold); }
+  .data-slide .metric .label { margin-top: 10px; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); line-height: 1.5; }
+
+  .closing-slide { justify-content: center; align-items: center; text-align: center; }
+  .closing-slide .deco { left: 50%; top: 50%; transform: translate(-50%,-50%); width: 400px; height: 400px; opacity: 0.1; }
+  .closing-slide h2 { font-family: var(--font-display); font-size: 88px; font-weight: 900; color: var(--green); }
+  .closing-slide h2 em { font-style: italic; font-weight: 400; color: var(--gold); }
+  .closing-slide .ornament-divider { margin: 20px 0; width: 200px; }
+  .closing-slide p { font-size: 18px; font-style: italic; color: var(--muted); }
+  .closing-slide .btn { margin-top: 28px; display: inline-block; border: 1.5px solid var(--gold); color: var(--green); padding: 12px 36px; font-family: var(--font-body); font-size: 13px; letter-spacing: 0.25em; text-transform: uppercase; background: transparent; }
+
+  .nav-hint { position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%); color: rgba(0,0,0,0.25); font-family: var(--font-body); font-size: 11px; letter-spacing: 0.2em; z-index: 100; pointer-events: none; }
+  .counter { position: absolute; bottom: 16px; right: 24px; color: rgba(0,0,0,0.4); font-family: var(--font-body); font-size: 12px; letter-spacing: 0.15em; z-index: 100; }
+</style>
+</head>
+<body>
+<div class="deck">
+<section class="slide title-slide active">
+<div class="border-frame"></div>
+<div class="corner tl"><svg viewbox="0 0 40 40"><path d="M2 38 Q2 2 38 2" fill="none" stroke="#B8944F" stroke-width="1.5"></path><circle cx="2" cy="38" fill="#B8944F" r="3"></circle><path d="M8 32 Q8 8 32 8" fill="none" opacity="0.5" stroke="#B8944F" stroke-width="0.5"></path></svg></div>
+<div class="corner tr"><svg viewbox="0 0 40 40"><path d="M2 38 Q2 2 38 2" fill="none" stroke="#B8944F" stroke-width="1.5"></path><circle cx="2" cy="38" fill="#B8944F" r="3"></circle><path d="M8 32 Q8 8 32 8" fill="none" opacity="0.5" stroke="#B8944F" stroke-width="0.5"></path></svg></div>
+<div class="corner bl"><svg viewbox="0 0 40 40"><path d="M2 38 Q2 2 38 2" fill="none" stroke="#B8944F" stroke-width="1.5"></path><circle cx="2" cy="38" fill="#B8944F" r="3"></circle><path d="M8 32 Q8 8 32 8" fill="none" opacity="0.5" stroke="#B8944F" stroke-width="0.5"></path></svg></div>
+<div class="corner br"><svg viewbox="0 0 40 40"><path d="M2 38 Q2 2 38 2" fill="none" stroke="#B8944F" stroke-width="1.5"></path><circle cx="2" cy="38" fill="#B8944F" r="3"></circle><path d="M8 32 Q8 8 32 8" fill="none" opacity="0.5" stroke="#B8944F" stroke-width="0.5"></path></svg></div>
+<div class="medallion">
+<svg viewbox="0 0 320 320">
+<circle cx="160" cy="160" fill="none" r="150" stroke="#B8944F" stroke-width="1.5"></circle>
+<circle cx="160" cy="160" fill="none" opacity="0.5" r="140" stroke="#B8944F" stroke-width="0.5"></circle>
+<path d="M160 20 Q180 80 160 160 Q140 80 160 20" fill="#2D4A3E" opacity="0.15"></path>
+<path d="M160 300 Q140 240 160 160 Q180 240 160 300" fill="#7D5A6E" opacity="0.15"></path>
+<path d="M20 160 Q80 140 160 160 Q80 180 20 160" fill="#2D4A3E" opacity="0.1"></path>
+<path d="M300 160 Q240 180 160 160 Q240 140 300 160" fill="#7D5A6E" opacity="0.1"></path>
+<circle cx="160" cy="160" fill="none" r="60" stroke="#B8944F" stroke-width="1"></circle>
+<path d="M160 100 Q200 130 160 160 Q120 130 160 100" fill="#B8944F" opacity="0.2"></path>
+<path d="M160 220 Q120 190 160 160 Q200 190 160 220" fill="#2D4A3E" opacity="0.15"></path>
+</svg>
+</div>
+<div class="label">FEISHU · AGENT IN MEETING</div>
+<h1>聊着天，<br/>把活干了</h1>
+<div class="ornament-divider">❦</div>
+<p class="subtitle">在飞书会议里，边聊边干，是一种怎样的体验？</p>
+<div class="footer"><span>FEISHU AGENT</span><span class="ornament">FEISHU AGENT</span><span>01 / 07</span></div>
+</section>
+<section class="slide section-slide">
+<div class="border-frame"></div>
+<div class="deco"><svg viewbox="0 0 500 500"><circle cx="250" cy="250" fill="none" r="240" stroke="#2D4A3E" stroke-width="2"></circle><circle cx="250" cy="250" fill="none" r="200" stroke="#B8944F" stroke-width="1"></circle><path d="M250 10 Q300 150 250 250 Q200 150 250 10" fill="#2D4A3E" opacity="0.3"></path><path d="M250 490 Q200 350 250 250 Q300 350 250 490" fill="#7D5A6E" opacity="0.3"></path></svg></div>
+<div class="num">01 · 框架</div>
+<h2>先看一个框架</h2>
+<div class="ornament-divider">❦</div>
+
+<div class="footer"><span>FEISHU AGENT</span><span class="ornament">FEISHU AGENT</span><span>02 / 07</span></div>
+</section>
+<section class="slide content-slide">
+<div class="border-frame"></div>
+<div class="header">
+<div class="label">THREE LEVELS</div>
+<h2>会议里和 AI 协同，有三个 Level</h2>
+</div>
+<div class="cards">
+<div class="card">
+<div class="ornament-circle">❀</div>
+<h3>会后总结</h3>
+<div class="divider"></div>
+<p>开完会后，AI 总结纪要和待办——人类处理待办</p>
+</div>
+<div class="card">
+<div class="ornament-circle">◩</div>
+<h3>Agent 代办</h3>
+<div class="divider"></div>
+<p>开完会后，Agent 总结纪要和待办——Agent 主动处理待办</p>
+</div>
+<div class="card">
+<div class="ornament-circle">✦</div>
+<h3>边聊边干</h3>
+<div class="divider"></div>
+<p>Agent 加入会议，会上直接处理待办——边聊边干</p>
+</div>
+</div>
+<div class="footer"><span>FEISHU AGENT</span><span class="ornament">FEISHU AGENT</span><span>03 / 07</span></div>
+</section>
+<section class="slide two-col">
+<div class="border-frame"></div>
+<div class="header"><h2>不用等会开完</h2></div>
+<div class="cols">
+<div class="col a">
+<div class="tag">01</div>
+<h3>提问，秒答</h3>
+<p>数据、进展、结论，问出口的瞬间就有答案</p>
+
+</div>
+<div class="col b">
+<div class="tag">02</div>
+<h3>说需求，秒执行</h3>
+<p>一句话交代清楚，Agent 会上就动手</p>
+
+</div>
+</div>
+<div class="footer"><span>FEISHU AGENT</span><span class="ornament">FEISHU AGENT</span><span>04 / 07</span></div>
+</section>
+<section class="slide quote-slide">
+<div class="border-frame"></div>
+<div class="quote-frame">
+<div class="big-quote">“</div>
+<blockquote>找一个舒服漂亮的地方，喝着咖啡，聊着天，让想法碰撞出火花，剩下的，交给 Agent。</blockquote>
+<cite>未来的工作方式 · 2026</cite>
+</div>
+<div class="footer"><span>FEISHU AGENT</span><span class="ornament">FEISHU AGENT</span><span>05 / 07</span></div>
+</section>
+<section class="slide data-slide">
+<div class="border-frame"></div>
+<div class="header"><h2>边聊边干，长这样</h2></div>
+<div class="metrics">
+<div class="metric"><div class="value">5.6 万元</div><div class="label">华东地区 7 月销售额，风衣类卖得最好</div></div>
+<div class="metric"><div class="value">分钟 级</div><div class="label">全国销售数据 HTML 报表，会还没开完已上线</div></div>
+<div class="metric"><div class="value">0 次</div><div class="label">JD 全文直接贴进会中弹幕，当场就能读</div></div>
+<div class="metric"><div class="value">3 Level</div><div class="label">从会后排待办到会上直接执行，三级跃迁</div></div>
+</div>
+<div class="footer"><span>FEISHU AGENT</span><span class="ornament">FEISHU AGENT</span><span>06 / 07</span></div>
+</section>
+<section class="slide closing-slide">
+<div class="border-frame"></div>
+<div class="deco"><svg viewbox="0 0 400 400"><circle cx="200" cy="200" fill="none" r="190" stroke="#B8944F" stroke-width="2"></circle><path d="M200 10 Q250 120 200 200 Q150 120 200 10" fill="#2D4A3E" opacity="0.2"></path></svg></div>
+<h2>想体验<br/>Level 3?</h2>
+<div class="ornament-divider">❦</div>
+<p>用飞书扫码加入「智能体会」早鸟体验群</p>
+<div class="btn">立即体验</div>
+<div class="footer" style="position:absolute;bottom:56px;left:80px;right:80px;"><span>FEISHU AGENT</span><span class="ornament">FEISHU AGENT</span><span>07 / 07</span></div>
+</section>
+<div class="nav-hint">← → ARROWS TO NAVIGATE</div>
+<div class="counter" id="counter">01 / 07</div>
+</div>
+<script>
+  const slides = document.querySelectorAll('.slide'); let current = 0;
+  const counter = document.getElementById('counter');
+  function show(i) { slides[current].classList.remove('active'); current = (i + slides.length) % slides.length; slides[current].classList.add('active'); counter.textContent = String(current+1).padStart(2,'0')+' / '+String(slides.length).padStart(2,'0'); }
+  document.addEventListener('keydown', e => {
+    if (e.key==='ArrowRight'||e.key==='ArrowDown'||e.key===' ') { e.preventDefault(); show(current+1); }
+    if (e.key==='ArrowLeft'||e.key==='ArrowUp') { e.preventDefault(); show(current-1); }
+    if (e.key==='Home') { e.preventDefault(); show(0); }
+    if (e.key==='End') { e.preventDefault(); show(slides.length-1); }
+  });
+</script>
+</body>
+</html>

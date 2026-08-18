@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>聊着天，把活干了 — Slides Design Systems</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700;900&amp;family=Shippori+Mincho:wght@400;700;800&amp;display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #F2EAD8;
+    --bg-dark: #E8DEC6;
+    --fg: #1A1A1A;
+    --indigo: #1B3A6B;
+    --indigo-light: #2C5F8A;
+    --indigo-pale: #5B8DB5;
+    --red: #C8362C;
+    --muted: #5A5040;
+    --font-display: 'Shippori Mincho', 'Noto Serif JP', serif;
+    --font-body: 'Noto Serif JP', serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; background: #1a1a1a; font-family: var(--font-body); overflow: hidden; }
+  .deck { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; }
+  .slide {
+    position: absolute; top: 50%; left: 50%; width: 1280px; height: 720px; background: var(--bg); color: var(--fg);
+    padding: 56px 80px; display: none; flex-direction: column; overflow: hidden; transform: translate(-50%, -50%); transform-origin: center center;
+  }
+  .slide.active { display: flex; }
+  @media (max-aspect-ratio: 16/9) { .slide { transform: translate(-50%, -50%) scale(calc(100vw / 1280)); } }
+  @media (min-aspect-ratio: 16/9) { .slide { transform: translate(-50%, -50%) scale(calc(100vh / 720)); } }
+
+  /* Paper texture */
+  .slide::before {
+    content:''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(180,160,120,0.08) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(180,160,120,0.06) 0%, transparent 50%);
+  }
+
+  /* Outer border like woodblock print frame */
+  .wood-frame { position: absolute; top: 20px; left: 20px; right: 20px; bottom: 20px; border: 2px solid var(--indigo); pointer-events: none; z-index: 2; }
+  .wood-frame::before { content:''; position: absolute; top: 5px; left: 5px; right: 5px; bottom: 5px; border: 0.5px solid var(--indigo); opacity: 0.3; }
+
+  .footer {
+    margin-top: auto; display: flex; justify-content: space-between; align-items: center;
+    font-size: 12px; color: var(--muted); padding-top: 12px; z-index: 2; position: relative;
+    font-family: var(--font-body); letter-spacing: 0.15em;
+  }
+  .footer .seal { display: inline-flex; align-items: center; gap: 8px; }
+  .slide > *:not(:where(.wood-frame)):not(:where(.footer)):not(:where(.deco)):not(:where(.wave-band)) { position: relative; z-index: 1; }
+  .deco { position: absolute; z-index: 0; }
+  .wave-band { position: absolute; left: 0; right: 0; bottom: 0; z-index: 0; pointer-events: none; }
+
+  .label { font-size: 12px; letter-spacing: 0.3em; color: var(--indigo-light); font-weight: 700; }
+  .seal-stamp {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 44px; height: 44px; background: var(--red); color: #fff;
+    font-family: var(--font-display); font-size: 18px; font-weight: 800;
+    border-radius: 4px; line-height: 1; text-align: center;
+    box-shadow: 1px 1px 0 rgba(0,0,0,0.1);
+  }
+
+  /* Title */
+  .title-slide { justify-content: center; }
+  .title-slide .fuji { position: absolute; right: 80px; top: 80px; width: 280px; z-index: 0; }
+  .title-slide .fuji svg { width: 100%; }
+  .title-slide .label { margin-bottom: 16px; }
+  .title-slide h1 { font-family: var(--font-display); font-size: 120px; font-weight: 800; color: var(--indigo); line-height: 1; writing-mode: horizontal-tb; }
+  .title-slide .title-row { display: flex; align-items: flex-end; gap: 20px; }
+  .title-slide .subtitle { margin-top: 24px; font-size: 16px; color: var(--muted); line-height: 1.8; max-width: 460px; }
+  .title-slide .subtitle-en { font-size: 13px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--indigo-light); margin-top: 8px; }
+
+  /* Section */
+  .section-slide { justify-content: center; align-items: center; text-align: center; }
+  .section-slide .deco { left: 50%; top: 50%; transform: translate(-50%,-50%); width: 400px; opacity: 0.06; }
+  .section-slide .num { font-size: 12px; letter-spacing: 0.4em; color: var(--red); margin-bottom: 16px; font-weight: 700; }
+  .section-slide h2 { font-family: var(--font-display); font-size: 80px; font-weight: 800; color: var(--indigo); line-height: 1.1; }
+  .section-slide h2 .red { color: var(--red); }
+  .section-slide .divider { width: 60px; height: 2px; background: var(--indigo); margin: 20px auto; position: relative; }
+  .section-slide .divider::after { content:''; position: absolute; left: 50%; top: -3px; transform: translateX(-50%) rotate(45deg); width: 8px; height: 8px; background: var(--red); }
+  .section-slide p { font-size: 16px; color: var(--muted); max-width: 440px; line-height: 1.8; }
+
+  /* Content */
+  .content-slide .header { margin-bottom: 36px; display: flex; align-items: center; gap: 16px; }
+  .content-slide .header .seal-stamp { width: 36px; height: 36px; font-size: 14px; }
+  .content-slide h2 { font-family: var(--font-display); font-size: 40px; font-weight: 800; color: var(--indigo); }
+  .content-slide .cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; flex: 1; }
+  .content-slide .card { padding: 28px 24px; background: rgba(255,255,255,0.5); border: 1.5px solid var(--indigo); display: flex; flex-direction: column; position: relative; }
+  .content-slide .card::before { content:''; position: absolute; top: 4px; left: 4px; right: 4px; bottom: 4px; border: 0.5px solid var(--indigo); opacity: 0.2; pointer-events: none; }
+  .content-slide .card .wave-icon { width: 48px; height: 32px; margin-bottom: 16px; }
+  .content-slide .card h3 { font-family: var(--font-display); font-size: 22px; font-weight: 800; color: var(--indigo); margin-bottom: 10px; }
+  .content-slide .card p { font-size: 13px; line-height: 1.8; color: var(--muted); }
+  .content-slide .card .num { position: absolute; top: 16px; right: 20px; font-family: var(--font-display); font-size: 32px; color: var(--red); opacity: 0.3; font-weight: 800; }
+
+  /* Two col */
+  .two-col .header { margin-bottom: 28px; display: flex; align-items: center; gap: 16px; }
+  .two-col h2 { font-family: var(--font-display); font-size: 38px; font-weight: 800; color: var(--indigo); }
+  .two-col .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; flex: 1; }
+  .two-col .col { padding: 36px; display: flex; flex-direction: column; position: relative; }
+  .two-col .col.a { background: var(--indigo); color: #fff; }
+  .two-col .col.b { background: rgba(255,255,255,0.5); border: 1.5px solid var(--indigo); color: var(--fg); }
+  .two-col .col .tag { font-size: 11px; letter-spacing: 0.3em; margin-bottom: 14px; font-weight: 700; }
+  .two-col .col.a .tag { color: rgba(255,255,255,0.6); }
+  .two-col .col.b .tag { color: var(--red); }
+  .two-col .col h3 { font-family: var(--font-display); font-size: 28px; font-weight: 800; margin-bottom: 14px; }
+  .two-col .col p { font-size: 14px; line-height: 1.8; opacity: 0.85; }
+  .two-col .col .stat { margin-top: auto; padding-top: 16px; font-family: var(--font-display); font-size: 48px; font-weight: 800; }
+  .two-col .col.a .stat { color: #fff; }
+  .two-col .col.b .stat { color: var(--indigo); }
+
+  /* Quote */
+  .quote-slide { justify-content: center; align-items: center; text-align: center; }
+  .quote-slide blockquote { font-family: var(--font-display); font-size: 44px; font-weight: 700; line-height: 1.5; color: var(--indigo); max-width: 880px; }
+  .quote-slide blockquote .red { color: var(--red); }
+  .quote-slide cite { display: block; margin-top: 28px; font-size: 13px; color: var(--muted); font-style: normal; letter-spacing: 0.2em; }
+  .quote-slide .quote-seal { margin-top: 24px; }
+
+  /* Data */
+  .data-slide .header { margin-bottom: 28px; display: flex; align-items: center; gap: 16px; }
+  .data-slide h2 { font-family: var(--font-display); font-size: 38px; font-weight: 800; color: var(--indigo); }
+  .data-slide .metrics { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; flex: 1; align-content: center; }
+  .data-slide .metric { padding: 28px 16px; text-align: center; background: rgba(255,255,255,0.5); border: 1.5px solid var(--indigo); position: relative; }
+  .data-slide .metric:nth-child(2) { background: var(--indigo); color: #fff; }
+  .data-slide .metric:nth-child(2) .value, .data-slide .metric:nth-child(2) .label { color: #fff; }
+  .data-slide .metric .value { font-family: var(--font-display); font-size: 52px; font-weight: 800; color: var(--indigo); line-height: 1; }
+  .data-slide .metric .label { margin-top: 10px; font-size: 12px; color: var(--muted); line-height: 1.5; letter-spacing: 0.1em; }
+
+  /* Closing */
+  .closing-slide { justify-content: center; align-items: center; text-align: center; }
+  .closing-slide h2 { font-family: var(--font-display); font-size: 100px; font-weight: 800; color: var(--indigo); }
+  .closing-slide .divider { width: 80px; height: 2px; background: var(--indigo); margin: 20px auto; position: relative; }
+  .closing-slide .divider::after { content:''; position: absolute; left: 50%; top: -3px; transform: translateX(-50%) rotate(45deg); width: 8px; height: 8px; background: var(--red); }
+  .closing-slide p { font-size: 16px; color: var(--muted); }
+  .closing-slide .seal-stamp { margin-top: 28px; width: 56px; height: 56px; font-size: 22px; }
+
+  .nav-hint { position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%); color: rgba(27,58,107,0.3); font-family: var(--font-body); font-size: 11px; letter-spacing: 0.15em; z-index: 100; pointer-events: none; }
+  .counter { position: absolute; bottom: 16px; right: 24px; color: rgba(27,58,107,0.5); font-family: var(--font-body); font-size: 12px; z-index: 100; }
+</style>
+</head>
+<body>
+<div class="deck">
+<section class="slide title-slide active">
+<div class="wood-frame"></div>
+<div class="fuji">
+<svg viewbox="0 0 280 200">
+<path d="M20 180 L140 30 L260 180 Z" fill="#1B3A6B"></path>
+<path d="M100 90 L140 30 L180 90 Q160 80 140 85 Q120 80 100 90Z" fill="#F2EAD8"></path>
+<path d="M20 180 L140 30 L260 180" fill="none" stroke="#1A1A1A" stroke-width="2"></path>
+<path d="M60 180 Q80 160 100 170 Q120 180 140 165" fill="none" opacity="0.5" stroke="#2C5F8A" stroke-width="1"></path>
+<path d="M140 165 Q160 180 180 170 Q200 160 220 180" fill="none" opacity="0.5" stroke="#2C5F8A" stroke-width="1"></path>
+</svg>
+</div>
+<svg class="wave-band" preserveaspectratio="none" style="height:100px;bottom:40px;opacity:0.15;" viewbox="0 0 1280 120">
+<path d="M0 60 Q40 20 80 60 T160 60 T240 60 T320 60 T400 60 T480 60 T560 60 T640 60 T720 60 T800 60 T880 60 T960 60 T1040 60 T1120 60 T1200 60 T1280 60 V120 H0Z" fill="#1B3A6B"></path>
+</svg>
+<div class="label">FEISHU · AGENT IN MEETING</div>
+<div class="title-row">
+<h1>聊着天，<br/>把活干了</h1>
+<div class="seal-stamp">絵</div>
+</div>
+
+<p class="subtitle">在飞书会议里，边聊边干，是一种怎样的体验？</p>
+<div class="footer"><span class="seal">FEISHU AGENT</span><span>01 / 07</span></div>
+</section>
+<section class="slide section-slide">
+<div class="wood-frame"></div>
+<svg class="deco" viewbox="0 0 400 400"><circle cx="200" cy="200" fill="none" r="180" stroke="#1B3A6B" stroke-width="2"></circle><path d="M20 200 Q60 140 100 200 T180 200 T260 200 T340 200 T380 200" fill="none" stroke="#1B3A6B" stroke-width="1.5"></path></svg>
+<div class="num">01 · 框架</div>
+<h2>先看一个框架</h2>
+<div class="divider"></div>
+
+<div class="footer"><span class="seal">FEISHU AGENT</span><span>02 / 07</span></div>
+</section>
+<section class="slide content-slide">
+<div class="wood-frame"></div>
+<div class="header">
+<div class="seal-stamp">三</div>
+<h2>会议里和 AI 协同，有三个 Level</h2>
+</div>
+<div class="cards">
+<div class="card">
+<div class="num">LEVEL 1</div>
+<svg class="wave-icon" viewbox="0 0 48 32"><path d="M0 20 Q12 5 24 20 T48 20" fill="none" stroke="#1B3A6B" stroke-width="2.5"></path><path d="M0 28 Q12 13 24 28 T48 28" fill="none" stroke="#2C5F8A" stroke-width="1.5"></path></svg>
+<h3>会后总结</h3>
+<p>开完会后，AI 总结纪要和待办——人类处理待办</p>
+</div>
+<div class="card">
+<div class="num">LEVEL 2</div>
+<svg class="wave-icon" viewbox="0 0 48 32"><path d="M24 4 L44 28 L4 28 Z" fill="none" stroke="#1B3A6B" stroke-width="2.5"></path><path d="M18 16 L24 8 L30 16" fill="#F2EAD8" stroke="#1B3A6B" stroke-width="1.5"></path></svg>
+<h3>Agent 代办</h3>
+<p>开完会后，Agent 总结纪要和待办——Agent 主动处理待办</p>
+</div>
+<div class="card">
+<div class="num">LEVEL 3</div>
+<svg class="wave-icon" viewbox="0 0 48 32"><rect fill="#C8362C" height="24" rx="2" width="24" x="12" y="4"></rect><text fill="#fff" font-size="14" font-weight="bold" text-anchor="middle" x="24" y="22">印</text></svg>
+<h3>边聊边干</h3>
+<p>Agent 加入会议，会上直接处理待办——边聊边干</p>
+</div>
+</div>
+<div class="footer"><span class="seal">FEISHU AGENT</span><span>03 / 07</span></div>
+</section>
+<section class="slide two-col">
+<div class="wood-frame"></div>
+<div class="header">
+<div class="seal-stamp">四</div>
+<h2>不用等会开完</h2>
+</div>
+<div class="cols">
+<div class="col a">
+<div class="tag">01</div>
+<h3>提问，秒答</h3>
+<p>数据、进展、结论，问出口的瞬间就有答案</p>
+
+</div>
+<div class="col b">
+<div class="tag">02</div>
+<h3>说需求，秒执行</h3>
+<p>一句话交代清楚，Agent 会上就动手</p>
+
+</div>
+</div>
+<div class="footer"><span class="seal">FEISHU AGENT</span><span>04 / 07</span></div>
+</section>
+<section class="slide quote-slide">
+<div class="wood-frame"></div>
+<svg class="wave-band" preserveaspectratio="none" style="height:80px;top:60px;opacity:0.08;transform:scaleY(-1);" viewbox="0 0 1280 120">
+<path d="M0 60 Q40 20 80 60 T160 60 T240 60 T320 60 T400 60 T480 60 T560 60 T640 60 T720 60 T800 60 T880 60 T960 60 T1040 60 T1120 60 T1200 60 T1280 60 V120 H0Z" fill="#1B3A6B"></path>
+</svg>
+<blockquote>找一个舒服漂亮的地方，喝着咖啡，聊着天，让想法碰撞出火花，剩下的，交给 Agent。</blockquote>
+<cite>未来的工作方式 · 2026</cite>
+<div class="quote-seal"><div class="seal-stamp">印</div></div>
+<div class="footer"><span class="seal">FEISHU AGENT</span><span>05 / 07</span></div>
+</section>
+<section class="slide data-slide">
+<div class="wood-frame"></div>
+<div class="header">
+<div class="seal-stamp">六</div>
+<h2>边聊边干，长这样</h2>
+</div>
+<div class="metrics">
+<div class="metric"><div class="value">5.6 万元</div><div class="label">华东地区 7 月销售额，风衣类卖得最好</div></div>
+<div class="metric"><div class="value">分钟 级</div><div class="label">全国销售数据 HTML 报表，会还没开完已上线</div></div>
+<div class="metric"><div class="value">0 次</div><div class="label">JD 全文直接贴进会中弹幕，当场就能读</div></div>
+<div class="metric"><div class="value">3 Level</div><div class="label">从会后排待办到会上直接执行，三级跃迁</div></div>
+</div>
+<div class="footer"><span class="seal">FEISHU AGENT</span><span>06 / 07</span></div>
+</section>
+<section class="slide closing-slide">
+<div class="wood-frame"></div>
+<svg class="wave-band" preserveaspectratio="none" style="height:100px;bottom:40px;opacity:0.12;" viewbox="0 0 1280 120">
+<path d="M0 60 Q40 20 80 60 T160 60 T240 60 T320 60 T400 60 T480 60 T560 60 T640 60 T720 60 T800 60 T880 60 T960 60 T1040 60 T1120 60 T1200 60 T1280 60 V120 H0Z" fill="#1B3A6B"></path>
+</svg>
+<h2>想体验<br/>Level 3?</h2>
+<div class="divider"></div>
+<p>用飞书扫码加入「智能体会」早鸟体验群</p>
+<div class="seal-stamp">終</div>
+<div class="footer" style="position:absolute;bottom:56px;left:80px;right:80px;"><span class="seal">FEISHU AGENT</span><span>07 / 07</span></div>
+</section>
+<div class="nav-hint">← → ARROWS TO NAVIGATE</div>
+<div class="counter" id="counter">01 / 07</div>
+</div>
+<script>
+  const slides = document.querySelectorAll('.slide'); let current = 0;
+  const counter = document.getElementById('counter');
+  function show(i) { slides[current].classList.remove('active'); current = (i + slides.length) % slides.length; slides[current].classList.add('active'); counter.textContent = String(current+1).padStart(2,'0')+' / '+String(slides.length).padStart(2,'0'); }
+  document.addEventListener('keydown', e => {
+    if (e.key==='ArrowRight'||e.key==='ArrowDown'||e.key===' ') { e.preventDefault(); show(current+1); }
+    if (e.key==='ArrowLeft'||e.key==='ArrowUp') { e.preventDefault(); show(current-1); }
+    if (e.key==='Home') { e.preventDefault(); show(0); }
+    if (e.key==='End') { e.preventDefault(); show(slides.length-1); }
+  });
+</script>
+</body>
+</html>

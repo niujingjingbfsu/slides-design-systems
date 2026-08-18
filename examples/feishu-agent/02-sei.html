@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>聊着天，把活干了 — Slides Design Systems</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;700;900&amp;family=Noto+Sans+SC:wght@300;400;500&amp;display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #F5F2EB;
+    --fg: #1A1A1A;
+    --muted: #8C867B;
+    --accent: #B33A2A;
+    --line: rgba(26, 26, 26, 0.15);
+    --font-serif: 'Noto Serif SC', 'Songti SC', 'SimSun', serif;
+    --font-sans: 'Noto Sans SC', -apple-system, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    height: 100%;
+    background: #2A2823;
+    font-family: var(--font-sans);
+    overflow: hidden;
+    }
+
+  .deck { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; }
+
+  .slide {
+    position: absolute; top: 50%; left: 50%; width: 1280px; height: 720px;
+    background: var(--bg);
+    color: var(--fg);
+    padding: 72px 96px;
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    transform: translate(-50%, -50%); transform-origin: center center;
+  }
+
+  .slide.active { display: flex; }
+
+  @media (max-aspect-ratio: 16/9) { .slide { transform: translate(-50%, -50%) scale(calc(100vw / 1280)); } }
+  @media (min-aspect-ratio: 16/9) { .slide { transform: translate(-50%, -50%) scale(calc(100vh / 720)); } }
+
+  /* Seal */
+  .seal {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: var(--accent);
+    color: #F5F2EB;
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 22px;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  .footer {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.2em;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+  }
+
+  .hairline {
+    height: 1px;
+    background: var(--fg);
+    width: 100%;
+  }
+
+  /* ---- Slide 1: Title ---- */
+  .title-slide { justify-content: center; align-items: center; text-align: center; }
+  .title-slide .seal-row {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+  .title-slide .seal-row .line {
+    width: 80px;
+    height: 1px;
+    background: var(--line);
+  }
+  .title-slide h1 {
+    font-family: var(--font-serif);
+    font-size: 160px;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: 0.1em;
+  }
+  .title-slide .subtitle {
+    margin-top: 32px;
+    font-size: 15px;
+    color: var(--muted);
+    letter-spacing: 0.3em;
+    font-weight: 300;
+  }
+  .title-slide .vertical-text {
+    position: absolute;
+    right: 64px;
+    top: 50%;
+    transform: translateY(-50%);
+    writing-mode: vertical-rl;
+    font-family: var(--font-serif);
+    font-size: 13px;
+    color: var(--muted);
+    letter-spacing: 0.4em;
+    font-weight: 300;
+  }
+
+  /* ---- Slide 2: Section ---- */
+  .section-slide { justify-content: center; }
+  .section-slide .section-label {
+    font-size: 12px;
+    color: var(--accent);
+    letter-spacing: 0.3em;
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .section-slide .section-label::after {
+    content: '';
+    width: 48px;
+    height: 1px;
+    background: var(--accent);
+  }
+  .section-slide h2 {
+    font-family: var(--font-serif);
+    font-size: 88px;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: 0.05em;
+  }
+  .section-slide h2 .light { font-weight: 300; color: var(--muted); }
+  .section-slide .big-char {
+    position: absolute;
+    right: 80px;
+    bottom: 60px;
+    font-family: var(--font-serif);
+    font-size: 280px;
+    font-weight: 900;
+    color: rgba(179, 58, 42, 0.06);
+    line-height: 1;
+  }
+
+  /* ---- Slide 3: Content ---- */
+  .content-slide .top-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 28px;
+    margin-bottom: 48px;
+  }
+  .content-slide .top-row .text h2 {
+    font-family: var(--font-serif);
+    font-size: 42px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    line-height: 1.2;
+  }
+  .content-slide .top-row .text .label {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.25em;
+    margin-bottom: 12px;
+  }
+  .content-slide .body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    flex: 1;
+  }
+  .content-slide .lead {
+    font-family: var(--font-serif);
+    font-size: 20px;
+    line-height: 2;
+    color: #3A3631;
+    font-weight: 400;
+  }
+  .content-slide ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+  .content-slide li {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #4A453E;
+    padding-left: 20px;
+    position: relative;
+    font-weight: 300;
+  }
+  .content-slide li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 12px;
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+  }
+  .content-slide li strong {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    color: var(--fg);
+    display: block;
+    font-size: 16px;
+    margin-bottom: 4px;
+  }
+
+  /* ---- Slide 4: Two column ---- */
+  .two-col .top-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 48px;
+  }
+  .two-col h2 {
+    font-family: var(--font-serif);
+    font-size: 40px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+  }
+  .two-col .cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    flex: 1;
+  }
+  .two-col .col {
+    display: flex;
+    flex-direction: column;
+    padding-top: 32px;
+    border-top: 1px solid var(--line);
+  }
+  .two-col .col-num {
+    font-family: var(--font-serif);
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    margin-bottom: 20px;
+  }
+  .two-col .col h3 {
+    font-family: var(--font-serif);
+    font-size: 26px;
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+  .two-col .col p {
+    font-size: 14px;
+    line-height: 1.9;
+    color: #55504A;
+    font-weight: 300;
+  }
+
+  /* ---- Slide 5: Quote ---- */
+  .quote-slide { justify-content: center; align-items: center; text-align: center; }
+  .quote-slide blockquote {
+    font-family: var(--font-serif);
+    font-size: 52px;
+    font-weight: 400;
+    line-height: 1.6;
+    letter-spacing: 0.08em;
+    max-width: 900px;
+  }
+  .quote-slide blockquote .accent { color: var(--accent); }
+  .quote-slide .quote-mark {
+    font-family: var(--font-serif);
+    font-size: 100px;
+    color: var(--accent);
+    line-height: 0.5;
+    margin-bottom: 32px;
+    opacity: 0.6;
+  }
+  .quote-slide cite {
+    margin-top: 40px;
+    font-style: normal;
+    font-size: 13px;
+    color: var(--muted);
+    letter-spacing: 0.25em;
+  }
+
+  /* ---- Slide 6: Data ---- */
+  .data-slide .top-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 48px;
+  }
+  .data-slide h2 {
+    font-family: var(--font-serif);
+    font-size: 40px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+  }
+  .data-slide .metrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    flex: 1;
+  }
+  .data-slide .metric {
+    padding: 48px 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-right: 1px solid var(--line);
+  }
+  .data-slide .metric:last-child { border-right: none; }
+  .data-slide .metric .value {
+    font-family: var(--font-serif);
+    font-size: 80px;
+    font-weight: 300;
+    line-height: 1;
+  }
+  .data-slide .metric .value .unit {
+    font-size: 24px;
+    color: var(--accent);
+  }
+  .data-slide .metric .label {
+    margin-top: 16px;
+    font-size: 13px;
+    color: var(--muted);
+    letter-spacing: 0.15em;
+    line-height: 1.6;
+  }
+
+  /* ---- Slide 7: Closing ---- */
+  .closing-slide { justify-content: center; align-items: center; text-align: center; }
+  .closing-slide .seal-big {
+    width: 72px;
+    height: 72px;
+    background: var(--accent);
+    color: #F5F2EB;
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+    margin-bottom: 40px;
+  }
+  .closing-slide h2 {
+    font-family: var(--font-serif);
+    font-size: 72px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+  }
+  .closing-slide p {
+    margin-top: 20px;
+    font-size: 14px;
+    color: var(--muted);
+    letter-spacing: 0.3em;
+  }
+
+  /* ---- Nav ---- */
+  .nav-hint {
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255,255,255,0.3);
+    font-family: var(--font-sans);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    z-index: 100;
+    pointer-events: none;
+  }
+  .counter {
+    position: absolute;
+    bottom: 16px;
+    right: 24px;
+    color: rgba(255,255,255,0.45);
+    font-family: var(--font-sans);
+    font-size: 12px;
+    z-index: 100;
+    letter-spacing: 0.1em;
+  }
+</style>
+</head>
+<body>
+<div class="deck">
+<!-- 1. Title -->
+<section class="slide title-slide active">
+<div class="seal-row">
+<span class="line"></span>
+<div class="seal">静</div>
+<span class="line"></span>
+</div>
+<h1>聊着天，<br/>把活干了</h1>
+<p class="subtitle">在飞书会议里，边聊边干，是一种怎样的体验？</p>
+
+<div class="footer">
+<span>FEISHU AGENT</span>
+<span>01 / 07</span>
+</div>
+</section>
+<!-- 2. Section -->
+<section class="slide section-slide">
+
+<h2>先看一个框架</h2>
+<div class="big-char">間</div>
+<div class="footer">
+<span>FEISHU AGENT</span>
+<span>02 / 07</span>
+</div>
+</section>
+<!-- 3. Content -->
+<section class="slide content-slide">
+<div class="top-row">
+<div class="seal">念</div>
+<div class="text">
+<div class="label">THREE LEVELS</div>
+<h2>会议里和 AI 协同，有三个 Level</h2>
+</div>
+</div>
+<div class="body">
+
+<ul>
+<li><strong>会后总结</strong>开完会后，AI 总结纪要和待办——人类处理待办</li>
+<li><strong>Agent 代办</strong>开完会后，Agent 总结纪要和待办——Agent 主动处理待办</li>
+<li><strong>边聊边干</strong>Agent 加入会议，会上直接处理待办——边聊边干</li>
+</ul>
+</div>
+<div class="footer">
+<span>FEISHU AGENT</span>
+<span>03 / 07</span>
+</div>
+</section>
+<!-- 4. Two column -->
+<section class="slide two-col">
+<div class="top-row">
+<div class="seal">對</div>
+<h2>不用等会开完</h2>
+</div>
+<div class="cols">
+<div class="col">
+<div class="col-num">01</div>
+<h3>提问，秒答</h3>
+<p>数据、进展、结论，问出口的瞬间就有答案</p>
+</div>
+<div class="col">
+<div class="col-num">02</div>
+<h3>说需求，秒执行</h3>
+<p>一句话交代清楚，Agent 会上就动手</p>
+</div>
+</div>
+<div class="footer">
+<span>FEISHU AGENT</span>
+<span>04 / 07</span>
+</div>
+</section>
+<!-- 5. Quote -->
+<section class="slide quote-slide">
+<div class="quote-mark">「</div>
+<blockquote>找一个舒服漂亮的地方，喝着咖啡，聊着天，让想法碰撞出火花，剩下的，交给 Agent。</blockquote>
+<cite>未来的工作方式 · 2026</cite>
+<div class="footer">
+<span>FEISHU AGENT</span>
+<span>05 / 07</span>
+</div>
+</section>
+<!-- 6. Data -->
+<section class="slide data-slide">
+<div class="top-row">
+<div class="seal">數</div>
+<h2>边聊边干，长这样</h2>
+</div>
+<div class="metrics">
+<div class="metric">
+<div class="value">5.6 <span class="unit">万元</span></div>
+<div class="label">华东地区 7 月销售额，风衣类卖得最好</div>
+</div>
+<div class="metric">
+<div class="value">分钟 <span class="unit">级</span></div>
+<div class="label">全国销售数据 HTML 报表，会还没开完已上线</div>
+</div>
+<div class="metric">
+<div class="value">0 <span class="unit">次</span></div>
+<div class="label">JD 全文直接贴进会中弹幕，当场就能读</div>
+</div>
+</div>
+<div class="footer">
+<span>FEISHU AGENT</span>
+<span>06 / 07</span>
+</div>
+</section>
+<!-- 7. Closing -->
+<section class="slide closing-slide">
+<div class="seal-big">終</div>
+<h2>想体验<br/>Level 3?</h2>
+<p>用飞书扫码加入「智能体会」早鸟体验群</p>
+<div class="footer" style="position:absolute;bottom:72px;left:96px;right:96px;">
+<span>FEISHU AGENT</span>
+<span>07 / 07</span>
+</div>
+</section>
+<div class="nav-hint">← → 方向键翻页</div>
+<div class="counter" id="counter">01 / 07</div>
+</div>
+<script>
+  const slides = document.querySelectorAll('.slide');
+  let current = 0;
+  const counter = document.getElementById('counter');
+  function show(i) {
+    slides[current].classList.remove('active');
+    current = (i + slides.length) % slides.length;
+    slides[current].classList.add('active');
+    counter.textContent = String(current + 1).padStart(2, '0') + ' / ' + String(slides.length).padStart(2, '0');
+  }
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); show(current + 1); }
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); show(current - 1); }
+    if (e.key === 'Home') { e.preventDefault(); show(0); }
+    if (e.key === 'End') { e.preventDefault(); show(slides.length - 1); }
+  });
+</script>
+</body>
+</html>

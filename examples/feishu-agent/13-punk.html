@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>聊着天，把活干了 — Slides Design Systems</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&amp;family=JetBrains+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #FFFFFF;
+    --fg: #000000;
+    --red: #E63946;
+    --muted: #666;
+    --font: 'Inter', -apple-system, sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; background: #111; font-family: var(--font); overflow: hidden; }
+  .deck { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; }
+  .slide {
+    position: absolute; top: 50%; left: 50%; width: 1280px; height: 720px; background: var(--bg); color: var(--fg);
+    padding: 56px 72px; display: none; flex-direction: column; overflow: hidden; transform: translate(-50%, -50%); transform-origin: center center;
+  }
+  .slide.active { display: flex; }
+  @media (max-aspect-ratio: 16/9) { .slide { transform: translate(-50%, -50%) scale(calc(100vw / 1280)); } }
+  @media (min-aspect-ratio: 16/9) { .slide { transform: translate(-50%, -50%) scale(calc(100vh / 720)); } }
+
+  .footer {
+    margin-top: auto; display: flex; justify-content: space-between; align-items: center;
+    font-size: 12px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.1em;
+    border-top: 3px solid #000; padding-top: 12px; z-index: 2; position: relative;
+  }
+  .footer .tag { background: var(--red); color: #fff; padding: 3px 12px; }
+
+  .slide > *:not(:where(.deco)):not(:where(.footer)) { position: relative; z-index: 1; }
+  .deco { position: absolute; z-index: 0; }
+
+  /* Title */
+  .title-slide { justify-content: center; }
+  .title-slide .stripe { position: absolute; top: 0; left: 0; right: 0; height: 12px; background: var(--red); }
+  .title-slide .label { font-family: var(--mono); font-size: 13px; font-weight: 700; letter-spacing: 0.2em; margin-bottom: 20px; text-transform: uppercase; }
+  .title-slide h1 { font-size: 180px; font-weight: 900; line-height: 0.82; letter-spacing: -0.05em; text-transform: uppercase; }
+  .title-slide h1 .red { color: var(--red); }
+  .title-slide h1 .outline { -webkit-text-stroke: 4px #000; color: transparent; }
+  .title-slide .red-block { position: absolute; right: 0; top: 0; bottom: 0; width: 180px; background: var(--red); display: flex; align-items: center; justify-content: center; }
+  .title-slide .red-block .vert { writing-mode: vertical-rl; color: #fff; font-weight: 900; font-size: 20px; letter-spacing: 0.3em; text-transform: uppercase; }
+  .title-slide .subtitle { margin-top: 24px; font-size: 16px; font-weight: 700; max-width: 500px; line-height: 1.5; text-transform: uppercase; }
+  .title-slide .meta { margin-top: 32px; display: flex; gap: 32px; font-family: var(--mono); font-size: 12px; font-weight: 700; }
+
+  /* Section */
+  .section-slide { justify-content: center; }
+  .section-slide .red-bar { position: absolute; left: 0; top: 100px; bottom: 100px; width: 24px; background: var(--red); }
+  .section-slide .num { font-family: var(--mono); font-size: 14px; font-weight: 700; color: var(--red); letter-spacing: 0.3em; margin-bottom: 16px; margin-left: 48px; }
+  .section-slide h2 { font-size: 110px; font-weight: 900; line-height: 0.9; letter-spacing: -0.04em; text-transform: uppercase; margin-left: 48px; max-width: 800px; }
+  .section-slide h2 .red { color: var(--red); }
+  .section-slide .rotated { position: absolute; right: 80px; bottom: 100px; transform: rotate(90deg); transform-origin: right bottom; font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: 0.3em; color: var(--muted); white-space: nowrap; }
+
+  /* Content */
+  .content-slide .header { margin-bottom: 32px; display: flex; align-items: baseline; gap: 20px; border-bottom: 3px solid #000; padding-bottom: 16px; }
+  .content-slide .num { font-family: var(--mono); font-size: 14px; font-weight: 700; color: var(--red); }
+  .content-slide h2 { font-size: 48px; font-weight: 900; text-transform: uppercase; letter-spacing: -0.02em; line-height: 1; }
+  .content-slide .body { display: grid; grid-template-columns: 1fr 2fr; gap: 48px; flex: 1; }
+  .content-slide .lead { font-size: 22px; font-weight: 900; line-height: 1.3; text-transform: uppercase; }
+  .content-slide .lead .red { color: var(--red); }
+  .content-slide ul { list-style: none; display: flex; flex-direction: column; gap: 0; }
+  .content-slide li { display: grid; grid-template-columns: 40px 1fr; gap: 16px; padding: 16px 0; border-bottom: 1px solid #000; align-items: baseline; }
+  .content-slide li:first-child { border-top: 1px solid #000; }
+  .content-slide li .n { font-family: var(--mono); font-size: 14px; font-weight: 700; color: var(--red); }
+  .content-slide li h4 { font-size: 16px; font-weight: 900; text-transform: uppercase; margin-bottom: 2px; }
+  .content-slide li p { font-size: 13px; line-height: 1.5; color: #444; font-weight: 500; }
+
+  /* Two col */
+  .two-col .header { margin-bottom: 28px; border-bottom: 3px solid #000; padding-bottom: 16px; }
+  .two-col h2 { font-size: 44px; font-weight: 900; text-transform: uppercase; }
+  .two-col .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0; flex: 1; border: 3px solid #000; }
+  .two-col .col { padding: 36px; display: flex; flex-direction: column; }
+  .two-col .col.a { background: #fff; border-right: 3px solid #000; }
+  .two-col .col.b { background: #000; color: #fff; }
+  .two-col .col .tag { font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: 0.2em; margin-bottom: 16px; }
+  .two-col .col.a .tag { color: var(--red); }
+  .two-col .col.b .tag { color: var(--red); }
+  .two-col .col h3 { font-size: 32px; font-weight: 900; text-transform: uppercase; margin-bottom: 14px; line-height: 1; }
+  .two-col .col p { font-size: 14px; line-height: 1.6; font-weight: 500; opacity: 0.8; }
+  .two-col .col .big { margin-top: auto; font-size: 64px; font-weight: 900; padding-top: 16px; }
+  .two-col .col.a .big { color: var(--red); }
+  .two-col .col.b .big { color: #fff; }
+
+  /* Quote */
+  .quote-slide { justify-content: center; align-items: flex-start; }
+  .quote-slide .red-band { position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%); height: 200px; background: var(--red); z-index: 0; }
+  .quote-slide blockquote { font-size: 64px; font-weight: 900; line-height: 1.1; letter-spacing: -0.03em; text-transform: uppercase; max-width: 1000px; color: #fff; mix-blend-mode: difference; }
+  .quote-slide cite { display: block; margin-top: 32px; font-family: var(--mono); font-size: 13px; font-weight: 700; font-style: normal; letter-spacing: 0.2em; text-transform: uppercase; }
+
+  /* Data */
+  .data-slide .header { margin-bottom: 28px; border-bottom: 3px solid #000; padding-bottom: 16px; }
+  .data-slide h2 { font-size: 44px; font-weight: 900; text-transform: uppercase; }
+  .data-slide .metrics { display: grid; grid-template-columns: repeat(4,1fr); flex: 1; border: 3px solid #000; }
+  .data-slide .metric { padding: 32px 20px; display: flex; flex-direction: column; justify-content: center; border-right: 3px solid #000; }
+  .data-slide .metric:last-child { border-right: none; }
+  .data-slide .metric:nth-child(2) { background: var(--red); color: #fff; }
+  .data-slide .metric:nth-child(4) { background: #000; color: #fff; }
+  .data-slide .metric .value { font-size: 64px; font-weight: 900; line-height: 1; letter-spacing: -0.03em; }
+  .data-slide .metric .label { margin-top: 10px; font-size: 11px; font-weight: 900; text-transform: uppercase; line-height: 1.4; }
+
+  /* Closing */
+  .closing-slide { justify-content: center; align-items: center; text-align: center; }
+  .closing-slide .stripe { position: absolute; top: 0; left: 0; right: 0; height: 12px; background: var(--red); }
+  .closing-slide h2 { font-size: 130px; font-weight: 900; text-transform: uppercase; line-height: 0.85; letter-spacing: -0.04em; }
+  .closing-slide h2 .red { color: var(--red); }
+  .closing-slide p { margin-top: 20px; font-size: 18px; font-weight: 900; text-transform: uppercase; }
+  .closing-slide .btn { margin-top: 28px; display: inline-block; background: var(--red); color: #fff; padding: 14px 40px; font-size: 16px; font-weight: 900; text-transform: uppercase; }
+
+  .nav-hint { position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%); color: rgba(0,0,0,0.3); font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0.1em; z-index: 100; pointer-events: none; }
+  .counter { position: absolute; bottom: 16px; right: 24px; color: rgba(0,0,0,0.5); font-family: var(--mono); font-size: 12px; font-weight: 700; z-index: 100; }
+</style>
+</head>
+<body>
+<div class="deck">
+<section class="slide title-slide active">
+<div class="stripe"></div>
+<div class="red-block"></div>
+<div class="label">FEISHU · AGENT IN MEETING</div>
+<h1>聊着天，<br/>把活干了</h1>
+<p class="subtitle">在飞书会议里，边聊边干，是一种怎样的体验？</p>
+<div class="meta"><span>飞书 AI Friendly</span><span>产品经理 · 晶泾</span><span>客户共创 · 2026</span></div>
+<div class="footer"><span>FEISHU AGENT</span><span>01 / 07</span></div>
+</section>
+<section class="slide section-slide">
+<div class="red-bar"></div>
+<div class="num">01 · 框架</div>
+<h2>先看一个框架</h2>
+
+<div class="footer"><span>FEISHU AGENT</span><span>02 / 07</span></div>
+</section>
+<section class="slide content-slide">
+<div class="header"><span class="num">03</span><h2>会议里和 AI 协同，有三个 Level</h2></div>
+<div class="body">
+
+<ul>
+<li><span class="n">01</span><div><h4>会后总结</h4><p>开完会后，AI 总结纪要和待办——人类处理待办</p></div></li>
+<li><span class="n">02</span><div><h4>Agent 代办</h4><p>开完会后，Agent 总结纪要和待办——Agent 主动处理待办</p></div></li>
+<li><span class="n">03</span><div><h4>边聊边干</h4><p>Agent 加入会议，会上直接处理待办——边聊边干</p></div></li>
+</ul>
+</div>
+<div class="footer"><span>FEISHU AGENT</span><span>03 / 07</span></div>
+</section>
+<section class="slide two-col">
+<div class="header"><h2>不用等会开完</h2></div>
+<div class="cols">
+<div class="col a">
+<div class="tag">01</div>
+<h3>提问，秒答</h3>
+<p>数据、进展、结论，问出口的瞬间就有答案</p>
+
+</div>
+<div class="col b">
+<div class="tag">02</div>
+<h3>说需求，秒执行</h3>
+<p>一句话交代清楚，Agent 会上就动手</p>
+
+</div>
+</div>
+<div class="footer"><span>FEISHU AGENT</span><span>04 / 07</span></div>
+</section>
+<section class="slide quote-slide">
+<div class="red-band"></div>
+<blockquote>找一个舒服漂亮的地方，喝着咖啡，聊着天，让想法碰撞出火花，剩下的，交给 Agent。</blockquote>
+<cite>未来的工作方式 · 2026</cite>
+<div class="footer"><span>FEISHU AGENT</span><span>05 / 07</span></div>
+</section>
+<section class="slide data-slide">
+<div class="header"><h2>边聊边干，长这样</h2></div>
+<div class="metrics">
+<div class="metric"><div class="value">5.6 万元</div><div class="label">华东地区 7 月销售额，风衣类卖得最好</div></div>
+<div class="metric"><div class="value">分钟 级</div><div class="label">全国销售数据 HTML 报表，会还没开完已上线</div></div>
+<div class="metric"><div class="value">0 次</div><div class="label">JD 全文直接贴进会中弹幕，当场就能读</div></div>
+<div class="metric"><div class="value">3 Level</div><div class="label">从会后排待办到会上直接执行，三级跃迁</div></div>
+</div>
+<div class="footer"><span>FEISHU AGENT</span><span>06 / 07</span></div>
+</section>
+<section class="slide closing-slide">
+<div class="stripe"></div>
+<h2>想体验<br/>Level 3?</h2>
+<p>用飞书扫码加入「智能体会」早鸟体验群</p>
+<div class="btn">立即体验</div>
+<div class="footer" style="position:absolute;bottom:56px;left:72px;right:72px;"><span>FEISHU AGENT</span><span>07 / 07</span></div>
+</section>
+<div class="nav-hint">← → ARROWS TO NAVIGATE</div>
+<div class="counter" id="counter">01 / 07</div>
+</div>
+<script>
+  const slides = document.querySelectorAll('.slide'); let current = 0;
+  const counter = document.getElementById('counter');
+  function show(i) { slides[current].classList.remove('active'); current = (i + slides.length) % slides.length; slides[current].classList.add('active'); counter.textContent = String(current+1).padStart(2,'0')+' / '+String(slides.length).padStart(2,'0'); }
+  document.addEventListener('keydown', e => {
+    if (e.key==='ArrowRight'||e.key==='ArrowDown'||e.key===' ') { e.preventDefault(); show(current+1); }
+    if (e.key==='ArrowLeft'||e.key==='ArrowUp') { e.preventDefault(); show(current-1); }
+    if (e.key==='Home') { e.preventDefault(); show(0); }
+    if (e.key==='End') { e.preventDefault(); show(slides.length-1); }
+  });
+</script>
+</body>
+</html>

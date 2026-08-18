@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>聊着天，把活干了 — Slides Design Systems</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&amp;family=Inter:wght@400;600;800&amp;display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #F5F0E8;
+    --fg: #000;
+    --pink: #FF6B9D;
+    --cyan: #00C9C9;
+    --yellow: #FFD93D;
+    --red: #FF4757;
+    --blue: #4ECDC4;
+    --font-display: 'Archivo Black', sans-serif;
+    --font-body: 'Inter', -apple-system, sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; background: #2a2520; font-family: var(--font-body); overflow: hidden; }
+  .deck { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; }
+  .slide {
+    position: absolute; top: 50%; left: 50%; width: 1280px; height: 720px; background: var(--bg); color: var(--fg);
+    padding: 56px 72px; display: none; flex-direction: column; overflow: hidden; transform: translate(-50%, -50%); transform-origin: center center;
+  }
+  .slide.active { display: flex; }
+  @media (max-aspect-ratio: 16/9) { .slide { transform: translate(-50%, -50%) scale(calc(100vw / 1280)); } }
+  @media (min-aspect-ratio: 16/9) { .slide { transform: translate(-50%, -50%) scale(calc(100vh / 720)); } }
+
+  /* Memphis decorations */
+  .deco { position: absolute; z-index: 0; }
+  .squiggle { width: 80px; height: 20px; }
+  .squiggle path { stroke: #000; stroke-width: 3; fill: none; stroke-linecap: round; }
+  .dot-pattern { background: radial-gradient(circle, #000 2.5px, transparent 3px); background-size: 16px 16px; }
+  .checker { background: conic-gradient(#000 25%, #fff 0 50%, #000 0 75%, #fff 0); background-size: 20px 20px; }
+  .zebra { background: repeating-linear-gradient(45deg, #000, #000 4px, transparent 4px, transparent 10px); }
+  .circle { border-radius: 50%; border: 4px solid #000; }
+  .triangle { width: 0; height: 0; }
+
+  .footer {
+    margin-top: auto; display: flex; justify-content: space-between; align-items: center;
+    font-size: 12px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; z-index: 2; position: relative;
+  }
+  .footer .tag { background: #000; color: var(--bg); padding: 4px 12px; }
+  .slide > *:not(:where(.deco)):not(:where(.footer)) { position: relative; z-index: 1; }
+
+  .pop-card { border: 4px solid #000; padding: 24px; }
+
+  /* Title */
+  .title-slide { justify-content: center; }
+  .title-slide .badge { display: inline-block; background: var(--pink); color: #fff; border: 3px solid #000; padding: 6px 18px; font-weight: 800; font-size: 13px; text-transform: uppercase; margin-bottom: 24px; transform: rotate(-2deg); align-self: flex-start; }
+  .title-slide h1 { font-family: var(--font-display); font-size: 120px; line-height: 0.9; text-transform: uppercase; }
+  .title-slide h1 .pink { color: var(--pink); }
+  .title-slide h1 .cyan { color: var(--cyan); -webkit-text-stroke: 3px #000; }
+  .title-slide .subtitle { margin-top: 24px; font-size: 17px; font-weight: 600; max-width: 460px; line-height: 1.6; }
+  .title-slide .shapes { position: absolute; right: 60px; top: 60px; width: 340px; height: 500px; z-index: 0; }
+
+  /* Section */
+  .section-slide { justify-content: center; }
+  .section-slide .label { display: inline-block; background: var(--cyan); color: #000; border: 3px solid #000; padding: 6px 18px; font-weight: 800; font-size: 13px; text-transform: uppercase; margin-bottom: 20px; transform: rotate(1deg); }
+  .section-slide h2 { font-family: var(--font-display); font-size: 96px; line-height: 0.95; text-transform: uppercase; max-width: 700px; }
+  .section-slide h2 .yellow-bg { background: var(--yellow); padding: 0 12px; border: 3px solid #000; display: inline-block; transform: rotate(-1deg); }
+
+  /* Content */
+  .content-slide .header { margin-bottom: 32px; }
+  .content-slide .label { display: inline-block; background: var(--yellow); border: 3px solid #000; padding: 5px 16px; font-weight: 800; font-size: 12px; text-transform: uppercase; margin-bottom: 12px; }
+  .content-slide h2 { font-family: var(--font-display); font-size: 44px; text-transform: uppercase; line-height: 1; }
+  .content-slide .cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; flex: 1; }
+  .content-slide .card { border: 4px solid #000; padding: 28px; display: flex; flex-direction: column; position: relative; }
+  .content-slide .card:nth-child(1) { background: var(--pink); color: #fff; }
+  .content-slide .card:nth-child(2) { background: var(--cyan); }
+  .content-slide .card:nth-child(3) { background: var(--yellow); }
+  .content-slide .card .shape-icon { width: 48px; height: 48px; border: 3px solid #000; margin-bottom: 16px; display: flex; align-items: center; justify-content: center; font-size: 24px; background: #fff; }
+  .content-slide .card h3 { font-family: var(--font-display); font-size: 22px; text-transform: uppercase; margin-bottom: 10px; line-height: 1.1; }
+  .content-slide .card p { font-size: 13px; line-height: 1.6; font-weight: 600; }
+
+  /* Two col */
+  .two-col .header { margin-bottom: 28px; }
+  .two-col h2 { font-family: var(--font-display); font-size: 40px; text-transform: uppercase; }
+  .two-col .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; flex: 1; }
+  .two-col .col { border: 4px solid #000; padding: 36px; display: flex; flex-direction: column; }
+  .two-col .col.a { background: #fff; }
+  .two-col .col.b { background: #000; color: #fff; }
+  .two-col .col .tag { display: inline-block; padding: 4px 14px; font-weight: 800; font-size: 12px; text-transform: uppercase; margin-bottom: 16px; align-self: flex-start; border: 2px solid currentColor; }
+  .two-col .col.a .tag { background: var(--pink); color: #fff; border-color: #000; }
+  .two-col .col.b .tag { background: var(--yellow); color: #000; border-color: var(--yellow); }
+  .two-col .col h3 { font-family: var(--font-display); font-size: 28px; text-transform: uppercase; margin-bottom: 14px; }
+  .two-col .col p { font-size: 14px; line-height: 1.7; font-weight: 500; opacity: 0.85; }
+  .two-col .col .big { margin-top: auto; font-family: var(--font-display); font-size: 56px; padding-top: 16px; }
+  .two-col .col.a .big { color: var(--pink); }
+  .two-col .col.b .big { color: var(--cyan); }
+
+  /* Quote */
+  .quote-slide { justify-content: center; align-items: center; text-align: center; }
+  .quote-slide .box { background: #fff; border: 4px solid #000; padding: 56px 64px; max-width: 900px; position: relative; transform: rotate(-1deg); box-shadow: 12px 12px 0 var(--pink); }
+  .quote-slide blockquote { font-family: var(--font-display); font-size: 44px; line-height: 1.2; text-transform: uppercase; }
+  .quote-slide blockquote .cyan { color: var(--cyan); }
+  .quote-slide cite { display: block; margin-top: 24px; font-size: 13px; font-weight: 800; font-style: normal; text-transform: uppercase; }
+
+  /* Data */
+  .data-slide .header { margin-bottom: 28px; }
+  .data-slide h2 { font-family: var(--font-display); font-size: 40px; text-transform: uppercase; }
+  .data-slide .metrics { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; flex: 1; align-content: center; }
+  .data-slide .metric { border: 4px solid #000; padding: 28px 16px; text-align: center; }
+  .data-slide .metric:nth-child(1) { background: var(--pink); color: #fff; }
+  .data-slide .metric:nth-child(2) { background: var(--cyan); }
+  .data-slide .metric:nth-child(3) { background: var(--yellow); }
+  .data-slide .metric:nth-child(4) { background: var(--red); color: #fff; }
+  .data-slide .metric .value { font-family: var(--font-display); font-size: 52px; line-height: 1; }
+  .data-slide .metric .label { margin-top: 10px; font-size: 11px; font-weight: 800; text-transform: uppercase; line-height: 1.4; }
+
+  /* Closing */
+  .closing-slide { justify-content: center; align-items: center; text-align: center; }
+  .closing-slide h2 { font-family: var(--font-display); font-size: 100px; text-transform: uppercase; line-height: 0.9; }
+  .closing-slide h2 .pink { color: var(--pink); }
+  .closing-slide p { margin-top: 16px; font-size: 18px; font-weight: 700; }
+  .closing-slide .btn { margin-top: 28px; display: inline-block; background: var(--cyan); border: 4px solid #000; padding: 12px 36px; font-family: var(--font-display); font-size: 20px; text-transform: uppercase; box-shadow: 6px 6px 0 #000; }
+
+  .nav-hint { position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%); color: rgba(0,0,0,0.3); font-family: var(--font-body); font-size: 11px; font-weight: 800; letter-spacing: 0.1em; z-index: 100; pointer-events: none; }
+  .counter { position: absolute; bottom: 16px; right: 24px; color: rgba(0,0,0,0.5); font-family: var(--font-body); font-size: 12px; font-weight: 800; z-index: 100; }
+</style>
+</head>
+<body>
+<div class="deck">
+<section class="slide title-slide active">
+<div class="shapes">
+<div class="deco circle" style="width:120px;height:120px;background:var(--pink);top:0;right:40px;"></div>
+<div class="deco" style="width:100px;height:100px;background:var(--yellow);border:4px solid #000;top:140px;right:0;transform:rotate(15deg);"></div>
+<div class="deco" style="width:0;height:0;border-left:50px solid transparent;border-right:50px solid transparent;border-bottom:90px solid var(--cyan);filter:drop-shadow(3px 3px 0 #000);top:260px;right:80px;"></div>
+<svg class="deco squiggle" style="top:380px;right:40px;" viewbox="0 0 80 20"><path d="M0 10 Q10 0 20 10 T40 10 T60 10 T80 10"></path></svg>
+<div class="deco checker" style="width:50px;height:50px;border:3px solid #000;top:420px;right:160px;"></div>
+<div class="deco" style="width:24px;height:24px;background:var(--red);border-radius:50%;border:3px solid #000;top:100px;right:180px;"></div>
+<svg class="deco squiggle" style="top:200px;right:200px;transform:rotate(45deg);" viewbox="0 0 80 20"><path d="M0 10 Q10 0 20 10 T40 10 T60 10 T80 10"></path></svg>
+</div>
+<span class="badge">FEISHU · AGENT IN MEETING</span>
+<h1>聊着天，<br/>把活干了</h1>
+<p class="subtitle">在飞书会议里，边聊边干，是一种怎样的体验？</p>
+<div class="footer"><span>FEISHU AGENT</span><span>01 / 07</span></div>
+</section>
+<section class="slide section-slide">
+<div class="deco circle" style="width:200px;height:200px;background:var(--pink);opacity:0.2;right:-60px;top:-60px;"></div>
+<div class="deco" style="width:80px;height:80px;background:var(--cyan);border:4px solid #000;bottom:80px;left:80px;transform:rotate(-10deg);"></div>
+<svg class="deco squiggle" style="bottom:120px;right:120px;width:120px;height:30px;" viewbox="0 0 120 30"><path d="M0 15 Q15 0 30 15 T60 15 T90 15 T120 15" stroke-width="4"></path></svg>
+
+<h2>先看一个框架</h2>
+<div class="footer"><span>FEISHU AGENT</span><span>02 / 07</span></div>
+</section>
+<section class="slide content-slide">
+<div class="deco" style="width:60px;height:60px;background:var(--yellow);border:4px solid #000;border-radius:50%;top:60px;right:80px;"></div>
+<div class="deco checker" style="width:40px;height:40px;top:140px;right:200px;"></div>
+<div class="header"><span class="label">THREE LEVELS</span><h2>会议里和 AI 协同，有三个 Level</h2></div>
+<div class="cards">
+<div class="card"><div class="shape-icon">●</div><h3>会后总结</h3><p>开完会后，AI 总结纪要和待办——人类处理待办</p></div>
+<div class="card"><div class="shape-icon">▲</div><h3>Agent 代办</h3><p>开完会后，Agent 总结纪要和待办——Agent 主动处理待办</p></div>
+<div class="card"><div class="shape-icon">≈</div><h3>边聊边干</h3><p>Agent 加入会议，会上直接处理待办——边聊边干</p></div>
+</div>
+<div class="footer"><span>FEISHU AGENT</span><span>03 / 07</span></div>
+</section>
+<section class="slide two-col">
+<div class="deco" style="width:50px;height:50px;background:var(--pink);border:3px solid #000;border-radius:50%;bottom:100px;right:100px;"></div>
+<svg class="deco squiggle" style="top:80px;right:60px;" viewbox="0 0 80 20"><path d="M0 10 Q10 0 20 10 T40 10 T60 10 T80 10"></path></svg>
+<div class="header"><h2>不用等会开完</h2></div>
+<div class="cols">
+<div class="col a"><span class="tag">01</span><h3>提问，秒答</h3><p>数据、进展、结论，问出口的瞬间就有答案</p></div>
+<div class="col b"><span class="tag">02</span><h3>说需求，秒执行</h3><p>一句话交代清楚，Agent 会上就动手</p></div>
+</div>
+<div class="footer"><span>FEISHU AGENT</span><span>04 / 07</span></div>
+</section>
+<section class="slide quote-slide">
+<div class="deco" style="width:100px;height:100px;background:var(--yellow);border:4px solid #000;border-radius:50%;top:60px;left:80px;opacity:0.5;"></div>
+<div class="deco" style="width:70px;height:70px;background:var(--cyan);border:4px solid #000;bottom:80px;right:100px;transform:rotate(20deg);"></div>
+<div class="box">
+<blockquote>找一个舒服漂亮的地方，喝着咖啡，聊着天，让想法碰撞出火花，剩下的，交给 Agent。</blockquote>
+<cite>未来的工作方式 · 2026</cite>
+</div>
+<div class="footer"><span>FEISHU AGENT</span><span>05 / 07</span></div>
+</section>
+<section class="slide data-slide">
+<div class="deco checker" style="width:50px;height:50px;top:80px;right:100px;"></div>
+<svg class="deco squiggle" style="bottom:120px;left:60px;width:100px;" viewbox="0 0 80 20"><path d="M0 10 Q10 0 20 10 T40 10 T60 10 T80 10"></path></svg>
+<div class="header"><h2>边聊边干，长这样</h2></div>
+<div class="metrics">
+<div class="metric"><div class="value">5.6 万元</div><div class="label">华东地区 7 月销售额，风衣类卖得最好</div></div>
+<div class="metric"><div class="value">分钟 级</div><div class="label">全国销售数据 HTML 报表，会还没开完已上线</div></div>
+<div class="metric"><div class="value">0 次</div><div class="label">JD 全文直接贴进会中弹幕，当场就能读</div></div>
+<div class="metric"><div class="value">3 Level</div><div class="label">从会后排待办到会上直接执行，三级跃迁</div></div>
+</div>
+<div class="footer"><span>FEISHU AGENT</span><span>06 / 07</span></div>
+</section>
+<section class="slide closing-slide">
+<div class="deco circle" style="width:160px;height:160px;background:var(--pink);opacity:0.15;left:50%;top:50%;transform:translate(-50%,-50%);"></div>
+<div class="deco" style="width:80px;height:80px;background:var(--cyan);border:4px solid #000;top:80px;left:100px;transform:rotate(-15deg);"></div>
+<div class="deco" style="width:60px;height:60px;background:var(--yellow);border:4px solid #000;border-radius:50%;bottom:100px;right:120px;"></div>
+<h2>想体验<br/>Level 3?</h2>
+<p>用飞书扫码加入「智能体会」早鸟体验群</p>
+<div class="btn">立即体验</div>
+<div class="footer" style="position:absolute;bottom:56px;left:72px;right:72px;"><span>FEISHU AGENT</span><span>07 / 07</span></div>
+</section>
+<div class="nav-hint">← → ARROWS TO NAVIGATE</div>
+<div class="counter" id="counter">01 / 07</div>
+</div>
+<script>
+  const slides = document.querySelectorAll('.slide'); let current = 0;
+  const counter = document.getElementById('counter');
+  function show(i) { slides[current].classList.remove('active'); current = (i + slides.length) % slides.length; slides[current].classList.add('active'); counter.textContent = String(current+1).padStart(2,'0')+' / '+String(slides.length).padStart(2,'0'); }
+  document.addEventListener('keydown', e => {
+    if (e.key==='ArrowRight'||e.key==='ArrowDown'||e.key===' ') { e.preventDefault(); show(current+1); }
+    if (e.key==='ArrowLeft'||e.key==='ArrowUp') { e.preventDefault(); show(current-1); }
+    if (e.key==='Home') { e.preventDefault(); show(0); }
+    if (e.key==='End') { e.preventDefault(); show(slides.length-1); }
+  });
+</script>
+</body>
+</html>

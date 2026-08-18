@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>聊着天，把活干了 — 20 套设计系统</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: #f5f5f5;
+    color: #1a1a1a;
+    line-height: 1.6;
+  }
+  .hero {
+    background: #111;
+    color: #fff;
+    padding: 80px 40px 60px;
+    text-align: center;
+  }
+  .hero h1 {
+    font-size: 48px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+  }
+  .hero p {
+    font-size: 18px;
+    color: #888;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .hero .meta {
+    margin-top: 24px;
+    font-size: 13px;
+    color: #555;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 24px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 32px;
+  }
+  .card {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  }
+  .card-preview {
+    width: 100%;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    background: #eee;
+  }
+  .card-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .card-info {
+    padding: 20px;
+  }
+  .card-num {
+    font-size: 12px;
+    color: #999;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+  }
+  .card-name {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 4px 0 8px;
+  }
+  .card-desc {
+    font-size: 13px;
+    color: #666;
+  }
+  .footer {
+    text-align: center;
+    padding: 40px;
+    color: #999;
+    font-size: 13px;
+  }
+  .footer a { color: #666; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>聊着天，把活干了</h1>
+  <p>在飞书会议里，边聊边干，是一种怎样的体验？</p>
+  <div class="meta">Feishu Agent in Meeting · 20 Design Systems · 2026</div>
+</div>
+
+<div class="container">
+  <div class="grid" id="grid"></div>
+</div>
+
+<div class="footer">
+  <p>Slides Design Systems · <a href="https://github.com/niujingjingbfsu/slides-design-systems">GitHub</a></p>
+</div>
+
+<script>
+const templates = [
+  { id: '01-systems', name: 'Systems', desc: '蓝图技术感 · 网格、等宽字体、赤陶色点缀' },
+  { id: '02-sei', name: 'Sei', desc: '日式禅意 · 留白、墨色、垂直节奏' },
+  { id: '03-soft-space', name: 'Soft Space', desc: '温暖柔和 · 奶油色、圆角、柔和阴影' },
+  { id: '04-light-as-air', name: 'Light as Air', desc: '通透梦幻 · 玻璃拟态、渐变、浮动' },
+  { id: '05-breathe', name: 'Breathe', desc: '清新自然 · 薄荷绿、呼吸感、有机曲线' },
+  { id: '06-essential', name: 'Essential', desc: '高端留白 · 极致简约、衬线标题、大量留白' },
+  { id: '07-noir', name: 'Noir', desc: '暗黑电影 · 高对比、金色点缀、戏剧感' },
+  { id: '08-brutal', name: 'Brutal', desc: '粗野主义 · 粗边框、硬阴影、原始排版' },
+  { id: '09-neon', name: 'Neon', desc: '霓虹合成波 · 复古未来、发光、网格地平线' },
+  { id: '10-pop', name: 'Pop', desc: '波普艺术 · 高饱和、漫画感、圆点图案' },
+  { id: '11-electric', name: 'Electric', desc: '大胆渐变 · 紫蓝粉渐变、流体形状' },
+  { id: '12-memphis', name: 'Memphis', desc: '孟菲斯后现代 · 几何图案、撞色、趣味' },
+  { id: '13-punk', name: 'Punk', desc: '朋克 · 撕纸、拼贴、反设计美学' },
+  { id: '14-tropic', name: 'Tropic', desc: '热带 · 翠绿、橙粉、夏日活力' },
+  { id: '15-mineral-strata', name: 'Mineral Strata', desc: '青绿山水 · 泥金、青绿、层叠山峦' },
+  { id: '16-iron-line-halo', name: 'Iron Line Halo', desc: '铁线描 · 墨线、朱砂、吴带当风' },
+  { id: '17-cobalt-circles', name: 'Cobalt Circles', desc: '青花瓷 · 钴蓝、缠枝纹、冰裂纹' },
+  { id: '18-nouveau', name: 'Nouveau', desc: '新艺术运动 · 藤蔓曲线、金色边框、优雅' },
+  { id: '19-deco', name: 'Deco', desc: '装饰艺术 · 几何对称、黑金、爵士时代' },
+  { id: '20-ukiyo-e', name: 'Ukiyo-e', desc: '浮世绘 · 靛蓝、和柄、富士山' },
+];
+
+const grid = document.getElementById('grid');
+templates.forEach(t => {
+  const a = document.createElement('a');
+  a.className = 'card';
+  a.href = `${t.id}.html`;
+  a.innerHTML = `
+    <div class="card-preview">
+      <img src="previews/${t.id}.png" alt="${t.name}" loading="lazy">
+    </div>
+    <div class="card-info">
+      <div class="card-num">${t.id.split('-')[0]}</div>
+      <div class="card-name">${t.name}</div>
+      <div class="card-desc">${t.desc}</div>
+    </div>
+  `;
+  grid.appendChild(a);
+});
+</script>
+
+</body>
+</html>

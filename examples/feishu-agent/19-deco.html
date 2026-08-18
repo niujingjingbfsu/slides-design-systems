@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>聊着天，把活干了 — Slides Design Systems</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Limelight&amp;family=Josefin+Sans:wght@300;400;600;700&amp;display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #0B0F1A;
+    --bg-light: #131829;
+    --fg: #E8DCC8;
+    --gold: #C9A961;
+    --gold-bright: #E8D5A3;
+    --gold-dim: rgba(201,169,97,0.4);
+    --muted: rgba(232,220,200,0.55);
+    --font-display: 'Limelight', serif;
+    --font-body: 'Josefin Sans', sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; background: #000; font-family: var(--font-body); overflow: hidden; }
+  .deck { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; }
+  .slide {
+    position: absolute; top: 50%; left: 50%; width: 1280px; height: 720px; background: var(--bg); color: var(--fg);
+    padding: 56px 80px; display: none; flex-direction: column; overflow: hidden; transform: translate(-50%, -50%); transform-origin: center center;
+  }
+  .slide.active { display: flex; }
+  @media (max-aspect-ratio: 16/9) { .slide { transform: translate(-50%, -50%) scale(calc(100vw / 1280)); } }
+  @media (min-aspect-ratio: 16/9) { .slide { transform: translate(-50%, -50%) scale(calc(100vh / 720)); } }
+
+  /* Deco frame */
+  .deco-frame { position: absolute; top: 28px; left: 28px; right: 28px; bottom: 28px; border: 1px solid var(--gold-dim); pointer-events: none; z-index: 2; }
+  .deco-frame::before { content:''; position: absolute; top: 8px; left: 8px; right: 8px; bottom: 8px; border: 0.5px solid var(--gold-dim); }
+  .chevron { position: absolute; width: 50px; height: 50px; z-index: 3; }
+  .chevron svg { width: 100%; height: 100%; }
+  .chevron.tl { top: 16px; left: 16px; }
+  .chevron.tr { top: 16px; right: 16px; transform: scaleX(-1); }
+  .chevron.bl { bottom: 16px; left: 16px; transform: scaleY(-1); }
+  .chevron.br { bottom: 16px; right: 16px; transform: scale(-1,-1); }
+
+  .footer {
+    margin-top: auto; display: flex; justify-content: space-between; align-items: center;
+    font-size: 11px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--muted);
+    padding-top: 14px; z-index: 2; position: relative; font-weight: 600;
+  }
+  .footer .gold-dot { color: var(--gold); }
+  .slide > *:not(:where(.deco-frame)):not(:where(.chevron)):not(:where(.footer)):not(:where(.sunburst)):not(:where(.deco)) { position: relative; z-index: 1; }
+  .deco { position: absolute; z-index: 0; }
+  .sunburst { position: absolute; z-index: 0; pointer-events: none; }
+
+  .label { font-size: 11px; letter-spacing: 0.5em; text-transform: uppercase; color: var(--gold); font-weight: 600; }
+  .gold-rule { width: 80px; height: 2px; background: var(--gold); margin: 0 auto; position: relative; }
+  .gold-rule::before, .gold-rule::after { content:''; position: absolute; top: -3px; width: 8px; height: 8px; background: var(--gold); transform: rotate(45deg); }
+  .gold-rule::before { left: -20px; }
+  .gold-rule::after { right: -20px; }
+
+  /* Title */
+  .title-slide { justify-content: center; align-items: center; text-align: center; }
+  .title-slide .sunburst { right: -100px; bottom: -100px; width: 600px; height: 600px; opacity: 0.15; }
+  .title-slide .pyramid { position: absolute; top: 60px; left: 50%; transform: translateX(-50%); width: 200px; height: 80px; z-index: 0; opacity: 0.2; }
+  .title-slide .label { margin-bottom: 24px; }
+  .title-slide h1 { font-family: var(--font-display); font-size: 120px; color: var(--gold-bright); line-height: 1; letter-spacing: 0.05em; }
+  .title-slide .gold-rule { margin: 28px auto; }
+  .title-slide .subtitle { font-size: 15px; color: var(--muted); letter-spacing: 0.15em; text-transform: uppercase; font-weight: 300; max-width: 480px; line-height: 1.8; }
+
+  /* Section */
+  .section-slide { justify-content: center; align-items: center; text-align: center; }
+  .section-slide .sunburst { left: 50%; top: 50%; transform: translate(-50%,-50%); width: 500px; height: 500px; opacity: 0.08; }
+  .section-slide .num { font-size: 12px; letter-spacing: 0.5em; color: var(--gold); margin-bottom: 20px; }
+  .section-slide h2 { font-family: var(--font-display); font-size: 72px; color: var(--gold-bright); line-height: 1.1; letter-spacing: 0.04em; }
+  .section-slide .gold-rule { margin: 24px auto; }
+  .section-slide p { font-size: 15px; color: var(--muted); letter-spacing: 0.1em; max-width: 440px; line-height: 1.8; font-weight: 300; }
+
+  /* Content */
+  .content-slide .header { text-align: center; margin-bottom: 40px; }
+  .content-slide .label { margin-bottom: 12px; }
+  .content-slide h2 { font-family: var(--font-display); font-size: 36px; color: var(--gold-bright); letter-spacing: 0.04em; }
+  .content-slide .cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 0; flex: 1; }
+  .content-slide .card { text-align: center; padding: 36px 28px; position: relative; display: flex; flex-direction: column; align-items: center; }
+  .content-slide .card:not(:last-child)::after { content:''; position: absolute; right: 0; top: 15%; bottom: 15%; width: 1px; background: var(--gold-dim); }
+  .content-slide .card .icon-frame { width: 72px; height: 72px; border: 1px solid var(--gold); display: flex; align-items: center; justify-content: center; margin-bottom: 24px; position: relative; }
+  .content-slide .card .icon-frame::before { content:''; position: absolute; top: 4px; left: 4px; right: 4px; bottom: 4px; border: 0.5px solid var(--gold-dim); }
+  .content-slide .card .icon-frame span { font-family: var(--font-display); font-size: 28px; color: var(--gold); }
+  .content-slide .card h3 { font-family: var(--font-display); font-size: 20px; color: var(--gold-bright); margin-bottom: 12px; letter-spacing: 0.03em; }
+  .content-slide .card p { font-size: 13px; line-height: 1.8; color: var(--muted); font-weight: 300; }
+
+  /* Two col */
+  .two-col .header { text-align: center; margin-bottom: 32px; }
+  .two-col h2 { font-family: var(--font-display); font-size: 34px; color: var(--gold-bright); letter-spacing: 0.04em; }
+  .two-col .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0; flex: 1; }
+  .two-col .col { padding: 40px; display: flex; flex-direction: column; align-items: center; text-align: center; position: relative; }
+  .two-col .col.a { border-right: 1px solid var(--gold-dim); }
+  .two-col .col .tag { font-size: 10px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; font-weight: 600; }
+  .two-col .col h3 { font-family: var(--font-display); font-size: 26px; color: var(--gold-bright); margin-bottom: 14px; letter-spacing: 0.03em; }
+  .two-col .col p { font-size: 13px; line-height: 1.8; color: var(--muted); font-weight: 300; max-width: 340px; }
+  .two-col .col .stat { margin-top: auto; padding-top: 20px; font-family: var(--font-display); font-size: 48px; color: var(--gold); }
+  .two-col .col .stat small { font-family: var(--font-body); font-size: 14px; color: var(--muted); letter-spacing: 0.2em; font-weight: 300; }
+
+  /* Quote */
+  .quote-slide { justify-content: center; align-items: center; text-align: center; }
+  .quote-slide .sunburst { left: 50%; top: 50%; transform: translate(-50%,-50%); width: 600px; height: 600px; opacity: 0.06; }
+  .quote-slide blockquote { font-family: var(--font-display); font-size: 38px; color: var(--gold-bright); line-height: 1.4; max-width: 860px; letter-spacing: 0.02em; }
+  .quote-slide cite { display: block; margin-top: 32px; font-size: 11px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); font-style: normal; font-weight: 600; }
+  .quote-slide .gold-rule { margin: 24px auto 0; }
+
+  /* Data */
+  .data-slide .header { text-align: center; margin-bottom: 32px; }
+  .data-slide h2 { font-family: var(--font-display); font-size: 34px; color: var(--gold-bright); letter-spacing: 0.04em; }
+  .data-slide .metrics { display: grid; grid-template-columns: repeat(4,1fr); gap: 0; flex: 1; align-content: center; }
+  .data-slide .metric { text-align: center; padding: 32px 16px; position: relative; }
+  .data-slide .metric:not(:last-child)::after { content:''; position: absolute; right: 0; top: 20%; bottom: 20%; width: 1px; background: var(--gold-dim); }
+  .data-slide .metric .value { font-family: var(--font-display); font-size: 52px; color: var(--gold-bright); line-height: 1; }
+  .data-slide .metric .label { margin-top: 12px; font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted); line-height: 1.6; font-weight: 600; }
+
+  /* Closing */
+  .closing-slide { justify-content: center; align-items: center; text-align: center; }
+  .closing-slide .sunburst { left: 50%; top: 50%; transform: translate(-50%,-50%); width: 500px; height: 500px; opacity: 0.1; }
+  .closing-slide h2 { font-family: var(--font-display); font-size: 96px; color: var(--gold-bright); letter-spacing: 0.05em; }
+  .closing-slide .gold-rule { margin: 24px auto; }
+  .closing-slide p { font-size: 15px; color: var(--muted); letter-spacing: 0.2em; text-transform: uppercase; font-weight: 300; }
+  .closing-slide .btn { margin-top: 32px; display: inline-block; border: 1px solid var(--gold); color: var(--gold); padding: 14px 44px; font-size: 12px; letter-spacing: 0.35em; text-transform: uppercase; background: transparent; font-weight: 600; }
+
+  .nav-hint { position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%); color: rgba(201,169,97,0.3); font-family: var(--font-body); font-size: 10px; letter-spacing: 0.3em; z-index: 100; pointer-events: none; }
+  .counter { position: absolute; bottom: 16px; right: 24px; color: rgba(201,169,97,0.5); font-family: var(--font-body); font-size: 11px; letter-spacing: 0.2em; z-index: 100; }
+</style>
+</head>
+<body>
+<div class="deck">
+<section class="slide title-slide active">
+<div class="deco-frame"></div>
+<div class="chevron tl"><svg viewbox="0 0 50 50"><path d="M4 4 L46 4 L46 10 L10 10 L10 46 L4 46 Z" fill="#C9A961"></path><path d="M14 14 L40 14 L40 18 L18 18 L18 40 L14 40 Z" fill="#C9A961" opacity="0.5"></path></svg></div>
+<div class="chevron tr"><svg viewbox="0 0 50 50"><path d="M4 4 L46 4 L46 10 L10 10 L10 46 L4 46 Z" fill="#C9A961"></path><path d="M14 14 L40 14 L40 18 L18 18 L18 40 L14 40 Z" fill="#C9A961" opacity="0.5"></path></svg></div>
+<div class="chevron bl"><svg viewbox="0 0 50 50"><path d="M4 4 L46 4 L46 10 L10 10 L10 46 L4 46 Z" fill="#C9A961"></path><path d="M14 14 L40 14 L40 18 L18 18 L18 40 L14 40 Z" fill="#C9A961" opacity="0.5"></path></svg></div>
+<div class="chevron br"><svg viewbox="0 0 50 50"><path d="M4 4 L46 4 L46 10 L10 10 L10 46 L4 46 Z" fill="#C9A961"></path><path d="M14 14 L40 14 L40 18 L18 18 L18 40 L14 40 Z" fill="#C9A961" opacity="0.5"></path></svg></div>
+<svg class="pyramid" viewbox="0 0 200 80"><path d="M100 0 L140 80 L60 80 Z" fill="none" stroke="#C9A961" stroke-width="1"></path><path d="M100 0 L120 80 L80 80 Z" fill="none" opacity="0.5" stroke="#C9A961" stroke-width="0.5"></path><path d="M60 80 L140 80" stroke="#C9A961" stroke-width="1"></path></svg>
+
+<div class="label">FEISHU · AGENT IN MEETING</div>
+<h1>聊着天，<br/>把活干了</h1>
+<div class="gold-rule"></div>
+<p class="subtitle">在飞书会议里，边聊边干，是一种怎样的体验？</p>
+<div class="footer"><span>FEISHU AGENT</span><span class="gold-dot">FEISHU AGENT</span><span>01 / 07</span></div>
+</section>
+<section class="slide section-slide">
+<div class="deco-frame"></div>
+<svg class="sunburst" viewbox="0 0 500 500">
+<g transform="translate(250,250)">
+<circle fill="none" r="60" stroke="#C9A961" stroke-width="1"></circle>
+<g id="rays2"></g>
+</g>
+</svg>
+<div class="num">01 · 框架</div>
+<h2>先看一个框架</h2>
+<div class="gold-rule"></div>
+
+<div class="footer"><span>FEISHU AGENT</span><span class="gold-dot">FEISHU AGENT</span><span>02 / 07</span></div>
+</section>
+<section class="slide content-slide">
+<div class="deco-frame"></div>
+<div class="header">
+<div class="label">THREE LEVELS</div>
+<h2>会议里和 AI 协同，有三个 Level</h2>
+</div>
+<div class="cards">
+<div class="card">
+<div class="icon-frame"><span>◆</span></div>
+<h3>会后总结</h3>
+<p>开完会后，AI 总结纪要和待办——人类处理待办</p>
+</div>
+<div class="card">
+<div class="icon-frame"><span>☀</span></div>
+<h3>Agent 代办</h3>
+<p>开完会后，Agent 总结纪要和待办——Agent 主动处理待办</p>
+</div>
+<div class="card">
+<div class="icon-frame"><span>♦</span></div>
+<h3>边聊边干</h3>
+<p>Agent 加入会议，会上直接处理待办——边聊边干</p>
+</div>
+</div>
+<div class="footer"><span>FEISHU AGENT</span><span class="gold-dot">FEISHU AGENT</span><span>03 / 07</span></div>
+</section>
+<section class="slide two-col">
+<div class="deco-frame"></div>
+<div class="header"><h2>不用等会开完</h2></div>
+<div class="cols">
+<div class="col a">
+<div class="tag">01</div>
+<h3>提问，秒答</h3>
+<p>数据、进展、结论，问出口的瞬间就有答案</p>
+
+</div>
+<div class="col b">
+<div class="tag">02</div>
+<h3>说需求，秒执行</h3>
+<p>一句话交代清楚，Agent 会上就动手</p>
+
+</div>
+</div>
+<div class="footer"><span>FEISHU AGENT</span><span class="gold-dot">FEISHU AGENT</span><span>04 / 07</span></div>
+</section>
+<section class="slide quote-slide">
+<div class="deco-frame"></div>
+<svg class="sunburst" viewbox="0 0 600 600">
+<g transform="translate(300,300)">
+<circle fill="none" r="100" stroke="#C9A961" stroke-width="1"></circle>
+<g id="rays3"></g>
+</g>
+</svg>
+<blockquote>找一个舒服漂亮的地方，喝着咖啡，聊着天，让想法碰撞出火花，剩下的，交给 Agent。</blockquote>
+<div class="gold-rule"></div>
+<cite>未来的工作方式 · 2026</cite>
+<div class="footer"><span>FEISHU AGENT</span><span class="gold-dot">FEISHU AGENT</span><span>05 / 07</span></div>
+</section>
+<section class="slide data-slide">
+<div class="deco-frame"></div>
+<div class="header"><h2>边聊边干，长这样</h2></div>
+<div class="metrics">
+<div class="metric"><div class="value">5.6 万元</div><div class="label">华东地区 7 月销售额，风衣类卖得最好</div></div>
+<div class="metric"><div class="value">分钟 级</div><div class="label">全国销售数据 HTML 报表，会还没开完已上线</div></div>
+<div class="metric"><div class="value">0 次</div><div class="label">JD 全文直接贴进会中弹幕，当场就能读</div></div>
+<div class="metric"><div class="value">3 Level</div><div class="label">从会后排待办到会上直接执行，三级跃迁</div></div>
+</div>
+<div class="footer"><span>FEISHU AGENT</span><span class="gold-dot">FEISHU AGENT</span><span>06 / 07</span></div>
+</section>
+<section class="slide closing-slide">
+<div class="deco-frame"></div>
+
+<h2>想体验<br/>Level 3?</h2>
+<div class="gold-rule"></div>
+<p>用飞书扫码加入「智能体会」早鸟体验群</p>
+<div class="btn">立即体验</div>
+<div class="footer" style="position:absolute;bottom:56px;left:80px;right:80px;"><span>FEISHU AGENT</span><span class="gold-dot">FEISHU AGENT</span><span>07 / 07</span></div>
+</section>
+<div class="nav-hint">← → ARROWS TO NAVIGATE</div>
+<div class="counter" id="counter">01 / 07</div>
+</div>
+<script>
+  // Generate sunburst rays
+  function addRays(groupId, count, inner, outer, width) {
+    const g = document.getElementById(groupId);
+    if (!g) return;
+    for (let i = 0; i < count; i++) {
+      const angle = (i * 360 / count) * Math.PI / 180;
+      const x1 = Math.cos(angle) * inner;
+      const y1 = Math.sin(angle) * inner;
+      const x2 = Math.cos(angle) * outer;
+      const y2 = Math.sin(angle) * outer;
+      const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      line.setAttribute('x1', x1); line.setAttribute('y1', y1);
+      line.setAttribute('x2', x2); line.setAttribute('y2', y2);
+      line.setAttribute('stroke', '#C9A961');
+      line.setAttribute('stroke-width', width || 1);
+      line.setAttribute('opacity', i % 2 === 0 ? '0.8' : '0.3');
+      g.appendChild(line);
+    }
+  }
+  addRays('rays', 48, 90, 280, 1);
+  addRays('rays2', 36, 70, 230, 1);
+  addRays('rays3', 60, 110, 290, 1);
+  addRays('rays4', 40, 90, 240, 1);
+
+  const slides = document.querySelectorAll('.slide'); let current = 0;
+  const counter = document.getElementById('counter');
+  function show(i) { slides[current].classList.remove('active'); current = (i + slides.length) % slides.length; slides[current].classList.add('active'); counter.textContent = String(current+1).padStart(2,'0')+' / '+String(slides.length).padStart(2,'0'); }
+  document.addEventListener('keydown', e => {
+    if (e.key==='ArrowRight'||e.key==='ArrowDown'||e.key===' ') { e.preventDefault(); show(current+1); }
+    if (e.key==='ArrowLeft'||e.key==='ArrowUp') { e.preventDefault(); show(current-1); }
+    if (e.key==='Home') { e.preventDefault(); show(0); }
+    if (e.key==='End') { e.preventDefault(); show(slides.length-1); }
+  });
+</script>
+</body>
+</html>
