@@ -1,7 +1,13 @@
 # Slides Design Systems
 
+[![GitHub](https://img.shields.io/badge/GitHub-niujingjingbfsu%2Fslides--design--systems-blue?logo=github&style=flat-square)](https://github.com/niujingjingbfsu/slides-design-systems)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
+[![Live Preview](https://img.shields.io/badge/Live_Preview-GitHub_Pages-green?style=flat-square)](https://niujingjingbfsu.github.io/slides-design-systems/)
+
 > 20 套精心设计的 HTML 演示文稿模板，每套都是一套完整的设计系统——从色彩、字体到装饰语法全部锁定。
 > 零依赖、单文件、浏览器直接打开，也可作为 Claude Code / Cursor / Codex 等 AI 编程助手的 Skill 使用。
+
+**[在 GitHub 上查看源码 →](https://github.com/niujingjingbfsu/slides-design-systems)**
 
 ## 为什么做这个项目
 
@@ -219,6 +225,12 @@ AI 读取后会严格遵守这些 token，不会自行发明颜色或字体。
 - **改字体**：替换 `<head>` 中的 Google Fonts 链接和 `--font-*` 变量
 - **加页面**：复制一个 `.slide` section，修改内容即可
 - **改内容**：直接编辑 HTML 中的文字
+
+## 项目链接
+
+- **GitHub 仓库**：[github.com/niujingjingbfsu/slides-design-systems](https://github.com/niujingjingbfsu/slides-design-systems)
+- **在线预览**：[niujingjingbfsu.github.io/slides-design-systems](https://niujingjingbfsu.github.io/slides-design-systems/)
+- **问题反馈**：[GitHub Issues](https://github.com/niujingjingbfsu/slides-design-systems/issues)
 
 ## License
 
