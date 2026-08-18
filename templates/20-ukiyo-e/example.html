@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>浮世绘 UKIYO-E — Slide Template</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700;900&family=Shippori+Mincho:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F2EAD8;
+    --bg-dark: #E8DEC6;
+    --fg: #1A1A1A;
+    --indigo: #1B3A6B;
+    --indigo-light: #2C5F8A;
+    --indigo-pale: #5B8DB5;
+    --red: #C8362C;
+    --muted: #5A5040;
+    --font-display: 'Shippori Mincho', 'Noto Serif JP', serif;
+    --font-body: 'Noto Serif JP', serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; background: #1a1a1a; font-family: var(--font-body); overflow: hidden; display: flex; align-items: center; justify-content: center; }
+  .deck { width: 100vw; height: 100vh; position: relative; display: flex; align-items: center; justify-content: center; }
+  .slide {
+    position: absolute; width: 1280px; height: 720px; background: var(--bg); color: var(--fg);
+    padding: 56px 80px; display: none; flex-direction: column; overflow: hidden; transform-origin: center center;
+  }
+  .slide.active { display: flex; }
+  @media (max-aspect-ratio: 16/9) { .slide { transform: scale(calc(100vw / 1280)); } }
+  @media (min-aspect-ratio: 16/9) { .slide { transform: scale(calc(100vh / 720)); } }
+
+  /* Paper texture */
+  .slide::before {
+    content:''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(180,160,120,0.08) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(180,160,120,0.06) 0%, transparent 50%);
+  }
+
+  /* Outer border like woodblock print frame */
+  .wood-frame { position: absolute; top: 20px; left: 20px; right: 20px; bottom: 20px; border: 2px solid var(--indigo); pointer-events: none; z-index: 2; }
+  .wood-frame::before { content:''; position: absolute; top: 5px; left: 5px; right: 5px; bottom: 5px; border: 0.5px solid var(--indigo); opacity: 0.3; }
+
+  .footer {
+    margin-top: auto; display: flex; justify-content: space-between; align-items: center;
+    font-size: 12px; color: var(--muted); padding-top: 12px; z-index: 2; position: relative;
+    font-family: var(--font-body); letter-spacing: 0.15em;
+  }
+  .footer .seal { display: inline-flex; align-items: center; gap: 8px; }
+  .slide > *:not(.wood-frame):not(.footer):not(.deco):not(.wave-band) { position: relative; z-index: 1; }
+  .deco { position: absolute; z-index: 0; }
+  .wave-band { position: absolute; left: 0; right: 0; bottom: 0; z-index: 0; pointer-events: none; }
+
+  .label { font-size: 12px; letter-spacing: 0.3em; color: var(--indigo-light); font-weight: 700; }
+  .seal-stamp {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 44px; height: 44px; background: var(--red); color: #fff;
+    font-family: var(--font-display); font-size: 18px; font-weight: 800;
+    border-radius: 4px; line-height: 1; text-align: center;
+    box-shadow: 1px 1px 0 rgba(0,0,0,0.1);
+  }
+
+  /* Title */
+  .title-slide { justify-content: center; }
+  .title-slide .fuji { position: absolute; right: 80px; top: 80px; width: 280px; z-index: 0; }
+  .title-slide .fuji svg { width: 100%; }
+  .title-slide .label { margin-bottom: 16px; }
+  .title-slide h1 { font-family: var(--font-display); font-size: 120px; font-weight: 800; color: var(--indigo); line-height: 1; writing-mode: horizontal-tb; }
+  .title-slide .title-row { display: flex; align-items: flex-end; gap: 20px; }
+  .title-slide .subtitle { margin-top: 24px; font-size: 16px; color: var(--muted); line-height: 1.8; max-width: 460px; }
+  .title-slide .subtitle-en { font-size: 13px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--indigo-light); margin-top: 8px; }
+
+  /* Section */
+  .section-slide { justify-content: center; align-items: center; text-align: center; }
+  .section-slide .deco { left: 50%; top: 50%; transform: translate(-50%,-50%); width: 400px; opacity: 0.06; }
+  .section-slide .num { font-size: 12px; letter-spacing: 0.4em; color: var(--red); margin-bottom: 16px; font-weight: 700; }
+  .section-slide h2 { font-family: var(--font-display); font-size: 80px; font-weight: 800; color: var(--indigo); line-height: 1.1; }
+  .section-slide h2 .red { color: var(--red); }
+  .section-slide .divider { width: 60px; height: 2px; background: var(--indigo); margin: 20px auto; position: relative; }
+  .section-slide .divider::after { content:''; position: absolute; left: 50%; top: -3px; transform: translateX(-50%) rotate(45deg); width: 8px; height: 8px; background: var(--red); }
+  .section-slide p { font-size: 16px; color: var(--muted); max-width: 440px; line-height: 1.8; }
+
+  /* Content */
+  .content-slide .header { margin-bottom: 36px; display: flex; align-items: center; gap: 16px; }
+  .content-slide .header .seal-stamp { width: 36px; height: 36px; font-size: 14px; }
+  .content-slide h2 { font-family: var(--font-display); font-size: 40px; font-weight: 800; color: var(--indigo); }
+  .content-slide .cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; flex: 1; }
+  .content-slide .card { padding: 28px 24px; background: rgba(255,255,255,0.5); border: 1.5px solid var(--indigo); display: flex; flex-direction: column; position: relative; }
+  .content-slide .card::before { content:''; position: absolute; top: 4px; left: 4px; right: 4px; bottom: 4px; border: 0.5px solid var(--indigo); opacity: 0.2; pointer-events: none; }
+  .content-slide .card .wave-icon { width: 48px; height: 32px; margin-bottom: 16px; }
+  .content-slide .card h3 { font-family: var(--font-display); font-size: 22px; font-weight: 800; color: var(--indigo); margin-bottom: 10px; }
+  .content-slide .card p { font-size: 13px; line-height: 1.8; color: var(--muted); }
+  .content-slide .card .num { position: absolute; top: 16px; right: 20px; font-family: var(--font-display); font-size: 32px; color: var(--red); opacity: 0.3; font-weight: 800; }
+
+  /* Two col */
+  .two-col .header { margin-bottom: 28px; display: flex; align-items: center; gap: 16px; }
+  .two-col h2 { font-family: var(--font-display); font-size: 38px; font-weight: 800; color: var(--indigo); }
+  .two-col .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; flex: 1; }
+  .two-col .col { padding: 36px; display: flex; flex-direction: column; position: relative; }
+  .two-col .col.a { background: var(--indigo); color: #fff; }
+  .two-col .col.b { background: rgba(255,255,255,0.5); border: 1.5px solid var(--indigo); color: var(--fg); }
+  .two-col .col .tag { font-size: 11px; letter-spacing: 0.3em; margin-bottom: 14px; font-weight: 700; }
+  .two-col .col.a .tag { color: rgba(255,255,255,0.6); }
+  .two-col .col.b .tag { color: var(--red); }
+  .two-col .col h3 { font-family: var(--font-display); font-size: 28px; font-weight: 800; margin-bottom: 14px; }
+  .two-col .col p { font-size: 14px; line-height: 1.8; opacity: 0.85; }
+  .two-col .col .stat { margin-top: auto; padding-top: 16px; font-family: var(--font-display); font-size: 48px; font-weight: 800; }
+  .two-col .col.a .stat { color: #fff; }
+  .two-col .col.b .stat { color: var(--indigo); }
+
+  /* Quote */
+  .quote-slide { justify-content: center; align-items: center; text-align: center; }
+  .quote-slide blockquote { font-family: var(--font-display); font-size: 44px; font-weight: 700; line-height: 1.5; color: var(--indigo); max-width: 880px; }
+  .quote-slide blockquote .red { color: var(--red); }
+  .quote-slide cite { display: block; margin-top: 28px; font-size: 13px; color: var(--muted); font-style: normal; letter-spacing: 0.2em; }
+  .quote-slide .quote-seal { margin-top: 24px; }
+
+  /* Data */
+  .data-slide .header { margin-bottom: 28px; display: flex; align-items: center; gap: 16px; }
+  .data-slide h2 { font-family: var(--font-display); font-size: 38px; font-weight: 800; color: var(--indigo); }
+  .data-slide .metrics { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; flex: 1; align-content: center; }
+  .data-slide .metric { padding: 28px 16px; text-align: center; background: rgba(255,255,255,0.5); border: 1.5px solid var(--indigo); position: relative; }
+  .data-slide .metric:nth-child(2) { background: var(--indigo); color: #fff; }
+  .data-slide .metric:nth-child(2) .value, .data-slide .metric:nth-child(2) .label { color: #fff; }
+  .data-slide .metric .value { font-family: var(--font-display); font-size: 52px; font-weight: 800; color: var(--indigo); line-height: 1; }
+  .data-slide .metric .label { margin-top: 10px; font-size: 12px; color: var(--muted); line-height: 1.5; letter-spacing: 0.1em; }
+
+  /* Closing */
+  .closing-slide { justify-content: center; align-items: center; text-align: center; }
+  .closing-slide h2 { font-family: var(--font-display); font-size: 100px; font-weight: 800; color: var(--indigo); }
+  .closing-slide .divider { width: 80px; height: 2px; background: var(--indigo); margin: 20px auto; position: relative; }
+  .closing-slide .divider::after { content:''; position: absolute; left: 50%; top: -3px; transform: translateX(-50%) rotate(45deg); width: 8px; height: 8px; background: var(--red); }
+  .closing-slide p { font-size: 16px; color: var(--muted); }
+  .closing-slide .seal-stamp { margin-top: 28px; width: 56px; height: 56px; font-size: 22px; }
+
+  .nav-hint { position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); color: rgba(27,58,107,0.3); font-family: var(--font-body); font-size: 11px; letter-spacing: 0.15em; z-index: 100; pointer-events: none; }
+  .counter { position: fixed; bottom: 16px; right: 24px; color: rgba(27,58,107,0.5); font-family: var(--font-body); font-size: 12px; z-index: 100; }
+</style>
+</head>
+<body>
+<div class="deck">
+
+  <section class="slide title-slide active">
+    <div class="wood-frame"></div>
+    <div class="fuji">
+      <svg viewBox="0 0 280 200">
+        <path d="M20 180 L140 30 L260 180 Z" fill="#1B3A6B"/>
+        <path d="M100 90 L140 30 L180 90 Q160 80 140 85 Q120 80 100 90Z" fill="#F2EAD8"/>
+        <path d="M20 180 L140 30 L260 180" fill="none" stroke="#1A1A1A" stroke-width="2"/>
+        <path d="M60 180 Q80 160 100 170 Q120 180 140 165" fill="none" stroke="#2C5F8A" stroke-width="1" opacity="0.5"/>
+        <path d="M140 165 Q160 180 180 170 Q200 160 220 180" fill="none" stroke="#2C5F8A" stroke-width="1" opacity="0.5"/>
+      </svg>
+    </div>
+    <svg class="wave-band" viewBox="0 0 1280 120" preserveAspectRatio="none" style="height:100px;bottom:40px;opacity:0.15;">
+      <path d="M0 60 Q40 20 80 60 T160 60 T240 60 T320 60 T400 60 T480 60 T560 60 T640 60 T720 60 T800 60 T880 60 T960 60 T1040 60 T1120 60 T1200 60 T1280 60 V120 H0Z" fill="#1B3A6B"/>
+    </svg>
+    <div class="label">第二十六章</div>
+    <div class="title-row">
+      <h1>浮世絵</h1>
+      <div class="seal-stamp">絵</div>
+    </div>
+    <div class="subtitle-en">UKIYO-E · FLOATING WORLD</div>
+    <p class="subtitle">江戸木版画の美学を現代のプレゼンテーションに。<br>平塗りの色、力強い輪郭、そして波。</p>
+    <div class="footer"><span class="seal"><span class="seal-stamp" style="width:24px;height:24px;font-size:11px;">印</span> UKIYO-E</span><span>01 / 07</span></div>
+  </section>
+
+  <section class="slide section-slide">
+    <div class="wood-frame"></div>
+    <svg class="deco" viewBox="0 0 400 400"><circle cx="200" cy="200" r="180" fill="none" stroke="#1B3A6B" stroke-width="2"/><path d="M20 200 Q60 140 100 200 T180 200 T260 200 T340 200 T380 200" fill="none" stroke="#1B3A6B" stroke-width="1.5"/></svg>
+    <div class="num">— 二 —</div>
+    <h2>波の<span class="red">美学</span></h2>
+    <div class="divider"></div>
+    <p>余白は沈黙ではない。それは呼吸である。<br>一枚の版画に、無限の空間が宿る。</p>
+    <div class="footer"><span class="seal"><span class="seal-stamp" style="width:24px;height:24px;font-size:11px;">印</span> UKIYO-E</span><span>02 / 07</span></div>
+  </section>
+
+  <section class="slide content-slide">
+    <div class="wood-frame"></div>
+    <div class="header">
+      <div class="seal-stamp">三</div>
+      <h2>三つの要素</h2>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <div class="num">一</div>
+        <svg class="wave-icon" viewBox="0 0 48 32"><path d="M0 20 Q12 5 24 20 T48 20" fill="none" stroke="#1B3A6B" stroke-width="2.5"/><path d="M0 28 Q12 13 24 28 T48 28" fill="none" stroke="#2C5F8A" stroke-width="1.5"/></svg>
+        <h3>波</h3>
+        <p>Indigo waves roll across every surface. The seigaiha pattern is the heartbeat of ukiyo-e — repetition with variation, order with movement.</p>
+      </div>
+      <div class="card">
+        <div class="num">二</div>
+        <svg class="wave-icon" viewBox="0 0 48 32"><path d="M24 4 L44 28 L4 28 Z" fill="none" stroke="#1B3A6B" stroke-width="2.5"/><path d="M18 16 L24 8 L30 16" fill="#F2EAD8" stroke="#1B3A6B" stroke-width="1.5"/></svg>
+        <h3>山</h3>
+        <p>Mt. Fuji — the silent geometric anchor. A single triangle with a snow cap, instantly recognizable across four centuries.</p>
+      </div>
+      <div class="card">
+        <div class="num">三</div>
+        <svg class="wave-icon" viewBox="0 0 48 32"><rect x="12" y="4" width="24" height="24" rx="2" fill="#C8362C"/><text x="24" y="22" text-anchor="middle" fill="#fff" font-size="14" font-weight="bold">印</text></svg>
+        <h3>印</h3>
+        <p>The red hanko seal. A single vermilion square that signs the work — the artist's presence in a field of blue and cream.</p>
+      </div>
+    </div>
+    <div class="footer"><span class="seal"><span class="seal-stamp" style="width:24px;height:24px;font-size:11px;">印</span> UKIYO-E</span><span>03 / 07</span></div>
+  </section>
+
+  <section class="slide two-col">
+    <div class="wood-frame"></div>
+    <div class="header">
+      <div class="seal-stamp">四</div>
+      <h2>二つの流派</h2>
+    </div>
+    <div class="cols">
+      <div class="col a">
+        <div class="tag">— 狩野派 —</div>
+        <h3>金と力</h3>
+        <p>Gold leaf, bold outlines, dramatic compositions. The Kano school painted for shoguns — power made visible on folding screens.</p>
+        <div class="stat">1603</div>
+      </div>
+      <div class="col b">
+        <div class="tag">— 浮世絵 —</div>
+        <h3>藍と日常</h3>
+        <p>Indigo on paper, actors and landscapes, the floating world of Edo. Hokusai and Hiroshige made art for the merchant class.</p>
+        <div class="stat">1831</div>
+      </div>
+    </div>
+    <div class="footer"><span class="seal"><span class="seal-stamp" style="width:24px;height:24px;font-size:11px;">印</span> UKIYO-E</span><span>04 / 07</span></div>
+  </section>
+
+  <section class="slide quote-slide">
+    <div class="wood-frame"></div>
+    <svg class="wave-band" viewBox="0 0 1280 120" preserveAspectRatio="none" style="height:80px;top:60px;opacity:0.08;transform:scaleY(-1);">
+      <path d="M0 60 Q40 20 80 60 T160 60 T240 60 T320 60 T400 60 T480 60 T560 60 T640 60 T720 60 T800 60 T880 60 T960 60 T1040 60 T1120 60 T1200 60 T1280 60 V120 H0Z" fill="#1B3A6B"/>
+    </svg>
+    <blockquote>
+      波は<span class="red">繰り返す</span>が、<br>
+      同じ波は二度と来ない。
+    </blockquote>
+    <cite>— 葛飾北斎</cite>
+    <div class="quote-seal"><div class="seal-stamp">印</div></div>
+    <div class="footer"><span class="seal"><span class="seal-stamp" style="width:24px;height:24px;font-size:11px;">印</span> UKIYO-E</span><span>05 / 07</span></div>
+  </section>
+
+  <section class="slide data-slide">
+    <div class="wood-frame"></div>
+    <div class="header">
+      <div class="seal-stamp">六</div>
+      <h2>数字で見る</h2>
+    </div>
+    <div class="metrics">
+      <div class="metric"><div class="value">3</div><div class="label">Signature colors</div></div>
+      <div class="metric"><div class="value">36</div><div class="label">Views of Fuji</div></div>
+      <div class="metric"><div class="value">1831</div><div class="label">Great Wave year</div></div>
+      <div class="metric"><div class="value">∞</div><div class="label">Waves drawn</div></div>
+    </div>
+    <div class="footer"><span class="seal"><span class="seal-stamp" style="width:24px;height:24px;font-size:11px;">印</span> UKIYO-E</span><span>06 / 07</span></div>
+  </section>
+
+  <section class="slide closing-slide">
+    <div class="wood-frame"></div>
+    <svg class="wave-band" viewBox="0 0 1280 120" preserveAspectRatio="none" style="height:100px;bottom:40px;opacity:0.12;">
+      <path d="M0 60 Q40 20 80 60 T160 60 T240 60 T320 60 T400 60 T480 60 T560 60 T640 60 T720 60 T800 60 T880 60 T960 60 T1040 60 T1120 60 T1200 60 T1280 60 V120 H0Z" fill="#1B3A6B"/>
+    </svg>
+    <h2>完</h2>
+    <div class="divider"></div>
+    <p>ありがとうございました</p>
+    <div class="seal-stamp">終</div>
+    <div class="footer" style="position:absolute;bottom:56px;left:80px;right:80px;"><span class="seal"><span class="seal-stamp" style="width:24px;height:24px;font-size:11px;">印</span> UKIYO-E</span><span>07 / 07</span></div>
+  </section>
+
+</div>
+<div class="nav-hint">← → ARROWS TO NAVIGATE</div>
+<div class="counter" id="counter">01 / 07</div>
+<script>
+  const slides = document.querySelectorAll('.slide'); let current = 0;
+  const counter = document.getElementById('counter');
+  function show(i) { slides[current].classList.remove('active'); current = (i + slides.length) % slides.length; slides[current].classList.add('active'); counter.textContent = String(current+1).padStart(2,'0')+' / '+String(slides.length).padStart(2,'0'); }
+  document.addEventListener('keydown', e => {
+    if (e.key==='ArrowRight'||e.key==='ArrowDown'||e.key===' ') { e.preventDefault(); show(current+1); }
+    if (e.key==='ArrowLeft'||e.key==='ArrowUp') { e.preventDefault(); show(current-1); }
+    if (e.key==='Home') { e.preventDefault(); show(0); }
+    if (e.key==='End') { e.preventDefault(); show(slides.length-1); }
+  });
+</script>
+</body>
+</html>

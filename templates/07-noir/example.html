@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Noir — Slide Template</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0A0A0A;
+    --fg: #FFFFFF;
+    --muted: #666666;
+    --gold: #C9A96E;
+    --gold-dim: rgba(201, 169, 110, 0.3);
+    --line: rgba(255, 255, 255, 0.08);
+    --font-serif: 'Cormorant Garamond', 'Times New Roman', serif;
+    --font-sans: 'Inter', -apple-system, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    height: 100%;
+    background: #000;
+    font-family: var(--font-sans);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .deck {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .slide {
+    position: absolute;
+    width: 1280px;
+    height: 720px;
+    background: var(--bg);
+    color: var(--fg);
+    padding: 72px 100px;
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    transform-origin: center center;
+  }
+
+  .slide.active { display: flex; }
+
+  @media (max-aspect-ratio: 16/9) {
+    .slide { transform: scale(calc(100vw / 1280)); }
+  }
+  @media (min-aspect-ratio: 16/9) {
+    .slide { transform: scale(calc(100vh / 720)); }
+  }
+
+  /* Corner marks */
+  .corner {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    border-color: var(--gold-dim);
+    border-style: solid;
+    border-width: 0;
+  }
+  .corner.tl { top: 40px; left: 40px; border-top-width: 1px; border-left-width: 1px; }
+  .corner.tr { top: 40px; right: 40px; border-top-width: 1px; border-right-width: 1px; }
+  .corner.bl { bottom: 40px; left: 40px; border-bottom-width: 1px; border-left-width: 1px; }
+  .corner.br { bottom: 40px; right: 40px; border-bottom-width: 1px; border-right-width: 1px; }
+
+  .footer {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 10px;
+    color: var(--muted);
+    font-weight: 400;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+  }
+  .footer .gold-dot {
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    background: var(--gold);
+    border-radius: 50%;
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+
+  .gold-rule {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    width: 60px;
+    margin: 0 auto;
+  }
+
+  /* ---- Slide 1: Title ---- */
+  .title-slide { justify-content: center; align-items: center; text-align: center; }
+  .title-slide .top-label {
+    position: absolute;
+    top: 72px;
+    left: 100px;
+    right: 100px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+  }
+  .title-slide .edition {
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+  }
+  .title-slide h1 {
+    font-family: var(--font-serif);
+    font-size: 140px;
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: 0.08em;
+  }
+  .title-slide h1 .italic { font-style: italic; font-weight: 300; color: var(--gold); }
+  .title-slide .gold-rule { margin: 36px auto; }
+  .title-slide .subtitle {
+    font-size: 13px;
+    color: var(--muted);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 300;
+  }
+
+  /* ---- Slide 2: Section ---- */
+  .section-slide { justify-content: center; align-items: center; text-align: center; }
+  .section-slide .chapter {
+    font-family: var(--font-serif);
+    font-size: 13px;
+    color: var(--gold);
+    letter-spacing: 0.4em;
+    margin-bottom: 28px;
+    font-style: italic;
+  }
+  .section-slide h2 {
+    font-family: var(--font-serif);
+    font-size: 96px;
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: 0.02em;
+  }
+  .section-slide h2 .gold { color: var(--gold); font-style: italic; }
+  .section-slide .gold-rule { margin: 36px auto 28px; }
+  .section-slide p {
+    font-size: 14px;
+    color: var(--muted);
+    max-width: 420px;
+    line-height: 1.8;
+    font-weight: 300;
+    letter-spacing: 0.02em;
+  }
+
+  /* ---- Slide 3: Content ---- */
+  .content-slide .header {
+    text-align: center;
+    margin-bottom: 56px;
+  }
+  .content-slide .header .label {
+    font-size: 10px;
+    color: var(--gold);
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .content-slide h2 {
+    font-family: var(--font-serif);
+    font-size: 48px;
+    font-weight: 300;
+    letter-spacing: 0.02em;
+  }
+  .content-slide h2 .italic { font-style: italic; color: var(--gold); }
+  .content-slide .body {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    flex: 1;
+  }
+  .content-slide .item {
+    background: var(--bg);
+    padding: 44px 36px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+  .content-slide .item .num {
+    font-family: var(--font-serif);
+    font-size: 40px;
+    font-weight: 300;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 24px;
+  }
+  .content-slide .item .gold-line {
+    width: 24px;
+    height: 1px;
+    background: var(--gold-dim);
+    margin-bottom: 24px;
+  }
+  .content-slide .item h3 {
+    font-family: var(--font-serif);
+    font-size: 24px;
+    font-weight: 400;
+    margin-bottom: 14px;
+    letter-spacing: 0.02em;
+  }
+  .content-slide .item h3 .italic { font-style: italic; }
+  .content-slide .item p {
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--muted);
+    font-weight: 300;
+  }
+
+  /* ---- Slide 4: Two column ---- */
+  .two-col .header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  .two-col .header .label {
+    font-size: 10px;
+    color: var(--gold);
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .two-col h2 {
+    font-family: var(--font-serif);
+    font-size: 44px;
+    font-weight: 300;
+  }
+  .two-col h2 .italic { font-style: italic; color: var(--gold); }
+  .two-col .cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    flex: 1;
+    align-content: center;
+  }
+  .two-col .col {
+    text-align: center;
+    padding: 48px 40px;
+    border: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .two-col .col.gold-border { border-color: var(--gold-dim); }
+  .two-col .col .col-label {
+    font-size: 10px;
+    color: var(--gold);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .two-col .col h3 {
+    font-family: var(--font-serif);
+    font-size: 32px;
+    font-weight: 300;
+    margin-bottom: 16px;
+  }
+  .two-col .col h3 .italic { font-style: italic; }
+  .two-col .col p {
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--muted);
+    font-weight: 300;
+    max-width: 320px;
+  }
+  .two-col .col .spec {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+    font-family: var(--font-serif);
+    font-size: 20px;
+    color: var(--gold);
+    width: 100%;
+    letter-spacing: 0.05em;
+  }
+
+  /* ---- Slide 5: Quote ---- */
+  .quote-slide { justify-content: center; align-items: center; text-align: center; }
+  .quote-slide .quote-mark {
+    font-family: var(--font-serif);
+    font-size: 80px;
+    color: var(--gold);
+    line-height: 0.5;
+    margin-bottom: 20px;
+    opacity: 0.5;
+  }
+  .quote-slide blockquote {
+    font-family: var(--font-serif);
+    font-size: 52px;
+    font-weight: 300;
+    line-height: 1.4;
+    letter-spacing: 0.01em;
+    max-width: 900px;
+  }
+  .quote-slide blockquote .gold { color: var(--gold); font-style: italic; }
+  .quote-slide .gold-rule { margin: 40px auto 24px; }
+  .quote-slide cite {
+    font-style: normal;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+  }
+
+  /* ---- Slide 6: Data ---- */
+  .data-slide .header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  .data-slide .header .label {
+    font-size: 10px;
+    color: var(--gold);
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .data-slide h2 {
+    font-family: var(--font-serif);
+    font-size: 44px;
+    font-weight: 300;
+  }
+  .data-slide h2 .italic { font-style: italic; color: var(--gold); }
+  .data-slide .metrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    flex: 1;
+    align-content: center;
+  }
+  .data-slide .metric {
+    text-align: center;
+    padding: 40px 32px;
+    position: relative;
+  }
+  .data-slide .metric:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 20%;
+    height: 60%;
+    width: 1px;
+    background: var(--line);
+  }
+  .data-slide .metric .value {
+    font-family: var(--font-serif);
+    font-size: 88px;
+    font-weight: 300;
+    line-height: 1;
+    color: var(--fg);
+  }
+  .data-slide .metric .value .gold { color: var(--gold); font-style: italic; font-size: 40px; }
+  .data-slide .metric .label {
+    margin-top: 20px;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    line-height: 1.6;
+  }
+
+  /* ---- Slide 7: Closing ---- */
+  .closing-slide { justify-content: center; align-items: center; text-align: center; }
+  .closing-slide .monogram {
+    font-family: var(--font-serif);
+    font-size: 24px;
+    color: var(--gold);
+    letter-spacing: 0.3em;
+    margin-bottom: 32px;
+  }
+  .closing-slide h2 {
+    font-family: var(--font-serif);
+    font-size: 100px;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+  }
+  .closing-slide h2 .italic { font-style: italic; color: var(--gold); }
+  .closing-slide .gold-rule { margin: 32px auto; }
+  .closing-slide p {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+  }
+
+  /* ---- Nav ---- */
+  .nav-hint {
+    position: fixed;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255,255,255,0.2);
+    font-family: var(--font-sans);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    z-index: 100;
+    pointer-events: none;
+  }
+  .counter {
+    position: fixed;
+    bottom: 16px;
+    right: 24px;
+    color: rgba(255,255,255,0.35);
+    font-family: var(--font-sans);
+    font-size: 11px;
+    z-index: 100;
+    letter-spacing: 0.1em;
+  }
+</style>
+</head>
+<body>
+
+<div class="deck">
+
+  <!-- 1. Title -->
+  <section class="slide title-slide active">
+    <div class="corner tl"></div>
+    <div class="corner tr"></div>
+    <div class="corner bl"></div>
+    <div class="corner br"></div>
+    <div class="top-label">
+      <span>MAISON NOIR</span>
+      <span>EST. MMXXVI</span>
+    </div>
+    <div class="edition">— Exclusive Edition —</div>
+    <h1>No<span class="italic">ir</span></h1>
+    <div class="gold-rule"></div>
+    <p class="subtitle">The Art of Restraint</p>
+    <div class="footer">
+      <span><span class="gold-dot"></span>NOIR</span>
+      <span>01 / 07</span>
+    </div>
+  </section>
+
+  <!-- 2. Section -->
+  <section class="slide section-slide">
+    <div class="corner tl"></div>
+    <div class="corner tr"></div>
+    <div class="corner bl"></div>
+    <div class="corner br"></div>
+    <div class="chapter">Chapitre II</div>
+    <h2>Darkness is<br><span class="gold">the canvas.</span></h2>
+    <div class="gold-rule"></div>
+    <p>Black is not the absence of design. It is the stage upon which light, gold, and silence perform.</p>
+    <div class="footer">
+      <span><span class="gold-dot"></span>NOIR</span>
+      <span>02 / 07</span>
+    </div>
+  </section>
+
+  <!-- 3. Content -->
+  <section class="slide content-slide">
+    <div class="corner tl"></div>
+    <div class="corner tr"></div>
+    <div class="corner bl"></div>
+    <div class="corner br"></div>
+    <div class="header">
+      <div class="label">— Principles —</div>
+      <h2>Three <span class="italic">truths</span></h2>
+    </div>
+    <div class="body">
+      <div class="item">
+        <div class="num">I</div>
+        <div class="gold-line"></div>
+        <h3>Black as <span class="italic">luxury</span></h3>
+        <p>Pure black absorbs distraction. Every element that remains earns its place through contrast and craft.</p>
+      </div>
+      <div class="item">
+        <div class="num">II</div>
+        <div class="gold-line"></div>
+        <h3>Gold as <span class="italic">whisper</span></h3>
+        <p>Champagne gold appears only as hairline rules and small marks — never as fill, never as noise.</p>
+      </div>
+      <div class="item">
+        <div class="num">III</div>
+        <div class="gold-line"></div>
+        <h3>Serif as <span class="italic">voice</span></h3>
+        <p>Light-weight Cormorant carries elegance. Its italics provide the only ornament the deck allows.</p>
+      </div>
+    </div>
+    <div class="footer">
+      <span><span class="gold-dot"></span>NOIR</span>
+      <span>03 / 07</span>
+    </div>
+  </section>
+
+  <!-- 4. Two column -->
+  <section class="slide two-col">
+    <div class="corner tl"></div>
+    <div class="corner tr"></div>
+    <div class="corner bl"></div>
+    <div class="corner br"></div>
+    <div class="header">
+      <div class="label">— Comparison —</div>
+      <h2>Two <span class="italic">moods</span></h2>
+    </div>
+    <div class="cols">
+      <div class="col">
+        <div class="col-label">Classique</div>
+        <h3>Pure <span class="italic">noir</span></h3>
+        <p>Black background with white serif and gold hairlines. The signature look — intimate, focused, ceremonial.</p>
+        <div class="spec">#0A0A0A</div>
+      </div>
+      <div class="col gold-border">
+        <div class="col-label">Signature</div>
+        <h3>Gold <span class="italic">edge</span></h3>
+        <p>Adds a faint gold border to key panels, elevating selected content without breaking the silence.</p>
+        <div class="spec">#C9A96E</div>
+      </div>
+    </div>
+    <div class="footer">
+      <span><span class="gold-dot"></span>NOIR</span>
+      <span>04 / 07</span>
+    </div>
+  </section>
+
+  <!-- 5. Quote -->
+  <section class="slide quote-slide">
+    <div class="corner tl"></div>
+    <div class="corner tr"></div>
+    <div class="corner bl"></div>
+    <div class="corner br"></div>
+    <div class="quote-mark">"</div>
+    <blockquote>Black is modest and arrogant at the same time. Black is <span class="gold">lazy and easy — but mysterious</span>.</blockquote>
+    <div class="gold-rule"></div>
+    <cite>— YOHJI YAMAMOTO</cite>
+    <div class="footer">
+      <span><span class="gold-dot"></span>NOIR</span>
+      <span>05 / 07</span>
+    </div>
+  </section>
+
+  <!-- 6. Data -->
+  <section class="slide data-slide">
+    <div class="corner tl"></div>
+    <div class="corner tr"></div>
+    <div class="corner bl"></div>
+    <div class="corner br"></div>
+    <div class="header">
+      <div class="label">— Measures —</div>
+      <h2>The <span class="italic">numbers</span></h2>
+    </div>
+    <div class="metrics">
+      <div class="metric">
+        <div class="value">1<span class="gold"> hue</span></div>
+        <div class="label">Champagne gold<br>the only accent</div>
+      </div>
+      <div class="metric">
+        <div class="value">32<span class="gold"> px</span></div>
+        <div class="label">Corner mark size<br>framing every slide</div>
+      </div>
+      <div class="metric">
+        <div class="value">300<span class="gold"> wt</span></div>
+        <div class="label">Light serif weight<br>for quiet elegance</div>
+      </div>
+    </div>
+    <div class="footer">
+      <span><span class="gold-dot"></span>NOIR</span>
+      <span>06 / 07</span>
+    </div>
+  </section>
+
+  <!-- 7. Closing -->
+  <section class="slide closing-slide">
+    <div class="corner tl"></div>
+    <div class="corner tr"></div>
+    <div class="corner bl"></div>
+    <div class="corner br"></div>
+    <div class="monogram">— M.N —</div>
+    <h2>Mer<span class="italic">ci</span></h2>
+    <div class="gold-rule"></div>
+    <p>End of presentation</p>
+    <div class="footer" style="position:absolute;bottom:72px;left:100px;right:100px;">
+      <span><span class="gold-dot"></span>NOIR</span>
+      <span>07 / 07</span>
+    </div>
+  </section>
+
+</div>
+
+<div class="nav-hint">← → ARROWS TO NAVIGATE</div>
+<div class="counter" id="counter">01 / 07</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  let current = 0;
+  const counter = document.getElementById('counter');
+  function show(i) {
+    slides[current].classList.remove('active');
+    current = (i + slides.length) % slides.length;
+    slides[current].classList.add('active');
+    counter.textContent = String(current + 1).padStart(2, '0') + ' / ' + String(slides.length).padStart(2, '0');
+  }
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); show(current + 1); }
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); show(current - 1); }
+    if (e.key === 'Home') { e.preventDefault(); show(0); }
+    if (e.key === 'End') { e.preventDefault(); show(slides.length - 1); }
+  });
+</script>
+</body>
+</html>

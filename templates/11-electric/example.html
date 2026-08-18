@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ELECTRIC — Slide Template</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --grad: linear-gradient(135deg, #FF6B35 0%, #FF3D7F 40%, #7B2FF7 100%);
+    --fg: #FFFFFF;
+    --muted: rgba(255,255,255,0.7);
+    --faint: rgba(255,255,255,0.15);
+    --orange: #FF6B35;
+    --pink: #FF3D7F;
+    --purple: #7B2FF7;
+    --font: 'Sora', -apple-system, sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; background: #1a0a2e; font-family: var(--font); overflow: hidden; display: flex; align-items: center; justify-content: center; }
+  .deck { width: 100vw; height: 100vh; position: relative; display: flex; align-items: center; justify-content: center; }
+  .slide {
+    position: absolute; width: 1280px; height: 720px; background: var(--grad); color: var(--fg);
+    padding: 64px 80px; display: none; flex-direction: column; overflow: hidden; transform-origin: center center;
+  }
+  .slide.active { display: flex; }
+  @media (max-aspect-ratio: 16/9) { .slide { transform: scale(calc(100vw / 1280)); } }
+  @media (min-aspect-ratio: 16/9) { .slide { transform: scale(calc(100vh / 720)); } }
+
+  .blob { position: absolute; border-radius: 50%; filter: blur(60px); z-index: 0; }
+  .mesh1 { width: 500px; height: 500px; background: rgba(255,107,53,0.5); top: -150px; right: -100px; }
+  .mesh2 { width: 400px; height: 400px; background: rgba(123,47,247,0.5); bottom: -100px; left: -80px; }
+  .mesh3 { width: 300px; height: 300px; background: rgba(255,61,127,0.4); top: 40%; left: 50%; }
+
+  .footer {
+    margin-top: auto; display: flex; justify-content: space-between; align-items: center;
+    font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+    border-top: 1px solid var(--faint); padding-top: 14px; z-index: 2; position: relative;
+  }
+  .slide > *:not(.blob):not(.footer) { position: relative; z-index: 1; }
+
+  .glass { background: rgba(255,255,255,0.12); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.2); border-radius: 20px; }
+  .pill { display: inline-flex; align-items: center; gap: 8px; padding: 8px 18px; background: rgba(255,255,255,0.15); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.25); border-radius: 100px; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+  .pill::before { content:''; width:8px; height:8px; border-radius:50%; background:#fff; box-shadow:0 0 8px #fff; }
+
+  /* Title */
+  .title-slide { justify-content: center; }
+  .title-slide h1 { font-size: 130px; font-weight: 900; line-height: 0.92; letter-spacing: -0.04em; text-transform: uppercase; }
+  .title-slide .subtitle { margin-top: 24px; font-size: 18px; color: var(--muted); font-weight: 400; max-width: 500px; line-height: 1.6; }
+  .title-slide .float-card { position: absolute; right: 80px; bottom: 120px; padding: 24px 28px; width: 240px; }
+  .title-slide .float-card .num { font-size: 36px; font-weight: 800; }
+  .title-slide .float-card .lbl { font-size: 12px; color: var(--muted); margin-top: 4px; font-weight: 600; }
+
+  /* Section */
+  .section-slide { justify-content: center; align-items: center; text-align: center; }
+  .section-slide .num { font-size: 13px; font-weight: 700; letter-spacing: 0.3em; color: var(--muted); margin-bottom: 20px; }
+  .section-slide h2 { font-size: 96px; font-weight: 900; line-height: 1; letter-spacing: -0.035em; text-transform: uppercase; }
+  .section-slide p { margin-top: 24px; font-size: 16px; color: var(--muted); max-width: 440px; line-height: 1.7; }
+
+  /* Content */
+  .content-slide .header { margin-bottom: 36px; }
+  .content-slide h2 { font-size: 44px; font-weight: 800; letter-spacing: -0.025em; margin-top: 14px; }
+  .content-slide .cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; flex: 1; }
+  .content-slide .card { padding: 32px; border-radius: 20px; background: rgba(255,255,255,0.1); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.18); display: flex; flex-direction: column; }
+  .content-slide .card .icon { width: 52px; height: 52px; border-radius: 16px; background: rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 20px; }
+  .content-slide .card h3 { font-size: 20px; font-weight: 700; margin-bottom: 10px; }
+  .content-slide .card p { font-size: 13px; line-height: 1.7; color: var(--muted); }
+
+  /* Two col */
+  .two-col .header { margin-bottom: 32px; }
+  .two-col h2 { font-size: 40px; font-weight: 800; letter-spacing: -0.025em; margin-top: 14px; }
+  .two-col .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; flex: 1; }
+  .two-col .col { padding: 40px; border-radius: 24px; display: flex; flex-direction: column; }
+  .two-col .col.a { background: rgba(255,255,255,0.1); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.2); }
+  .two-col .col.b { background: #fff; color: #1a0a2e; }
+  .two-col .col .tag { font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 16px; }
+  .two-col .col.a .tag { color: rgba(255,255,255,0.8); }
+  .two-col .col.b .tag { color: var(--purple); }
+  .two-col .col h3 { font-size: 26px; font-weight: 800; margin-bottom: 14px; }
+  .two-col .col p { font-size: 14px; line-height: 1.7; opacity: 0.75; }
+  .two-col .col.b p { opacity: 0.7; }
+  .two-col .col .stat { margin-top: auto; padding-top: 20px; font-size: 48px; font-weight: 900; letter-spacing: -0.02em; }
+
+  /* Quote */
+  .quote-slide { justify-content: center; align-items: center; text-align: center; }
+  .quote-slide blockquote { font-size: 48px; font-weight: 800; line-height: 1.3; letter-spacing: -0.025em; max-width: 920px; }
+  .quote-slide cite { margin-top: 32px; font-style: normal; font-size: 12px; color: var(--muted); font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; }
+
+  /* Data */
+  .data-slide .header { margin-bottom: 32px; }
+  .data-slide h2 { font-size: 40px; font-weight: 800; letter-spacing: -0.025em; margin-top: 14px; }
+  .data-slide .metrics { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; flex: 1; align-content: center; }
+  .data-slide .metric { padding: 32px 24px; border-radius: 20px; background: rgba(255,255,255,0.1); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.18); text-align: center; }
+  .data-slide .metric .value { font-size: 56px; font-weight: 900; letter-spacing: -0.03em; line-height: 1; }
+  .data-slide .metric .label { margin-top: 10px; font-size: 12px; color: var(--muted); font-weight: 600; line-height: 1.5; }
+
+  /* Closing */
+  .closing-slide { justify-content: center; align-items: center; text-align: center; }
+  .closing-slide h2 { font-size: 100px; font-weight: 900; letter-spacing: -0.04em; text-transform: uppercase; }
+  .closing-slide p { margin-top: 16px; font-size: 16px; color: var(--muted); }
+  .closing-slide .btn { margin-top: 32px; display: inline-block; padding: 16px 40px; background: #fff; color: var(--purple); border-radius: 100px; font-size: 14px; font-weight: 800; box-shadow: 0 12px 40px rgba(0,0,0,0.2); }
+
+  .nav-hint { position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.3); font-family: var(--font); font-size: 11px; font-weight: 600; letter-spacing: 0.1em; z-index: 100; pointer-events: none; }
+  .counter { position: fixed; bottom: 16px; right: 24px; color: rgba(255,255,255,0.5); font-family: var(--font); font-size: 12px; font-weight: 700; z-index: 100; }
+</style>
+</head>
+<body>
+<div class="deck">
+
+  <section class="slide title-slide active">
+    <div class="blob mesh1"></div><div class="blob mesh2"></div><div class="blob mesh3"></div>
+    <span class="pill">High Energy Design</span>
+    <h1>ELEC<br>TRIC</h1>
+    <p class="subtitle">A bold, gradient-drenched presentation template. Loud colors, clean type, zero apologies.</p>
+    <div class="float-card glass">
+      <div class="num">3</div>
+      <div class="lbl">Gradient hues</div>
+    </div>
+    <div class="footer"><span>ELECTRIC</span><span>01 / 07</span></div>
+  </section>
+
+  <section class="slide section-slide">
+    <div class="blob mesh1" style="width:600px;height:600px;opacity:0.5"></div>
+    <div class="num">CHAPTER 02</div>
+    <h2>LOUD<br>TYPE.</h2>
+    <p>Big, bold, and unapologetic. When the gradient speaks this loud, the type has to keep up.</p>
+    <div class="footer"><span>ELECTRIC</span><span>02 / 07</span></div>
+  </section>
+
+  <section class="slide content-slide">
+    <div class="blob mesh2" style="width:400px;height:400px;opacity:0.4"></div>
+    <div class="header"><span class="pill">Principles</span><h2>Three charges</h2></div>
+    <div class="cards">
+      <div class="card"><div class="icon">⚡</div><h3>Bold gradient</h3><p>Orange to pink to purple at 135 degrees. The gradient is the brand — not a background, but the statement.</p></div>
+      <div class="card"><div class="icon">◈</div><h3>Heavy type</h3><p>Sora at 800-900 weight. Tight letter spacing. Type should feel like it's pushing the edges of the slide.</p></div>
+      <div class="card"><div class="icon">◎</div><h3>Glass accents</h3><p>Frosted white cards float over the gradient. They organize content without dimming the energy.</p></div>
+    </div>
+    <div class="footer"><span>ELECTRIC</span><span>03 / 07</span></div>
+  </section>
+
+  <section class="slide two-col">
+    <div class="blob mesh3" style="width:350px;height:350px;opacity:0.3"></div>
+    <div class="header"><span class="pill">Compare</span><h2>Two voltages</h2></div>
+    <div class="cols">
+      <div class="col a">
+        <div class="tag">Glass mode</div>
+        <h3>Translucent</h3>
+        <p>Frosted panels over the gradient. Best for content-heavy slides where you need structure without losing energy.</p>
+        <div class="stat">12%</div>
+      </div>
+      <div class="col b">
+        <div class="tag">Solid mode</div>
+        <h3>White out</h3>
+        <p>Solid white panel with purple text. Maximum contrast for key numbers and featured callouts.</p>
+        <div class="stat">100%</div>
+      </div>
+    </div>
+    <div class="footer"><span>ELECTRIC</span><span>04 / 07</span></div>
+  </section>
+
+  <section class="slide quote-slide">
+    <div class="blob mesh1" style="width:500px;height:500px;opacity:0.3;top:20%;left:30%"></div>
+    <blockquote>If it doesn't make you<br>feel something, <span style="background:rgba(255,255,255,0.2);padding:0 12px;border-radius:8px">turn it up.</span></blockquote>
+    <cite>— ELECTRIC MANIFESTO</cite>
+    <div class="footer"><span>ELECTRIC</span><span>05 / 07</span></div>
+  </section>
+
+  <section class="slide data-slide">
+    <div class="blob mesh2" style="width:350px;height:350px;opacity:0.3"></div>
+    <div class="header"><span class="pill">Metrics</span><h2>Power grid</h2></div>
+    <div class="metrics">
+      <div class="metric"><div class="value">3</div><div class="label">Gradient stops</div></div>
+      <div class="metric"><div class="value">900</div><div class="label">Max font weight</div></div>
+      <div class="metric"><div class="value">20px</div><div class="label">Glass radius</div></div>
+      <div class="metric"><div class="value">135°</div><div class="label">Gradient angle</div></div>
+    </div>
+    <div class="footer"><span>ELECTRIC</span><span>06 / 07</span></div>
+  </section>
+
+  <section class="slide closing-slide">
+    <div class="blob mesh1" style="width:500px;height:500px;opacity:0.4"></div>
+    <div class="blob mesh2" style="width:400px;height:400px;opacity:0.4"></div>
+    <h2>PLUG IN.</h2>
+    <p>Stay charged. Stay bold.</p>
+    <div class="btn">Get started →</div>
+    <div class="footer" style="position:absolute;bottom:64px;left:80px;right:80px;"><span>ELECTRIC</span><span>07 / 07</span></div>
+  </section>
+
+</div>
+<div class="nav-hint">← → ARROWS TO NAVIGATE</div>
+<div class="counter" id="counter">01 / 07</div>
+<script>
+  const slides = document.querySelectorAll('.slide'); let current = 0;
+  const counter = document.getElementById('counter');
+  function show(i) { slides[current].classList.remove('active'); current = (i + slides.length) % slides.length; slides[current].classList.add('active'); counter.textContent = String(current+1).padStart(2,'0')+' / '+String(slides.length).padStart(2,'0'); }
+  document.addEventListener('keydown', e => {
+    if (e.key==='ArrowRight'||e.key==='ArrowDown'||e.key===' ') { e.preventDefault(); show(current+1); }
+    if (e.key==='ArrowLeft'||e.key==='ArrowUp') { e.preventDefault(); show(current-1); }
+    if (e.key==='Home') { e.preventDefault(); show(0); }
+    if (e.key==='End') { e.preventDefault(); show(slides.length-1); }
+  });
+</script>
+</body>
+</html>

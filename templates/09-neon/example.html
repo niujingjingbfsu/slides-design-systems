@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEON — Slide Template</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-grad: linear-gradient(180deg, #1A0533 0%, #0D0221 60%, #05010F 100%);
+    --pink: #FF2E97;
+    --cyan: #00F0FF;
+    --purple: #B026FF;
+    --fg: #FFFFFF;
+    --muted: #8B7FB0;
+    --font-display: 'Orbitron', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; background: #000; font-family: var(--font-mono); overflow: hidden; display: flex; align-items: center; justify-content: center; }
+  .deck { width: 100vw; height: 100vh; position: relative; display: flex; align-items: center; justify-content: center; }
+  .slide {
+    position: absolute; width: 1280px; height: 720px; background: var(--bg-grad); color: var(--fg);
+    padding: 56px 72px; display: none; flex-direction: column; overflow: hidden; transform-origin: center center;
+  }
+  .slide.active { display: flex; }
+  @media (max-aspect-ratio: 16/9) { .slide { transform: scale(calc(100vw / 1280)); } }
+  @media (min-aspect-ratio: 16/9) { .slide { transform: scale(calc(100vh / 720)); } }
+
+  /* Grid floor */
+  .grid-floor {
+    position: absolute; bottom: 0; left: -50%; width: 200%; height: 45%;
+    background-image:
+      linear-gradient(rgba(255,46,151,0.4) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,240,255,0.3) 1px, transparent 1px);
+    background-size: 60px 60px;
+    transform: perspective(400px) rotateX(60deg);
+    transform-origin: bottom center;
+    z-index: 0;
+  }
+  .sun {
+    position: absolute; right: 120px; top: 80px; width: 180px; height: 180px; border-radius: 50%;
+    background: linear-gradient(180deg, #FF2E97 0%, #FF6B35 100%);
+    box-shadow: 0 0 80px rgba(255,46,151,0.6), 0 0 120px rgba(255,46,151,0.3);
+    z-index: 0; overflow: hidden;
+  }
+  .sun::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 50%;
+    background: repeating-linear-gradient(0deg, transparent, transparent 12px, var(--bg-grad) 12px, var(--bg-grad) 20px);
+    background-size: 100% 20px;
+  }
+  .stars { position: absolute; inset: 0; z-index: 0; }
+  .star { position: absolute; width: 2px; height: 2px; background: #fff; border-radius: 50%; box-shadow: 0 0 4px #fff; }
+
+  .footer {
+    margin-top: auto; display: flex; justify-content: space-between; align-items: center;
+    font-size: 11px; color: var(--cyan); letter-spacing: 0.2em; text-transform: uppercase;
+    border-top: 1px solid rgba(0,240,255,0.3); padding-top: 12px; z-index: 2; position: relative;
+  }
+  .footer .neon-tag { color: var(--pink); text-shadow: 0 0 8px var(--pink); }
+
+  .slide > *:not(.grid-floor):not(.sun):not(.stars):not(.footer) { position: relative; z-index: 1; }
+
+  .neon-pink { color: var(--pink); text-shadow: 0 0 10px var(--pink), 0 0 20px var(--pink), 0 0 40px rgba(255,46,151,0.5); }
+  .neon-cyan { color: var(--cyan); text-shadow: 0 0 10px var(--cyan), 0 0 20px var(--cyan), 0 0 40px rgba(0,240,255,0.5); }
+  .neon-grad {
+    background: linear-gradient(90deg, var(--pink), var(--cyan));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    filter: drop-shadow(0 0 12px rgba(255,46,151,0.6));
+  }
+
+  /* Title */
+  .title-slide { justify-content: center; }
+  .title-slide .label { font-family: var(--font-mono); font-size: 13px; color: var(--cyan); letter-spacing: 0.3em; margin-bottom: 24px; text-shadow: 0 0 8px var(--cyan); }
+  .title-slide h1 { font-family: var(--font-display); font-size: 120px; font-weight: 900; line-height: 1; letter-spacing: 0.02em; }
+  .title-slide .sub { margin-top: 20px; font-family: var(--font-mono); font-size: 16px; color: var(--muted); letter-spacing: 0.15em; }
+  .title-slide .sub .pink { color: var(--pink); }
+
+  /* Section */
+  .section-slide { justify-content: center; align-items: center; text-align: center; }
+  .section-slide .chapter { font-family: var(--font-mono); font-size: 13px; color: var(--pink); letter-spacing: 0.4em; margin-bottom: 20px; text-shadow: 0 0 8px var(--pink); }
+  .section-slide h2 { font-family: var(--font-display); font-size: 80px; font-weight: 900; line-height: 1.1; }
+  .section-slide .desc { margin-top: 24px; font-family: var(--font-mono); font-size: 14px; color: var(--muted); max-width: 500px; line-height: 1.8; }
+
+  /* Content */
+  .content-slide .header { margin-bottom: 36px; }
+  .content-slide .label { font-family: var(--font-mono); font-size: 11px; color: var(--cyan); letter-spacing: 0.3em; margin-bottom: 12px; }
+  .content-slide h2 { font-family: var(--font-display); font-size: 40px; font-weight: 700; }
+  .content-slide .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; flex: 1; }
+  .content-slide .card {
+    border: 1px solid rgba(255,46,151,0.4); background: rgba(26,5,51,0.6); backdrop-filter: blur(8px);
+    padding: 28px; display: flex; flex-direction: column;
+    box-shadow: 0 0 20px rgba(255,46,151,0.15), inset 0 0 20px rgba(0,240,255,0.05);
+  }
+  .content-slide .card .icon { font-family: var(--font-display); font-size: 32px; margin-bottom: 16px; }
+  .content-slide .card:nth-child(1) .icon { color: var(--pink); text-shadow: 0 0 12px var(--pink); }
+  .content-slide .card:nth-child(2) .icon { color: var(--cyan); text-shadow: 0 0 12px var(--cyan); }
+  .content-slide .card:nth-child(3) .icon { color: var(--purple); text-shadow: 0 0 12px var(--purple); }
+  .content-slide .card h3 { font-family: var(--font-display); font-size: 18px; font-weight: 700; margin-bottom: 10px; letter-spacing: 0.02em; }
+  .content-slide .card p { font-size: 12px; line-height: 1.7; color: var(--muted); }
+
+  /* Two col */
+  .two-col .header { margin-bottom: 32px; }
+  .two-col h2 { font-family: var(--font-display); font-size: 38px; font-weight: 700; }
+  .two-col .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; flex: 1; }
+  .two-col .col {
+    padding: 36px; display: flex; flex-direction: column; border: 1px solid;
+  }
+  .two-col .col.a { border-color: rgba(0,240,255,0.4); background: rgba(0,240,255,0.05); box-shadow: 0 0 20px rgba(0,240,255,0.1); }
+  .two-col .col.b { border-color: rgba(255,46,151,0.4); background: rgba(255,46,151,0.05); box-shadow: 0 0 20px rgba(255,46,151,0.1); }
+  .two-col .col .tag { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.2em; margin-bottom: 16px; }
+  .two-col .col.a .tag { color: var(--cyan); }
+  .two-col .col.b .tag { color: var(--pink); }
+  .two-col .col h3 { font-family: var(--font-display); font-size: 26px; font-weight: 700; margin-bottom: 14px; }
+  .two-col .col p { font-size: 13px; line-height: 1.7; color: var(--muted); }
+  .two-col .col .stat { margin-top: auto; padding-top: 16px; font-family: var(--font-display); font-size: 40px; font-weight: 900; }
+  .two-col .col.a .stat { color: var(--cyan); text-shadow: 0 0 12px var(--cyan); }
+  .two-col .col.b .stat { color: var(--pink); text-shadow: 0 0 12px var(--pink); }
+
+  /* Quote */
+  .quote-slide { justify-content: center; align-items: center; text-align: center; }
+  .quote-slide blockquote { font-family: var(--font-display); font-size: 44px; font-weight: 700; line-height: 1.3; max-width: 900px; }
+  .quote-slide cite { margin-top: 32px; font-style: normal; font-family: var(--font-mono); font-size: 12px; color: var(--muted); letter-spacing: 0.2em; }
+
+  /* Data */
+  .data-slide .header { margin-bottom: 32px; }
+  .data-slide h2 { font-family: var(--font-display); font-size: 38px; font-weight: 700; }
+  .data-slide .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; flex: 1; align-content: center; }
+  .data-slide .metric { text-align: center; padding: 32px 16px; border: 1px solid rgba(255,46,151,0.3); background: rgba(26,5,51,0.5); }
+  .data-slide .metric .value { font-family: var(--font-display); font-size: 52px; font-weight: 900; line-height: 1; }
+  .data-slide .metric:nth-child(odd) .value { color: var(--pink); text-shadow: 0 0 16px var(--pink); }
+  .data-slide .metric:nth-child(even) .value { color: var(--cyan); text-shadow: 0 0 16px var(--cyan); }
+  .data-slide .metric .label { margin-top: 12px; font-size: 11px; color: var(--muted); letter-spacing: 0.15em; line-height: 1.5; }
+
+  /* Closing */
+  .closing-slide { justify-content: center; align-items: center; text-align: center; }
+  .closing-slide h2 { font-family: var(--font-display); font-size: 100px; font-weight: 900; }
+  .closing-slide p { margin-top: 16px; font-family: var(--font-mono); font-size: 14px; color: var(--muted); letter-spacing: 0.2em; }
+  .closing-slide .btn { margin-top: 32px; display: inline-block; padding: 14px 40px; border: 1px solid var(--pink); color: var(--pink); font-family: var(--font-display); font-size: 14px; letter-spacing: 0.15em; box-shadow: 0 0 20px rgba(255,46,151,0.3); }
+
+  .nav-hint { position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); color: rgba(255,46,151,0.3); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; z-index: 100; pointer-events: none; }
+  .counter { position: fixed; bottom: 16px; right: 24px; color: rgba(0,240,255,0.5); font-family: var(--font-mono); font-size: 12px; z-index: 100; }
+</style>
+</head>
+<body>
+<div class="deck">
+
+  <section class="slide title-slide active">
+    <div class="stars">
+      <div class="star" style="left:10%;top:15%"></div><div class="star" style="left:25%;top:8%"></div>
+      <div class="star" style="left:45%;top:20%"></div><div class="star" style="left:65%;top:12%"></div>
+      <div class="star" style="left:80%;top:25%"></div><div class="star" style="left:15%;top:35%"></div>
+      <div class="star" style="left:55%;top:5%"></div><div class="star" style="left:90%;top:40%"></div>
+    </div>
+    <div class="sun"></div>
+    <div class="grid-floor"></div>
+    <div class="label">// SYSTEM ONLINE — 1984</div>
+    <h1><span class="neon-grad">NEON</span></h1>
+    <div class="sub"><span class="pink">[SYNTHWAVE]</span> / RETRO-FUTURE PRESENTATION SYSTEM</div>
+    <div class="footer">
+      <span class="neon-tag">◆ NEON</span>
+      <span>01 / 07</span>
+    </div>
+  </section>
+
+  <section class="slide section-slide">
+    <div class="stars">
+      <div class="star" style="left:20%;top:20%"></div><div class="star" style="left:70%;top:15%"></div>
+      <div class="star" style="left:40%;top:30%"></div><div class="star" style="left:85%;top:35%"></div>
+    </div>
+    <div class="grid-floor"></div>
+    <div class="chapter">CHAPTER 02</div>
+    <h2><span class="neon-pink">RUN THE</span><br><span class="neon-cyan">GRID.</span></h2>
+    <p class="desc">Perspective lines, glowing type, and chrome dreams. The future never looked so retro.</p>
+    <div class="footer">
+      <span class="neon-tag">◆ NEON</span>
+      <span>02 / 07</span>
+    </div>
+  </section>
+
+  <section class="slide content-slide">
+    <div class="grid-floor" style="opacity:0.3"></div>
+    <div class="header">
+      <div class="label">// CORE PROTOCOLS</div>
+      <h2><span class="neon-pink">Three</span> <span class="neon-cyan">signals</span></h2>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <div class="icon">◆</div>
+        <h3>GLOW TYPE</h3>
+        <p>Every heading carries a neon text-shadow. Pink and cyan are the only voices — no other colors allowed.</p>
+      </div>
+      <div class="card">
+        <div class="icon">◇</div>
+        <h3>GRID FLOOR</h3>
+        <p>A perspective grid anchors every slide in infinite space. It's the signature of the synthwave dimension.</p>
+      </div>
+      <div class="card">
+        <div class="icon">○</div>
+        <h3>DARK CANVAS</h3>
+        <p>Deep purple-to-black gradient. Neon only works when the room is dark enough to glow.</p>
+      </div>
+    </div>
+    <div class="footer">
+      <span class="neon-tag">◆ NEON</span>
+      <span>03 / 07</span>
+    </div>
+  </section>
+
+  <section class="slide two-col">
+    <div class="grid-floor" style="opacity:0.2"></div>
+    <div class="header">
+      <h2><span class="neon-pink">SIGNAL</span> / <span class="neon-cyan">CHANNEL</span></h2>
+    </div>
+    <div class="cols">
+      <div class="col a">
+        <div class="tag">[CYAN CHANNEL]</div>
+        <h3>Data mode</h3>
+        <p>Cyan glow for technical content, metrics, and system labels. Cold, precise, digital.</p>
+        <div class="stat">00F0FF</div>
+      </div>
+      <div class="col b">
+        <div class="tag">[PINK CHANNEL]</div>
+        <h3>Emotion mode</h3>
+        <p>Pink glow for titles, statements, and emphasis. Warm, electric, unforgettable.</p>
+        <div class="stat">FF2E97</div>
+      </div>
+    </div>
+    <div class="footer">
+      <span class="neon-tag">◆ NEON</span>
+      <span>04 / 07</span>
+    </div>
+  </section>
+
+  <section class="slide quote-slide">
+    <div class="stars">
+      <div class="star" style="left:15%;top:25%"></div><div class="star" style="left:80%;top:20%"></div>
+      <div class="star" style="left:50%;top:10%"></div><div class="star" style="left:30%;top:40%"></div>
+    </div>
+    <div class="grid-floor" style="opacity:0.25"></div>
+    <blockquote><span class="neon-pink">The future</span> is already here —<br>it's just not <span class="neon-cyan">evenly distributed</span>.</blockquote>
+    <cite>— WILLIAM GIBSON</cite>
+    <div class="footer">
+      <span class="neon-tag">◆ NEON</span>
+      <span>05 / 07</span>
+    </div>
+  </section>
+
+  <section class="slide data-slide">
+    <div class="grid-floor" style="opacity:0.2"></div>
+    <div class="header">
+      <h2><span class="neon-grad">SYSTEM STATS</span></h2>
+    </div>
+    <div class="metrics">
+      <div class="metric"><div class="value">2</div><div class="label">Neon colors</div></div>
+      <div class="metric"><div class="value">80s</div><div class="label">Reference era</div></div>
+      <div class="metric"><div class="value">∞</div><div class="label">Glow radius</div></div>
+      <div class="metric"><div class="value">60°</div><div class="label">Grid angle</div></div>
+    </div>
+    <div class="footer">
+      <span class="neon-tag">◆ NEON</span>
+      <span>06 / 07</span>
+    </div>
+  </section>
+
+  <section class="slide closing-slide">
+    <div class="stars">
+      <div class="star" style="left:20%;top:30%"></div><div class="star" style="left:75%;top:25%"></div>
+      <div class="star" style="left:50%;top:15%"></div>
+    </div>
+    <div class="sun" style="width:120px;height:120px;right:50%;top:15%;transform:translateX(50%);position:absolute"></div>
+    <div class="grid-floor"></div>
+    <h2><span class="neon-grad">GAME OVER</span></h2>
+    <p>INSERT COIN TO CONTINUE</p>
+    <div class="btn">▶ RETRY</div>
+    <div class="footer" style="position:absolute;bottom:56px;left:72px;right:72px;">
+      <span class="neon-tag">◆ NEON</span>
+      <span>07 / 07</span>
+    </div>
+  </section>
+
+</div>
+<div class="nav-hint">← → ARROWS TO NAVIGATE</div>
+<div class="counter" id="counter">01 / 07</div>
+<script>
+  const slides = document.querySelectorAll('.slide'); let current = 0;
+  const counter = document.getElementById('counter');
+  function show(i) { slides[current].classList.remove('active'); current = (i + slides.length) % slides.length; slides[current].classList.add('active'); counter.textContent = String(current+1).padStart(2,'0')+' / '+String(slides.length).padStart(2,'0'); }
+  document.addEventListener('keydown', e => {
+    if (e.key==='ArrowRight'||e.key==='ArrowDown'||e.key===' ') { e.preventDefault(); show(current+1); }
+    if (e.key==='ArrowLeft'||e.key==='ArrowUp') { e.preventDefault(); show(current-1); }
+    if (e.key==='Home') { e.preventDefault(); show(0); }
+    if (e.key==='End') { e.preventDefault(); show(slides.length-1); }
+  });
+</script>
+</body>
+</html>

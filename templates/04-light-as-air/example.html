@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Light as Air — Slide Template</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-grad: linear-gradient(135deg, #FFFFFF 0%, #EEF1FA 45%, #E4E9F8 100%);
+    --fg: #1E2A5E;
+    --muted: #6B7A99;
+    --glass: rgba(255, 255, 255, 0.45);
+    --glass-border: rgba(255, 255, 255, 0.7);
+    --lavender: #B8C0E8;
+    --sky: #A8D8E8;
+    --blush: #E8D0E8;
+    --indigo: #1E2A5E;
+    --shadow: 0 8px 32px rgba(30, 42, 94, 0.08);
+    --shadow-lg: 0 24px 64px rgba(30, 42, 94, 0.12);
+    --radius: 24px;
+    --radius-lg: 32px;
+    --font: 'Sora', -apple-system, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    height: 100%;
+    background: #D8DFF0;
+    font-family: var(--font);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .deck {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .slide {
+    position: absolute;
+    width: 1280px;
+    height: 720px;
+    background: var(--bg-grad);
+    color: var(--fg);
+    padding: 64px 80px;
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    transform-origin: center center;
+  }
+
+  .slide.active { display: flex; }
+
+  @media (max-aspect-ratio: 16/9) {
+    .slide { transform: scale(calc(100vw / 1280)); }
+  }
+  @media (min-aspect-ratio: 16/9) {
+    .slide { transform: scale(calc(100vh / 720)); }
+  }
+
+  .orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(40px);
+    z-index: 0;
+  }
+
+  .glass {
+    background: var(--glass);
+    backdrop-filter: blur(20px) saturate(1.4);
+    -webkit-backdrop-filter: blur(20px) saturate(1.4);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+  }
+
+  .footer {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    color: var(--muted);
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    z-index: 2;
+    position: relative;
+  }
+
+  .slide > *:not(.orb) { position: relative; z-index: 1; }
+
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 18px;
+    background: var(--glass);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--indigo);
+    box-shadow: var(--shadow);
+  }
+  .tag::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--lavender), var(--sky));
+  }
+
+  /* ---- Slide 1: Title ---- */
+  .title-slide { justify-content: center; }
+  .title-slide .orb.o1 { width: 360px; height: 360px; background: var(--lavender); opacity: 0.5; right: -60px; top: -80px; }
+  .title-slide .orb.o2 { width: 280px; height: 280px; background: var(--sky); opacity: 0.4; right: 280px; bottom: -60px; }
+  .title-slide .orb.o3 { width: 200px; height: 200px; background: var(--blush); opacity: 0.4; left: 60px; bottom: 100px; }
+  .title-slide .tag { margin-bottom: 32px; }
+  .title-slide h1 {
+    font-size: 92px;
+    font-weight: 700;
+    letter-spacing: -0.035em;
+    line-height: 1.0;
+  }
+  .title-slide h1 .light { font-weight: 200; background: linear-gradient(135deg, var(--indigo), var(--lavender)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .title-slide .subtitle {
+    margin-top: 24px;
+    font-size: 18px;
+    color: var(--muted);
+    font-weight: 300;
+    max-width: 480px;
+    line-height: 1.6;
+  }
+  .title-slide .float-cards {
+    position: absolute;
+    right: 80px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    z-index: 1;
+  }
+  .title-slide .float-card {
+    padding: 20px 24px;
+    width: 220px;
+    border-radius: var(--radius);
+  }
+  .title-slide .float-card .num { font-size: 28px; font-weight: 700; color: var(--indigo); }
+  .title-slide .float-card .lbl { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+  /* ---- Slide 2: Section ---- */
+  .section-slide { justify-content: center; align-items: center; text-align: center; }
+  .section-slide .orb.o1 { width: 500px; height: 500px; background: var(--lavender); opacity: 0.3; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+  .section-slide .orb.o2 { width: 300px; height: 300px; background: var(--sky); opacity: 0.25; left: 30%; top: 30%; }
+  .section-slide .glass-card {
+    padding: 64px 80px;
+    border-radius: var(--radius-lg);
+    text-align: center;
+  }
+  .section-slide .num {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+    letter-spacing: 0.25em;
+    margin-bottom: 20px;
+  }
+  .section-slide h2 {
+    font-size: 72px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+  }
+  .section-slide h2 .light { font-weight: 200; }
+  .section-slide p {
+    margin-top: 20px;
+    font-size: 16px;
+    color: var(--muted);
+    font-weight: 300;
+    max-width: 440px;
+    line-height: 1.6;
+  }
+
+  /* ---- Slide 3: Content ---- */
+  .content-slide .header { margin-bottom: 40px; }
+  .content-slide h2 { font-size: 44px; font-weight: 700; letter-spacing: -0.025em; margin-top: 16px; }
+  .content-slide .cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    flex: 1;
+  }
+  .content-slide .card {
+    padding: 36px 32px;
+    border-radius: var(--radius);
+    display: flex;
+    flex-direction: column;
+  }
+  .content-slide .card .orb-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 18px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+  }
+  .content-slide .card:nth-child(1) .orb-icon { background: linear-gradient(135deg, rgba(184,192,232,0.5), rgba(184,192,232,0.2)); }
+  .content-slide .card:nth-child(2) .orb-icon { background: linear-gradient(135deg, rgba(168,216,232,0.5), rgba(168,216,232,0.2)); }
+  .content-slide .card:nth-child(3) .orb-icon { background: linear-gradient(135deg, rgba(232,208,232,0.5), rgba(232,208,232,0.2)); }
+  .content-slide .card h3 { font-size: 20px; font-weight: 600; margin-bottom: 12px; }
+  .content-slide .card p { font-size: 13px; line-height: 1.7; color: var(--muted); font-weight: 300; }
+
+  /* ---- Slide 4: Two column ---- */
+  .two-col .header { margin-bottom: 36px; }
+  .two-col h2 { font-size: 40px; font-weight: 700; letter-spacing: -0.025em; margin-top: 16px; }
+  .two-col .cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    flex: 1;
+  }
+  .two-col .col {
+    padding: 44px;
+    border-radius: var(--radius-lg);
+    display: flex;
+    flex-direction: column;
+  }
+  .two-col .col.solid {
+    background: linear-gradient(135deg, var(--indigo), #3A4A8E);
+    color: #fff;
+    border: none;
+  }
+  .two-col .col .col-tag {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    color: var(--lavender);
+  }
+  .two-col .col.solid .col-tag { color: var(--sky); }
+  .two-col .col h3 { font-size: 26px; font-weight: 600; margin-bottom: 14px; }
+  .two-col .col p { font-size: 14px; line-height: 1.7; color: var(--muted); font-weight: 300; }
+  .two-col .col.solid p { color: rgba(255,255,255,0.7); }
+  .two-col .col .stat {
+    margin-top: auto;
+    padding-top: 24px;
+    font-size: 44px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  .two-col .col.solid .stat { color: #fff; }
+  .two-col .col .stat small { font-size: 14px; font-weight: 300; color: var(--muted); }
+
+  /* ---- Slide 5: Quote ---- */
+  .quote-slide { justify-content: center; align-items: center; }
+  .quote-slide .orb.o1 { width: 400px; height: 400px; background: var(--lavender); opacity: 0.3; left: 10%; top: 15%; }
+  .quote-slide .orb.o2 { width: 280px; height: 280px; background: var(--blush); opacity: 0.3; right: 10%; bottom: 10%; }
+  .quote-slide .glass-card {
+    padding: 72px 80px;
+    border-radius: var(--radius-lg);
+    max-width: 920px;
+    text-align: center;
+  }
+  .quote-slide blockquote {
+    font-size: 40px;
+    font-weight: 300;
+    line-height: 1.35;
+    letter-spacing: -0.015em;
+  }
+  .quote-slide blockquote .gradient {
+    background: linear-gradient(135deg, var(--indigo), #8B9AE8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 600;
+  }
+  .quote-slide cite {
+    margin-top: 32px;
+    font-style: normal;
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    display: block;
+  }
+
+  /* ---- Slide 6: Data ---- */
+  .data-slide .header { margin-bottom: 36px; }
+  .data-slide h2 { font-size: 40px; font-weight: 700; letter-spacing: -0.025em; margin-top: 16px; }
+  .data-slide .metrics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    flex: 1;
+    align-content: center;
+  }
+  .data-slide .metric {
+    padding: 36px 24px;
+    border-radius: var(--radius);
+    text-align: center;
+  }
+  .data-slide .metric .value {
+    font-size: 56px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+  .data-slide .metric:nth-child(1) .value { color: #7B8BD4; }
+  .data-slide .metric:nth-child(2) .value { color: #6BB8D0; }
+  .data-slide .metric:nth-child(3) .value { color: #C89AC8; }
+  .data-slide .metric:nth-child(4) .value { color: var(--indigo); }
+  .data-slide .metric .label {
+    margin-top: 12px;
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 400;
+    line-height: 1.5;
+  }
+
+  /* ---- Slide 7: Closing ---- */
+  .closing-slide { justify-content: center; align-items: center; text-align: center; }
+  .closing-slide .orb.o1 { width: 420px; height: 420px; background: var(--lavender); opacity: 0.35; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+  .closing-slide .orb.o2 { width: 260px; height: 260px; background: var(--sky); opacity: 0.3; left: 35%; top: 30%; }
+  .closing-slide h2 {
+    font-size: 80px;
+    font-weight: 700;
+    letter-spacing: -0.035em;
+  }
+  .closing-slide h2 .light {
+    font-weight: 200;
+    background: linear-gradient(135deg, var(--indigo), var(--lavender));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .closing-slide p {
+    margin-top: 20px;
+    font-size: 16px;
+    color: var(--muted);
+    font-weight: 300;
+  }
+  .closing-slide .glass-btn {
+    margin-top: 36px;
+    padding: 16px 40px;
+    background: var(--indigo);
+    color: #fff;
+    border-radius: 100px;
+    font-size: 14px;
+    font-weight: 600;
+    box-shadow: 0 12px 32px rgba(30, 42, 94, 0.25);
+  }
+
+  /* ---- Nav ---- */
+  .nav-hint {
+    position: fixed;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(30,42,94,0.35);
+    font-family: var(--font);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    z-index: 100;
+    pointer-events: none;
+  }
+  .counter {
+    position: fixed;
+    bottom: 16px;
+    right: 24px;
+    color: rgba(30,42,94,0.5);
+    font-family: var(--font);
+    font-size: 12px;
+    font-weight: 600;
+    z-index: 100;
+  }
+</style>
+</head>
+<body>
+
+<div class="deck">
+
+  <!-- 1. Title -->
+  <section class="slide title-slide active">
+    <div class="orb o1"></div>
+    <div class="orb o2"></div>
+    <div class="orb o3"></div>
+    <span class="tag">FLOATING DESIGN</span>
+    <h1>Light as<br><span class="light">Air</span></h1>
+    <p class="subtitle">An ethereal presentation template with frosted glass, soft gradients, and weightless motion.</p>
+    <div class="float-cards">
+      <div class="float-card glass">
+        <div class="num">24px</div>
+        <div class="lbl">Glass radius</div>
+      </div>
+      <div class="float-card glass">
+        <div class="num">3</div>
+        <div class="lbl">Floating hues</div>
+      </div>
+    </div>
+    <div class="footer">
+      <span>LIGHT AS AIR</span>
+      <span>01 / 07</span>
+    </div>
+  </section>
+
+  <!-- 2. Section -->
+  <section class="slide section-slide">
+    <div class="orb o1"></div>
+    <div class="orb o2"></div>
+    <div class="glass-card glass">
+      <div class="num">CHAPTER 02</div>
+      <h2>Weightless<br><span class="light">layers</span></h2>
+      <p>Depth comes from blur and light, not from heavy shadows or borders.</p>
+    </div>
+    <div class="footer">
+      <span>LIGHT AS AIR</span>
+      <span>02 / 07</span>
+    </div>
+  </section>
+
+  <!-- 3. Content -->
+  <section class="slide content-slide">
+    <div class="orb o1" style="width:300px;height:300px;background:var(--lavender);opacity:0.25;right:-60px;top:-60px;"></div>
+    <div class="header">
+      <span class="tag">PRINCIPLES</span>
+      <h2>Three layers of light</h2>
+    </div>
+    <div class="cards">
+      <div class="card glass">
+        <div class="orb-icon">✦</div>
+        <h3>Frosted glass</h3>
+        <p>Backdrop blur creates depth while letting the gradient atmosphere show through every surface.</p>
+      </div>
+      <div class="card glass">
+        <div class="orb-icon">◎</div>
+        <h3>Soft orbs</h3>
+        <p>Blurred color circles float behind content, adding atmosphere without competing for attention.</p>
+      </div>
+      <div class="card glass">
+        <div class="orb-icon">≈</div>
+        <h3>Gradient type</h3>
+        <p>Headings carry a subtle indigo-to-lavender gradient that ties the palette together.</p>
+      </div>
+    </div>
+    <div class="footer">
+      <span>LIGHT AS AIR</span>
+      <span>03 / 07</span>
+    </div>
+  </section>
+
+  <!-- 4. Two column -->
+  <section class="slide two-col">
+    <div class="orb o1" style="width:280px;height:280px;background:var(--sky);opacity:0.2;left:-80px;bottom:-60px;"></div>
+    <div class="header">
+      <span class="tag">COMPARE</span>
+      <h2>Surface choices</h2>
+    </div>
+    <div class="cols">
+      <div class="col glass">
+        <div class="col-tag">GLASS</div>
+        <h3>Translucent</h3>
+        <p>Frosted panels that reveal the gradient behind. Best for cards over atmospheric backgrounds.</p>
+        <div class="stat">45% <small>opacity</small></div>
+      </div>
+      <div class="col solid">
+        <div class="col-tag">SOLID</div>
+        <h3>Deep indigo</h3>
+        <p>Opaque deep-blue panel for contrast and focus. Best for key statements and featured content.</p>
+        <div class="stat">100% <small>coverage</small></div>
+      </div>
+    </div>
+    <div class="footer">
+      <span>LIGHT AS AIR</span>
+      <span>04 / 07</span>
+    </div>
+  </section>
+
+  <!-- 5. Quote -->
+  <section class="slide quote-slide">
+    <div class="orb o1"></div>
+    <div class="orb o2"></div>
+    <div class="glass-card glass">
+      <blockquote>Simplicity is the ultimate <span class="gradient">sophistication</span> — and lightness is its quiet voice.</blockquote>
+      <cite>— DESIGN NOTE</cite>
+    </div>
+    <div class="footer">
+      <span>LIGHT AS AIR</span>
+      <span>05 / 07</span>
+    </div>
+  </section>
+
+  <!-- 6. Data -->
+  <section class="slide data-slide">
+    <div class="orb o1" style="width:320px;height:320px;background:var(--blush);opacity:0.2;right:10%;top:10%;"></div>
+    <div class="header">
+      <span class="tag">METRICS</span>
+      <h2>System specs</h2>
+    </div>
+    <div class="metrics">
+      <div class="metric glass">
+        <div class="value">20px</div>
+        <div class="label">Blur radius</div>
+      </div>
+      <div class="metric glass">
+        <div class="value">3</div>
+        <div class="label">Atmospheric hues</div>
+      </div>
+      <div class="metric glass">
+        <div class="value">24px</div>
+        <div class="label">Corner radius</div>
+      </div>
+      <div class="metric glass">
+        <div class="value">0</div>
+        <div class="label">Hard borders</div>
+      </div>
+    </div>
+    <div class="footer">
+      <span>LIGHT AS AIR</span>
+      <span>06 / 07</span>
+    </div>
+  </section>
+
+  <!-- 7. Closing -->
+  <section class="slide closing-slide">
+    <div class="orb o1"></div>
+    <div class="orb o2"></div>
+    <h2>Float <span class="light">on</span></h2>
+    <p>Thank you — stay light.</p>
+    <div class="glass-btn">Get started →</div>
+    <div class="footer" style="position:absolute;bottom:64px;left:80px;right:80px;">
+      <span>LIGHT AS AIR</span>
+      <span>07 / 07</span>
+    </div>
+  </section>
+
+</div>
+
+<div class="nav-hint">← → ARROWS TO NAVIGATE</div>
+<div class="counter" id="counter">01 / 07</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  let current = 0;
+  const counter = document.getElementById('counter');
+  function show(i) {
+    slides[current].classList.remove('active');
+    current = (i + slides.length) % slides.length;
+    slides[current].classList.add('active');
+    counter.textContent = String(current + 1).padStart(2, '0') + ' / ' + String(slides.length).padStart(2, '0');
+  }
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); show(current + 1); }
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); show(current - 1); }
+    if (e.key === 'Home') { e.preventDefault(); show(0); }
+    if (e.key === 'End') { e.preventDefault(); show(slides.length - 1); }
+  });
+</script>
+</body>
+</html>

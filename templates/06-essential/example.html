@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ESSENTIAL — Slide Template</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FFFFFF;
+    --fg: #0A0A0A;
+    --muted: #999999;
+    --faint: #CCCCCC;
+    --accent: #1A3A5C;
+    --font-serif: 'Cormorant Garamond', 'Times New Roman', serif;
+    --font-sans: 'Inter', -apple-system, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    height: 100%;
+    background: #1A1A1A;
+    font-family: var(--font-sans);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .deck {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .slide {
+    position: absolute;
+    width: 1280px;
+    height: 720px;
+    background: var(--bg);
+    color: var(--fg);
+    padding: 80px 100px;
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    transform-origin: center center;
+  }
+
+  .slide.active { display: flex; }
+
+  @media (max-aspect-ratio: 16/9) {
+    .slide { transform: scale(calc(100vw / 1280)); }
+  }
+  @media (min-aspect-ratio: 16/9) {
+    .slide { transform: scale(calc(100vh / 720)); }
+  }
+
+  .footer {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 10px;
+    color: var(--muted);
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+  .footer .square {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    background: var(--accent);
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+
+  .index-label {
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+
+  /* ---- Slide 1: Title ---- */
+  .title-slide { justify-content: center; }
+  .title-slide .top-meta {
+    position: absolute;
+    top: 60px;
+    left: 100px;
+    right: 100px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .title-slide h1 {
+    font-family: var(--font-serif);
+    font-size: 168px;
+    font-weight: 300;
+    line-height: 0.9;
+    letter-spacing: -0.01em;
+    margin-left: -4px;
+  }
+  .title-slide h1 .italic { font-style: italic; font-weight: 300; }
+  .title-slide .subtitle {
+    margin-top: 40px;
+    font-size: 14px;
+    color: var(--muted);
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    line-height: 1.8;
+    max-width: 380px;
+  }
+  .title-slide .accent-line {
+    position: absolute;
+    right: 100px;
+    bottom: 120px;
+    width: 1px;
+    height: 120px;
+    background: var(--accent);
+  }
+
+  /* ---- Slide 2: Section ---- */
+  .section-slide { justify-content: center; }
+  .section-slide .section-num {
+    font-family: var(--font-serif);
+    font-size: 14px;
+    color: var(--accent);
+    letter-spacing: 0.3em;
+    margin-bottom: 32px;
+    font-weight: 400;
+  }
+  .section-slide h2 {
+    font-family: var(--font-serif);
+    font-size: 120px;
+    font-weight: 300;
+    line-height: 0.95;
+    letter-spacing: -0.015em;
+    max-width: 800px;
+  }
+  .section-slide h2 .italic { font-style: italic; }
+  .section-slide .section-desc {
+    margin-top: 40px;
+    font-size: 14px;
+    color: var(--muted);
+    font-weight: 300;
+    max-width: 360px;
+    line-height: 1.8;
+  }
+  .section-slide .thin-rule {
+    position: absolute;
+    left: 100px;
+    bottom: 100px;
+    width: 80px;
+    height: 1px;
+    background: var(--fg);
+  }
+
+  /* ---- Slide 3: Content ---- */
+  .content-slide .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 64px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--faint);
+  }
+  .content-slide h2 {
+    font-family: var(--font-serif);
+    font-size: 48px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+  .content-slide h2 .italic { font-style: italic; font-weight: 300; }
+  .content-slide .body {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 80px;
+    flex: 1;
+  }
+  .content-slide .lead {
+    font-family: var(--font-serif);
+    font-size: 26px;
+    line-height: 1.5;
+    font-weight: 300;
+    color: #2A2A2A;
+  }
+  .content-slide .lead .italic { font-style: italic; }
+  .content-slide ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+  .content-slide li {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    gap: 16px;
+    align-items: baseline;
+  }
+  .content-slide li .num {
+    font-family: var(--font-serif);
+    font-size: 18px;
+    color: var(--accent);
+    font-weight: 400;
+  }
+  .content-slide li h4 {
+    font-family: var(--font-serif);
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+  .content-slide li p {
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--muted);
+    font-weight: 300;
+  }
+
+  /* ---- Slide 4: Two column ---- */
+  .two-col .header {
+    margin-bottom: 56px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--faint);
+  }
+  .two-col h2 {
+    font-family: var(--font-serif);
+    font-size: 44px;
+    font-weight: 400;
+  }
+  .two-col h2 .italic { font-style: italic; font-weight: 300; }
+  .two-col .cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    flex: 1;
+  }
+  .two-col .col {
+    display: flex;
+    flex-direction: column;
+  }
+  .two-col .col .col-num {
+    font-family: var(--font-serif);
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    margin-bottom: 20px;
+  }
+  .two-col .col h3 {
+    font-family: var(--font-serif);
+    font-size: 32px;
+    font-weight: 400;
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+  .two-col .col h3 .italic { font-style: italic; font-weight: 300; }
+  .two-col .col p {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #666;
+    font-weight: 300;
+  }
+  .two-col .col .divider {
+    width: 40px;
+    height: 1px;
+    background: var(--faint);
+    margin: 24px 0;
+  }
+
+  /* ---- Slide 5: Quote ---- */
+  .quote-slide { justify-content: center; }
+  .quote-slide .quote-mark {
+    font-family: var(--font-serif);
+    font-size: 120px;
+    color: var(--faint);
+    line-height: 0.5;
+    margin-bottom: 24px;
+    font-weight: 300;
+  }
+  .quote-slide blockquote {
+    font-family: var(--font-serif);
+    font-size: 56px;
+    font-weight: 300;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    max-width: 960px;
+  }
+  .quote-slide blockquote .italic { font-style: italic; }
+  .quote-slide blockquote .accent { color: var(--accent); }
+  .quote-slide cite {
+    margin-top: 48px;
+    font-style: normal;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+
+  /* ---- Slide 6: Data ---- */
+  .data-slide .header {
+    margin-bottom: 56px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--faint);
+  }
+  .data-slide h2 {
+    font-family: var(--font-serif);
+    font-size: 44px;
+    font-weight: 400;
+  }
+  .data-slide h2 .italic { font-style: italic; font-weight: 300; }
+  .data-slide .metrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    flex: 1;
+  }
+  .data-slide .metric {
+    padding: 0 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-right: 1px solid var(--faint);
+  }
+  .data-slide .metric:first-child { padding-left: 0; }
+  .data-slide .metric:last-child { border-right: none; }
+  .data-slide .metric .value {
+    font-family: var(--font-serif);
+    font-size: 96px;
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .data-slide .metric .value .unit {
+    font-size: 28px;
+    color: var(--accent);
+    font-style: italic;
+  }
+  .data-slide .metric .label {
+    margin-top: 20px;
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    line-height: 1.6;
+  }
+
+  /* ---- Slide 7: Closing ---- */
+  .closing-slide { justify-content: center; align-items: center; text-align: center; }
+  .closing-slide .square-mark {
+    width: 10px;
+    height: 10px;
+    background: var(--accent);
+    margin-bottom: 48px;
+  }
+  .closing-slide h2 {
+    font-family: var(--font-serif);
+    font-size: 120px;
+    font-weight: 300;
+    letter-spacing: -0.015em;
+    line-height: 1;
+  }
+  .closing-slide h2 .italic { font-style: italic; }
+  .closing-slide p {
+    margin-top: 32px;
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+  }
+
+  /* ---- Nav ---- */
+  .nav-hint {
+    position: fixed;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255,255,255,0.25);
+    font-family: var(--font-sans);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    z-index: 100;
+    pointer-events: none;
+  }
+  .counter {
+    position: fixed;
+    bottom: 16px;
+    right: 24px;
+    color: rgba(255,255,255,0.4);
+    font-family: var(--font-sans);
+    font-size: 11px;
+    z-index: 100;
+    letter-spacing: 0.1em;
+  }
+</style>
+</head>
+<body>
+
+<div class="deck">
+
+  <!-- 1. Title -->
+  <section class="slide title-slide active">
+    <div class="top-meta">
+      <span class="index-label">ESSENTIAL — VOL. I</span>
+      <span class="index-label">MMXXVI</span>
+    </div>
+    <h1>Less,<br><span class="italic">but better.</span></h1>
+    <p class="subtitle">A gallery-grade presentation template built on extreme whitespace, refined serif typography, and a single deep-blue accent.</p>
+    <div class="accent-line"></div>
+    <div class="footer">
+      <span><span class="square"></span>ESSENTIAL</span>
+      <span>01 / 07</span>
+    </div>
+  </section>
+
+  <!-- 2. Section -->
+  <section class="slide section-slide">
+    <div class="section-num">— II</div>
+    <h2>The discipline<br>of <span class="italic">less.</span></h2>
+    <p class="section-desc">Every element must justify its presence. If it can be removed, it should be.</p>
+    <div class="thin-rule"></div>
+    <div class="footer">
+      <span><span class="square"></span>ESSENTIAL</span>
+      <span>02 / 07</span>
+    </div>
+  </section>
+
+  <!-- 3. Content -->
+  <section class="slide content-slide">
+    <div class="header">
+      <h2>Three <span class="italic">rules</span></h2>
+      <span class="index-label">03 — PRINCIPLES</span>
+    </div>
+    <div class="body">
+      <p class="lead">Design is not what you add.<br>It is what you <span class="italic">leave behind</span> — the quiet confidence of a slide that knows exactly what it wants to say.</p>
+      <ul>
+        <li>
+          <span class="num">01</span>
+          <div>
+            <h4>Whitespace is content</h4>
+            <p>Empty space is not wasted space. It gives weight to what remains and guides the eye without decoration.</p>
+          </div>
+        </li>
+        <li>
+          <span class="num">02</span>
+          <div>
+            <h4>Typography carries everything</h4>
+            <p>A single serif family at light weight does the work that colors and shapes do elsewhere.</p>
+          </div>
+        </li>
+        <li>
+          <span class="num">03</span>
+          <div>
+            <h4>One accent, used sparingly</h4>
+            <p>A deep-blue square appears only where attention must land. It never decorates.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="footer">
+      <span><span class="square"></span>ESSENTIAL</span>
+      <span>03 / 07</span>
+    </div>
+  </section>
+
+  <!-- 4. Two column -->
+  <section class="slide two-col">
+    <div class="header">
+      <h2>Form & <span class="italic">restraint</span></h2>
+    </div>
+    <div class="cols">
+      <div class="col">
+        <div class="col-num">— 01</div>
+        <h3>Serif <span class="italic">as structure</span></h3>
+        <p>Cormorant Garamond at light weight provides elegance and authority without shouting. Its high contrast strokes create visual interest that no decoration could improve upon.</p>
+        <div class="divider"></div>
+        <p style="font-size:12px;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;">300 weight · 120px display</p>
+      </div>
+      <div class="col">
+        <div class="col-num">— 02</div>
+        <h3>Space <span class="italic">as voice</span></h3>
+        <p>Generous margins and sparse composition make every word feel deliberate. The audience does not work to find meaning — the layout presents it.</p>
+        <div class="divider"></div>
+        <p style="font-size:12px;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;">100px margin · 80px gaps</p>
+      </div>
+    </div>
+    <div class="footer">
+      <span><span class="square"></span>ESSENTIAL</span>
+      <span>04 / 07</span>
+    </div>
+  </section>
+
+  <!-- 5. Quote -->
+  <section class="slide quote-slide">
+    <div class="quote-mark">"</div>
+    <blockquote>Perfection is achieved not when there is nothing more to add, but when there is <span class="accent">nothing left to take away</span>.</blockquote>
+    <cite>— ANTOINE DE SAINT-EXUPÉRY</cite>
+    <div class="footer">
+      <span><span class="square"></span>ESSENTIAL</span>
+      <span>05 / 07</span>
+    </div>
+  </section>
+
+  <!-- 6. Data -->
+  <section class="slide data-slide">
+    <div class="header">
+      <h2>By <span class="italic">subtraction</span></h2>
+    </div>
+    <div class="metrics">
+      <div class="metric">
+        <div class="value">1<span class="unit"> accent</span></div>
+        <div class="label">Deep blue square<br>used only for focus</div>
+      </div>
+      <div class="metric">
+        <div class="value">2<span class="unit"> families</span></div>
+        <div class="label">Cormorant serif<br>+ Inter sans</div>
+      </div>
+      <div class="metric">
+        <div class="value">70<span class="unit">%</span></div>
+        <div class="label">Of every slide<br>left empty</div>
+      </div>
+    </div>
+    <div class="footer">
+      <span><span class="square"></span>ESSENTIAL</span>
+      <span>06 / 07</span>
+    </div>
+  </section>
+
+  <!-- 7. Closing -->
+  <section class="slide closing-slide">
+    <div class="square-mark"></div>
+    <h2>Fin.</h2>
+    <p>Thank you</p>
+    <div class="footer" style="position:absolute;bottom:80px;left:100px;right:100px;">
+      <span><span class="square"></span>ESSENTIAL</span>
+      <span>07 / 07</span>
+    </div>
+  </section>
+
+</div>
+
+<div class="nav-hint">← → ARROWS TO NAVIGATE</div>
+<div class="counter" id="counter">01 / 07</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  let current = 0;
+  const counter = document.getElementById('counter');
+  function show(i) {
+    slides[current].classList.remove('active');
+    current = (i + slides.length) % slides.length;
+    slides[current].classList.add('active');
+    counter.textContent = String(current + 1).padStart(2, '0') + ' / ' + String(slides.length).padStart(2, '0');
+  }
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); show(current + 1); }
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); show(current - 1); }
+    if (e.key === 'Home') { e.preventDefault(); show(0); }
+    if (e.key === 'End') { e.preventDefault(); show(slides.length - 1); }
+  });
+</script>
+</body>
+</html>

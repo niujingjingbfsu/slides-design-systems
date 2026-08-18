@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TROPIC — Slide Template</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0A3D3D;
+    --fg: #FFFFFF;
+    --coral: #FF6B47;
+    --yellow: #FFD23F;
+    --teal-light: #14A098;
+    --muted: rgba(255,255,255,0.7);
+    --font-display: 'Fredoka', sans-serif;
+    --font-body: 'Inter', -apple-system, sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; background: #052828; font-family: var(--font-body); overflow: hidden; display: flex; align-items: center; justify-content: center; }
+  .deck { width: 100vw; height: 100vh; position: relative; display: flex; align-items: center; justify-content: center; }
+  .slide {
+    position: absolute; width: 1280px; height: 720px; background: var(--bg); color: var(--fg);
+    padding: 64px 80px; display: none; flex-direction: column; overflow: hidden; transform-origin: center center;
+  }
+  .slide.active { display: flex; }
+  @media (max-aspect-ratio: 16/9) { .slide { transform: scale(calc(100vw / 1280)); } }
+  @media (min-aspect-ratio: 16/9) { .slide { transform: scale(calc(100vh / 720)); } }
+
+  .sun { position: absolute; border-radius: 50%; z-index: 0; }
+  .wave { position: absolute; left: 0; right: 0; z-index: 0; }
+  .leaf { position: absolute; z-index: 0; opacity: 0.85; }
+
+  .footer {
+    margin-top: auto; display: flex; justify-content: space-between; align-items: center;
+    font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; z-index: 2; position: relative;
+  }
+  .footer .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: var(--yellow); margin-right: 8px; }
+  .slide > *:not(.sun):not(.wave):not(.leaf):not(.footer) { position: relative; z-index: 1; }
+
+  .pill { display: inline-flex; align-items: center; gap: 8px; padding: 8px 20px; background: rgba(255,255,255,0.15); border-radius: 100px; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+  .pill::before { content:''; width:8px;height:8px;border-radius:50%;background:var(--yellow); }
+
+  /* Title */
+  .title-slide { justify-content: center; }
+  .title-slide .sun { width: 380px; height: 380px; background: var(--yellow); right: -80px; top: 50%; transform: translateY(-50%); box-shadow: 0 0 100px rgba(255,210,63,0.3); }
+  .title-slide .leaf { right: 60px; top: 50%; transform: translateY(-30%); width: 280px; }
+  .title-slide h1 { font-family: var(--font-display); font-size: 130px; font-weight: 700; line-height: 0.9; letter-spacing: -0.02em; }
+  .title-slide h1 .coral { color: var(--coral); }
+  .title-slide h1 .o { display: inline-block; width: 0.9em; height: 0.9em; background: var(--coral); border-radius: 50%; vertical-align: baseline; position: relative; }
+  .title-slide .subtitle { margin-top: 24px; font-size: 18px; color: var(--muted); font-weight: 500; max-width: 480px; line-height: 1.6; }
+  .title-slide .chips { margin-top: 36px; display: flex; gap: 12px; }
+  .title-slide .chip { padding: 10px 22px; border-radius: 100px; font-size: 13px; font-weight: 700; }
+  .title-slide .chip:nth-child(1) { background: var(--coral); }
+  .title-slide .chip:nth-child(2) { background: var(--yellow); color: #0A3D3D; }
+  .title-slide .chip:nth-child(3) { background: var(--teal-light); }
+
+  /* Section */
+  .section-slide { justify-content: center; align-items: center; text-align: center; }
+  .section-slide .sun { width: 300px; height: 300px; background: var(--coral); left: 50%; top: 50%; transform: translate(-50%,-50%); opacity: 0.15; }
+  .section-slide .num { font-size: 13px; font-weight: 700; letter-spacing: 0.3em; color: var(--yellow); margin-bottom: 20px; }
+  .section-slide h2 { font-family: var(--font-display); font-size: 100px; font-weight: 700; line-height: 1; }
+  .section-slide h2 .coral { color: var(--coral); }
+  .section-slide p { margin-top: 20px; font-size: 16px; color: var(--muted); max-width: 440px; line-height: 1.7; }
+
+  /* Content */
+  .content-slide .header { margin-bottom: 36px; }
+  .content-slide h2 { font-family: var(--font-display); font-size: 48px; font-weight: 700; margin-top: 14px; }
+  .content-slide .cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; flex: 1; }
+  .content-slide .card { padding: 32px; border-radius: 24px; display: flex; flex-direction: column; }
+  .content-slide .card:nth-child(1) { background: var(--coral); }
+  .content-slide .card:nth-child(2) { background: var(--yellow); color: #0A3D3D; }
+  .content-slide .card:nth-child(3) { background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.2); }
+  .content-slide .card .icon { width: 56px; height: 56px; border-radius: 18px; background: rgba(0,0,0,0.15); display: flex; align-items: center; justify-content: center; font-size: 28px; margin-bottom: 20px; }
+  .content-slide .card:nth-child(2) .icon { background: rgba(10,61,61,0.1); }
+  .content-slide .card h3 { font-family: var(--font-display); font-size: 24px; font-weight: 700; margin-bottom: 10px; }
+  .content-slide .card p { font-size: 13px; line-height: 1.7; opacity: 0.9; font-weight: 500; }
+
+  /* Two col */
+  .two-col .header { margin-bottom: 32px; }
+  .two-col h2 { font-family: var(--font-display); font-size: 44px; font-weight: 700; margin-top: 14px; }
+  .two-col .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; flex: 1; }
+  .two-col .col { padding: 40px; border-radius: 28px; display: flex; flex-direction: column; }
+  .two-col .col.a { background: rgba(255,255,255,0.08); border: 2px solid rgba(255,255,255,0.15); }
+  .two-col .col.b { background: var(--yellow); color: #0A3D3D; }
+  .two-col .col .tag { font-size: 11px; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 16px; }
+  .two-col .col.a .tag { color: var(--yellow); }
+  .two-col .col.b .tag { color: var(--coral); }
+  .two-col .col h3 { font-family: var(--font-display); font-size: 30px; font-weight: 700; margin-bottom: 14px; }
+  .two-col .col p { font-size: 14px; line-height: 1.7; opacity: 0.85; font-weight: 500; }
+  .two-col .col .stat { margin-top: auto; padding-top: 20px; font-family: var(--font-display); font-size: 56px; font-weight: 700; }
+  .two-col .col.a .stat { color: var(--coral); }
+
+  /* Quote */
+  .quote-slide { justify-content: center; align-items: center; text-align: center; }
+  .quote-slide .sun { width: 500px; height: 500px; background: var(--coral); left: 50%; top: 50%; transform: translate(-50%,-50%); opacity: 0.1; border-radius: 50%; }
+  .quote-slide blockquote { font-family: var(--font-display); font-size: 52px; font-weight: 600; line-height: 1.25; max-width: 900px; }
+  .quote-slide blockquote .yellow { color: var(--yellow); }
+  .quote-slide cite { margin-top: 32px; font-style: normal; font-size: 13px; color: var(--muted); font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; }
+
+  /* Data */
+  .data-slide .header { margin-bottom: 32px; }
+  .data-slide h2 { font-family: var(--font-display); font-size: 44px; font-weight: 700; margin-top: 14px; }
+  .data-slide .metrics { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; flex: 1; align-content: center; }
+  .data-slide .metric { padding: 32px 20px; border-radius: 24px; text-align: center; }
+  .data-slide .metric:nth-child(1) { background: var(--coral); }
+  .data-slide .metric:nth-child(2) { background: var(--yellow); color: #0A3D3D; }
+  .data-slide .metric:nth-child(3) { background: var(--teal-light); }
+  .data-slide .metric:nth-child(4) { background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.2); }
+  .data-slide .metric .value { font-family: var(--font-display); font-size: 56px; font-weight: 700; line-height: 1; }
+  .data-slide .metric .label { margin-top: 10px; font-size: 12px; font-weight: 700; line-height: 1.5; opacity: 0.9; }
+
+  /* Closing */
+  .closing-slide { justify-content: center; align-items: center; text-align: center; }
+  .closing-slide .sun { width: 400px; height: 400px; background: var(--yellow); left: 50%; top: 50%; transform: translate(-50%,-50%); opacity: 0.12; }
+  .closing-slide h2 { font-family: var(--font-display); font-size: 110px; font-weight: 700; }
+  .closing-slide h2 .coral { color: var(--coral); }
+  .closing-slide p { margin-top: 16px; font-size: 18px; color: var(--muted); font-weight: 600; }
+  .closing-slide .btn { margin-top: 32px; display: inline-block; background: var(--coral); padding: 16px 44px; border-radius: 100px; font-size: 16px; font-weight: 800; }
+
+  .nav-hint { position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.25); font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 0.1em; z-index: 100; pointer-events: none; }
+  .counter { position: fixed; bottom: 16px; right: 24px; color: rgba(255,255,255,0.4); font-family: var(--font-body); font-size: 12px; font-weight: 700; z-index: 100; }
+</style>
+</head>
+<body>
+<div class="deck">
+
+  <section class="slide title-slide active">
+    <div class="sun"></div>
+    <svg class="leaf" viewBox="0 0 200 300" fill="none">
+      <path d="M100 20 C60 80 30 160 50 240 C60 270 80 290 100 290 C120 290 140 270 150 240 C170 160 140 80 100 20Z" fill="#FF6B47" opacity="0.85"/>
+      <path d="M100 40 L100 280" stroke="#0A3D3D" stroke-width="2" opacity="0.3"/>
+      <path d="M100 100 Q60 120 40 160" stroke="#0A3D3D" stroke-width="1.5" fill="none" opacity="0.3"/>
+      <path d="M100 100 Q140 120 160 160" stroke="#0A3D3D" stroke-width="1.5" fill="none" opacity="0.3"/>
+      <path d="M100 170 Q65 190 48 230" stroke="#0A3D3D" stroke-width="1.5" fill="none" opacity="0.3"/>
+      <path d="M100 170 Q135 190 152 230" stroke="#0A3D3D" stroke-width="1.5" fill="none" opacity="0.3"/>
+    </svg>
+    <svg class="leaf" style="right:200px;top:55%;width:180px;transform:translateY(-20%) rotate(20deg);" viewBox="0 0 200 300" fill="none">
+      <path d="M100 20 C60 80 30 160 50 240 C60 270 80 290 100 290 C120 290 140 270 150 240 C170 160 140 80 100 20Z" fill="#FFD23F" opacity="0.7"/>
+    </svg>
+    <span class="pill">Tropical Design System</span>
+    <h1>TR<span class="o"></span>PIC</h1>
+    <p class="subtitle">A hot, high-energy presentation template powered by coral, sunlight, and the rhythm of the tropics.</p>
+    <div class="chips">
+      <span class="chip">Hot</span>
+      <span class="chip">Bold</span>
+      <span class="chip">Alive</span>
+    </div>
+    <div class="footer"><span><span class="dot"></span>TROPIC</span><span>01 / 07</span></div>
+  </section>
+
+  <section class="slide section-slide">
+    <div class="sun"></div>
+    <div class="num">CHAPTER 02</div>
+    <h2>FEEL THE <span class="coral">HEAT.</span></h2>
+    <p>Deep teal nights, coral sunsets, and yellow so bright it casts a shadow. This is design with a pulse.</p>
+    <div class="footer"><span><span class="dot"></span>TROPIC</span><span>02 / 07</span></div>
+  </section>
+
+  <section class="slide content-slide">
+    <div class="header"><span class="pill">Vibes</span><h2>Three elements</h2></div>
+    <div class="cards">
+      <div class="card"><div class="icon">🔥</div><h3>Coral fire</h3><p>#FF6B47 burns through the teal. It's the CTA color, the energy color, the color that says "look here."</p></div>
+      <div class="card"><div class="icon">☀</div><h3>Yellow sun</h3><p>#FFD23F is pure warmth. It highlights, it tags, it makes every slide feel like golden hour.</p></div>
+      <div class="card"><div class="icon">🌿</div><h3>Deep teal</h3><p>#0A3D3D is the jungle at dusk — the rich, dark base that makes the hot colors sing even louder.</p></div>
+    </div>
+    <div class="footer"><span><span class="dot"></span>TROPIC</span><span>03 / 07</span></div>
+  </section>
+
+  <section class="slide two-col">
+    <div class="header"><span class="pill">Compare</span><h2>Day & night</h2></div>
+    <div class="cols">
+      <div class="col a">
+        <div class="tag">Sunset</div>
+        <h3>Golden hour</h3>
+        <p>Teal base with coral and yellow accents. The signature look — warm, energetic, unmistakably tropical.</p>
+        <div class="stat">32°C</div>
+      </div>
+      <div class="col b">
+        <div class="tag">Midday</div>
+        <h3>Full sun</h3>
+        <p>Yellow-dominant panel for maximum brightness. Best for key stats and moments that need to explode with energy.</p>
+        <div class="stat">38°C</div>
+      </div>
+    </div>
+    <div class="footer"><span><span class="dot"></span>TROPIC</span><span>04 / 07</span></div>
+  </section>
+
+  <section class="slide quote-slide">
+    <div class="sun"></div>
+    <blockquote>Live in the <span class="yellow">sunshine,</span><br>swim the sea,<br>drink the wild air.</blockquote>
+    <cite>— EMERSON</cite>
+    <div class="footer"><span><span class="dot"></span>TROPIC</span><span>05 / 07</span></div>
+  </section>
+
+  <section class="slide data-slide">
+    <div class="header"><span class="pill">Metrics</span><h2>Temperature check</h2></div>
+    <div class="metrics">
+      <div class="metric"><div class="value">3</div><div class="label">Hot colors</div></div>
+      <div class="metric"><div class="value">24px</div><div class="label">Corner radius</div></div>
+      <div class="metric"><div class="value">700</div><div class="label">Display weight</div></div>
+      <div class="metric"><div class="value">∞</div><div class="label">Summer energy</div></div>
+    </div>
+    <div class="footer"><span><span class="dot"></span>TROPIC</span><span>06 / 07</span></div>
+  </section>
+
+  <section class="slide closing-slide">
+    <div class="sun"></div>
+    <h2>MAHALO.</h2>
+    <p>Thank you — stay tropical.</p>
+    <div class="btn">Ride the wave →</div>
+    <div class="footer" style="position:absolute;bottom:64px;left:80px;right:80px;"><span><span class="dot"></span>TROPIC</span><span>07 / 07</span></div>
+  </section>
+
+</div>
+<div class="nav-hint">← → ARROWS TO NAVIGATE</div>
+<div class="counter" id="counter">01 / 07</div>
+<script>
+  const slides = document.querySelectorAll('.slide'); let current = 0;
+  const counter = document.getElementById('counter');
+  function show(i) { slides[current].classList.remove('active'); current = (i + slides.length) % slides.length; slides[current].classList.add('active'); counter.textContent = String(current+1).padStart(2,'0')+' / '+String(slides.length).padStart(2,'0'); }
+  document.addEventListener('keydown', e => {
+    if (e.key==='ArrowRight'||e.key==='ArrowDown'||e.key===' ') { e.preventDefault(); show(current+1); }
+    if (e.key==='ArrowLeft'||e.key==='ArrowUp') { e.preventDefault(); show(current-1); }
+    if (e.key==='Home') { e.preventDefault(); show(0); }
+    if (e.key==='End') { e.preventDefault(); show(slides.length-1); }
+  });
+</script>
+</body>
+</html>

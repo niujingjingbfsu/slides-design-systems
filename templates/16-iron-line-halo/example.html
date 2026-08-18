@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>敦煌 IRON LINE & HALO — Slide Template</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&family=Cormorant+Garamond:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F0E4D0;
+    --fg: #2A1F14;
+    --red: #B85C38;
+    --ochre: #C4956A;
+    --azurite: #3A6B8C;
+    --gold: #C9A227;
+    --gold-bright: #E8C868;
+    --gold-deep: #9A7B1A;
+    --muted: #7A6B54;
+    --font-cn: 'Noto Serif SC', serif;
+    --font-en: 'Cormorant Garamond', Georgia, serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; background: #1a1a1a; font-family: var(--font-cn); overflow: hidden; display: flex; align-items: center; justify-content: center; }
+  .deck { width: 100vw; height: 100vh; position: relative; display: flex; align-items: center; justify-content: center; }
+  .slide {
+    position: absolute; width: 1280px; height: 720px; background: var(--bg); color: var(--fg);
+    display: none; flex-direction: column; overflow: hidden; transform-origin: center center;
+  }
+  .slide.active { display: flex; }
+  @media (max-aspect-ratio: 16/9) { .slide { transform: scale(calc(100vw / 1280)); } }
+  @media (min-aspect-ratio: 16/9) { .slide { transform: scale(calc(100vh / 720)); } }
+
+  /* Subtle plaster grain */
+  .slide::before {
+    content:''; position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: 0.4;
+    background-image:
+      radial-gradient(circle at 15% 25%, rgba(184,92,56,0.06) 0%, transparent 40%),
+      radial-gradient(circle at 85% 75%, rgba(58,107,140,0.05) 0%, transparent 40%),
+      radial-gradient(circle at 50% 50%, rgba(196,149,106,0.04) 0%, transparent 60%);
+  }
+
+  /* Border bands */
+  .border-top, .border-bottom { position: absolute; left: 0; right: 0; height: 32px; z-index: 3; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .border-top { top: 0; }
+  .border-bottom { bottom: 0; }
+  .border-band { width: 100%; height: 100%; }
+
+  .content-area { position: relative; z-index: 2; padding: 56px 80px; flex: 1; display: flex; flex-direction: column; margin-top: 16px; margin-bottom: 16px; }
+
+  .footer {
+    position: absolute; bottom: 0; left: 0; right: 0; height: 32px;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0 40px; color: rgba(42,31,20,0.5); font-size: 11px; letter-spacing: 0.2em; z-index: 4;
+    font-family: var(--font-en); font-weight: 600;
+  }
+  .footer .cn { font-family: var(--font-cn); font-weight: 700; color: var(--red); }
+
+  .label { font-family: var(--font-en); font-size: 12px; letter-spacing: 0.35em; text-transform: uppercase; color: var(--red); font-weight: 600; }
+  .label-cn { font-family: var(--font-cn); font-size: 13px; color: var(--red); font-weight: 700; letter-spacing: 0.1em; }
+
+  /* Iron line curves */
+  .iron-line { position: absolute; z-index: 1; pointer-events: none; }
+
+  /* Halo circles */
+  .halo { position: absolute; z-index: 1; pointer-events: none; }
+  .halo svg { width: 100%; height: 100%; }
+
+  /* Title */
+  .title-slide .content-area { justify-content: center; }
+  .title-slide h1 { font-family: var(--font-cn); font-size: 120px; font-weight: 900; color: var(--red); line-height: 1; letter-spacing: 0.08em; }
+  .title-slide .gold-accent { width: 120px; height: 3px; margin-top: 20px; background: linear-gradient(90deg, #E8C868, #D4A843, #9A7B1A); position: relative; }
+  .title-slide .gold-accent::after { content:''; position: absolute; right: -8px; top: 50%; transform: translateY(-50%) rotate(45deg); width: 10px; height: 10px; background: #D4A843; }
+  .title-slide .en { font-family: var(--font-en); font-size: 20px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-top: 16px; font-weight: 700; }
+  .title-slide .subtitle { margin-top: 20px; font-size: 15px; color: var(--muted); line-height: 1.8; max-width: 460px; }
+  .title-slide .label-cn { margin-bottom: 20px; }
+  .title-slide .halo { right: 80px; top: 50%; transform: translateY(-50%); width: 280px; height: 280px; }
+
+  /* Section */
+  .section-slide .content-area { justify-content: center; align-items: center; text-align: center; }
+  .section-slide .num { font-family: var(--font-en); font-size: 13px; letter-spacing: 0.4em; color: var(--gold); margin-bottom: 16px; font-weight: 600; }
+  .section-slide h2 { font-family: var(--font-cn); font-size: 80px; font-weight: 900; color: var(--red); line-height: 1.1; letter-spacing: 0.08em; }
+  .section-slide p { font-size: 16px; color: var(--muted); max-width: 440px; line-height: 1.8; margin-top: 20px; }
+  .section-slide .halo { left: 50%; top: 50%; transform: translate(-50%,-50%); width: 400px; height: 400px; opacity: 0.15; }
+
+  /* Content */
+  .content-slide .content-area { padding: 64px 80px; }
+  .content-slide .header { margin-bottom: 36px; }
+  .content-slide .label-cn { margin-bottom: 8px; }
+  .content-slide h2 { font-family: var(--font-cn); font-size: 40px; font-weight: 900; color: var(--red); letter-spacing: 0.05em; }
+  .content-slide .cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 28px; flex: 1; }
+  .content-slide .card { padding: 28px 24px; background: rgba(255,255,255,0.35); border: 1px solid var(--gold); display: flex; flex-direction: column; position: relative; }
+  .content-slide .card::before { content:''; position: absolute; top: 6px; left: 6px; right: 6px; bottom: 6px; border: 0.5px solid var(--gold); opacity: 0.3; pointer-events: none; }
+  .content-slide .card .num-cn { font-family: var(--font-cn); font-size: 14px; color: var(--gold); font-weight: 700; margin-bottom: 12px; letter-spacing: 0.1em; }
+  .content-slide .card h3 { font-family: var(--font-cn); font-size: 22px; font-weight: 700; color: var(--red); margin-bottom: 10px; }
+  .content-slide .card p { font-size: 13px; line-height: 1.8; color: var(--muted); }
+  .content-slide .card .en-term { font-family: var(--font-en); font-size: 13px; color: var(--azurite); letter-spacing: 0.1em; margin-top: auto; padding-top: 12px; font-weight: 700; }
+
+  /* Two col */
+  .two-col .content-area { padding: 64px 80px; }
+  .two-col .header { margin-bottom: 28px; }
+  .two-col h2 { font-family: var(--font-cn); font-size: 38px; font-weight: 900; color: var(--red); }
+  .two-col .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; flex: 1; }
+  .two-col .col { padding: 32px; display: flex; flex-direction: column; position: relative; }
+  .two-col .col.a { background: var(--red); color: #fff; }
+  .two-col .col.b { background: rgba(255,255,255,0.35); border: 1px solid var(--gold); color: var(--fg); }
+  .two-col .col .tag { font-family: var(--font-en); font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 14px; font-weight: 700; }
+  .two-col .col.a .tag { color: var(--gold); }
+  .two-col .col.b .tag { color: var(--azurite); }
+  .two-col .col h3 { font-family: var(--font-cn); font-size: 26px; font-weight: 700; margin-bottom: 12px; }
+  .two-col .col p { font-size: 14px; line-height: 1.8; opacity: 0.85; }
+  .two-col .col .stat { margin-top: auto; padding-top: 16px; font-family: var(--font-cn); font-size: 44px; font-weight: 900; }
+  .two-col .col.a .stat { color: var(--gold); }
+  .two-col .col.b .stat { color: var(--red); }
+
+  /* Quote */
+  .quote-slide .content-area { justify-content: center; align-items: center; text-align: center; }
+  .quote-slide blockquote { font-family: var(--font-cn); font-size: 44px; font-weight: 700; line-height: 1.6; color: var(--red); max-width: 860px; }
+  .quote-slide blockquote .gold { color: var(--gold); }
+  .quote-slide cite { display: block; margin-top: 28px; font-family: var(--font-en); font-size: 13px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted); font-style: normal; font-weight: 600; }
+
+  /* Data */
+  .data-slide .content-area { padding: 64px 80px; }
+  .data-slide .header { margin-bottom: 28px; }
+  .data-slide h2 { font-family: var(--font-cn); font-size: 38px; font-weight: 900; color: var(--red); }
+  .data-slide .metrics { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; flex: 1; align-content: center; }
+  .data-slide .metric { text-align: center; padding: 28px 16px; background: rgba(255,255,255,0.35); border: 1px solid var(--gold); position: relative; }
+  .data-slide .metric:nth-child(2) { background: var(--red); color: #fff; }
+  .data-slide .metric:nth-child(2) .value, .data-slide .metric:nth-child(2) .label { color: #fff; }
+  .data-slide .metric .value { font-family: var(--font-cn); font-size: 48px; font-weight: 900; color: var(--red); line-height: 1; }
+  .data-slide .metric .label { margin-top: 10px; font-size: 12px; color: var(--muted); line-height: 1.5; letter-spacing: 0.1em; }
+
+  /* Closing */
+  .closing-slide .content-area { justify-content: center; align-items: center; text-align: center; }
+  .closing-slide h2 { font-family: var(--font-cn); font-size: 100px; font-weight: 900; color: var(--red); letter-spacing: 0.1em; }
+  .closing-slide p { font-size: 16px; color: var(--muted); letter-spacing: 0.1em; margin-top: 16px; }
+  .closing-slide .halo { left: 50%; top: 50%; transform: translate(-50%,-50%); width: 350px; height: 350px; opacity: 0.12; }
+
+  .nav-hint { position: fixed; bottom: 8px; left: 50%; transform: translateX(-50%); color: rgba(184,92,56,0.3); font-family: var(--font-en); font-size: 11px; letter-spacing: 0.2em; z-index: 100; pointer-events: none; }
+  .counter { position: fixed; bottom: 8px; right: 24px; color: rgba(184,92,56,0.5); font-family: var(--font-en); font-size: 12px; z-index: 100; }
+</style>
+</head>
+<body>
+<div class="deck">
+
+  <section class="slide title-slide active">
+    <div class="border-top"><svg class="border-band" viewBox="0 0 1280 32" preserveAspectRatio="none">
+      <rect width="1280" height="32" fill="#D4A843" opacity="0.12"/>
+      <g fill="#D4A843">
+        <circle cx="40" cy="16" r="3"/><path d="M60 16 Q70 6 80 16 Q90 26 100 16" stroke="#D4A843" stroke-width="1.5" fill="none"/>
+        <circle cx="120" cy="16" r="3"/><path d="M140 16 Q150 6 160 16 Q170 26 180 16" stroke="#D4A843" stroke-width="1.5" fill="none"/>
+        <circle cx="200" cy="16" r="3"/><path d="M220 16 Q230 6 240 16 Q250 26 260 16" stroke="#D4A843" stroke-width="1.5" fill="none"/>
+        <circle cx="280" cy="16" r="3"/><path d="M300 16 Q310 6 320 16 Q330 26 340 16" stroke="#D4A843" stroke-width="1.5" fill="none"/>
+        <circle cx="360" cy="16" r="3"/><path d="M380 16 Q390 6 400 16 Q410 26 420 16" stroke="#D4A843" stroke-width="1.5" fill="none"/>
+        <circle cx="440" cy="16" r="3"/><path d="M460 16 Q470 6 480 16 Q490 26 500 16" stroke="#D4A843" stroke-width="1.5" fill="none"/>
+        <circle cx="520" cy="16" r="3"/><path d="M540 16 Q550 6 560 16 Q570 26 580 16" stroke="#D4A843" stroke-width="1.5" fill="none"/>
+        <circle cx="600" cy="16" r="3"/><path d="M620 16 Q630 6 640 16 Q650 26 660 16" stroke="#D4A843" stroke-width="1.5" fill="none"/>
+        <circle cx="680" cy="16" r="3"/><path d="M700 16 Q710 6 720 16 Q730 26 740 16" stroke="#D4A843" stroke-width="1.5" fill="none"/>
+        <circle cx="760" cy="16" r="3"/><path d="M780 16 Q790 6 800 16 Q810 26 820 16" stroke="#D4A843" stroke-width="1.5" fill="none"/>
+        <circle cx="840" cy="16" r="3"/><path d="M860 16 Q870 6 880 16 Q890 26 900 16" stroke="#D4A843" stroke-width="1.5" fill="none"/>
+        <circle cx="920" cy="16" r="3"/><path d="M940 16 Q950 6 960 16 Q970 26 980 16" stroke="#D4A843" stroke-width="1.5" fill="none"/>
+        <circle cx="1000" cy="16" r="3"/><path d="M1020 16 Q1030 6 1040 16 Q1050 26 1060 16" stroke="#D4A843" stroke-width="1.5" fill="none"/>
+        <circle cx="1080" cy="16" r="3"/><path d="M1100 16 Q1110 6 1120 16 Q1130 26 1140 16" stroke="#D4A843" stroke-width="1.5" fill="none"/>
+        <circle cx="1160" cy="16" r="3"/><path d="M1180 16 Q1190 6 1200 16 Q1210 26 1220 16" stroke="#D4A843" stroke-width="1.5" fill="none"/>
+        <circle cx="1240" cy="16" r="3"/>
+      </g>
+    </svg></div>
+    <div class="border-bottom"><svg class="border-band" viewBox="0 0 1280 32" preserveAspectRatio="none">
+      <rect width="1280" height="32" fill="#D4A843" opacity="0.08"/>
+      <g fill="#D4A843">
+        <circle cx="40" cy="16" r="3"/><path d="M60 16 Q70 26 80 16 Q90 6 100 16" stroke="#D4A843" stroke-width="1.5" fill="none"/>
+        <circle cx="120" cy="16" r="3"/><path d="M140 16 Q150 26 160 16 Q170 6 180 16" stroke="#D4A843" stroke-width="1.5" fill="none"/>
+        <circle cx="200" cy="16" r="3"/><path d="M220 16 Q230 26 240 16 Q250 6 260 16" stroke="#D4A843" stroke-width="1.5" fill="none"/>
+        <circle cx="280" cy="16" r="3"/><path d="M300 16 Q310 26 320 16 Q330 6 340 16" stroke="#D4A843" stroke-width="1.5" fill="none"/>
+        <circle cx="360" cy="16" r="3"/><path d="M380 16 Q390 26 400 16 Q410 6 420 16" stroke="#D4A843" stroke-width="1.5" fill="none"/>
+        <circle cx="440" cy="16" r="3"/><path d="M460 16 Q470 26 480 16 Q490 6 500 16" stroke="#D4A843" stroke-width="1.5" fill="none"/>
+        <circle cx="520" cy="16" r="3"/><path d="M540 16 Q550 26 560 16 Q570 6 580 16" stroke="#D4A843" stroke-width="1.5" fill="none"/>
+        <circle cx="600" cy="16" r="3"/><path d="M620 16 Q630 26 640 16 Q650 6 660 16" stroke="#D4A843" stroke-width="1.5" fill="none"/>
+        <circle cx="680" cy="16" r="3"/><path d="M700 16 Q710 26 720 16 Q730 6 740 16" stroke="#D4A843" stroke-width="1.5" fill="none"/>
+        <circle cx="760" cy="16" r="3"/><path d="M780 16 Q790 26 800 16 Q810 6 820 16" stroke="#D4A843" stroke-width="1.5" fill="none"/>
+        <circle cx="840" cy="16" r="3"/><path d="M860 16 Q870 26 880 16 Q890 6 900 16" stroke="#D4A843" stroke-width="1.5" fill="none"/>
+        <circle cx="920" cy="16" r="3"/><path d="M940 16 Q950 26 960 16 Q970 6 980 16" stroke="#D4A843" stroke-width="1.5" fill="none"/>
+        <circle cx="1000" cy="16" r="3"/><path d="M1020 16 Q1030 26 1040 16 Q1050 6 1060 16" stroke="#D4A843" stroke-width="1.5" fill="none"/>
+        <circle cx="1080" cy="16" r="3"/><path d="M1100 16 Q1110 26 1120 16 Q1130 6 1140 16" stroke="#D4A843" stroke-width="1.5" fill="none"/>
+        <circle cx="1160" cy="16" r="3"/><path d="M1180 16 Q1190 26 1200 16 Q1210 6 1220 16" stroke="#D4A843" stroke-width="1.5" fill="none"/>
+        <circle cx="1240" cy="16" r="3"/>
+      </g>
+    </svg></div>
+
+    <svg class="iron-line" style="top:0;left:0;width:100%;height:100%;" viewBox="0 0 1280 720" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="goldLine1" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#E8C868"/>
+          <stop offset="100%" stop-color="#9A7B1A"/>
+        </linearGradient>
+      </defs>
+      <path d="M-20 80 Q200 200 400 280 Q600 360 500 500 Q400 640 600 740" stroke="#B85C38" stroke-width="10" fill="none" opacity="0.1"/>
+      <path d="M-20 120 Q250 220 450 300 Q650 380 550 520 Q450 660 650 760" stroke="url(#goldLine1)" stroke-width="3" fill="none" opacity="0.55"/>
+      <path d="M-20 160 Q300 240 500 320 Q700 400 600 540 Q500 680 700 780" stroke="#D4A843" stroke-width="1.5" fill="none" opacity="0.4"/>
+    </svg>
+
+    <div class="halo">
+      <svg viewBox="0 0 280 280">
+        <defs>
+          <linearGradient id="goldGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#E8C868"/>
+            <stop offset="50%" stop-color="#D4A843"/>
+            <stop offset="100%" stop-color="#9A7B1A"/>
+          </linearGradient>
+        </defs>
+        <circle cx="140" cy="140" r="130" fill="none" stroke="url(#goldGrad1)" stroke-width="3.5"/>
+        <circle cx="140" cy="140" r="115" fill="none" stroke="#D4A843" stroke-width="1.5" opacity="0.7"/>
+        <circle cx="140" cy="140" r="100" fill="none" stroke="#D4A843" stroke-width="1" opacity="0.4"/>
+        <circle cx="140" cy="140" r="60" fill="none" stroke="url(#goldGrad1)" stroke-width="2.5"/>
+        <circle cx="140" cy="140" r="40" fill="none" stroke="#D4A843" stroke-width="1" opacity="0.5"/>
+      </svg>
+    </div>
+
+    <div class="content-area">
+      <div class="label-cn">第二十二章</div>
+      <h1>敦煌</h1>
+      <div class="gold-accent"></div>
+      <div class="en">Iron Line &amp; Halo</div>
+      <p class="subtitle">以铁线描的流动曲线与圆光的同心圆重构敦煌语法——<br>不画飞天，而以线条与光环见气韵。</p>
+    </div>
+    <div class="footer"><span class="cn">敦煌</span><span>IRON LINE &amp; HALO</span><span>01 / 07</span></div>
+  </section>
+
+  <section class="slide section-slide">
+    <div class="border-top"><svg class="border-band" viewBox="0 0 1280 32" preserveAspectRatio="none"><rect width="1280" height="32" fill="#D4A843" opacity="0.12"/><g fill="#D4A843"><circle cx="40" cy="16" r="3"/><path d="M60 16 Q70 6 80 16 Q90 26 100 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="120" cy="16" r="3"/><path d="M140 16 Q150 6 160 16 Q170 26 180 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="200" cy="16" r="3"/><path d="M220 16 Q230 6 240 16 Q250 26 260 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="280" cy="16" r="3"/><path d="M300 16 Q310 6 320 16 Q330 26 340 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="360" cy="16" r="3"/><path d="M380 16 Q390 6 400 16 Q410 26 420 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="440" cy="16" r="3"/><path d="M460 16 Q470 6 480 16 Q490 26 500 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="520" cy="16" r="3"/><path d="M540 16 Q550 6 560 16 Q570 26 580 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="600" cy="16" r="3"/><path d="M620 16 Q630 6 640 16 Q650 26 660 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="680" cy="16" r="3"/><path d="M700 16 Q710 6 720 16 Q730 26 740 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="760" cy="16" r="3"/><path d="M780 16 Q790 6 800 16 Q810 26 820 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="840" cy="16" r="3"/><path d="M860 16 Q870 6 880 16 Q890 26 900 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="920" cy="16" r="3"/><path d="M940 16 Q950 6 960 16 Q970 26 980 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="1000" cy="16" r="3"/><path d="M1020 16 Q1030 6 1040 16 Q1050 26 1060 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="1080" cy="16" r="3"/><path d="M1100 16 Q1110 6 1120 16 Q1130 26 1140 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="1160" cy="16" r="3"/><path d="M1180 16 Q1190 6 1200 16 Q1210 26 1220 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="1240" cy="16" r="3"/></g></svg></div>
+    <div class="border-bottom"><svg class="border-band" viewBox="0 0 1280 32" preserveAspectRatio="none"><rect width="1280" height="32" fill="#D4A843" opacity="0.08"/><g fill="#D4A843"><circle cx="40" cy="16" r="3"/><path d="M60 16 Q70 26 80 16 Q90 6 100 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="120" cy="16" r="3"/><path d="M140 16 Q150 26 160 16 Q170 6 180 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="200" cy="16" r="3"/><path d="M220 16 Q230 26 240 16 Q250 6 260 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="280" cy="16" r="3"/><path d="M300 16 Q310 26 320 16 Q330 6 340 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="360" cy="16" r="3"/><path d="M380 16 Q390 26 400 16 Q410 6 420 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="440" cy="16" r="3"/><path d="M460 16 Q470 26 480 16 Q490 6 500 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="520" cy="16" r="3"/><path d="M540 16 Q550 26 560 16 Q570 6 580 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="600" cy="16" r="3"/><path d="M620 16 Q630 26 640 16 Q650 6 660 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="680" cy="16" r="3"/><path d="M700 16 Q710 26 720 16 Q730 6 740 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="760" cy="16" r="3"/><path d="M780 16 Q790 26 800 16 Q810 6 820 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="840" cy="16" r="3"/><path d="M860 16 Q870 26 880 16 Q890 6 900 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="920" cy="16" r="3"/><path d="M940 16 Q950 26 960 16 Q970 6 980 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="1000" cy="16" r="3"/><path d="M1020 16 Q1030 26 1040 16 Q1050 6 1060 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="1080" cy="16" r="3"/><path d="M1100 16 Q1110 26 1120 16 Q1130 6 1140 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="1160" cy="16" r="3"/><path d="M1180 16 Q1190 26 1200 16 Q1210 6 1220 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="1240" cy="16" r="3"/></g></svg></div>
+    <div class="halo" style="opacity:0.25;"><svg viewBox="0 0 400 400">
+      <defs>
+        <linearGradient id="goldGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#E8C868"/>
+          <stop offset="100%" stop-color="#9A7B1A"/>
+        </linearGradient>
+      </defs>
+      <circle cx="200" cy="200" r="190" fill="none" stroke="url(#goldGrad2)" stroke-width="3"/>
+      <circle cx="200" cy="200" r="160" fill="none" stroke="#D4A843" stroke-width="1.5" opacity="0.6"/>
+      <circle cx="200" cy="200" r="130" fill="none" stroke="#D4A843" stroke-width="1" opacity="0.4"/>
+    </svg></div>
+    <div class="content-area">
+      <div class="num">— II —</div>
+      <h2>铁线</h2>
+      <p>线如铁丝，均匀有力。<br>一条曲线贯穿版面，即是飞天的飘带，也是版式的骨架。</p>
+    </div>
+    <div class="footer"><span class="cn">敦煌</span><span>IRON LINE &amp; HALO</span><span>02 / 07</span></div>
+  </section>
+
+  <section class="slide content-slide">
+    <div class="border-top"><svg class="border-band" viewBox="0 0 1280 32" preserveAspectRatio="none"><rect width="1280" height="32" fill="#D4A843" opacity="0.12"/><g fill="#D4A843"><circle cx="40" cy="16" r="3"/><path d="M60 16 Q70 6 80 16 Q90 26 100 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="120" cy="16" r="3"/><path d="M140 16 Q150 6 160 16 Q170 26 180 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="200" cy="16" r="3"/><path d="M220 16 Q230 6 240 16 Q250 26 260 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="280" cy="16" r="3"/><path d="M300 16 Q310 6 320 16 Q330 26 340 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="360" cy="16" r="3"/><path d="M380 16 Q390 6 400 16 Q410 26 420 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="440" cy="16" r="3"/><path d="M460 16 Q470 6 480 16 Q490 26 500 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="520" cy="16" r="3"/><path d="M540 16 Q550 6 560 16 Q570 26 580 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="600" cy="16" r="3"/><path d="M620 16 Q630 6 640 16 Q650 26 660 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="680" cy="16" r="3"/><path d="M700 16 Q710 6 720 16 Q730 26 740 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="760" cy="16" r="3"/><path d="M780 16 Q790 6 800 16 Q810 26 820 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="840" cy="16" r="3"/><path d="M860 16 Q870 6 880 16 Q890 26 900 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="920" cy="16" r="3"/><path d="M940 16 Q950 6 960 16 Q970 26 980 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="1000" cy="16" r="3"/><path d="M1020 16 Q1030 6 1040 16 Q1050 26 1060 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="1080" cy="16" r="3"/><path d="M1100 16 Q1110 6 1120 16 Q1130 26 1140 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="1160" cy="16" r="3"/><path d="M1180 16 Q1190 6 1200 16 Q1210 26 1220 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="1240" cy="16" r="3"/></g></svg></div>
+    <div class="border-bottom"><svg class="border-band" viewBox="0 0 1280 32" preserveAspectRatio="none"><rect width="1280" height="32" fill="#D4A843" opacity="0.08"/><g fill="#D4A843"><circle cx="40" cy="16" r="3"/><path d="M60 16 Q70 26 80 16 Q90 6 100 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="120" cy="16" r="3"/><path d="M140 16 Q150 26 160 16 Q170 6 180 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="200" cy="16" r="3"/><path d="M220 16 Q230 26 240 16 Q250 6 260 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="280" cy="16" r="3"/><path d="M300 16 Q310 26 320 16 Q330 6 340 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="360" cy="16" r="3"/><path d="M380 16 Q390 26 400 16 Q410 6 420 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="440" cy="16" r="3"/><path d="M460 16 Q470 26 480 16 Q490 6 500 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="520" cy="16" r="3"/><path d="M540 16 Q550 26 560 16 Q570 6 580 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="600" cy="16" r="3"/><path d="M620 16 Q630 26 640 16 Q650 6 660 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="680" cy="16" r="3"/><path d="M700 16 Q710 26 720 16 Q730 6 740 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="760" cy="16" r="3"/><path d="M780 16 Q790 26 800 16 Q810 6 820 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="840" cy="16" r="3"/><path d="M860 16 Q870 26 880 16 Q890 6 900 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="920" cy="16" r="3"/><path d="M940 16 Q950 26 960 16 Q970 6 980 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="1000" cy="16" r="3"/><path d="M1020 16 Q1030 26 1040 16 Q1050 6 1060 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="1080" cy="16" r="3"/><path d="M1100 16 Q1110 26 1120 16 Q1130 6 1140 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="1160" cy="16" r="3"/><path d="M1180 16 Q1190 26 1200 16 Q1210 6 1220 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="1240" cy="16" r="3"/></g></svg></div>
+    <svg class="iron-line" style="top:0;left:0;width:100%;height:100%;" viewBox="0 0 1280 720" preserveAspectRatio="none">
+      <path d="M900 -20 Q700 200 800 400 Q900 600 700 740" stroke="#B85C38" stroke-width="8" fill="none" opacity="0.06"/>
+      <path d="M900 -20 Q700 200 800 400 Q900 600 700 740" stroke="#D4A843" stroke-width="2.5" fill="none" opacity="0.35"/>
+    </svg>
+    <div class="content-area">
+      <div class="header">
+        <div class="label-cn">三法</div>
+        <h2>三个视觉法则</h2>
+      </div>
+      <div class="cards">
+        <div class="card"><div class="num-cn">壹</div><h3>铁线流动</h3><p>粗细均匀、力透纸背的曲线贯穿版面。它是飞天的飘带，也是分隔内容的骨架——线条即运动。</p><div class="en-term">IRON LINE</div></div>
+        <div class="card"><div class="num-cn">贰</div><h3>圆光环光</h3><p>同心圆是菩萨头光的抽象化。圆环不装人物，只装内容——光环从宗教符号变为版式容器。</p><div class="en-term">HALO</div></div>
+        <div class="card"><div class="num-cn">叁</div><h3>大地色系</h3><p>土红、赭石、石青、泥金——矿物与泥土的颜色。暖底沉着，彩色克制，像洞窟中千年不褪的壁画。</p><div class="en-term">EARTH TONES</div></div>
+      </div>
+    </div>
+    <div class="footer"><span class="cn">敦煌</span><span>IRON LINE &amp; HALO</span><span>03 / 07</span></div>
+  </section>
+
+  <section class="slide two-col">
+    <div class="border-top"><svg class="border-band" viewBox="0 0 1280 32" preserveAspectRatio="none"><rect width="1280" height="32" fill="#D4A843" opacity="0.12"/><g fill="#D4A843"><circle cx="40" cy="16" r="3"/><path d="M60 16 Q70 6 80 16 Q90 26 100 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="120" cy="16" r="3"/><path d="M140 16 Q150 6 160 16 Q170 26 180 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="200" cy="16" r="3"/><path d="M220 16 Q230 6 240 16 Q250 26 260 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="280" cy="16" r="3"/><path d="M300 16 Q310 6 320 16 Q330 26 340 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="360" cy="16" r="3"/><path d="M380 16 Q390 6 400 16 Q410 26 420 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="440" cy="16" r="3"/><path d="M460 16 Q470 6 480 16 Q490 26 500 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="520" cy="16" r="3"/><path d="M540 16 Q550 6 560 16 Q570 26 580 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="600" cy="16" r="3"/><path d="M620 16 Q630 6 640 16 Q650 26 660 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="680" cy="16" r="3"/><path d="M700 16 Q710 6 720 16 Q730 26 740 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="760" cy="16" r="3"/><path d="M780 16 Q790 6 800 16 Q810 26 820 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="840" cy="16" r="3"/><path d="M860 16 Q870 6 880 16 Q890 26 900 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="920" cy="16" r="3"/><path d="M940 16 Q950 6 960 16 Q970 26 980 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="1000" cy="16" r="3"/><path d="M1020 16 Q1030 6 1040 16 Q1050 26 1060 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="1080" cy="16" r="3"/><path d="M1100 16 Q1110 6 1120 16 Q1130 26 1140 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="1160" cy="16" r="3"/><path d="M1180 16 Q1190 6 1200 16 Q1210 26 1220 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="1240" cy="16" r="3"/></g></svg></div>
+    <div class="border-bottom"><svg class="border-band" viewBox="0 0 1280 32" preserveAspectRatio="none"><rect width="1280" height="32" fill="#D4A843" opacity="0.08"/><g fill="#D4A843"><circle cx="40" cy="16" r="3"/><path d="M60 16 Q70 26 80 16 Q90 6 100 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="120" cy="16" r="3"/><path d="M140 16 Q150 26 160 16 Q170 6 180 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="200" cy="16" r="3"/><path d="M220 16 Q230 26 240 16 Q250 6 260 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="280" cy="16" r="3"/><path d="M300 16 Q310 26 320 16 Q330 6 340 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="360" cy="16" r="3"/><path d="M380 16 Q390 26 400 16 Q410 6 420 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="440" cy="16" r="3"/><path d="M460 16 Q470 26 480 16 Q490 6 500 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="520" cy="16" r="3"/><path d="M540 16 Q550 26 560 16 Q570 6 580 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="600" cy="16" r="3"/><path d="M620 16 Q630 26 640 16 Q650 6 660 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="680" cy="16" r="3"/><path d="M700 16 Q710 26 720 16 Q730 6 740 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="760" cy="16" r="3"/><path d="M780 16 Q790 26 800 16 Q810 6 820 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="840" cy="16" r="3"/><path d="M860 16 Q870 26 880 16 Q890 6 900 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="920" cy="16" r="3"/><path d="M940 16 Q950 26 960 16 Q970 6 980 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="1000" cy="16" r="3"/><path d="M1020 16 Q1030 26 1040 16 Q1050 6 1060 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="1080" cy="16" r="3"/><path d="M1100 16 Q1110 26 1120 16 Q1130 6 1140 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="1160" cy="16" r="3"/><path d="M1180 16 Q1190 26 1200 16 Q1210 6 1220 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="1240" cy="16" r="3"/></g></svg></div>
+    <div class="content-area">
+      <div class="header"><h2>二色</h2></div>
+      <div class="cols">
+        <div class="col a"><div class="tag">— EARTH RED —</div><h3>土红</h3><p>氧化铁的颜色，洞窟墙壁的底色。温暖、沉着、有时间的重量，是整个系统的主色。</p><div class="stat">#B85C38</div></div>
+        <div class="col b"><div class="tag">— MINERAL BLUE —</div><h3>石青</h3><p>蓝铜矿在暖底上的冷色对比。只做点缀和边框，不做大面积，像壁画中菩萨的衣袂。</p><div class="stat">#3A6B8C</div></div>
+      </div>
+    </div>
+    <div class="footer"><span class="cn">敦煌</span><span>IRON LINE &amp; HALO</span><span>04 / 07</span></div>
+  </section>
+
+  <section class="slide quote-slide">
+    <div class="border-top"><svg class="border-band" viewBox="0 0 1280 32" preserveAspectRatio="none"><rect width="1280" height="32" fill="#D4A843" opacity="0.12"/><g fill="#D4A843"><circle cx="40" cy="16" r="3"/><path d="M60 16 Q70 6 80 16 Q90 26 100 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="120" cy="16" r="3"/><path d="M140 16 Q150 6 160 16 Q170 26 180 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="200" cy="16" r="3"/><path d="M220 16 Q230 6 240 16 Q250 26 260 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="280" cy="16" r="3"/><path d="M300 16 Q310 6 320 16 Q330 26 340 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="360" cy="16" r="3"/><path d="M380 16 Q390 6 400 16 Q410 26 420 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="440" cy="16" r="3"/><path d="M460 16 Q470 6 480 16 Q490 26 500 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="520" cy="16" r="3"/><path d="M540 16 Q550 6 560 16 Q570 26 580 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="600" cy="16" r="3"/><path d="M620 16 Q630 6 640 16 Q650 26 660 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="680" cy="16" r="3"/><path d="M700 16 Q710 6 720 16 Q730 26 740 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="760" cy="16" r="3"/><path d="M780 16 Q790 6 800 16 Q810 26 820 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="840" cy="16" r="3"/><path d="M860 16 Q870 6 880 16 Q890 26 900 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="920" cy="16" r="3"/><path d="M940 16 Q950 6 960 16 Q970 26 980 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="1000" cy="16" r="3"/><path d="M1020 16 Q1030 6 1040 16 Q1050 26 1060 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="1080" cy="16" r="3"/><path d="M1100 16 Q1110 6 1120 16 Q1130 26 1140 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="1160" cy="16" r="3"/><path d="M1180 16 Q1190 6 1200 16 Q1210 26 1220 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="1240" cy="16" r="3"/></g></svg></div>
+    <div class="border-bottom"><svg class="border-band" viewBox="0 0 1280 32" preserveAspectRatio="none"><rect width="1280" height="32" fill="#D4A843" opacity="0.08"/><g fill="#D4A843"><circle cx="40" cy="16" r="3"/><path d="M60 16 Q70 26 80 16 Q90 6 100 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="120" cy="16" r="3"/><path d="M140 16 Q150 26 160 16 Q170 6 180 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="200" cy="16" r="3"/><path d="M220 16 Q230 26 240 16 Q250 6 260 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="280" cy="16" r="3"/><path d="M300 16 Q310 26 320 16 Q330 6 340 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="360" cy="16" r="3"/><path d="M380 16 Q390 26 400 16 Q410 6 420 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="440" cy="16" r="3"/><path d="M460 16 Q470 26 480 16 Q490 6 500 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="520" cy="16" r="3"/><path d="M540 16 Q550 26 560 16 Q570 6 580 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="600" cy="16" r="3"/><path d="M620 16 Q630 26 640 16 Q650 6 660 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="680" cy="16" r="3"/><path d="M700 16 Q710 26 720 16 Q730 6 740 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="760" cy="16" r="3"/><path d="M780 16 Q790 26 800 16 Q810 6 820 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="840" cy="16" r="3"/><path d="M860 16 Q870 26 880 16 Q890 6 900 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="920" cy="16" r="3"/><path d="M940 16 Q950 26 960 16 Q970 6 980 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="1000" cy="16" r="3"/><path d="M1020 16 Q1030 26 1040 16 Q1050 6 1060 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="1080" cy="16" r="3"/><path d="M1100 16 Q1110 26 1120 16 Q1130 6 1140 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="1160" cy="16" r="3"/><path d="M1180 16 Q1190 26 1200 16 Q1210 6 1220 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="1240" cy="16" r="3"/></g></svg></div>
+    <div class="content-area">
+      <blockquote>
+        线者，<span class="gold">生死</span>刚柔，<br>
+        无不借<span class="gold">一笔</span>以见之。
+      </blockquote>
+      <cite>— 谢赫《古画品录》</cite>
+    </div>
+    <div class="footer"><span class="cn">敦煌</span><span>IRON LINE &amp; HALO</span><span>05 / 07</span></div>
+  </section>
+
+  <section class="slide data-slide">
+    <div class="border-top"><svg class="border-band" viewBox="0 0 1280 32" preserveAspectRatio="none"><rect width="1280" height="32" fill="#D4A843" opacity="0.12"/><g fill="#D4A843"><circle cx="40" cy="16" r="3"/><path d="M60 16 Q70 6 80 16 Q90 26 100 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="120" cy="16" r="3"/><path d="M140 16 Q150 6 160 16 Q170 26 180 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="200" cy="16" r="3"/><path d="M220 16 Q230 6 240 16 Q250 26 260 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="280" cy="16" r="3"/><path d="M300 16 Q310 6 320 16 Q330 26 340 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="360" cy="16" r="3"/><path d="M380 16 Q390 6 400 16 Q410 26 420 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="440" cy="16" r="3"/><path d="M460 16 Q470 6 480 16 Q490 26 500 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="520" cy="16" r="3"/><path d="M540 16 Q550 6 560 16 Q570 26 580 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="600" cy="16" r="3"/><path d="M620 16 Q630 6 640 16 Q650 26 660 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="680" cy="16" r="3"/><path d="M700 16 Q710 6 720 16 Q730 26 740 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="760" cy="16" r="3"/><path d="M780 16 Q790 6 800 16 Q810 26 820 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="840" cy="16" r="3"/><path d="M860 16 Q870 6 880 16 Q890 26 900 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="920" cy="16" r="3"/><path d="M940 16 Q950 6 960 16 Q970 26 980 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="1000" cy="16" r="3"/><path d="M1020 16 Q1030 6 1040 16 Q1050 26 1060 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="1080" cy="16" r="3"/><path d="M1100 16 Q1110 6 1120 16 Q1130 26 1140 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="1160" cy="16" r="3"/><path d="M1180 16 Q1190 6 1200 16 Q1210 26 1220 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="1240" cy="16" r="3"/></g></svg></div>
+    <div class="border-bottom"><svg class="border-band" viewBox="0 0 1280 32" preserveAspectRatio="none"><rect width="1280" height="32" fill="#D4A843" opacity="0.08"/><g fill="#D4A843"><circle cx="40" cy="16" r="3"/><path d="M60 16 Q70 26 80 16 Q90 6 100 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="120" cy="16" r="3"/><path d="M140 16 Q150 26 160 16 Q170 6 180 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="200" cy="16" r="3"/><path d="M220 16 Q230 26 240 16 Q250 6 260 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="280" cy="16" r="3"/><path d="M300 16 Q310 26 320 16 Q330 6 340 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="360" cy="16" r="3"/><path d="M380 16 Q390 26 400 16 Q410 6 420 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="440" cy="16" r="3"/><path d="M460 16 Q470 26 480 16 Q490 6 500 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="520" cy="16" r="3"/><path d="M540 16 Q550 26 560 16 Q570 6 580 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="600" cy="16" r="3"/><path d="M620 16 Q630 26 640 16 Q650 6 660 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="680" cy="16" r="3"/><path d="M700 16 Q710 26 720 16 Q730 6 740 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="760" cy="16" r="3"/><path d="M780 16 Q790 26 800 16 Q810 6 820 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="840" cy="16" r="3"/><path d="M860 16 Q870 26 880 16 Q890 6 900 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="920" cy="16" r="3"/><path d="M940 16 Q950 26 960 16 Q970 6 980 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="1000" cy="16" r="3"/><path d="M1020 16 Q1030 26 1040 16 Q1050 6 1060 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="1080" cy="16" r="3"/><path d="M1100 16 Q1110 26 1120 16 Q1130 6 1140 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="1160" cy="16" r="3"/><path d="M1180 16 Q1190 26 1200 16 Q1210 6 1220 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="1240" cy="16" r="3"/></g></svg></div>
+    <div class="content-area">
+      <div class="header"><h2>数字</h2></div>
+      <div class="metrics">
+        <div class="metric"><div class="value">4</div><div class="label">矿物色</div></div>
+        <div class="metric"><div class="value">3</div><div class="label">同心圆层</div></div>
+        <div class="metric"><div class="value">1</div><div class="label">铁线主脉</div></div>
+        <div class="metric"><div class="value">1600</div><div class="label">传承年限</div></div>
+      </div>
+    </div>
+    <div class="footer"><span class="cn">敦煌</span><span>IRON LINE &amp; HALO</span><span>06 / 07</span></div>
+  </section>
+
+  <section class="slide closing-slide">
+    <div class="border-top"><svg class="border-band" viewBox="0 0 1280 32" preserveAspectRatio="none"><rect width="1280" height="32" fill="#D4A843" opacity="0.12"/><g fill="#D4A843"><circle cx="40" cy="16" r="3"/><path d="M60 16 Q70 6 80 16 Q90 26 100 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="120" cy="16" r="3"/><path d="M140 16 Q150 6 160 16 Q170 26 180 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="200" cy="16" r="3"/><path d="M220 16 Q230 6 240 16 Q250 26 260 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="280" cy="16" r="3"/><path d="M300 16 Q310 6 320 16 Q330 26 340 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="360" cy="16" r="3"/><path d="M380 16 Q390 6 400 16 Q410 26 420 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="440" cy="16" r="3"/><path d="M460 16 Q470 6 480 16 Q490 26 500 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="520" cy="16" r="3"/><path d="M540 16 Q550 6 560 16 Q570 26 580 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="600" cy="16" r="3"/><path d="M620 16 Q630 6 640 16 Q650 26 660 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="680" cy="16" r="3"/><path d="M700 16 Q710 6 720 16 Q730 26 740 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="760" cy="16" r="3"/><path d="M780 16 Q790 6 800 16 Q810 26 820 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="840" cy="16" r="3"/><path d="M860 16 Q870 6 880 16 Q890 26 900 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="920" cy="16" r="3"/><path d="M940 16 Q950 6 960 16 Q970 26 980 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="1000" cy="16" r="3"/><path d="M1020 16 Q1030 6 1040 16 Q1050 26 1060 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="1080" cy="16" r="3"/><path d="M1100 16 Q1110 6 1120 16 Q1130 26 1140 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="1160" cy="16" r="3"/><path d="M1180 16 Q1190 6 1200 16 Q1210 26 1220 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="1240" cy="16" r="3"/></g></svg></div>
+    <div class="border-bottom"><svg class="border-band" viewBox="0 0 1280 32" preserveAspectRatio="none"><rect width="1280" height="32" fill="#D4A843" opacity="0.08"/><g fill="#D4A843"><circle cx="40" cy="16" r="3"/><path d="M60 16 Q70 26 80 16 Q90 6 100 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="120" cy="16" r="3"/><path d="M140 16 Q150 26 160 16 Q170 6 180 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="200" cy="16" r="3"/><path d="M220 16 Q230 26 240 16 Q250 6 260 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="280" cy="16" r="3"/><path d="M300 16 Q310 26 320 16 Q330 6 340 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="360" cy="16" r="3"/><path d="M380 16 Q390 26 400 16 Q410 6 420 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="440" cy="16" r="3"/><path d="M460 16 Q470 26 480 16 Q490 6 500 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="520" cy="16" r="3"/><path d="M540 16 Q550 26 560 16 Q570 6 580 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="600" cy="16" r="3"/><path d="M620 16 Q630 26 640 16 Q650 6 660 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="680" cy="16" r="3"/><path d="M700 16 Q710 26 720 16 Q730 6 740 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="760" cy="16" r="3"/><path d="M780 16 Q790 26 800 16 Q810 6 820 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="840" cy="16" r="3"/><path d="M860 16 Q870 26 880 16 Q890 6 900 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="920" cy="16" r="3"/><path d="M940 16 Q950 26 960 16 Q970 6 980 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="1000" cy="16" r="3"/><path d="M1020 16 Q1030 26 1040 16 Q1050 6 1060 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="1080" cy="16" r="3"/><path d="M1100 16 Q1110 26 1120 16 Q1130 6 1140 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="1160" cy="16" r="3"/><path d="M1180 16 Q1190 26 1200 16 Q1210 6 1220 16" stroke="#D4A843" stroke-width="1.5" fill="none"/><circle cx="1240" cy="16" r="3"/></g></svg></div>
+    <div class="halo" style="opacity:0.2;"><svg viewBox="0 0 350 350">
+      <defs>
+        <linearGradient id="goldGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#E8C868"/>
+          <stop offset="100%" stop-color="#9A7B1A"/>
+        </linearGradient>
+      </defs>
+      <circle cx="175" cy="175" r="165" fill="none" stroke="url(#goldGrad3)" stroke-width="3"/>
+      <circle cx="175" cy="175" r="140" fill="none" stroke="#D4A843" stroke-width="1" opacity="0.5"/>
+    </svg></div>
+    <div class="content-area">
+      <h2>圆满</h2>
+      <p>千佛洞前，后会有期</p>
+    </div>
+    <div class="footer"><span class="cn">敦煌</span><span>IRON LINE &amp; HALO</span><span>07 / 07</span></div>
+  </section>
+
+</div>
+<div class="nav-hint">← → ARROWS TO NAVIGATE</div>
+<div class="counter" id="counter">01 / 07</div>
+<script>
+  const slides = document.querySelectorAll('.slide'); let current = 0;
+  const counter = document.getElementById('counter');
+  function show(i) { slides[current].classList.remove('active'); current = (i + slides.length) % slides.length; slides[current].classList.add('active'); counter.textContent = String(current+1).padStart(2,'0')+' / '+String(slides.length).padStart(2,'0'); }
+  document.addEventListener('keydown', e => {
+    if (e.key==='ArrowRight'||e.key==='ArrowDown'||e.key===' ') { e.preventDefault(); show(current+1); }
+    if (e.key==='ArrowLeft'||e.key==='ArrowUp') { e.preventDefault(); show(current-1); }
+    if (e.key==='Home') { e.preventDefault(); show(0); }
+    if (e.key==='End') { e.preventDefault(); show(slides.length-1); }
+  });
+</script>
+</body>
+</html>

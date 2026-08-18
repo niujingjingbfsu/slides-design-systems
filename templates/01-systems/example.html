@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SYSTEMS — Slide Template</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F6F5F2;
+    --fg: #1A1A1A;
+    --muted: #8A8580;
+    --accent: #B85C38;
+    --accent-soft: rgba(184, 92, 56, 0.10);
+    --line: rgba(26, 26, 26, 0.12);
+    --grid: rgba(26, 26, 26, 0.035);
+    --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+    --font-sans: 'Inter', -apple-system, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    height: 100%;
+    background: #2A2926;
+    font-family: var(--font-mono);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .deck {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .slide {
+    position: absolute;
+    width: 1280px;
+    height: 720px;
+    background: var(--bg);
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 32px 32px;
+    color: var(--fg);
+    padding: 64px 80px;
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    transform-origin: center center;
+  }
+
+  .slide.active { display: flex; }
+
+  /* Scale to fit viewport */
+  @media (max-aspect-ratio: 16/9) {
+    .slide { transform: scale(calc(100vw / 1280)); }
+  }
+  @media (min-aspect-ratio: 16/9) {
+    .slide { transform: scale(calc(100vh / 720)); }
+  }
+
+  /* ---- Shared elements ---- */
+  .eyebrow {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .eyebrow::before {
+    content: '';
+    width: 24px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .slide-title {
+    font-family: var(--font-mono);
+    font-size: 44px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-top: 20px;
+  }
+
+  .slide-title .underline {
+    display: inline-block;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 4px;
+  }
+
+  .footer {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-top: 1px solid var(--line);
+    padding-top: 16px;
+  }
+
+  .footer .dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+
+  /* ---- Slide 1: Title ---- */
+  .title-slide { justify-content: center; }
+  .title-slide .section-tag {
+    font-size: 13px;
+    color: var(--muted);
+    letter-spacing: 0.2em;
+    margin-bottom: 32px;
+  }
+  .title-slide h1 {
+    font-size: 96px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 0.95;
+  }
+  .title-slide h1 .accent { color: var(--accent); }
+  .title-slide .subtitle {
+    margin-top: 28px;
+    font-family: var(--font-sans);
+    font-size: 18px;
+    color: var(--muted);
+    font-weight: 300;
+    max-width: 520px;
+    line-height: 1.6;
+  }
+  .title-slide .meta {
+    margin-top: 56px;
+    display: flex;
+    gap: 48px;
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+  .title-slide .meta span strong {
+    display: block;
+    color: var(--fg);
+    font-weight: 500;
+    margin-top: 6px;
+    letter-spacing: 0.05em;
+  }
+
+  /* ---- Slide 2: Section divider ---- */
+  .section-slide { justify-content: center; }
+  .section-slide .big-num {
+    font-size: 200px;
+    font-weight: 700;
+    color: var(--accent-soft);
+    line-height: 1;
+    position: absolute;
+    right: 60px;
+    bottom: 40px;
+  }
+  .section-slide h2 {
+    font-size: 72px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    max-width: 700px;
+  }
+  .section-slide .section-label {
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    margin-bottom: 24px;
+  }
+
+  /* ---- Slide 3: Content bullets ---- */
+  .content-slide .body {
+    margin-top: 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    flex: 1;
+  }
+  .content-slide .lead {
+    font-family: var(--font-sans);
+    font-size: 17px;
+    line-height: 1.7;
+    color: #44403C;
+    font-weight: 300;
+  }
+  .content-slide ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .content-slide li {
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.6;
+    padding-left: 24px;
+    position: relative;
+    color: #3A3733;
+  }
+  .content-slide li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 9px;
+    width: 8px;
+    height: 8px;
+    background: var(--accent);
+  }
+  .content-slide li strong {
+    font-family: var(--font-mono);
+    font-weight: 500;
+    color: var(--fg);
+    display: block;
+    font-size: 13px;
+    margin-bottom: 4px;
+    letter-spacing: 0.02em;
+  }
+
+  /* ---- Slide 4: Two column ---- */
+  .two-col .cols {
+    margin-top: 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    flex: 1;
+  }
+  .two-col .col {
+    background: var(--bg);
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+  }
+  .two-col .col-num {
+    font-size: 12px;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    margin-bottom: 16px;
+  }
+  .two-col .col h3 {
+    font-family: var(--font-mono);
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+  .two-col .col p {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    line-height: 1.7;
+    color: #555049;
+    font-weight: 300;
+  }
+  .two-col .col .spec {
+    margin-top: auto;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+
+  /* ---- Slide 5: Quote ---- */
+  .quote-slide { justify-content: center; align-items: flex-start; }
+  .quote-slide blockquote {
+    font-size: 48px;
+    font-weight: 300;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    max-width: 900px;
+    font-family: var(--font-sans);
+  }
+  .quote-slide blockquote::before {
+    content: '"';
+    font-family: var(--font-mono);
+    color: var(--accent);
+    font-size: 80px;
+    line-height: 0;
+    position: relative;
+    top: 20px;
+    margin-right: 8px;
+  }
+  .quote-slide cite {
+    margin-top: 32px;
+    font-style: normal;
+    font-size: 13px;
+    color: var(--muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .quote-slide cite strong { color: var(--fg); font-weight: 500; }
+
+  /* ---- Slide 6: Data / metrics ---- */
+  .data-slide .metrics {
+    margin-top: 48px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    flex: 1;
+  }
+  .data-slide .metric {
+    background: var(--bg);
+    padding: 40px 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .data-slide .metric .value {
+    font-size: 64px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+  .data-slide .metric .value .unit {
+    font-size: 24px;
+    color: var(--accent);
+    font-weight: 500;
+  }
+  .data-slide .metric .label {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+    margin-top: 12px;
+  }
+  .data-slide .metric .tag {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    margin-bottom: 20px;
+  }
+
+  /* ---- Slide 7: Closing ---- */
+  .closing-slide { justify-content: center; align-items: center; text-align: center; }
+  .closing-slide h2 {
+    font-size: 80px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+  }
+  .closing-slide h2 .accent { color: var(--accent); }
+  .closing-slide p {
+    margin-top: 24px;
+    font-family: var(--font-sans);
+    font-size: 16px;
+    color: var(--muted);
+    font-weight: 300;
+  }
+  .closing-slide .corner-mark {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--accent);
+  }
+  .closing-slide .corner-mark.tl { top: 40px; left: 40px; border-right: none; border-bottom: none; }
+  .closing-slide .corner-mark.tr { top: 40px; right: 40px; border-left: none; border-bottom: none; }
+  .closing-slide .corner-mark.bl { bottom: 40px; left: 40px; border-right: none; border-top: none; }
+  .closing-slide .corner-mark.br { bottom: 40px; right: 40px; border-left: none; border-top: none; }
+
+  /* ---- Nav ---- */
+  .nav-hint {
+    position: fixed;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255,255,255,0.35);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    z-index: 100;
+    pointer-events: none;
+  }
+  .counter {
+    position: fixed;
+    bottom: 16px;
+    right: 24px;
+    color: rgba(255,255,255,0.5);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    z-index: 100;
+    letter-spacing: 0.1em;
+  }
+</style>
+</head>
+<body>
+
+<div class="deck">
+
+  <!-- 1. Title -->
+  <section class="slide title-slide active">
+    <div class="section-tag">// TECHNICAL DOCUMENTATION</div>
+    <h1>SYSTEMS<br><span class="accent">/</span> DESIGN</h1>
+    <p class="subtitle">A blueprint-driven presentation template built on grid, type, and precise spacing tokens.</p>
+    <div class="meta">
+      <span>VERSION<strong>01.0</strong></span>
+      <span>DATE<strong>2026.08</strong></span>
+      <span>AUTHOR<strong>ENGINEERING</strong></span>
+    </div>
+    <div class="footer">
+      <span><span class="dot"></span>SYSTEMS TEMPLATE</span>
+      <span>01 / 07</span>
+    </div>
+  </section>
+
+  <!-- 2. Section divider -->
+  <section class="slide section-slide">
+    <div class="section-label">SECTION 02</div>
+    <h2>Architecture<br>of the system.</h2>
+    <div class="big-num">02</div>
+    <div class="footer">
+      <span><span class="dot"></span>SYSTEMS TEMPLATE</span>
+      <span>02 / 07</span>
+    </div>
+  </section>
+
+  <!-- 3. Content -->
+  <section class="slide content-slide">
+    <div class="eyebrow">FOUNDATIONS</div>
+    <h2 class="slide-title"><span class="underline">Core principles</span></h2>
+    <div class="body">
+      <p class="lead">Every decision in this template traces back to a small set of rules. The grid is not decoration — it is the contract that keeps every slide aligned.</p>
+      <ul>
+        <li><strong>GRID // 32PX BASELINE</strong>All spacing is a multiple of 32px. No arbitrary values.</li>
+        <li><strong>TYPE // MONOSPACE FIRST</strong>JetBrains Mono carries structure; Inter supports reading.</li>
+        <li><strong>COLOR // TERRACOTTA ACCENT</strong>One accent color, used only for emphasis and markers.</li>
+        <li><strong>BORDER // 1PX HAIRLINE</strong>Separation comes from lines, never from shadows.</li>
+      </ul>
+    </div>
+    <div class="footer">
+      <span><span class="dot"></span>SYSTEMS TEMPLATE</span>
+      <span>03 / 07</span>
+    </div>
+  </section>
+
+  <!-- 4. Two column -->
+  <section class="slide two-col">
+    <div class="eyebrow">COMPARISON</div>
+    <h2 class="slide-title"><span class="underline">Two approaches</span></h2>
+    <div class="cols">
+      <div class="col">
+        <div class="col-num">A — RIGID</div>
+        <h3>Fixed grid</h3>
+        <p>Predictable alignment at every breakpoint. Best for technical content, data-heavy slides, and documentation where consistency matters more than surprise.</p>
+        <div class="spec">RADIUS: 0PX · SHADOW: NONE</div>
+      </div>
+      <div class="col">
+        <div class="col-num">B — FLUID</div>
+        <h3>Elastic spacing</h3>
+        <p>Spacing scales with viewport while maintaining proportional rhythm. Best for narrative decks where breathing room changes with screen size.</p>
+        <div class="spec">RADIUS: 0PX · SHADOW: NONE</div>
+      </div>
+    </div>
+    <div class="footer">
+      <span><span class="dot"></span>SYSTEMS TEMPLATE</span>
+      <span>04 / 07</span>
+    </div>
+  </section>
+
+  <!-- 5. Quote -->
+  <section class="slide quote-slide">
+    <blockquote>Good design is as little design as possible. Less, but better — because it concentrates on the essential aspects.</blockquote>
+    <cite><strong>DIETER RAMS</strong> — TEN PRINCIPLES</cite>
+    <div class="footer">
+      <span><span class="dot"></span>SYSTEMS TEMPLATE</span>
+      <span>05 / 07</span>
+    </div>
+  </section>
+
+  <!-- 6. Data -->
+  <section class="slide data-slide">
+    <div class="eyebrow">METRICS</div>
+    <h2 class="slide-title"><span class="underline">By the numbers</span></h2>
+    <div class="metrics">
+      <div class="metric">
+        <div>
+          <div class="tag">SPACING</div>
+          <div class="value">32<span class="unit">px</span></div>
+        </div>
+        <div class="label">Baseline grid unit used across all slide layouts and component spacing.</div>
+      </div>
+      <div class="metric">
+        <div>
+          <div class="tag">TYPE SCALE</div>
+          <div class="value">7<span class="unit">steps</span></div>
+        </div>
+        <div class="label">From 11px caption to 96px display, each step multiplies by 1.25.</div>
+      </div>
+      <div class="metric">
+        <div>
+          <div class="tag">COLORS</div>
+          <div class="value">3<span class="unit">core</span></div>
+        </div>
+        <div class="label">Background, foreground, and a single terracotta accent. Nothing more.</div>
+      </div>
+    </div>
+    <div class="footer">
+      <span><span class="dot"></span>SYSTEMS TEMPLATE</span>
+      <span>06 / 07</span>
+    </div>
+  </section>
+
+  <!-- 7. Closing -->
+  <section class="slide closing-slide">
+    <div class="corner-mark tl"></div>
+    <div class="corner-mark tr"></div>
+    <div class="corner-mark bl"></div>
+    <div class="corner-mark br"></div>
+    <h2>END<span class="accent">.</span></h2>
+    <p>Thank you — questions welcome.</p>
+    <div class="footer" style="position:absolute;bottom:64px;left:80px;right:80px;">
+      <span><span class="dot"></span>SYSTEMS TEMPLATE</span>
+      <span>07 / 07</span>
+    </div>
+  </section>
+
+</div>
+
+<div class="nav-hint">← → ARROWS TO NAVIGATE</div>
+<div class="counter" id="counter">01 / 07</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  let current = 0;
+  const counter = document.getElementById('counter');
+
+  function show(i) {
+    slides[current].classList.remove('active');
+    current = (i + slides.length) % slides.length;
+    slides[current].classList.add('active');
+    counter.textContent = String(current + 1).padStart(2, '0') + ' / ' + String(slides.length).padStart(2, '0');
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); show(current + 1); }
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); show(current - 1); }
+    if (e.key === 'Home') { e.preventDefault(); show(0); }
+    if (e.key === 'End') { e.preventDefault(); show(slides.length - 1); }
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Soft Space — Slide Template</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FAF6EF;
+    --fg: #3D3530;
+    --muted: #9A8F86;
+    --accent: #E8D5D0;
+    --accent-deep: #D4A574;
+    --accent-rose: #E8D5D0;
+    --card: #FFFFFF;
+    --shadow: 0 8px 32px rgba(61, 53, 48, 0.06), 0 2px 8px rgba(61, 53, 48, 0.04);
+    --shadow-lg: 0 20px 60px rgba(61, 53, 48, 0.08), 0 4px 16px rgba(61, 53, 48, 0.05);
+    --radius: 20px;
+    --radius-lg: 28px;
+    --font: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    height: 100%;
+    background: #E8E2D9;
+    font-family: var(--font);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .deck {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .slide {
+    position: absolute;
+    width: 1280px;
+    height: 720px;
+    background: var(--bg);
+    color: var(--fg);
+    padding: 64px 80px;
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    transform-origin: center center;
+  }
+
+  .slide.active { display: flex; }
+
+  @media (max-aspect-ratio: 16/9) {
+    .slide { transform: scale(calc(100vw / 1280)); }
+  }
+  @media (min-aspect-ratio: 16/9) {
+    .slide { transform: scale(calc(100vh / 720)); }
+  }
+
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(0px);
+    z-index: 0;
+  }
+
+  .footer {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 500;
+    z-index: 2;
+    position: relative;
+  }
+  .footer .dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: var(--accent-deep);
+    border-radius: 50%;
+    margin-right: 8px;
+  }
+
+  .slide > *:not(.blob):not(.footer) { position: relative; z-index: 1; }
+
+  .tag {
+    display: inline-block;
+    padding: 6px 16px;
+    background: rgba(232, 213, 208, 0.4);
+    color: #8A6F66;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+
+  /* ---- Slide 1: Title ---- */
+  .title-slide { justify-content: center; }
+  .title-slide .blob.b1 { width: 420px; height: 420px; background: var(--accent-rose); opacity: 0.5; right: -80px; top: -100px; }
+  .title-slide .blob.b2 { width: 200px; height: 200px; background: var(--accent-deep); opacity: 0.15; right: 200px; bottom: -40px; }
+  .title-slide .blob.b3 { width: 120px; height: 120px; background: #F0E0D8; opacity: 0.6; left: 80px; bottom: 80px; }
+  .title-slide .tag { margin-bottom: 28px; align-self: flex-start; }
+  .title-slide h1 {
+    font-size: 88px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+  }
+  .title-slide h1 .soft { color: #C49A8F; font-weight: 300; }
+  .title-slide .subtitle {
+    margin-top: 24px;
+    font-size: 18px;
+    color: var(--muted);
+    font-weight: 400;
+    max-width: 480px;
+    line-height: 1.6;
+  }
+  .title-slide .chips {
+    margin-top: 40px;
+    display: flex;
+    gap: 12px;
+  }
+  .title-slide .chip {
+    padding: 10px 20px;
+    background: var(--card);
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #7A6F66;
+    box-shadow: var(--shadow);
+  }
+
+  /* ---- Slide 2: Section ---- */
+  .section-slide { justify-content: center; align-items: center; text-align: center; }
+  .section-slide .blob.b1 { width: 500px; height: 500px; background: var(--accent-rose); opacity: 0.35; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+  .section-slide .num {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--accent-deep);
+    letter-spacing: 0.2em;
+    margin-bottom: 20px;
+  }
+  .section-slide h2 {
+    font-size: 80px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+  }
+  .section-slide h2 .light { font-weight: 300; color: var(--muted); }
+  .section-slide p {
+    margin-top: 20px;
+    font-size: 16px;
+    color: var(--muted);
+    max-width: 440px;
+    line-height: 1.6;
+  }
+
+  /* ---- Slide 3: Content cards ---- */
+  .content-slide .header { margin-bottom: 40px; }
+  .content-slide .header .tag { margin-bottom: 16px; }
+  .content-slide h2 {
+    font-size: 44px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  .content-slide .cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    flex: 1;
+  }
+  .content-slide .card {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 32px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s;
+  }
+  .content-slide .card .icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+  .content-slide .card:nth-child(1) .icon { background: #F5E6E1; }
+  .content-slide .card:nth-child(2) .icon { background: #EDE8DF; }
+  .content-slide .card:nth-child(3) .icon { background: #F0E4D8; }
+  .content-slide .card h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .content-slide .card p {
+    font-size: 13px;
+    line-height: 1.7;
+    color: #8A817A;
+    font-weight: 400;
+  }
+
+  /* ---- Slide 4: Two column ---- */
+  .two-col .header { margin-bottom: 36px; }
+  .two-col h2 { font-size: 40px; font-weight: 700; letter-spacing: -0.02em; }
+  .two-col .cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    flex: 1;
+  }
+  .two-col .col {
+    background: var(--card);
+    border-radius: var(--radius-lg);
+    padding: 40px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+  }
+  .two-col .col.featured { background: #3D3530; color: #FAF6EF; }
+  .two-col .col .col-tag {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    color: var(--accent-deep);
+  }
+  .two-col .col.featured .col-tag { color: var(--accent-deep); }
+  .two-col .col h3 { font-size: 24px; font-weight: 700; margin-bottom: 14px; }
+  .two-col .col p { font-size: 14px; line-height: 1.7; color: #8A817A; font-weight: 400; }
+  .two-col .col.featured p { color: rgba(250, 246, 239, 0.7); }
+  .two-col .col .price {
+    margin-top: auto;
+    padding-top: 24px;
+    font-size: 36px;
+    font-weight: 800;
+  }
+  .two-col .col .price small { font-size: 14px; font-weight: 400; color: var(--muted); }
+
+  /* ---- Slide 5: Quote ---- */
+  .quote-slide { justify-content: center; align-items: center; text-align: center; }
+  .quote-slide .blob.b1 { width: 300px; height: 300px; background: var(--accent-rose); opacity: 0.3; left: 10%; top: 20%; }
+  .quote-slide .blob.b2 { width: 180px; height: 180px; background: var(--accent-deep); opacity: 0.1; right: 15%; bottom: 15%; }
+  .quote-slide .quote-card {
+    background: var(--card);
+    border-radius: var(--radius-lg);
+    padding: 64px 72px;
+    box-shadow: var(--shadow-lg);
+    max-width: 880px;
+  }
+  .quote-slide blockquote {
+    font-size: 36px;
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+  }
+  .quote-slide blockquote .warm { color: #C49A8F; }
+  .quote-slide cite {
+    margin-top: 28px;
+    font-style: normal;
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    display: block;
+  }
+
+  /* ---- Slide 6: Data ---- */
+  .data-slide .header { margin-bottom: 36px; }
+  .data-slide h2 { font-size: 40px; font-weight: 700; letter-spacing: -0.02em; }
+  .data-slide .metrics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    flex: 1;
+    align-content: center;
+  }
+  .data-slide .metric {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 32px 24px;
+    box-shadow: var(--shadow);
+    text-align: center;
+  }
+  .data-slide .metric .value {
+    font-size: 52px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+  .data-slide .metric:nth-child(1) .value { color: #C49A8F; }
+  .data-slide .metric:nth-child(2) .value { color: var(--accent-deep); }
+  .data-slide .metric:nth-child(3) .value { color: #8FA88A; }
+  .data-slide .metric:nth-child(4) .value { color: #7A9EB8; }
+  .data-slide .metric .label {
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 500;
+    line-height: 1.5;
+  }
+
+  /* ---- Slide 7: Closing ---- */
+  .closing-slide { justify-content: center; align-items: center; text-align: center; }
+  .closing-slide .blob.b1 { width: 380px; height: 380px; background: var(--accent-rose); opacity: 0.4; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+  .closing-slide h2 {
+    font-size: 72px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+  }
+  .closing-slide h2 .soft { font-weight: 300; color: #C49A8F; }
+  .closing-slide p {
+    margin-top: 20px;
+    font-size: 16px;
+    color: var(--muted);
+  }
+  .closing-slide .btn {
+    margin-top: 36px;
+    padding: 14px 36px;
+    background: #3D3530;
+    color: #FAF6EF;
+    border-radius: 100px;
+    font-size: 14px;
+    font-weight: 600;
+    box-shadow: var(--shadow-lg);
+  }
+
+  /* ---- Nav ---- */
+  .nav-hint {
+    position: fixed;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255,255,255,0.4);
+    font-family: var(--font);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    z-index: 100;
+    pointer-events: none;
+  }
+  .counter {
+    position: fixed;
+    bottom: 16px;
+    right: 24px;
+    color: rgba(255,255,255,0.5);
+    font-family: var(--font);
+    font-size: 12px;
+    font-weight: 600;
+    z-index: 100;
+  }
+</style>
+</head>
+<body>
+
+<div class="deck">
+
+  <!-- 1. Title -->
+  <section class="slide title-slide active">
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+    <div class="blob b3"></div>
+    <span class="tag">✦ WELCOME</span>
+    <h1>Soft<br><span class="soft">Space</span></h1>
+    <p class="subtitle">A warm, gentle presentation template with rounded cards, soft shadows, and a quiet palette.</p>
+    <div class="chips">
+      <span class="chip">Cream</span>
+      <span class="chip">Rounded</span>
+      <span class="chip">Calm</span>
+    </div>
+    <div class="footer">
+      <span><span class="dot"></span>SOFT SPACE</span>
+      <span>01 / 07</span>
+    </div>
+  </section>
+
+  <!-- 2. Section -->
+  <section class="slide section-slide">
+    <div class="blob b1"></div>
+    <div class="num">CHAPTER 02</div>
+    <h2>Warm <span class="light">foundations</span></h2>
+    <p>Build every slide on soft surfaces, rounded forms, and gentle hierarchy.</p>
+    <div class="footer">
+      <span><span class="dot"></span>SOFT SPACE</span>
+      <span>02 / 07</span>
+    </div>
+  </section>
+
+  <!-- 3. Content cards -->
+  <section class="slide content-slide">
+    <div class="header">
+      <span class="tag">PRINCIPLES</span>
+      <h2 style="margin-top:14px;">Three soft pillars</h2>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <div class="icon">🌸</div>
+        <h3>Gentle hierarchy</h3>
+        <p>Weight and size create order without shouting. Every element earns its place through quiet contrast.</p>
+      </div>
+      <div class="card">
+        <div class="icon">◐</div>
+        <h3>Soft surfaces</h3>
+        <p>Rounded corners and diffused shadows make cards feel approachable, never cold or mechanical.</p>
+      </div>
+      <div class="card">
+        <div class="icon">❋</div>
+        <h3>Warm palette</h3>
+        <p>Cream, blush, and ochre create a cozy atmosphere that keeps audiences at ease.</p>
+      </div>
+    </div>
+    <div class="footer">
+      <span><span class="dot"></span>SOFT SPACE</span>
+      <span>03 / 07</span>
+    </div>
+  </section>
+
+  <!-- 4. Two column -->
+  <section class="slide two-col">
+    <div class="header">
+      <span class="tag">OPTIONS</span>
+      <h2 style="margin-top:14px;">Choose your tone</h2>
+    </div>
+    <div class="cols">
+      <div class="col">
+        <div class="col-tag">LIGHT</div>
+        <h3>Day mode</h3>
+        <p>Cream surfaces with soft pink accents. Best for well-lit rooms and friendly, conversational decks.</p>
+        <div class="price">Free <small>forever</small></div>
+      </div>
+      <div class="col featured">
+        <div class="col-tag">RECOMMENDED</div>
+        <h3>Warm mode</h3>
+        <p>Deep cocoa surface with cream text. Adds intimacy and focus for keynote moments.</p>
+        <div class="price">Pro <small>best value</small></div>
+      </div>
+    </div>
+    <div class="footer">
+      <span><span class="dot"></span>SOFT SPACE</span>
+      <span>04 / 07</span>
+    </div>
+  </section>
+
+  <!-- 5. Quote -->
+  <section class="slide quote-slide">
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+    <div class="quote-card">
+      <blockquote>Softness is not weakness. It is the <span class="warm">confidence</span> to be quiet when others shout.</blockquote>
+      <cite>— DESIGN PHILOSOPHY</cite>
+    </div>
+    <div class="footer">
+      <span><span class="dot"></span>SOFT SPACE</span>
+      <span>05 / 07</span>
+    </div>
+  </section>
+
+  <!-- 6. Data -->
+  <section class="slide data-slide">
+    <div class="header">
+      <span class="tag">METRICS</span>
+      <h2 style="margin-top:14px;">By the numbers</h2>
+    </div>
+    <div class="metrics">
+      <div class="metric">
+        <div class="value">20<span style="font-size:24px">px</span></div>
+        <div class="label">Card radius</div>
+      </div>
+      <div class="metric">
+        <div class="value">3<span style="font-size:24px">hues</span></div>
+        <div class="label">Warm core palette</div>
+      </div>
+      <div class="metric">
+        <div class="value">8<span style="font-size:24px">px</span></div>
+        <div class="label">Soft shadow blur</div>
+      </div>
+      <div class="metric">
+        <div class="value">100<span style="font-size:24px">%</span></div>
+        <div class="label">Rounded corners</div>
+      </div>
+    </div>
+    <div class="footer">
+      <span><span class="dot"></span>SOFT SPACE</span>
+      <span>06 / 07</span>
+    </div>
+  </section>
+
+  <!-- 7. Closing -->
+  <section class="slide closing-slide">
+    <div class="blob b1"></div>
+    <h2>Thank <span class="soft">you</span></h2>
+    <p>Questions? Let's talk softly.</p>
+    <div class="btn">Get in touch →</div>
+    <div class="footer" style="position:absolute;bottom:64px;left:80px;right:80px;">
+      <span><span class="dot"></span>SOFT SPACE</span>
+      <span>07 / 07</span>
+    </div>
+  </section>
+
+</div>
+
+<div class="nav-hint">← → ARROWS TO NAVIGATE</div>
+<div class="counter" id="counter">01 / 07</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  let current = 0;
+  const counter = document.getElementById('counter');
+  function show(i) {
+    slides[current].classList.remove('active');
+    current = (i + slides.length) % slides.length;
+    slides[current].classList.add('active');
+    counter.textContent = String(current + 1).padStart(2, '0') + ' / ' + String(slides.length).padStart(2, '0');
+  }
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); show(current + 1); }
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); show(current - 1); }
+    if (e.key === 'Home') { e.preventDefault(); show(0); }
+    if (e.key === 'End') { e.preventDefault(); show(slides.length - 1); }
+  });
+</script>
+</body>
+</html>

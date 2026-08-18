@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>POP! — Slide Template</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FFE500;
+    --fg: #000;
+    --red: #E63946;
+    --blue: #1D4E89;
+    --white: #fff;
+    --font-display: 'Anton', sans-serif;
+    --font-body: 'Inter', -apple-system, sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; background: #222; font-family: var(--font-body); overflow: hidden; display: flex; align-items: center; justify-content: center; }
+  .deck { width: 100vw; height: 100vh; position: relative; display: flex; align-items: center; justify-content: center; }
+  .slide {
+    position: absolute; width: 1280px; height: 720px; background: var(--bg); color: var(--fg);
+    padding: 56px 72px; display: none; flex-direction: column; overflow: hidden; transform-origin: center center;
+  }
+  .slide.active { display: flex; }
+  @media (max-aspect-ratio: 16/9) { .slide { transform: scale(calc(100vw / 1280)); } }
+  @media (min-aspect-ratio: 16/9) { .slide { transform: scale(calc(100vh / 720)); } }
+
+  /* Ben-Day dots */
+  .dots-tr, .dots-bl { position: absolute; z-index: 0; }
+  .dots-tr { top: 0; right: 0; width: 280px; height: 280px; background: radial-gradient(circle, var(--red) 2px, transparent 2.5px); background-size: 16px 16px; opacity: 0.7; -webkit-mask-image: linear-gradient(225deg, #000 0%, transparent 70%); mask-image: linear-gradient(225deg, #000 0%, transparent 70%); }
+  .dots-bl { bottom: 0; left: 0; width: 240px; height: 240px; background: radial-gradient(circle, var(--red) 2px, transparent 2.5px); background-size: 16px 16px; opacity: 0.5; -webkit-mask-image: linear-gradient(45deg, #000 0%, transparent 70%); mask-image: linear-gradient(45deg, #000 0%, transparent 70%); }
+
+  .footer {
+    margin-top: auto; display: flex; justify-content: space-between; align-items: center;
+    font-size: 13px; font-weight: 900; text-transform: uppercase; z-index: 2; position: relative;
+  }
+  .footer .badge { background: #000; color: var(--bg); padding: 4px 14px; }
+
+  .slide > *:not(.dots-tr):not(.dots-bl):not(.footer) { position: relative; z-index: 1; }
+
+  .comic-border { border: 4px solid #000; }
+  .pop-title { font-family: var(--font-display); text-transform: uppercase; letter-spacing: 0.02em; }
+  .stroke-text { -webkit-text-stroke: 3px #000; color: #fff; paint-order: stroke fill; }
+
+  /* Starburst */
+  .starburst {
+    position: absolute; background: var(--red; border: 4px solid #000;
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    display: flex; align-items: center; justify-content: center; text-align: center;
+    font-family: var(--font-display); color: #fff; font-size: 22px; line-height: 1; text-transform: uppercase;
+    z-index: 2;
+  }
+
+  /* Title */
+  .title-slide { justify-content: center; }
+  .title-slide .tag { display: inline-block; background: #000; color: #fff; padding: 6px 18px; font-weight: 900; font-size: 13px; text-transform: uppercase; margin-bottom: 20px; transform: rotate(-3deg); align-self: flex-start; }
+  .title-slide h1 { font-family: var(--font-display); font-size: 150px; line-height: 0.88; text-transform: uppercase; }
+  .title-slide h1 .stroke-text { font-size: 170px; }
+  .title-slide h1 .red { color: var(--red); }
+  .title-slide h1 .blue { color: var(--blue); }
+  .title-slide .subtitle { margin-top: 24px; font-size: 18px; font-weight: 700; max-width: 480px; line-height: 1.5; }
+  .title-slide .shapes { position: absolute; right: 80px; top: 50%; transform: translateY(-50%); z-index: 1; }
+  .title-slide .shape { border: 4px solid #000; position: absolute; }
+  .title-slide .circle { width: 140px; height: 140px; border-radius: 50%; background: var(--red); right: 60px; top: -80px; }
+  .title-slide .rect { width: 160px; height: 60px; background: var(--blue); right: 0; top: 60px; }
+  .title-slide .starburst.s1 { width: 130px; height: 130px; right: -20px; top: -140px; font-size: 18px; }
+
+  /* Section */
+  .section-slide { justify-content: center; align-items: center; text-align: center; }
+  .section-slide .num { font-family: var(--font-display); font-size: 200px; color: var(--red); -webkit-text-stroke: 4px #000; line-height: 0.8; position: absolute; opacity: 0.3; z-index: 0; }
+  .section-slide .num.bl { bottom: 40px; left: 60px; }
+  .section-slide .num.tr { top: 40px; right: 60px; }
+  .section-slide .label { display: inline-block; background: var(--blue); color: #fff; padding: 6px 20px; font-weight: 900; font-size: 14px; text-transform: uppercase; margin-bottom: 20px; transform: rotate(2deg); }
+  .section-slide h2 { font-family: var(--font-display); font-size: 100px; line-height: 0.95; text-transform: uppercase; position: relative; z-index: 1; }
+  .section-slide h2 .stroke-text { -webkit-text-stroke-width: 4px; }
+
+  /* Content */
+  .content-slide .header { margin-bottom: 32px; }
+  .content-slide .label { display: inline-block; background: var(--red); color: #fff; padding: 5px 16px; font-weight: 900; font-size: 12px; text-transform: uppercase; margin-bottom: 12px; }
+  .content-slide h2 { font-family: var(--font-display); font-size: 48px; text-transform: uppercase; line-height: 1; }
+  .content-slide .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; flex: 1; }
+  .content-slide .card { border: 4px solid #000; padding: 28px; display: flex; flex-direction: column; position: relative; }
+  .content-slide .card:nth-child(1) { background: #fff; }
+  .content-slide .card:nth-child(2) { background: var(--blue); color: #fff; }
+  .content-slide .card:nth-child(3) { background: var(--red); color: #fff; }
+  .content-slide .card .bubble { width: 52px; height: 52px; border-radius: 50%; border: 3px solid #000; background: var(--bg); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 24px; margin-bottom: 16px; }
+  .content-slide .card h3 { font-family: var(--font-display); font-size: 24px; text-transform: uppercase; margin-bottom: 10px; line-height: 1.1; }
+  .content-slide .card p { font-size: 13px; line-height: 1.6; font-weight: 700; }
+
+  /* Two col */
+  .two-col .header { margin-bottom: 28px; }
+  .two-col h2 { font-family: var(--font-display); font-size: 44px; text-transform: uppercase; }
+  .two-col .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; flex: 1; }
+  .two-col .col { border: 4px solid #000; padding: 36px; display: flex; flex-direction: column; }
+  .two-col .col.a { background: #fff; }
+  .two-col .col.b { background: #000; color: #fff; }
+  .two-col .col .tag { display: inline-block; padding: 4px 14px; font-weight: 900; font-size: 12px; text-transform: uppercase; margin-bottom: 16px; align-self: flex-start; }
+  .two-col .col.a .tag { background: var(--red); color: #fff; }
+  .two-col .col.b .tag { background: var(--bg); color: #000; }
+  .two-col .col h3 { font-family: var(--font-display); font-size: 30px; text-transform: uppercase; margin-bottom: 14px; }
+  .two-col .col p { font-size: 14px; line-height: 1.7; font-weight: 600; opacity: 0.9; }
+  .two-col .col .pow { margin-top: auto; font-family: var(--font-display); font-size: 48px; padding-top: 12px; }
+  .two-col .col.a .pow { color: var(--red); }
+  .two-col .col.b .pow { color: var(--bg); }
+
+  /* Quote */
+  .quote-slide { justify-content: center; align-items: center; text-align: center; }
+  .quote-slide .bubble { background: #fff; border: 4px solid #000; border-radius: 24px; padding: 56px 64px; max-width: 900px; position: relative; transform: rotate(-1.5deg); box-shadow: 8px 8px 0 var(--red); }
+  .quote-slide .bubble::after { content: ''; position: absolute; bottom: -24px; left: 80px; width: 0; height: 0; border-left: 20px solid transparent; border-right: 20px solid transparent; border-top: 24px solid #000; }
+  .quote-slide .bubble::before { content: ''; position: absolute; bottom: -16px; left: 84px; width: 0; height: 0; border-left: 16px solid transparent; border-right: 16px solid transparent; border-top: 20px solid #fff; z-index: 1; }
+  .quote-slide blockquote { font-family: var(--font-display); font-size: 44px; line-height: 1.2; text-transform: uppercase; }
+  .quote-slide blockquote .red { color: var(--red); }
+  .quote-slide cite { display: block; margin-top: 28px; font-size: 13px; font-weight: 900; font-style: normal; text-transform: uppercase; }
+
+  /* Data */
+  .data-slide .header { margin-bottom: 28px; }
+  .data-slide h2 { font-family: var(--font-display); font-size: 44px; text-transform: uppercase; }
+  .data-slide .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; flex: 1; align-content: center; }
+  .data-slide .metric { border: 4px solid #000; padding: 28px 16px; text-align: center; }
+  .data-slide .metric:nth-child(1) { background: var(--red); color: #fff; }
+  .data-slide .metric:nth-child(2) { background: var(--blue); color: #fff; }
+  .data-slide .metric:nth-child(3) { background: #fff; }
+  .data-slide .metric:nth-child(4) { background: #000; color: var(--bg); }
+  .data-slide .metric .value { font-family: var(--font-display); font-size: 56px; line-height: 1; }
+  .data-slide .metric .label { margin-top: 10px; font-size: 12px; font-weight: 900; text-transform: uppercase; line-height: 1.4; }
+
+  /* Closing */
+  .closing-slide { justify-content: center; align-items: center; text-align: center; }
+  .closing-slide h2 { font-family: var(--font-display); font-size: 120px; text-transform: uppercase; line-height: 0.9; }
+  .closing-slide h2 .red { color: var(--red); }
+  .closing-slide p { margin-top: 16px; font-size: 18px; font-weight: 700; }
+  .closing-slide .btn { margin-top: 28px; display: inline-block; background: var(--blue); color: #fff; border: 4px solid #000; padding: 12px 36px; font-family: var(--font-display); font-size: 22px; text-transform: uppercase; box-shadow: 6px 6px 0 #000; }
+  .closing-slide .starburst.s2 { width: 100px; height: 100px; right: 120px; top: 100px; font-size: 14px; }
+
+  .nav-hint { position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); color: rgba(0,0,0,0.4); font-family: var(--font-body); font-size: 11px; font-weight: 900; letter-spacing: 0.1em; z-index: 100; pointer-events: none; }
+  .counter { position: fixed; bottom: 16px; right: 24px; color: rgba(0,0,0,0.5); font-family: var(--font-body); font-size: 12px; font-weight: 900; z-index: 100; }
+</style>
+</head>
+<body>
+<div class="deck">
+
+  <section class="slide title-slide active">
+    <div class="dots-tr"></div>
+    <div class="dots-bl"></div>
+    <div class="shapes">
+      <div class="shape circle"></div>
+      <div class="shape rect"></div>
+      <div class="starburst s1">WOW!</div>
+    </div>
+    <span class="tag">★ COMIC BOOK DESIGN ★</span>
+    <h1><span class="stroke-text">POP!</span><br><span class="red">BOLD</span> <span class="blue">LOUD</span></h1>
+    <p class="subtitle">A high-energy presentation template inspired by comic books, halftone dots, and primary colors that punch you in the eye.</p>
+    <div class="footer">
+      <span><span class="badge">POP!</span></span>
+      <span>01 / 07</span>
+    </div>
+  </section>
+
+  <section class="slide section-slide">
+    <div class="dots-tr"></div>
+    <div class="num bl">02</div>
+    <span class="label">CHAPTER TWO</span>
+    <h2><span class="stroke-text">KAPOW!</span></h2>
+    <div class="footer">
+      <span><span class="badge">POP!</span></span>
+      <span>02 / 07</span>
+    </div>
+  </section>
+
+  <section class="slide content-slide">
+    <div class="dots-bl"></div>
+    <div class="header">
+      <span class="label">RULES!</span>
+      <h2>Three big ideas</h2>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <div class="bubble">1</div>
+        <h3>Halftone dots</h3>
+        <p>Red Ben-Day dots in the corners scream comic book. They're texture, not decoration — use them loud.</p>
+      </div>
+      <div class="card">
+        <div class="bubble" style="background:var(--red);color:#fff">2</div>
+        <h3>Thick outlines</h3>
+        <p>Every shape gets a 4px black border. White text gets a black stroke. Nothing floats without an edge.</p>
+      </div>
+      <div class="card">
+        <div class="bubble" style="background:var(--blue);color:#fff">3</div>
+        <h3>Primary power</h3>
+        <p>Yellow, red, blue — straight from the printer. No pastels, no gradients, no apologies.</p>
+      </div>
+    </div>
+    <div class="footer">
+      <span><span class="badge">POP!</span></span>
+      <span>03 / 07</span>
+    </div>
+  </section>
+
+  <section class="slide two-col">
+    <div class="dots-tr" style="opacity:0.4"></div>
+    <div class="header">
+      <h2>Good vs. Evil</h2>
+    </div>
+    <div class="cols">
+      <div class="col a">
+        <span class="tag">HERO</span>
+        <h3>Bright side</h3>
+        <p>Yellow background with white cards and red/blue accents. Maximum energy, maximum fun. Best for upbeat pitches and creative decks.</p>
+        <div class="pow">BAM!</div>
+      </div>
+      <div class="col b">
+        <span class="tag">VILLAIN</span>
+        <h3>Dark side</h3>
+        <p>Black background with yellow and red type. Turns up the drama. Best for bold statements and big reveals.</p>
+        <div class="pow">ZAP!</div>
+      </div>
+    </div>
+    <div class="footer">
+      <span><span class="badge">POP!</span></span>
+      <span>04 / 07</span>
+    </div>
+  </section>
+
+  <section class="slide quote-slide">
+    <div class="dots-tr"></div>
+    <div class="dots-bl"></div>
+    <div class="bubble">
+      <blockquote>Why fit in when you were<br>born to <span class="red">stand out?</span></blockquote>
+      <cite>— DR. SEUSS</cite>
+    </div>
+    <div class="footer">
+      <span><span class="badge">POP!</span></span>
+      <span>05 / 07</span>
+    </div>
+  </section>
+
+  <section class="slide data-slide">
+    <div class="dots-bl" style="opacity:0.4"></div>
+    <div class="header">
+      <h2>By the numbers!</h2>
+    </div>
+    <div class="metrics">
+      <div class="metric"><div class="value">4px</div><div class="label">Border width</div></div>
+      <div class="metric"><div class="value">3</div><div class="label">Primary colors</div></div>
+      <div class="metric"><div class="value">150</div><div class="label">Font size</div></div>
+      <div class="metric"><div class="value">∞</div><div class="label">Energy level</div></div>
+    </div>
+    <div class="footer">
+      <span><span class="badge">POP!</span></span>
+      <span>06 / 07</span>
+    </div>
+  </section>
+
+  <section class="slide closing-slide">
+    <div class="dots-tr"></div>
+    <div class="dots-bl"></div>
+    <div class="starburst s2">THANKS!</div>
+    <h2>THE <span class="red">END!</span></h2>
+    <p>See you in the funny pages.</p>
+    <div class="btn">▶ NEXT ISSUE</div>
+    <div class="footer" style="position:absolute;bottom:56px;left:72px;right:72px;">
+      <span><span class="badge">POP!</span></span>
+      <span>07 / 07</span>
+    </div>
+  </section>
+
+</div>
+<div class="nav-hint">← → ARROWS TO NAVIGATE</div>
+<div class="counter" id="counter">01 / 07</div>
+<script>
+  const slides = document.querySelectorAll('.slide'); let current = 0;
+  const counter = document.getElementById('counter');
+  function show(i) { slides[current].classList.remove('active'); current = (i + slides.length) % slides.length; slides[current].classList.add('active'); counter.textContent = String(current+1).padStart(2,'0')+' / '+String(slides.length).padStart(2,'0'); }
+  document.addEventListener('keydown', e => {
+    if (e.key==='ArrowRight'||e.key==='ArrowDown'||e.key===' ') { e.preventDefault(); show(current+1); }
+    if (e.key==='ArrowLeft'||e.key==='ArrowUp') { e.preventDefault(); show(current-1); }
+    if (e.key==='Home') { e.preventDefault(); show(0); }
+    if (e.key==='End') { e.preventDefault(); show(slides.length-1); }
+  });
+</script>
+</body>
+</html>
