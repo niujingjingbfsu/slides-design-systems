@@ -25,41 +25,25 @@
     background: #2A2823;
     font-family: var(--font-sans);
     overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+    }
 
-  .deck {
-    width: 100vw;
-    height: 100vh;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+  .deck { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; }
 
   .slide {
-    position: absolute;
-    width: 1280px;
-    height: 720px;
+    position: absolute; top: 50%; left: 50%; width: 1280px; height: 720px;
     background: var(--bg);
     color: var(--fg);
     padding: 72px 96px;
     display: none;
     flex-direction: column;
     overflow: hidden;
-    transform-origin: center center;
+    transform: translate(-50%, -50%); transform-origin: center center;
   }
 
   .slide.active { display: flex; }
 
-  @media (max-aspect-ratio: 16/9) {
-    .slide { transform: scale(calc(100vw / 1280)); }
-  }
-  @media (min-aspect-ratio: 16/9) {
-    .slide { transform: scale(calc(100vh / 720)); }
-  }
+  @media (max-aspect-ratio: 16/9) { .slide { transform: translate(-50%, -50%) scale(calc(100vw / 1280)); } }
+  @media (min-aspect-ratio: 16/9) { .slide { transform: translate(-50%, -50%) scale(calc(100vh / 720)); } }
 
   /* Seal */
   .seal {
@@ -386,7 +370,7 @@
 
   /* ---- Nav ---- */
   .nav-hint {
-    position: fixed;
+    position: absolute;
     bottom: 16px;
     left: 50%;
     transform: translateX(-50%);
@@ -398,7 +382,7 @@
     pointer-events: none;
   }
   .counter {
-    position: fixed;
+    position: absolute;
     bottom: 16px;
     right: 24px;
     color: rgba(255,255,255,0.45);
@@ -535,11 +519,9 @@
     </div>
   </section>
 
+  <div class="nav-hint">← → 方向键翻页</div>
+  <div class="counter" id="counter">01 / 07</div>
 </div>
-
-<div class="nav-hint">← → 方向键翻页</div>
-<div class="counter" id="counter">01 / 07</div>
-
 <script>
   const slides = document.querySelectorAll('.slide');
   let current = 0;

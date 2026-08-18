@@ -32,24 +32,12 @@
     background: #D8DFF0;
     font-family: var(--font);
     overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+    }
 
-  .deck {
-    width: 100vw;
-    height: 100vh;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+  .deck { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; }
 
   .slide {
-    position: absolute;
-    width: 1280px;
-    height: 720px;
+    position: absolute; top: 50%; left: 50%; width: 1280px; height: 720px;
     background: var(--bg-grad);
     color: var(--fg);
     padding: 64px 80px;
@@ -61,12 +49,8 @@
 
   .slide.active { display: flex; }
 
-  @media (max-aspect-ratio: 16/9) {
-    .slide { transform: scale(calc(100vw / 1280)); }
-  }
-  @media (min-aspect-ratio: 16/9) {
-    .slide { transform: scale(calc(100vh / 720)); }
-  }
+  @media (max-aspect-ratio: 16/9) { .slide { transform: translate(-50%, -50%) scale(calc(100vw / 1280)); } }
+  @media (min-aspect-ratio: 16/9) { .slide { transform: translate(-50%, -50%) scale(calc(100vh / 720)); } }
 
   .orb {
     position: absolute;
@@ -97,7 +81,7 @@
     position: relative;
   }
 
-  .slide > *:not(.orb) { position: relative; z-index: 1; }
+  .slide > *:not(:where(.orb)) { position: relative; z-index: 1; }
 
   .tag {
     display: inline-flex;
@@ -368,7 +352,7 @@
 
   /* ---- Nav ---- */
   .nav-hint {
-    position: fixed;
+    position: absolute;
     bottom: 16px;
     left: 50%;
     transform: translateX(-50%);
@@ -381,7 +365,7 @@
     pointer-events: none;
   }
   .counter {
-    position: fixed;
+    position: absolute;
     bottom: 16px;
     right: 24px;
     color: rgba(30,42,94,0.5);
@@ -550,11 +534,9 @@
     </div>
   </section>
 
+  <div class="nav-hint">← → ARROWS TO NAVIGATE</div>
+  <div class="counter" id="counter">01 / 07</div>
 </div>
-
-<div class="nav-hint">← → ARROWS TO NAVIGATE</div>
-<div class="counter" id="counter">01 / 07</div>
-
 <script>
   const slides = document.querySelectorAll('.slide');
   let current = 0;

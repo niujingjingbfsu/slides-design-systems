@@ -19,15 +19,15 @@
     --font-body: 'Cormorant Garamond', Georgia, serif;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  html, body { height: 100%; background: #1a1a1a; font-family: var(--font-body); overflow: hidden; display: flex; align-items: center; justify-content: center; }
-  .deck { width: 100vw; height: 100vh; position: relative; display: flex; align-items: center; justify-content: center; }
+  html, body { height: 100%; background: #1a1a1a; font-family: var(--font-body); overflow: hidden; }
+  .deck { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; }
   .slide {
-    position: absolute; width: 1280px; height: 720px; background: var(--bg); color: var(--fg);
-    padding: 56px 80px; display: none; flex-direction: column; overflow: hidden; transform-origin: center center;
+    position: absolute; top: 50%; left: 50%; width: 1280px; height: 720px; background: var(--bg); color: var(--fg);
+    padding: 56px 80px; display: none; flex-direction: column; overflow: hidden; transform: translate(-50%, -50%); transform-origin: center center;
   }
   .slide.active { display: flex; }
-  @media (max-aspect-ratio: 16/9) { .slide { transform: scale(calc(100vw / 1280)); } }
-  @media (min-aspect-ratio: 16/9) { .slide { transform: scale(calc(100vh / 720)); } }
+  @media (max-aspect-ratio: 16/9) { .slide { transform: translate(-50%, -50%) scale(calc(100vw / 1280)); } }
+  @media (min-aspect-ratio: 16/9) { .slide { transform: translate(-50%, -50%) scale(calc(100vh / 720)); } }
 
   .border-frame { position: absolute; top: 24px; left: 24px; right: 24px; bottom: 24px; border: 1.5px solid var(--gold); pointer-events: none; z-index: 2; }
   .border-frame::before { content:''; position: absolute; top: 6px; left: 6px; right: 6px; bottom: 6px; border: 0.5px solid var(--gold); opacity: 0.5; }
@@ -44,7 +44,7 @@
     color: var(--muted); padding-top: 12px; z-index: 2; position: relative;
   }
   .footer .ornament { color: var(--gold); font-size: 16px; }
-  .slide > *:not(.border-frame):not(.corner):not(.footer):not(.deco) { position: relative; z-index: 1; }
+  .slide > *:not(:where(.border-frame)):not(:where(.corner)):not(:where(.footer)):not(:where(.deco)) { position: relative; z-index: 1; }
   .deco { position: absolute; z-index: 0; opacity: 0.15; }
 
   .ornament-divider { display: flex; align-items: center; gap: 16px; color: var(--gold); }
@@ -117,8 +117,8 @@
   .closing-slide p { font-size: 18px; font-style: italic; color: var(--muted); }
   .closing-slide .btn { margin-top: 28px; display: inline-block; border: 1.5px solid var(--gold); color: var(--green); padding: 12px 36px; font-family: var(--font-body); font-size: 13px; letter-spacing: 0.25em; text-transform: uppercase; background: transparent; }
 
-  .nav-hint { position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); color: rgba(0,0,0,0.25); font-family: var(--font-body); font-size: 11px; letter-spacing: 0.2em; z-index: 100; pointer-events: none; }
-  .counter { position: fixed; bottom: 16px; right: 24px; color: rgba(0,0,0,0.4); font-family: var(--font-body); font-size: 12px; letter-spacing: 0.15em; z-index: 100; }
+  .nav-hint { position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%); color: rgba(0,0,0,0.25); font-family: var(--font-body); font-size: 11px; letter-spacing: 0.2em; z-index: 100; pointer-events: none; }
+  .counter { position: absolute; bottom: 16px; right: 24px; color: rgba(0,0,0,0.4); font-family: var(--font-body); font-size: 12px; letter-spacing: 0.15em; z-index: 100; }
 </style>
 </head>
 <body>
@@ -241,9 +241,9 @@
     <div class="footer" style="position:absolute;bottom:56px;left:80px;right:80px;"><span>Art Nouveau</span><span class="ornament">&#10086;</span><span>07 / 07</span></div>
   </section>
 
+  <div class="nav-hint">← → ARROWS TO NAVIGATE</div>
+  <div class="counter" id="counter">01 / 07</div>
 </div>
-<div class="nav-hint">← → ARROWS TO NAVIGATE</div>
-<div class="counter" id="counter">01 / 07</div>
 <script>
   const slides = document.querySelectorAll('.slide'); let current = 0;
   const counter = document.getElementById('counter');

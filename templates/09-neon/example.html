@@ -19,15 +19,15 @@
     --font-mono: 'JetBrains Mono', monospace;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  html, body { height: 100%; background: #000; font-family: var(--font-mono); overflow: hidden; display: flex; align-items: center; justify-content: center; }
-  .deck { width: 100vw; height: 100vh; position: relative; display: flex; align-items: center; justify-content: center; }
+  html, body { height: 100%; background: #000; font-family: var(--font-mono); overflow: hidden; }
+  .deck { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; }
   .slide {
-    position: absolute; width: 1280px; height: 720px; background: var(--bg-grad); color: var(--fg);
-    padding: 56px 72px; display: none; flex-direction: column; overflow: hidden; transform-origin: center center;
+    position: absolute; top: 50%; left: 50%; width: 1280px; height: 720px; background: var(--bg-grad); color: var(--fg);
+    padding: 56px 72px; display: none; flex-direction: column; overflow: hidden; transform: translate(-50%, -50%); transform-origin: center center;
   }
   .slide.active { display: flex; }
-  @media (max-aspect-ratio: 16/9) { .slide { transform: scale(calc(100vw / 1280)); } }
-  @media (min-aspect-ratio: 16/9) { .slide { transform: scale(calc(100vh / 720)); } }
+  @media (max-aspect-ratio: 16/9) { .slide { transform: translate(-50%, -50%) scale(calc(100vw / 1280)); } }
+  @media (min-aspect-ratio: 16/9) { .slide { transform: translate(-50%, -50%) scale(calc(100vh / 720)); } }
 
   /* Grid floor */
   .grid-floor {
@@ -61,7 +61,7 @@
   }
   .footer .neon-tag { color: var(--pink); text-shadow: 0 0 8px var(--pink); }
 
-  .slide > *:not(.grid-floor):not(.sun):not(.stars):not(.footer) { position: relative; z-index: 1; }
+  .slide > *:not(:where(.grid-floor)):not(:where(.sun)):not(:where(.stars)):not(:where(.footer)) { position: relative; z-index: 1; }
 
   .neon-pink { color: var(--pink); text-shadow: 0 0 10px var(--pink), 0 0 20px var(--pink), 0 0 40px rgba(255,46,151,0.5); }
   .neon-cyan { color: var(--cyan); text-shadow: 0 0 10px var(--cyan), 0 0 20px var(--cyan), 0 0 40px rgba(0,240,255,0.5); }
@@ -140,8 +140,8 @@
   .closing-slide p { margin-top: 16px; font-family: var(--font-mono); font-size: 14px; color: var(--muted); letter-spacing: 0.2em; }
   .closing-slide .btn { margin-top: 32px; display: inline-block; padding: 14px 40px; border: 1px solid var(--pink); color: var(--pink); font-family: var(--font-display); font-size: 14px; letter-spacing: 0.15em; box-shadow: 0 0 20px rgba(255,46,151,0.3); }
 
-  .nav-hint { position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); color: rgba(255,46,151,0.3); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; z-index: 100; pointer-events: none; }
-  .counter { position: fixed; bottom: 16px; right: 24px; color: rgba(0,240,255,0.5); font-family: var(--font-mono); font-size: 12px; z-index: 100; }
+  .nav-hint { position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%); color: rgba(255,46,151,0.3); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; z-index: 100; pointer-events: none; }
+  .counter { position: absolute; bottom: 16px; right: 24px; color: rgba(0,240,255,0.5); font-family: var(--font-mono); font-size: 12px; z-index: 100; }
 </style>
 </head>
 <body>
@@ -281,9 +281,9 @@
     </div>
   </section>
 
+  <div class="nav-hint">← → ARROWS TO NAVIGATE</div>
+  <div class="counter" id="counter">01 / 07</div>
 </div>
-<div class="nav-hint">← → ARROWS TO NAVIGATE</div>
-<div class="counter" id="counter">01 / 07</div>
 <script>
   const slides = document.querySelectorAll('.slide'); let current = 0;
   const counter = document.getElementById('counter');

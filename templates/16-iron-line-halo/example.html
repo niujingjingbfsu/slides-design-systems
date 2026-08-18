@@ -22,15 +22,15 @@
     --font-en: 'Cormorant Garamond', Georgia, serif;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  html, body { height: 100%; background: #1a1a1a; font-family: var(--font-cn); overflow: hidden; display: flex; align-items: center; justify-content: center; }
-  .deck { width: 100vw; height: 100vh; position: relative; display: flex; align-items: center; justify-content: center; }
+  html, body { height: 100%; background: #1a1a1a; font-family: var(--font-cn); overflow: hidden; }
+  .deck { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; }
   .slide {
-    position: absolute; width: 1280px; height: 720px; background: var(--bg); color: var(--fg);
-    display: none; flex-direction: column; overflow: hidden; transform-origin: center center;
+    position: absolute; top: 50%; left: 50%; width: 1280px; height: 720px; background: var(--bg); color: var(--fg);
+    display: none; flex-direction: column; overflow: hidden; transform: translate(-50%, -50%); transform-origin: center center;
   }
   .slide.active { display: flex; }
-  @media (max-aspect-ratio: 16/9) { .slide { transform: scale(calc(100vw / 1280)); } }
-  @media (min-aspect-ratio: 16/9) { .slide { transform: scale(calc(100vh / 720)); } }
+  @media (max-aspect-ratio: 16/9) { .slide { transform: translate(-50%, -50%) scale(calc(100vw / 1280)); } }
+  @media (min-aspect-ratio: 16/9) { .slide { transform: translate(-50%, -50%) scale(calc(100vh / 720)); } }
 
   /* Subtle plaster grain */
   .slide::before {
@@ -137,8 +137,8 @@
   .closing-slide p { font-size: 16px; color: var(--muted); letter-spacing: 0.1em; margin-top: 16px; }
   .closing-slide .halo { left: 50%; top: 50%; transform: translate(-50%,-50%); width: 350px; height: 350px; opacity: 0.12; }
 
-  .nav-hint { position: fixed; bottom: 8px; left: 50%; transform: translateX(-50%); color: rgba(184,92,56,0.3); font-family: var(--font-en); font-size: 11px; letter-spacing: 0.2em; z-index: 100; pointer-events: none; }
-  .counter { position: fixed; bottom: 8px; right: 24px; color: rgba(184,92,56,0.5); font-family: var(--font-en); font-size: 12px; z-index: 100; }
+  .nav-hint { position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); color: rgba(184,92,56,0.3); font-family: var(--font-en); font-size: 11px; letter-spacing: 0.2em; z-index: 100; pointer-events: none; }
+  .counter { position: absolute; bottom: 8px; right: 24px; color: rgba(184,92,56,0.5); font-family: var(--font-en); font-size: 12px; z-index: 100; }
 </style>
 </head>
 <body>
@@ -331,9 +331,9 @@
     <div class="footer"><span class="cn">敦煌</span><span>IRON LINE &amp; HALO</span><span>07 / 07</span></div>
   </section>
 
+  <div class="nav-hint">← → ARROWS TO NAVIGATE</div>
+  <div class="counter" id="counter">01 / 07</div>
 </div>
-<div class="nav-hint">← → ARROWS TO NAVIGATE</div>
-<div class="counter" id="counter">01 / 07</div>
 <script>
   const slides = document.querySelectorAll('.slide'); let current = 0;
   const counter = document.getElementById('counter');
