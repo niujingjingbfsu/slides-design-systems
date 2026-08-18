@@ -444,6 +444,18 @@
     .data-slide .metric { padding: 32px 28px; }
     .content-slide .card, .two-col .col { margin-bottom: 0; }
     
+
+  /* === Content overflow safeguards === */
+  *, *::before, *::after { box-sizing: border-box; }
+  .slide > * { min-width: 0; min-height: 0; }
+  .slide .body, .slide .cols, .slide .cards, .slide .metrics,
+  .slide .content-area, .slide .content, .slide .grid { min-height: 0; }
+  .slide .card, .slide .col, .slide .metric { overflow: hidden; }
+  .slide p, .slide li, .slide h1, .slide h2, .slide h3, .slide h4,
+  .slide blockquote, .slide span, .slide div {
+    overflow-wrap: break-word; word-break: break-word;
+  }
+
 </style>
 </head>
 <body>
