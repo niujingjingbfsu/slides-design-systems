@@ -21,39 +21,127 @@
 
 ### 冷静克制 / 轻盈 / 高端留白
 
-| 01 Systems | 02 静 Sei | 03 Soft Space | 04 Light as Air |
-|:---:|:---:|:---:|:---:|
-| ![Systems](templates/01-systems/preview.png) | ![Sei](templates/02-sei/preview.png) | ![Soft Space](templates/03-soft-space/preview.png) | ![Light as Air](templates/04-light-as-air/preview.png) |
-| 蓝图技术感 | 日式禅意 | 温暖柔和 | 通透梦幻 |
+**01 Systems · 蓝图技术感**
 
-| 05 Breathe | 06 ESSENTIAL | 07 Noir |
-|:---:|:---:|:---:|
-| ![Breathe](templates/05-breathe/preview.png) | ![ESSENTIAL](templates/06-essential/preview.png) | ![Noir](templates/07-noir/preview.png) |
-| 清新自然 | 画廊极简 | 暗夜奢雅 |
+<img src="templates/01-systems/preview.png" width="800" alt="01 Systems">
+
+---
+
+**02 静 Sei · 日式禅意**
+
+<img src="templates/02-sei/preview.png" width="800" alt="02 Sei">
+
+---
+
+**03 Soft Space · 温暖柔和**
+
+<img src="templates/03-soft-space/preview.png" width="800" alt="03 Soft Space">
+
+---
+
+**04 Light as Air · 通透梦幻**
+
+<img src="templates/04-light-as-air/preview.png" width="800" alt="04 Light as Air">
+
+---
+
+**05 Breathe · 清新自然**
+
+<img src="templates/05-breathe/preview.png" width="800" alt="05 Breathe">
+
+---
+
+**06 ESSENTIAL · 画廊极简**
+
+<img src="templates/06-essential/preview.png" width="800" alt="06 Essential">
+
+---
+
+**07 Noir · 暗夜奢雅**
+
+<img src="templates/07-noir/preview.png" width="800" alt="07 Noir">
+
+---
 
 ### 色彩鲜明 / 风格化强烈
 
-| 08 Brutal | 09 Neon | 10 Pop! | 11 Electric |
-|:---:|:---:|:---:|:---:|
-| ![Brutal](templates/08-brutal/preview.png) | ![Neon](templates/09-neon/preview.png) | ![Pop](templates/10-pop/preview.png) | ![Electric](templates/11-electric/preview.png) |
-| 新粗野主义 | 合成波霓虹 | 波普艺术 | 大胆渐变 |
+**08 Brutal · 新粗野主义**
 
-| 12 Memphis | 13 Punk | 14 Tropic |
-|:---:|:---:|:---:|
-| ![Memphis](templates/12-memphis/preview.png) | ![Punk](templates/13-punk/preview.png) | ![Tropic](templates/14-tropic/preview.png) |
-| 孟菲斯后现代 | 瑞士朋克 | 热带热力 |
+<img src="templates/08-brutal/preview.png" width="800" alt="08 Brutal">
+
+---
+
+**09 Neon · 合成波霓虹**
+
+<img src="templates/09-neon/preview.png" width="800" alt="09 Neon">
+
+---
+
+**10 Pop! · 波普艺术**
+
+<img src="templates/10-pop/preview.png" width="800" alt="10 Pop">
+
+---
+
+**11 Electric · 大胆渐变**
+
+<img src="templates/11-electric/preview.png" width="800" alt="11 Electric">
+
+---
+
+**12 Memphis · 孟菲斯后现代**
+
+<img src="templates/12-memphis/preview.png" width="800" alt="12 Memphis">
+
+---
+
+**13 Punk · 瑞士朋克**
+
+<img src="templates/13-punk/preview.png" width="800" alt="13 Punk">
+
+---
+
+**14 Tropic · 热带热力**
+
+<img src="templates/14-tropic/preview.png" width="800" alt="14 Tropic">
+
+---
 
 ### 绘画风格（中西方）
 
-| 15 Mineral Strata | 16 Iron Line & Halo | 17 Cobalt Circles |
-|:---:|:---:|:---:|
-| ![Mineral Strata](templates/15-mineral-strata/preview.png) | ![Iron Line & Halo](templates/16-iron-line-halo/preview.png) | ![Cobalt Circles](templates/17-cobalt-circles/preview.png) |
-| 青绿矿物层叠 | 敦煌铁线圆光 | 青花钴蓝同心圆 |
+**15 Mineral Strata · 青绿矿物层叠**
 
-| 18 Nouveau | 19 Deco | 20 Ukiyo-e |
-|:---:|:---:|:---:|
-| ![Nouveau](templates/18-nouveau/preview.png) | ![Deco](templates/19-deco/preview.png) | ![Ukiyo-e](templates/20-ukiyo-e/preview.png) |
-| 新艺术运动 | 装饰艺术 | 浮世绘 |
+<img src="templates/15-mineral-strata/preview.png" width="800" alt="15 Mineral Strata">
+
+---
+
+**16 Iron Line & Halo · 敦煌铁线圆光**
+
+<img src="templates/16-iron-line-halo/preview.png" width="800" alt="16 Iron Line Halo">
+
+---
+
+**17 Cobalt Circles · 青花钴蓝同心圆**
+
+<img src="templates/17-cobalt-circles/preview.png" width="800" alt="17 Cobalt Circles">
+
+---
+
+**18 Nouveau · 新艺术运动**
+
+<img src="templates/18-nouveau/preview.png" width="800" alt="18 Nouveau">
+
+---
+
+**19 Deco · 装饰艺术**
+
+<img src="templates/19-deco/preview.png" width="800" alt="19 Deco">
+
+---
+
+**20 Ukiyo-e · 浮世绘**
+
+<img src="templates/20-ukiyo-e/preview.png" width="800" alt="20 Ukiyo-e">
 
 ## 快速开始
 
