@@ -564,7 +564,7 @@ These are the most common aesthetic failures. Check every page against these.
 **① 不乱 — No visual chaos**
 - One alignment per page. If the title is left-aligned, don't center the body. If the page is centered, don't left-align a card.
 - Spacing follows a rhythm. Gaps should be multiples of a base unit (8px or 12px). Random gaps (13px, 27px, 41px) feel chaotic.
-- No more than 3 font sizes on a page. Title, body, caption — that's enough. If you need a 4th, you're probably over-designing.
+- Small text (≤16px) uses exactly 3 sizes: **12px** (labels, tags, captions, progress section), **14px** (body, descriptions), **16px** (emphasis, progress page number). Never use 10/11/13/15px — they create visual noise. Medium (20-32px for card titles), large (40-48px for page titles), and display (56px+ for hero/big numbers) follow the template's hierarchy. A typical page has 5-7 total sizes but only 3 in the small range — that's what keeps it clean.
 - Grid lines should be invisible but felt. Elements should line up with each other even if there's no visible grid.
 
 **② 不花 — No visual noise**
