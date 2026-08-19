@@ -3,3 +3,4 @@ Thumbs.db
 .frontend-slides/
 .slides-previews/
 *.log
+migrate_progress.py

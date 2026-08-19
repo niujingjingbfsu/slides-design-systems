@@ -476,15 +476,15 @@ Section pages are exempt from content alignment (they are centered by design), b
 A progress bar that meets all functional specs can still be ugly. These rules prevent that.
 
 **Hard rules (never violate):**
-1. **No full-width border lines on light backgrounds.** A `border-top` spanning the entire slide width creates a visible horizontal "stiff line" that cuts across the design — even 1px solid is noticeable. On light/cream/white backgrounds where the progress bar background matches the slide, use `border-top: none`. Only use a border on dark backgrounds where it creates necessary separation (max `1px solid rgba(...,0.2)`). Heavy borders (2px+ solid) are never acceptable.
-2. **Progress bar background MUST match the slide background.** Never use a different solid color for the progress bar container (e.g., cream bar on a beige slide, black bar on a white slide). This creates an ugly horizontal "color block" that splits the slide. Set `background: var(--bg)` or `background: transparent`. If text legibility is an issue, change the text color — do NOT add a contrasting background band.
+1. **No border-top.** A `border-top` spanning the slide width creates a visible horizontal line that cuts across the design. Use `border-top: none` on all templates — light and dark alike. The progress bar needs no separation line; it floats on the slide.
+2. **No background container.** The progress bar is not a "bar" — it's floating text and segments at the bottom of the slide. Set `background: transparent` (or omit it entirely) and `border-top: none`. Never give the progress bar its own background color, even if it matches the slide — a redundant background is a bug waiting to happen when the slide color changes. If text feels hard to read, fix the text color, don't add a background band.
 3. **Progress segments must match the template's primary shape language.** If the template uses circles (soft-space, light-as-air), use circles. If it uses sharp squares (brutal, punk), use squares. Never import a shape that doesn't exist elsewhere in the template.
 4. **Progress bar visual weight ≤ 15% of content area.** The progress bar is navigation chrome, not a design feature. It should be noticed when needed, invisible when not.
 5. **Colors must come from the template's palette.** No generic gray. Use the template's accent color for "current", muted foreground for "past", and a very faint version of foreground for "future".
 6. **Typography must match.** Section label and page number must use fonts already defined in the template (display font for page number if the template has one, body font for section label).
 
 **Soft rules (strongly recommended):**
-- On light backgrounds, use a transparent or matching background with NO border line — let the segments and text be the only visible elements. On dark backgrounds, a semi-transparent dark bar (rgba(0,0,0,0.5-0.8)) with a very subtle border (max rgba 0.2) works well.
+- No background, no border — the progress bar is floating chrome, not a container. Choose text and segment colors that work directly on the slide background.
 - The "current" segment should be 20-40% larger than future segments, with the template's accent color.
 - If the template has a signature effect (offset shadow in Memphis, glow in neon, gold shimmer in deco), apply it subtly to the current segment.
 - Page number format: current page in accent color, total in muted color (e.g., `<span class="cur">03</span> / 09`).
