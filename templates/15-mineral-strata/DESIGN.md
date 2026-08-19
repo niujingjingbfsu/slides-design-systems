@@ -9,8 +9,8 @@ color:
   foreground: "#1A2A3A"
   azurite: "#2E5A88"
   malachite: "#4A8B6F"
-  gold: "#C9A227"
-  gold_light: "rgba(201,162,39,0.3)"
+  gold: "#DAA520"
+  gold_light: "rgba(218,165,32,0.3)"
   muted: "#6B6352"
 
 typography:
@@ -46,7 +46,7 @@ shadow:
 border:
   width: "1-2px"
   style: "solid"
-  color: "#C9A227"
+  color: "#DAA520"
 
 progress_bar:
   height: "50px"
@@ -71,7 +71,7 @@ progress_bar:
     section_gap: "24px"
     future: "light fill; w=36px, h=4px"
     past: "medium fill"
-    current: "var(--gold) fill; h=5px; shadow: 0 0 6px rgba(201,162,39,0.5)"
+    current: "var(--gold) fill; h=5px; shadow: 0 0 6px rgba(218,165,32,0.5)"
 
 ---
 
@@ -86,7 +86,7 @@ progress_bar:
 - **背景**：暖绢白 `#F5F0E6`，不是纯白，带绢本质感。
 - **石青** `#2E5A88`：上方色带、主标题、关键文字——最远最高的颜色。
 - **石绿** `#4A8B6F`：下方色带，托住全局——最近最沉的颜色。
-- **泥金** `#C9A227`：只做线，不做面——分隔线、山形轮廓、装饰圆环。
+- **泥金** `#DAA520`：只做线，不做面——分隔线、山形轮廓、装饰圆环。
 - **禁止**：渐变色、高饱和色、冷灰、大面积金色块。
 
 ## 字体规则
@@ -108,9 +108,9 @@ progress_bar:
 ## 组件模式
 
 - **色带**：绝对定位的 `position: absolute; left:0; right:0;` 矩形，石青或石绿填充，高度 50-100px。
-- **金线**：`height: 1px; background: #C9A227;`，位于色带边缘。
+- **金线**：`height: 1.5px; background: linear-gradient(90deg, transparent, #B8860B, #DAA520, #FFD700, #DAA520, #B8860B, transparent);`，金属光泽渐变，位于色带边缘。
 - **山形**：SVG `<polygon>`，如 `points="680,200 820,40 960,200"`，石青填充 + 泥金描边。
-- **同心圆**：SVG `<circle>` 多层，`fill: none; stroke: #C9A227`，1-2px 线宽。
+- **同心圆**：SVG `<circle>` 多层，`fill: none; stroke: #DAA520`，1-2px 线宽。
 - **卡片**：半透明白底 `rgba(255,255,255,0.4)` + 2px 泥金 `border-top`，无圆角。
 - **双栏**：一栏石青底白字，一栏半透明白底深字。
 
@@ -129,11 +129,11 @@ progress_bar:
 - **每一种 slide type 都必须有对应的 `.bottom-band` CSS 规则**（position + background + height）。HTML 里有 div 不等于 CSS 里有样式。
 - **页脚高度必须按版式匹配**：封面/结尾 100px，章节 60px，内容/双栏/数据/金句 50px。
 - **nav-hint/counter 在短页脚版式上必须上移**到 `bottom: 64px`。
-- 泥金色是 `#C9A227`（不是 `#C4A35A`），只做线不做面。
+- 泥金色是 `#DAA520`（不是 `#C4A35A`），只做线不做面。
 - 石青 `#2E5A88`、石绿 `#4A8B6F`、绢白 `#F5F0E6`。
 - 山形只用 SVG polygon 几何三角形 + 泥金描边，不画皴法。
 - 新增 slide type 时必须同时定义：bottom-band、footer 高度、content-area padding、nav-hint 位置。
 
 ## 给 Coding Agent 的提示
 
-> 请读取本 DESIGN.md。背景为暖绢白 #F5F0E6。页面由石青 #2E5A88（上）和石绿 #4A8B6F（下）水平色带分割，泥金 #C9A227 1px 细线分隔。底部放 2-3 个极简 SVG 三角形山形（石青/石绿填充+泥金描边）。中文标题 Noto Serif SC 900 大字距，英文 Cormorant Garamond 大写金色。卡片半透明白底+泥金顶部边框，零圆角。禁止画真实山水、渐变、圆角、阴影。
+> 请读取本 DESIGN.md。背景为暖绢白 #F5F0E6。页面由石青 #2E5A88（上）和石绿 #4A8B6F（下）水平色带分割，泥金 #DAA520 1px 细线分隔。底部放 2-3 个极简 SVG 三角形山形（石青/石绿填充+泥金描边）。中文标题 Noto Serif SC 900 大字距，英文 Cormorant Garamond 大写金色。卡片半透明白底+泥金顶部边框，零圆角。禁止画真实山水、渐变、圆角、阴影。

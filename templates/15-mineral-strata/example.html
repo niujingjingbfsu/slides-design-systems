@@ -14,8 +14,9 @@
     --fg: #1A2A3A;
     --azurite: #2E5A88;
     --malachite: #4A8B6F;
-    --gold: #C9A227;
-    --gold-light: rgba(201,162,39,0.3);
+    --gold: #DAA520;
+    --gold-light: rgba(218,165,32,0.3);
+    --gold-shimmer: linear-gradient(90deg, rgba(180,130,20,0) 0%, #B8860B 15%, #DAA520 35%, #FFD700 50%, #DAA520 65%, #B8860B 85%, rgba(180,130,20,0) 100%);
     --muted: #6B6352;
     --font-cn: 'Noto Serif SC', serif;
     --font-en: 'Cormorant Garamond', Georgia, serif;
@@ -35,7 +36,7 @@
   .strata { position: absolute; left: 0; right: 0; z-index: 0; }
   .strata-top { top: 0; height: 80px; background: var(--azurite); }
   .strata-bottom { bottom: 0; height: 100px; background: var(--malachite); }
-  .gold-line { position: absolute; left: 0; right: 0; height: 1px; background: var(--gold); z-index: 1; }
+  .gold-line { position: absolute; left: 0; right: 0; height: 1.5px; background: var(--gold-shimmer); z-index: 1; }
 
   /* Minimal mountain triangles */
   .mountains { position: absolute; bottom: 100px; left: 0; right: 0; z-index: 1; pointer-events: none; }
@@ -57,7 +58,7 @@
   .label { font-family: var(--font-en); font-size: 14px; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); font-weight: 600; }
   .label-cn { font-family: var(--font-cn); font-size: 14px; color: var(--azurite); font-weight: 700; letter-spacing: 0.1em; }
 
-  .gold-rule { width: 60px; height: 1px; background: var(--gold); }
+  .gold-rule { width: 60px; height: 2px; background: var(--gold-shimmer); }
 
   /* Title */
   .title-slide .content-area { justify-content: center; }
