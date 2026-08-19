@@ -50,6 +50,9 @@
     font-family: var(--font-en);
   }
   .footer .cn { font-family: var(--font-cn); font-weight: 700; letter-spacing: 0.15em; }
+  /* Footer height matches bottom-band height per slide type */
+  .section-slide .footer { height: 60px; }
+  .content-slide .footer, .two-col .footer, .data-slide .footer { height: 50px; }
 
   .label { font-family: var(--font-en); font-size: 12px; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); font-weight: 600; }
   .label-cn { font-family: var(--font-cn); font-size: 13px; color: var(--azurite); font-weight: 700; letter-spacing: 0.1em; }
@@ -85,7 +88,7 @@
   .content-slide .gold-line-1 { top: 50px; }
   .content-slide .bottom-band { position: absolute; bottom: 0; left: 0; right: 0; height: 50px; background: var(--malachite); z-index: 0; }
   .content-slide .gold-line-2 { bottom: 50px; }
-  .content-slide .content-area { padding: 72px 80px 110px; }
+  .content-slide .content-area { padding: 72px 80px 70px; }
   .content-slide .header { margin-bottom: 36px; }
   .content-slide .label-cn { margin-bottom: 8px; }
   .content-slide h2 { font-family: var(--font-cn); font-size: 40px; font-weight: 900; color: var(--azurite); letter-spacing: 0.03em; }
@@ -101,7 +104,7 @@
   .two-col .gold-line-1 { top: 50px; }
   .two-col .bottom-band { position: absolute; bottom: 0; left: 0; right: 0; height: 50px; background: var(--malachite); z-index: 0; }
   .two-col .gold-line-2 { bottom: 50px; }
-  .two-col .content-area { padding: 72px 80px 110px; }
+  .two-col .content-area { padding: 72px 80px 70px; }
   .two-col .header { margin-bottom: 28px; }
   .two-col h2 { font-family: var(--font-cn); font-size: 38px; font-weight: 900; color: var(--azurite); }
   .two-col .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; flex: 1; }
@@ -129,7 +132,7 @@
   .data-slide .gold-line-1 { top: 50px; }
   .data-slide .bottom-band { position: absolute; bottom: 0; left: 0; right: 0; height: 50px; background: var(--malachite); z-index: 0; }
   .data-slide .gold-line-2 { bottom: 50px; }
-  .data-slide .content-area { padding: 72px 80px 110px; }
+  .data-slide .content-area { padding: 72px 80px 70px; }
   .data-slide .header { margin-bottom: 28px; }
   .data-slide h2 { font-family: var(--font-cn); font-size: 38px; font-weight: 900; color: var(--azurite); }
   .data-slide .metrics { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; flex: 1; align-content: center; }
@@ -151,6 +154,11 @@
 
   .nav-hint { position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.4); font-family: var(--font-en); font-size: 11px; letter-spacing: 0.2em; z-index: 100; pointer-events: none; }
   .counter { position: absolute; bottom: 16px; right: 24px; color: rgba(255,255,255,0.6); font-family: var(--font-en); font-size: 12px; z-index: 100; }
+  /* Move nav hints above shorter footer bands on content/section/two-col/data slides */
+  .deck:has(.section-slide.active) .nav-hint, .deck:has(.section-slide.active) .counter,
+  .deck:has(.content-slide.active) .nav-hint, .deck:has(.content-slide.active) .counter,
+  .deck:has(.two-col.active) .nav-hint, .deck:has(.two-col.active) .counter,
+  .deck:has(.data-slide.active) .nav-hint, .deck:has(.data-slide.active) .counter { bottom: 64px; color: var(--muted); }
 
     /* CJK readability fixes */
     h1, h2, h3, h4 { line-height: 1.2; }
