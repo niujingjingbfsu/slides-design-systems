@@ -95,6 +95,14 @@ border:
 - **Don't** 不要让赤陶色占据超过画面 5% 的面积。
 - **Don't** 不要使用居中排版（结尾页除外）。
 
+## 实现注意事项
+
+- 字体栈：`'JetBrains Mono', 'Inter', 'Noto Sans SC', monospace`，Mono 用于英文标签和数据，Inter 用于正文，Noto Sans SC 用于中文。
+- 网格背景用 CSS `background-image: linear-gradient(...)` 实现，不要用图片。
+- 橙色强调色 `#D4541E` 只用于关键数字、分隔线和 hover 状态，不要大面积使用。
+- 数据页是 3 列指标，不要放第 4 个指标。
+- 页脚是深色文字在浅色背景上，不需要 bottom-band。
+
 ## 给 Coding Agent 的提示
 
 > 请读取本 DESIGN.md。所有颜色、字体、间距必须使用上述 token，禁止自行发明颜色或圆角。背景必须叠加 32px 栅格线。强调色 `#B85C38` 仅用于线条、方点和小标记。所有卡片和容器使用 1px 实线描边，无阴影无圆角。正文用 Inter 300，标题和标签用 JetBrains Mono 700。

@@ -94,6 +94,15 @@ border:
 - **Don't** 不要使用柔和色或暖色。
 - **Don't** 不要让霓虹色脱离深色背景单独使用。
 
+## 实现注意事项
+
+- 字体栈：`'Orbitron', 'JetBrains Mono', 'Noto Sans SC', sans-serif`。Orbitron 用于英文标题，中文回退 Noto Sans SC 700。
+- **CSS 声明之间不能漏分号**。
+- 深色背景 `#0A0A1A` + 霓虹发光效果（`text-shadow` / `box-shadow` with cyan/magenta）。
+- 网格地平线用 CSS 或 SVG 实现。
+- 霓虹边框卡片不要填充实色背景，用透明/半透明深色。
+- 页脚青色/品红色文字在深色背景上。
+
 ## 给 Coding Agent 的提示
 
 > 请读取本 DESIGN.md。背景固定为深紫到黑的渐变。霓虹粉 #FF2E97 和电光青 #00F0FF 是仅有的两个强调色，所有彩色文字必须带 text-shadow 辉光（至少 0 0 10px 和 0 0 20px 两层）。标题用 Orbitron 700-900，正文标签用 JetBrains Mono 等宽大写。每页底部加 perspective 透视网格。卡片为半透明深紫底+1px霓虹描边+发光阴影，零圆角。封面加条纹太阳和星点。

@@ -97,6 +97,14 @@ border:
 - **Don't** 不要使用渐变或柔和色。
 - **Don't** 不要使用细字体。
 
+## 实现注意事项
+
+- 字体栈：`'Archivo Black', 'Inter', 'Noto Sans SC', sans-serif`。Archivo Black 用于英文标题，中文回退 Noto Sans SC 900。
+- **CSS 声明之间不能漏分号**，特别是 `font-family` 和 `font-size` 之间。
+- 粗黑边框（3-4px solid #000）+ 偏移阴影（`box-shadow: 6px 6px 0 #000`），不要用柔和阴影。
+- 高饱和黄/红/蓝色块，不要渐变。
+- 内容页用 3 列卡片网格，卡片有粗黑边框。
+
 ## 给 Coding Agent 的提示
 
 > 请读取本 DESIGN.md。所有元素必须有 4px 纯黑描边和硬投影（8px 8px 0 #000，零模糊）。零圆角。背景纯白。标题用 Archivo Black 全大写。强调色只用红 #E63946、黄 #FFD93D、蓝 #2563EB。卡片用不同底色撞色。禁止渐变、柔和阴影、细字体。元素可微旋转 1-3 度增加手工感。

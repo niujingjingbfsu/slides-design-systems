@@ -342,6 +342,10 @@ def process_template(template_dir, output_path):
             # Skip page counter spans (e.g. "01 / 07")
             if re.match(r'\d{2}\s*/\s*\d{2}', text):
                 continue
+            # Skip decorative/ornament/cn-label spans
+            span_classes = ' '.join(span.get('class', []))
+            if re.search(r'ornament|deco|dot|icon|sep|line|\bcn\b', span_classes, re.I):
+                continue
             # Skip spans containing a dot indicator
             if span.find('span', class_='dot'):
                 # This is the template name span with a dot - replace its text

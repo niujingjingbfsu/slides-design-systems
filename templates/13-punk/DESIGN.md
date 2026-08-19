@@ -96,6 +96,15 @@ border:
 - **Don't** 不要使用圆角、渐变、阴影。
 - **Don't** 不要让所有元素整齐对齐——错位是核心语言。
 
+## 实现注意事项
+
+- 字体栈：`'Inter', 'JetBrains Mono', 'Noto Sans SC', sans-serif`。
+- **h1 line-height 必须 ≥ 1.15**（当前 1.15），中文两行标题不能贴在一起。
+- **内容页列表必须全宽显示**，不要用 `1fr 2fr` 网格把内容挤到右侧。
+- 红色只用于强调（序号、关键文字），不要大面积红色背景。
+- 水平分隔线是核心视觉元素，用 `<hr>` 或 `border-top`。
+- 页脚深色文字，无 bottom-band。
+
 ## 给 Coding Agent 的提示
 
 > 请读取本 DESIGN.md。只用黑白红三色（红 #E63946）。标题 Inter Black 900 全大写极紧字距，封面 180px。用红色色带/色块切割画面，元素可旋转 15 度、互相遮挡。竖排文字用 writing-mode: vertical-rl。列表用 3px 黑线分隔，不用卡片。金句用红色横带+mix-blend-mode:difference 反色。禁止圆角、渐变、阴影、第四色。网格要被打破。

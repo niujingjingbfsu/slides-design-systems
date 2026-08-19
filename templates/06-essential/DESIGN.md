@@ -109,6 +109,14 @@ border:
 - **Don't** 不要使用卡片或色块容器。
 - **Don't** 不要让深蓝色面积超过画面 1%。
 
+## 实现注意事项
+
+- 字体栈：`'Cormorant Garamond', 'Noto Serif SC', Georgia, serif`。
+- **列表序号列宽必须 ≥ 90px**（如 `grid-template-columns: 90px 1fr`），否则 "LEVEL 1" 会断行成 "LEV EL 1"。序号加 `white-space: nowrap`。
+- 极致留白是核心设计，内容只占左侧约 60% 宽度，右侧留白是故意的。
+- 细线分隔（1px #E5E5E5），不要用粗线或色块。
+- 页脚极简，小号大写字母，深色文字。
+
 ## 给 Coding Agent 的提示
 
 > 请读取本 DESIGN.md。背景纯白，文字近黑，唯一强调色是深蓝 `#1A3A5C` 且只用于 7-10px 小方块和个别文字。所有标题用 Cormorant Garamond 300（极细），强调用 italic 300，绝对不要用 bold。正文和标签用 Inter 300，标签大写+0.2em字距。无圆角无阴影无卡片。每页留白 70% 以上。分隔线只用 1px #CCCCCC。

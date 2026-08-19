@@ -96,6 +96,14 @@ border:
 - **Don't** 不要使用圆角卡片或现代 UI 组件。
 - **Don't** 不要把画面填满，克制是第一原则。
 
+## 实现注意事项
+
+- 已有完整 CJK 字体栈（Noto Serif SC + Noto Sans SC），不需要额外添加。
+-  en 字体是 Cormorant Garamond，中文用 Noto Serif SC，风格协调。
+- 大量留白是设计核心，不要用卡片或色块填充空间。
+- 装饰元素（圆、线、留白）用 SVG 实现，不要用 emoji 或图片。
+- 页脚文字深色，无 bottom-band。
+
 ## 给 Coding Agent 的提示
 
 > 请读取本 DESIGN.md。背景固定为 `#F5F2EB`，文字为墨黑，唯一的强调色是朱红 `#B33A2A` 且只用于印章元素。标题用 Noto Serif SC，正文用 Noto Sans SC 300。所有分隔线为 1px 实线，无圆角无阴影。每页留白不少于 60%。印章是 44px 朱红方块带白色汉字。不要添加任何额外颜色或装饰元素。

@@ -97,6 +97,17 @@ border:
 - **Don't** 不要使用圆角、渐变、阴影。
 - **Don't** 不要让石青和石绿直接相邻——中间必须有绢白留白。
 
+## 实现注意事项
+
+- 字体栈：`'Noto Serif SC', 'Cormorant Garamond', Georgia, serif`。
+- **每一种 slide type 都必须有对应的 `.bottom-band` CSS 规则**（position + background + height）。HTML 里有 div 不等于 CSS 里有样式。
+- **页脚高度必须按版式匹配**：封面/结尾 100px，章节 60px，内容/双栏/数据/金句 50px。
+- **nav-hint/counter 在短页脚版式上必须上移**到 `bottom: 64px`。
+- 泥金色是 `#C9A227`（不是 `#C4A35A`），只做线不做面。
+- 石青 `#2E5A88`、石绿 `#4A8B6F`、绢白 `#F5F0E6`。
+- 山形只用 SVG polygon 几何三角形 + 泥金描边，不画皴法。
+- 新增 slide type 时必须同时定义：bottom-band、footer 高度、content-area padding、nav-hint 位置。
+
 ## 给 Coding Agent 的提示
 
 > 请读取本 DESIGN.md。背景为暖绢白 #F5F0E6。页面由石青 #2E5A88（上）和石绿 #4A8B6F（下）水平色带分割，泥金 #C9A227 1px 细线分隔。底部放 2-3 个极简 SVG 三角形山形（石青/石绿填充+泥金描边）。中文标题 Noto Serif SC 900 大字距，英文 Cormorant Garamond 大写金色。卡片半透明白底+泥金顶部边框，零圆角。禁止画真实山水、渐变、圆角、阴影。

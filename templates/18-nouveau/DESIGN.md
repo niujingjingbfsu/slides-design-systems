@@ -97,6 +97,15 @@ Art Nouveau 的优雅与有机感。双层金线框包裹版面，四角有程�
 - **Don't** 不要让装饰压过内容——角花和纹章是框架不是主体。
 - **Don't** 不要使用圆角、阴影、渐变。
 
+## 实现注意事项
+
+- 字体栈：`'Playfair Display', 'Cormorant Garamond', 'Noto Serif SC', Georgia, serif`。
+- **CSS 声明之间不能漏分号**。
+- 新艺术运动装饰边框用 SVG path（对称曲线、植物藤蔓），必须 `pointer-events: none`。
+- 暖米色背景 `#F0E6D3`，墨绿 `#2D4A3E` + 金色 `#B8860B`。
+- 装饰边框不能遮挡内容，内容区需要足够 padding。
+- 页脚深色文字，无 bottom-band。
+
 ## 给 Coding Agent 的提示
 
 > 请读取本 DESIGN.md。背景暖象牙 #F0E6D3。每页有双层金色线框（2px+0.5px #B8944F）和四角金色植物角花 SVG。封面有金色同心圆纹章。标题 Playfair Display 700 深森林绿 #2D4A3E，正文 Cormorant Garamond。卡片奶油白 #FAF5EA + 金色边框。暗紫 #7D5A6E 做小面积点缀。装饰用有机曲线，禁止几何直角、圆角、阴影。

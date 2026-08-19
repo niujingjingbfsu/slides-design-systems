@@ -14,6 +14,7 @@ Create zero-dependency HTML presentations using one of 20 hand-crafted design sy
 3. **20 Design Systems, Not 20 Themes** — Each system has its own typography, palette, decorative vocabulary, and component grammar. Mixing systems breaks the design; stay inside one.
 4. **Fixed 16:9 Stage** — Every deck uses a 1280×720 slide canvas scaled as a whole to the viewport via `transform: scale()`. Slides stay 16:9 on every screen; content never reflows.
 5. **Design Tokens Are Law** — Each system's `DESIGN.md` contains YAML front-matter tokens (colors, fonts, spacing, radius, shadow, border). Read them and obey them. Do not invent colors, fonts, or radii.
+6. **Implementation Rules Are Mandatory** — Read `AGENT_GUIDE.md` before generating any deck. It contains CSS syntax rules, footer/band invariants, CJK typography rules, content length limits, and a verification checklist — all derived from real bugs. Each template's `DESIGN.md` also has a "实现注意事项" section with template-specific gotchas. Skip them and the deck will break.
 
 ## The 20 Design Systems
 
@@ -91,9 +92,10 @@ Save previews to `.slides-previews/` and open them for the user. Present the thr
 
 Once the user picks a system:
 
-1. **Re-read that system's `templates/<slug>/DESIGN.md`** in full. Treat it as the design recipe.
-2. **Read `templates/<slug>/example.html`** for the implementation reference (CSS variable structure, component patterns, decorative SVG).
-3. Generate the complete presentation as a **single self-contained HTML file**:
+1. **Read `AGENT_GUIDE.md`** in full. It contains mandatory CSS, layout, typography, and verification rules.
+2. **Re-read that system's `templates/<slug>/DESIGN.md`** in full, including the "实现注意事项" section. Treat it as the design recipe.
+3. **Read `templates/<slug>/example.html`** for the implementation reference (CSS variable structure, component patterns, decorative SVG).
+4. Generate the complete presentation as a **single self-contained HTML file**:
    - All CSS inline in `<style>`, all JS inline in `<script>`.
    - Fonts via Google Fonts CDN with `<link rel="preconnect">`.
    - Define all design tokens as `:root` CSS variables copied from DESIGN.md.
@@ -101,9 +103,9 @@ Once the user picks a system:
    - Add more layouts as needed, always using the same token system.
    - Every section gets a clear `/* === SECTION NAME === */` comment.
    - Navigation JS: arrow keys / Space / Home / End.
-4. **Preserve the system's visual identity**: its fonts, palette, decorative vocabulary (borders, frames, circles, blobs, halos, etc.), spacing rhythm, and component grammar. Do not import patterns from other systems.
-5. **Adapt content density** to the user's choice: low-density = one idea per slide, large type, generous space; high-density = structured grids, more self-contained detail.
-6. After generating, verify: no text overflow, no overlapping panels, all decorative elements render, fonts load.
+5. **Preserve the system's visual identity**: its fonts, palette, decorative vocabulary (borders, frames, circles, blobs, halos, etc.), spacing rhythm, and component grammar. Do not import patterns from other systems.
+6. **Adapt content density** to the user's choice: low-density = one idea per slide, large type, generous space; high-density = structured grids, more self-contained detail.
+7. After generating, run the **Verification Checklist** in `AGENT_GUIDE.md` §7 — screenshot EVERY slide type and check for overflow, overlap, footer contrast, and CJK font rendering.
 
 ### Phase 4: Delivery
 
@@ -136,6 +138,7 @@ Do NOT produce generic AI-presentation aesthetics:
 ```
 slides-design-systems/
 ├── SKILL.md                          # This file
+├── AGENT_GUIDE.md                    # MANDATORY implementation rules & verification checklist
 ├── DESIGN_SYSTEMS.md                  # All 20 systems in one reference document
 ├── README.md
 ├── LICENSE
@@ -143,7 +146,7 @@ slides-design-systems/
     ├── index.json                     # Compact metadata for all 20 systems
     ├── 01-systems/
     │   ├── example.html               # Working demo deck (7 layouts)
-    │   ├── DESIGN.md                  # Design tokens + rules + agent prompt
+    │   ├── DESIGN.md                  # Design tokens + rules + 实现注意事项 + agent prompt
     │   └── preview.png                # Screenshot of the cover slide
     ├── 02-sei/
     │   ├── example.html
@@ -156,5 +159,5 @@ slides-design-systems/
 
 1. Read this `SKILL.md` once.
 2. In Phase 2, read only the `DESIGN.md` files of the 3 candidate systems.
-3. In Phase 3, read the chosen system's `DESIGN.md` + `example.html` in full.
+3. In Phase 3, **read `AGENT_GUIDE.md` first**, then the chosen system's `DESIGN.md` (especially "实现注意事项") + `example.html` in full.
 4. Do not read all 20 DESIGN.md files at once — it wastes context. Read on demand.

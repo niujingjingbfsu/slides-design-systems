@@ -100,6 +100,15 @@ border:
 - **Don't** 不要使用圆角、box-shadow。
 - **Don't** 不要让金色变成土黄色——必须有明暗渐变。
 
+## 实现注意事项
+
+- 字体栈：`'Noto Serif SC', 'Cormorant Garamond', Georgia, serif`。
+- **nav-hint/counter 必须在 `bottom: 40px`**，不能在 `bottom: 8px`——底部 32px 是装饰波浪纹边框区域，页脚文字在其中，nav-hint 必须在边框上方。
+- 铁线描用 SVG path，1.5-2px 线宽，朱红 `#B85C38` + 泥金 `#D4A843`。
+- 圆光（同心圆）用 SVG circle，泥金细线，低透明度。
+- 暖绢底色 `#F2E8D5`，不要用纯白。
+- 页脚朱红/泥金文字在装饰边框内。
+
 ## 给 Coding Agent 的提示
 
 > 请读取本 DESIGN.md。背景暖米色 #F0E4D0 带极淡颗粒。每页有 SVG 贝塞尔铁线曲线（土红低透明粗线 + 泥金渐变细线叠加）和泥金同心圆光环（金属渐变描边，2-4层）。上下有 32px 忍冬纹弧形圆点装饰带。中文标题 Noto Serif SC 900 土红色，英文 Cormorant Garamond 大写泥金色。金色必须用 linear-gradient(#E8C868→#9A7B1A) 模拟金属感。卡片半透明白底+双层泥金描边。禁止画宗教人物、圆角、阴影。

@@ -105,6 +105,14 @@ glass:
 - **Don't** 不要使用 0px 圆角或硬边框。
 - **Don't** 不要让光球遮挡内容（z-index 始终在内容下方）。
 
+## 实现注意事项
+
+- **必须**确保 `.slide` 有 `transform: translate(-50%, -50%)`，否则内容会跑到右下角。
+- 字体栈：`'Sora', 'Noto Sans SC', sans-serif`。
+- 渐变背景 + 毛玻璃卡片（`backdrop-filter: blur()`），不要用实色卡片。
+- 装饰性浮动形状必须 `pointer-events: none`。
+- 整体色调是粉紫蓝梦幻渐变，不要引入暖色。
+
 ## 给 Coding Agent 的提示
 
 > 请读取本 DESIGN.md。背景必须是白到淡蓝紫的 135deg 渐变。所有卡片使用 `rgba(255,255,255,0.45)` + `backdrop-filter: blur(20px)` 磨砂玻璃效果，24px 圆角，1px 白色半透明描边。背景层放 2-3 个 blur(40px) 的彩色光球（薰衣草紫/天蓝/粉紫）。字体用 Sora。深靛蓝 `#1E2A5E` 用于文字和实心卡片。禁止不透明卡片和硬边。

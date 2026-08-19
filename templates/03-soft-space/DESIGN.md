@@ -98,6 +98,14 @@ shadow:
 - **Don't** 不要使用冷色系颜色。
 - **Don't** 不要使用深色背景（除了单张反转卡片）。
 
+## 实现注意事项
+
+- **必须**确保 `.slide` 有 `transform: translate(-50%, -50%)`，否则内容会跑到右下角。
+- 字体栈：`'Plus Jakarta Sans', 'Noto Sans SC', sans-serif`。
+- 柔和渐变背景 + 大圆角卡片，卡片有轻微阴影。
+- 装饰性圆形 blob 必须 `pointer-events: none` 且 z-index 低于内容。
+- 整体色调温暖，不要引入冷色。
+
 ## 给 Coding Agent 的提示
 
 > 请读取本 DESIGN.md。背景为奶油色 `#FAF6EF`，所有卡片为白色 20px 圆角配双层柔和阴影。主色是灰粉 `#E8D5D0` 和赭石 `#D4A574`。字体全程 Plus Jakarta Sans。所有按钮和标签使用 100px 胶囊圆角。背景层可加低透明度彩色圆斑装饰。禁止使用冷色、硬边和高饱和色。

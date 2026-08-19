@@ -101,6 +101,15 @@ border:
 - **Don't** 不要引入第二色相（红色印章也不行——保持单色纯粹）。
 - **Don't** 不要使用圆角（圆形除外）、渐变背景、阴影。
 
+## 实现注意事项
+
+- 字体栈：`'Noto Serif SC', 'Cormorant Garamond', Georgia, serif`。
+- 页脚在 `bottom: 32px; height: 32px`，nav-hint 在 `bottom: 4px`（在底部青花波浪装饰边框内，故意低对比度）。
+- 钴蓝色 `#1B4B8A`，白底，青花波浪纹在底部。
+- 同心圆装饰用 SVG circle，钴蓝细线。
+- 卡片有 1px 钴蓝边框，无填充或极浅蓝填充。
+- 不要引入其他颜色。
+
 ## 给 Coding Agent 的提示
 
 > 请读取本 DESIGN.md。背景纯白。只用钴蓝 #1B4B8A 一个色相，配合 #4A7FB5/#8AB0D5/#C5D9EC/#E8F0F8 四个淡色阶。每页有 SVG 同心圆，由内向外颜色渐淡、线宽递减。底部 32px 钴蓝色带配白色三层叠浪弧线（海水纹，data URI SVG），顶部 4px 钴蓝线。中文标题 Noto Serif SC 900，英文 Josefin Sans 大写。卡片白底+双层钴蓝边框，零圆角。禁止第二色相、具象纹样、渐变背景。

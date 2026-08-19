@@ -95,6 +95,15 @@ border:
 - **Don't** 不要使用细字体。
 - **Don't** 不要让黄色只做小面积点缀——它是主角。
 
+## 实现注意事项
+
+- 字体栈：`'Anton', 'Inter', 'Noto Sans SC', sans-serif`。Anton 用于英文大标题，中文回退 Noto Sans SC 900。
+- **CSS 声明之间不能漏分号**，特别是 `var()` 后。
+- 高饱和黄/红/蓝/白四色，粗黑边框，波普圆点装饰。
+- 圆点图案用 CSS `radial-gradient` 实现。
+- 卡片颜色交替使用，不要全部同色。
+- 页脚深色文字在黄色背景上。
+
 ## 给 Coding Agent 的提示
 
 > 请读取本 DESIGN.md。背景固定为亮黄色 #FFE500。所有形状带 4px 纯黑描边。标题用 Anton 全大写，可用白色填充+黑色 stroke 做空心字。四角加红色 Ben-Day 半调网点（radial-gradient 圆点 + mask 淡出）。金句用白色对话气泡（圆角+黑描边+红色硬投影+尖角）。强调色为红 #E63946 和蓝 #1D4E89。爆炸星用 clip-path 多边形。禁止渐变和柔和色。
