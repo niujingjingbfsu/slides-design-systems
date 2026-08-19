@@ -498,3 +498,60 @@ A progress bar that meets all functional specs can still be ugly. These rules pr
 - [ ] Page number and section label are legible
 
 **Reference:** Each template's `DESIGN.md` has a `progress_bar:` section with exact tokens. Read it first. If implementing a new template, write the `progress_bar:` spec BEFORE writing CSS — design it as part of the system, not as an afterthought.
+
+## 10. Aesthetic Quality (avoid ugly, don't enforce rigid)
+
+These are NOT pixel-perfect rules. They are things to LOOK AT and JUDGE after filling content. If something looks off, fix it. The goal is to avoid common aesthetic failures, not to enforce a uniform grid.
+
+### 10.1 Visual self-check (look at every screenshot)
+
+After generating a deck, screenshot EVERY page and ask these questions:
+
+**Typography:**
+- Does the title have enough breathing room? (Lines of Chinese text should never touch each other.)
+- Is the body text readable? (Line height should feel generous, not cramped.)
+- Do Chinese and English fonts look like they belong together? (Sharp Chinese + rounded English = jarring. Match the visual weight.)
+- Is there a clear hierarchy? (Title > subtitle > body > caption — you should be able to tell at a glance what's most important.)
+
+**Spacing:**
+- Is there enough space between text and the edges of cards/blocks? (Text touching a border or color block always looks bad.)
+- Is the whitespace intentional? (Empty space on one side of the slide is fine if it's a deliberate layout choice. It's bad if content just didn't fill the space.)
+- Do related elements sit close together, and unrelated elements have more space? (Proximity = grouping.)
+
+**Balance:**
+- Does the page feel weighted to one side for no reason? (Asymmetry is fine if it's intentional. A list that only fills 40% of the width with empty space on the right is not.)
+- Do cards/columns have similar visual weight? (One giant card next to a tiny one looks unbalanced unless it's a deliberate focal point.)
+- Is the content vertically centered or top-aligned consistently? (Don't mix alignment within the same page type.)
+
+**Color and decoration:**
+- Do decorative elements enhance or distract? (A shape overlapping text = distract. A shape in a corner = enhance.)
+- Is the accent color used sparingly? (Accent on everything = accent on nothing.)
+- Does the progress bar feel like part of the design? (If it looks like it was pasted on at the end, redesign it.)
+
+**Consistency across pages:**
+- When flipping between pages, does the content area "jump"? (Cover/closing can be special. All middle pages should have consistent frame and content start position.)
+- Do cards look the same across pages? (Same padding, same border radius, same shadow.)
+- Does the same type of element (label, metric, tag) look the same everywhere?
+
+### 10.2 Minimum spacing principles (soft, not rigid)
+
+These are guidelines, not hard rules. Use judgment.
+
+- **Text inside a card**: at least the font size of the body text as padding (e.g., 14px text → ≥16px padding).
+- **Title to next element**: at least 1.5× the title's line height.
+- **Section label to title**: small gap (8-12px). Title to body: larger gap (24-36px).
+- **Card to card**: at least the card's internal padding.
+- **Content to progress bar / footer**: at least 24px clear space.
+- **Chinese headings**: line-height ≥ 1.2 (never below 1.1). English display headings can go tighter (0.9-1.0), but Chinese cannot.
+
+If content is longer than expected, let the layout adapt (reduce font size slightly, increase card height) rather than cramming. Never let text touch a border.
+
+### 10.3 When in doubt, simplify
+
+If a page feels "off" but you can't pinpoint why:
+1. Remove one decorative element.
+2. Increase the largest gap by 8px.
+3. Reduce the number of colors by one.
+4. Make the title slightly smaller.
+
+Most "ugly" slides have too much going on, not too little.
