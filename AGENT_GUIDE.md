@@ -555,3 +555,43 @@ If a page feels "off" but you can't pinpoint why:
 4. Make the title slightly smaller.
 
 Most "ugly" slides have too much going on, not too little.
+
+### 10.4 The Five Don'ts (read before writing any HTML)
+
+These are the most common aesthetic failures. Check every page against these.
+
+**① 不乱 — No visual chaos**
+- One alignment per page. If the title is left-aligned, don't center the body. If the page is centered, don't left-align a card.
+- Spacing follows a rhythm. Gaps should be multiples of a base unit (8px or 12px). Random gaps (13px, 27px, 41px) feel chaotic.
+- No more than 3 font sizes on a page. Title, body, caption — that's enough. If you need a 4th, you're probably over-designing.
+- Grid lines should be invisible but felt. Elements should line up with each other even if there's no visible grid.
+
+**② 不花 — No visual noise**
+- Max 3 colors per page (background + text + accent). A 4th color needs a reason.
+- Max 2 font families per page. Decorative display font + body font. A 3rd font is almost always unnecessary.
+- Pick ONE effect style. If you use shadows, don't also use gradients AND borders AND glows. One effect per page.
+- Decorative elements: 2-5 per page is enough. More than that and they compete with content.
+- No rainbow text, no gradient text on busy backgrounds, no neon colors unless the template is neon-themed.
+
+**③ 不杂 — No inconsistency**
+- Same component = same style everywhere. If card A has 24px padding and 8px radius, card B on the next page should too.
+- Same level = same treatment. All h2s look the same. All labels look the same. All metrics look the same.
+- Don't mix icon styles (line icons + filled icons on the same page).
+- Don't mix border radii (a 4px card next to a 24px card looks like two different designs).
+- If a template uses serif headings, don't switch to sans-serif headings on one page.
+
+**④ 不丑 — No ugly elements**
+- Text must never touch a border, a color block edge, or another text element. Minimum clear space = the font size of that text.
+- No orphaned single characters (a Chinese title where one character drops to its own line). Adjust font size or width.
+- No stretched/squashed images. Keep aspect ratios.
+- No low-contrast text. If you can't read it at a glance, it's too low contrast.
+- No lorem ipsum or placeholder text left in. Every word should be real content.
+- No broken icons, missing images, or default browser styling (blue underlined links, etc.).
+
+**⑤ 不空 — No empty pages**
+- Content should occupy at least 50% of the content area. If it's less, either enlarge the content, add a relevant visual (quote, metric, illustration), or split into two pages.
+- Whitespace is good — but it should be deliberate. A title in the top-left corner with 70% empty space below is not "minimalist", it's unfinished.
+- If a page has only a title and one line of text, it probably needs either more content or to be merged with another page.
+- Data pages with only 1 metric look sparse. Use at least 2-3, or make the single metric very large and prominent.
+
+**Quick test:** After finishing a page, squint at it (or zoom out to 50%). If you can't tell what's the most important element, or if your eye bounces around with no clear path, the page needs simplification.
