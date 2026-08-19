@@ -10,7 +10,11 @@ color:
   azurite: "#2E5A88"
   malachite: "#4A8B6F"
   gold: "#DAA520"
+  gold_deep: "#B8860B"
+  gold_bright: "#FFD700"
   gold_light: "rgba(218,165,32,0.3)"
+  gold_shimmer: "linear-gradient(90deg, #8B6914, #B8860B, #DAA520, #FFD700, #DAA520, #B8860B, #8B6914)"
+  gold_ink: "linear-gradient(180deg, #FFF0A0, #FFD700, #DAA520, #B8860B, #DAA520)"
   muted: "#6B6352"
 
 typography:
@@ -44,7 +48,7 @@ shadow:
   none: true
 
 border:
-  width: "1-2px"
+  width: "2-3px"
   style: "solid"
   color: "#DAA520"
 
@@ -71,7 +75,7 @@ progress_bar:
     section_gap: "24px"
     future: "light fill; w=36px, h=4px"
     past: "medium fill"
-    current: "var(--gold) fill; h=5px; shadow: 0 0 6px rgba(218,165,32,0.5)"
+    current: "gold-shimmer gradient fill; h=6px; shadow: 0 0 8px rgba(255,215,0,0.6), 0 0 16px rgba(218,165,32,0.3)"
 
 ---
 
@@ -86,7 +90,7 @@ progress_bar:
 - **背景**：暖绢白 `#F5F0E6`，不是纯白，带绢本质感。
 - **石青** `#2E5A88`：上方色带、主标题、关键文字——最远最高的颜色。
 - **石绿** `#4A8B6F`：下方色带，托住全局——最近最沉的颜色。
-- **泥金** `#DAA520`：只做线，不做面——分隔线、山形轮廓、装饰圆环。
+- **泥金** `#DAA520`（深 `#B8860B` / 亮 `#FFD700`）：金属渐变文字（gold-ink）+ 金属光泽金线（gold-shimmer），只做线和字，不做面。
 - **禁止**：渐变色、高饱和色、冷灰、大面积金色块。
 
 ## 字体规则
@@ -108,10 +112,11 @@ progress_bar:
 ## 组件模式
 
 - **色带**：绝对定位的 `position: absolute; left:0; right:0;` 矩形，石青或石绿填充，高度 50-100px。
-- **金线**：`height: 1.5px; background: linear-gradient(90deg, transparent, #B8860B, #DAA520, #FFD700, #DAA520, #B8860B, transparent);`，金属光泽渐变，位于色带边缘。
+- **金线**：`height: 2px; background: gold-shimmer (linear-gradient 90deg, #8B6914 → #B8860B → #DAA520 → #FFD700 → #DAA520 → #B8860B → #8B6914);`，金属光泽渐变，位于色带边缘。
+- **金色文字**：`background: gold-ink (linear-gradient 180deg, #FFF0A0 → #FFD700 → #DAA520 → #B8860B → #DAA520); -webkit-background-clip: text; -webkit-text-fill-color: transparent;`，所有金色文字（标签、编号、英文副标题、页码）均用金属渐变，不用纯色。
 - **山形**：SVG `<polygon>`，如 `points="680,200 820,40 960,200"`，石青填充 + 泥金描边。
 - **同心圆**：SVG `<circle>` 多层，`fill: none; stroke: #DAA520`，1-2px 线宽。
-- **卡片**：半透明白底 `rgba(255,255,255,0.4)` + 2px 泥金 `border-top`，无圆角。
+- **卡片**：半透明白底 `rgba(255,255,255,0.4)` + 3px 泥金 `border-top`，无圆角。
 - **双栏**：一栏石青底白字，一栏半透明白底深字。
 
 ## Do / Don't
@@ -136,4 +141,4 @@ progress_bar:
 
 ## 给 Coding Agent 的提示
 
-> 请读取本 DESIGN.md。背景为暖绢白 #F5F0E6。页面由石青 #2E5A88（上）和石绿 #4A8B6F（下）水平色带分割，泥金 #DAA520 1px 细线分隔。底部放 2-3 个极简 SVG 三角形山形（石青/石绿填充+泥金描边）。中文标题 Noto Serif SC 900 大字距，英文 Cormorant Garamond 大写金色。卡片半透明白底+泥金顶部边框，零圆角。禁止画真实山水、渐变、圆角、阴影。
+> 请读取本 DESIGN.md。背景为暖绢白 #F5F0E6。页面由石青 #2E5A88（上）和石绿 #4A8B6F（下）水平色带分割，泥金 #DAA520 2px 金属光泽渐变线（gold-shimmer）分隔。底部放 2-3 个极简 SVG 三角形山形（石青/石绿填充+泥金描边）。中文标题 Noto Serif SC 900 大字距，英文 Cormorant Garamond 大写金色金属渐变文字（gold-ink，不用纯色）。所有金色文字（标签、编号、页码）均用 gold-ink 金属渐变。卡片半透明白底+3px 泥金顶部边框，零圆角。禁止画真实山水、渐变（除金色金属渐变外）、圆角、阴影。
