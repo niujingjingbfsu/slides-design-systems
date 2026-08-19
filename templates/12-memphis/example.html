@@ -157,39 +157,38 @@
     position: absolute; bottom: 0; left: 0; right: 0;
     height: 56px; display: flex; align-items: center; justify-content: space-between;
     padding: 0 60px; z-index: 50;
-    background: var(--cream, #F5EFE0);
-    border-top: 3px solid var(--black, #222);
+    background: transparent;
+    border-top: none;
   }
   .progress-bar .pb-section {
     font-family: var(--font-sans); font-size: 12px; font-weight: 700;
     letter-spacing: 0.25em; text-transform: uppercase;
-    color: rgba(0,0,0,0.6); min-width: 180px;
+    color: rgba(0,0,0,0.5); min-width: 180px;
   }
   .progress-bar .pb-page {
     font-family: var(--font-sans); font-size: 16px; font-weight: 700;
     letter-spacing: 0.1em; color: var(--pink, #FF6B9D);
   }
   .progress-strip {
-    position: absolute; top: -8px; left: 50%; transform: translateX(-50%);
-    display: flex; align-items: center; height: 14px;
+    position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+    display: flex; align-items: center; height: 20px;
   }
   .progress-strip .seg {
-    width: 36px; height: 8px; border-radius: 0;
-    background: rgba(0,0,0,0.12);
-    border: 2px solid rgba(0,0,0,0.2);
-    margin: 0 4px; transition: all 0.25s;
-    
+    width: 38px; height: 12px; border-radius: 0;
+    background: #fff;
+    border: 2px solid var(--black, #222);
+    margin: 0 5px; transition: all 0.25s;
   }
   .progress-strip .seg.past {
-    background: rgba(0,0,0,0.4);
-    border-color: rgba(0,0,0,0.4);
+    background: var(--black, #222);
+    border-color: var(--black, #222);
   }
   .progress-strip .seg.current {
     background: var(--pink, #FF6B9D);
-    border-color: var(--pink, #FF6B9D);
-    
+    border-color: var(--black, #222);
+    height: 18px;
   }
-  .progress-strip .seg.seg-gap { margin-left: 22px; }
+  .progress-strip .seg.seg-gap { margin-left: 24px; }
   .nav-hint { display: none !important; }
 </style>
 </head>
