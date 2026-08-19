@@ -104,6 +104,15 @@ glass:
 - 渐变色是橙→粉→紫，不要引入其他色相。
 - 大圆角（20-24px），不要直角。
 
+## 常见陷阱与规避
+- **Footer 必须贴底**：`.footer` 用 `margin-top: auto` 贴在幻灯片底部，不要用固定 `margin-top: 24px`（会导致 footer 跟着内容走）。同时加 `align-self: stretch` 确保在 `align-items: center` 的 section/closing 页也能撑满全宽。
+- **z-index 层级规则用 `:where()`**：`.slide > *:not(:where(.blob)):not(:where(.footer))` 中的 `:where()` 优先级为 0，不会覆盖 `.float-card` 等装饰元素的 `position: absolute`。如果写成 `:not(.blob)` 不带 `:where()`，优先级 (0,3,0) 会盖过 `.title-slide .float-card` 的 (0,2,0)，导致绝对定位失效、元素被推到幻灯片外产生裁切阴影。
+- **玻璃卡上的文字可读性**：`--muted: rgba(255,255,255,0.7)` 只适合短标签和单行描述。玻璃卡内的正文、列表项、多行文字应使用 ≥0.88 的白色不透明度，否则在亮渐变上难以辨认。
+- **中英文混排对齐**：多列 meta 信息（如 VERSION/TEAM/AUTHOR）的 flex 容器必须设 `align-items: flex-start`，标签和值都要显式设 `line-height`（标签 `line-height: 1`，值 `line-height: 1.2-1.3`），否则 Sora（Latin）与 Noto Sans SC（CJK）字体度量差异会导致基线错位。
+- **Footer 基线对齐**：`.footer` 设 `line-height: 1`，避免符号（◆ ■ 等）与文字在不同字体下基线不齐。
+- **Grid 子项默认拉伸**：grid 布局中的卡片默认 `align-self: stretch` 会拉伸到行高。如果卡片只应包裹内容并垂直居中，显式设 `align-self: center`。
+- **不要重复页码**：页码只在 `.footer` 内出现一次，不要额外加全局 `.counter` div，否则在 16:9 全屏时两个页码会重叠。
+
 ## 给 Coding Agent 的提示
 
 > 请读取本 DESIGN.md。背景必须是 linear-gradient(135deg, #FF6B35, #FF3D7F, #7B2FF7) 高饱和渐变。加 2-3 个 blur(60px) 的半透明大圆形做 mesh 效果。所有文字白色，标题 Sora 800-900 全大写紧字距。卡片用磨砂玻璃 rgba(255,255,255,0.12)+blur(16px)+20px 圆角+白色半透明描边。双栏中一张可用纯白底紫字做对比。禁止深色文字和纯色背景。

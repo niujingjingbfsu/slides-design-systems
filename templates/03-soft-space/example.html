@@ -57,7 +57,7 @@
     z-index: 0;
   }
 
-  .footer {
+  .footer { align-self: stretch; line-height: 1;
     margin-top: auto;
     display: flex;
     justify-content: space-between;
@@ -337,16 +337,7 @@
     z-index: 100;
     pointer-events: none;
   }
-  .counter {
-    position: absolute;
-    bottom: 16px;
-    right: 24px;
-    color: rgba(255,255,255,0.5);
-    font-family: var(--font); font-size: 12px; font-weight: 600;
-    z-index: 100;
-  }
-
-    /* CJK readability fixes */
+/* CJK readability fixes */
     h1, h2, h3, h4 { line-height: 1.2; }
     .title-slide h1 { line-height: 1.18; }
     .content-slide .header, .two-col .header, .data-slide .header { margin-bottom: 40px; }
@@ -357,24 +348,7 @@
     .content-slide li { padding: 20px 0; }
     .two-col .col { padding: 36px 40px; }
     .data-slide .metric { padding: 32px 28px; }
-    
-
-    /* CJK readability fixes */
-    h1, h2, h3, h4 { line-height: 1.2; }
-    .title-slide h1 { line-height: 1.18; font-weight: 900; }
-    .section-slide h2 { font-weight: 900; }
-    .content-slide h2, .two-col h2, .data-slide h2 { font-weight: 900; }
-    .content-slide .header, .two-col .header, .data-slide .header { margin-bottom: 40px; }
-    .content-slide .body { gap: 32px; }
-    .two-col .cols { gap: 32px; }
-    .data-slide .metrics { gap: 24px; }
-    .content-slide ul { gap: 4px; }
-    .content-slide li { padding: 20px 0; }
-    .two-col .col { padding: 36px 40px; }
-    .data-slide .metric { padding: 32px 28px; }
     .content-slide .card, .two-col .col { margin-bottom: 0; }
-    
-
   /* === Content overflow safeguards === */
   *, *::before, *::after { box-sizing: border-box; }
   .slide > * { min-width: 0; min-height: 0; }
@@ -388,7 +362,7 @@
 
 
   /* Footer spacing fix */
-  .slide > .footer { margin-top: 24px; flex-shrink: 0; }
+  .slide > .footer { margin-top: auto; flex-shrink: 0; }
   .slide > .cards, .slide > .cols, .slide > .metrics, .slide > .body { flex-shrink: 1; min-height: 0; }
 
 </style>
@@ -533,24 +507,21 @@
     <h2>Thank <span class="soft">you</span></h2>
     <p>Questions? Let's talk softly.</p>
     <div class="btn">Get in touch →</div>
-    <div class="footer" style="position:absolute;bottom:64px;left:80px;right:80px;">
+    <div class="footer">
       <span><span class="dot"></span>SOFT SPACE</span>
       <span>07 / 07</span>
     </div>
   </section>
 
   <div class="nav-hint">← → ARROWS TO NAVIGATE</div>
-  <div class="counter" id="counter">01 / 07</div>
 </div>
 <script>
   const slides = document.querySelectorAll('.slide');
   let current = 0;
-  const counter = document.getElementById('counter');
   function show(i) {
     slides[current].classList.remove('active');
     current = (i + slides.length) % slides.length;
     slides[current].classList.add('active');
-    counter.textContent = String(current + 1).padStart(2, '0') + ' / ' + String(slides.length).padStart(2, '0');
   }
   document.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); show(current + 1); }
