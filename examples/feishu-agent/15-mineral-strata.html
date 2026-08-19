@@ -52,7 +52,7 @@
   .footer .cn { font-family: var(--font-cn); font-weight: 700; letter-spacing: 0.15em; }
   /* Footer height matches bottom-band height per slide type */
   .section-slide .footer { height: 60px; }
-  .content-slide .footer, .two-col .footer, .data-slide .footer { height: 50px; }
+  .content-slide .footer, .two-col .footer, .data-slide .footer, .quote-slide .footer { height: 50px; }
 
   .label { font-family: var(--font-en); font-size: 12px; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); font-weight: 600; }
   .label-cn { font-family: var(--font-cn); font-size: 13px; color: var(--azurite); font-weight: 700; letter-spacing: 0.1em; }
@@ -121,7 +121,8 @@
   .two-col .col.b .stat { color: var(--azurite); }
 
   /* Quote */
-  .quote-slide .content-area { justify-content: center; align-items: center; text-align: center; }
+  .quote-slide .bottom-band { position: absolute; bottom: 0; left: 0; right: 0; height: 50px; background: var(--malachite); z-index: 0; }
+  .quote-slide .content-area { padding: 72px 80px 70px; justify-content: center; align-items: center; text-align: center; }
   .quote-slide blockquote { font-family: var(--font-cn); font-size: 44px; font-weight: 700; line-height: 1.6; color: var(--azurite); max-width: 860px; }
   .quote-slide blockquote .gold-text { color: var(--gold); }
   .quote-slide cite { display: block; margin-top: 28px; font-family: var(--font-en); font-size: 13px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted); font-style: normal; }
@@ -158,7 +159,8 @@
   .deck:has(.section-slide.active) .nav-hint, .deck:has(.section-slide.active) .counter,
   .deck:has(.content-slide.active) .nav-hint, .deck:has(.content-slide.active) .counter,
   .deck:has(.two-col.active) .nav-hint, .deck:has(.two-col.active) .counter,
-  .deck:has(.data-slide.active) .nav-hint, .deck:has(.data-slide.active) .counter { bottom: 64px; color: var(--muted); }
+  .deck:has(.data-slide.active) .nav-hint, .deck:has(.data-slide.active) .counter,
+  .deck:has(.quote-slide.active) .nav-hint, .deck:has(.quote-slide.active) .counter { bottom: 64px; color: var(--muted); }
 
     /* CJK readability fixes */
     h1, h2, h3, h4 { line-height: 1.2; }
