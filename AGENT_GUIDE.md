@@ -354,7 +354,8 @@ The structure is universal; the visual form adapts to each template's design lan
   position: absolute; top: -8px; left: 50%; transform: translateX(-50%);
   display: flex; align-items: center;
 }
-.progress-strip .seg { margin: 0 4px; transition: all 0.25s; }
+.progress-strip .seg { margin: 0 4px; transition: all 0.25s; cursor: pointer; }
+.progress-strip .seg:hover { opacity: 0.7; }   /* clickable feedback */
 .progress-strip .seg.seg-gap { margin-left: 4px; }  /* uniform spacing — do NOT use larger gaps for section boundaries, it looks fragmented */
 .slide { padding-bottom: 80px !important; }           /* prevent content overlap */
 ```
@@ -389,6 +390,9 @@ function buildProgress() {
     sections.forEach((section, i) => {
       const seg = document.createElement('div');
       seg.className = 'seg';
+      seg.dataset.index = i;
+      // MANDATORY: click-to-jump — users must be able to jump directly to any page
+      seg.addEventListener('click', function() { show(parseInt(this.dataset.index)); });
       if (lastSection !== null && section !== lastSection) seg.classList.add('seg-gap');
       strip.appendChild(seg);
       lastSection = section;
@@ -439,6 +443,7 @@ updateUI(current);
 - Do NOT forget `padding-bottom` on `.slide` — content will overlap the progress bar
 - Do NOT keep old `.footer` elements alongside `.progress-bar` — duplicate info
 - Do NOT hide nav-hint outside the slide boundary — use `display: none` if not needed
+- Do NOT forget click-to-jump on progress segments — users must be able to click any segment to jump directly to that page (add `seg.addEventListener('click', ...)` + `cursor: pointer`). Without it, jumping from page 1 to page 15 requires 14 arrow presses.
 
 ### 9.7 Templates with decorative bottom elements
 

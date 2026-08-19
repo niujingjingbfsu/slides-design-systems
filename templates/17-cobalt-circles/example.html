@@ -192,7 +192,11 @@
     background: transparent;
     border: 2px solid rgba(30,80,160,0.25);
     margin: 0 5px; transition: all 0.3s;
-  }
+    cursor: pointer;
+  transition: opacity 0.2s;
+}
+  .progress-strip .seg:hover { opacity: 0.7; }
+
   .progress-strip .seg.past {
     background: var(--cobalt, #1E50A0);
     border-color: var(--cobalt, #1E50A0);
@@ -456,6 +460,8 @@
       sections.forEach((section, i) => {
         const seg = document.createElement('div');
         seg.className = 'seg';
+        seg.dataset.index = i;
+        seg.addEventListener('click', function() { show(parseInt(this.dataset.index)); });
         if (lastSection !== null && section !== lastSection) seg.classList.add('seg-gap');
         strip.appendChild(seg);
         lastSection = section;

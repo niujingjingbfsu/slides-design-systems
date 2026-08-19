@@ -193,7 +193,11 @@
     
     margin: 0 4px; transition: all 0.25s;
     
-  }
+    cursor: pointer;
+  transition: opacity 0.2s;
+}
+  .progress-strip .seg:hover { opacity: 0.7; }
+
   .progress-strip .seg.past {
     background: rgba(30,50,100,0.4);
     
@@ -399,6 +403,8 @@
       sections.forEach((section, i) => {
         const seg = document.createElement('div');
         seg.className = 'seg';
+        seg.dataset.index = i;
+        seg.addEventListener('click', function() { show(parseInt(this.dataset.index)); });
         if (lastSection !== null && section !== lastSection) seg.classList.add('seg-gap');
         strip.appendChild(seg);
         lastSection = section;
