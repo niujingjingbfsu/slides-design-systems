@@ -190,14 +190,16 @@
     position: absolute; top: -8px; left: 50%; transform: translateX(-50%);
     display: flex; align-items: center; height: 14px;
   }
+  .progress-strip .seg {
+    width: 28px; height: 2px; border-radius: 0;
+    background: rgba(180,100,60,0.15);
+    margin: 0 4px; transition: all 0.25s;
   }
   .progress-strip .seg.past {
     background: rgba(180,100,60,0.5);
-    
   }
   .progress-strip .seg.current {
     background: var(--red, #B43C2C);
-    
     height: 3px;
   }
   .progress-strip .seg.seg-gap { margin-left: 4px; }
