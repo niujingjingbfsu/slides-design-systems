@@ -44,6 +44,32 @@ border:
   width: "3px"
   style: "solid"
   color: "#000000"
+
+progress_bar:
+  height: "56px"
+  background: "#111"
+  border_top: "none"
+  section_label:
+    font: "var(--font-mono)"
+    size: "12px"
+    weight: "700"
+    color: "rgba(255,255,255,0.6)"
+    letter_spacing: "0.25em"
+  page_number:
+    font: "var(--font-mono)"
+    size: "16px"
+    weight: "700"
+    color: "var(--yellow, #FFD600)"
+    letter_spacing: "0.1em"
+  segments:
+    shape: "line"
+    size: "6px"
+    gap: "5px"
+    section_gap: "22px"
+    future: "faint fill; 1px solid rgba(255,255,255,0.2); w=38px, h=6px"
+    past: "medium fill; rgba(255,255,255,0.5)"
+    current: "var(--yellow, #FFD600) fill; var(--yellow, #FFD600)"
+
 ---
 
 # Punk — Design Specification

@@ -49,6 +49,32 @@ radius:
 shadow:
   card: "0 8px 32px rgba(61, 53, 48, 0.06), 0 2px 8px rgba(61, 53, 48, 0.04)"
   card_lg: "0 20px 60px rgba(61, 53, 48, 0.08), 0 4px 16px rgba(61, 53, 48, 0.05)"
+
+progress_bar:
+  height: "56px"
+  background: "var(--bg)"
+  border_top: "rgba(0,0,0,0.06)"
+  section_label:
+    font: "var(--font-sans)"
+    size: "12px"
+    weight: "700"
+    color: "var(--muted)"
+    letter_spacing: "0.25em"
+  page_number:
+    font: "var(--font-sans)"
+    size: "16px"
+    weight: "700"
+    color: "var(--accent)"
+    letter_spacing: "0.1em"
+  segments:
+    shape: "line"
+    size: "6px"
+    gap: "5px"
+    section_gap: "22px"
+    future: "faint fill; w=40px, h=6px"
+    past: "light fill"
+    current: "var(--accent) fill"
+
 ---
 
 # Soft Space — Design Specification

@@ -47,6 +47,32 @@ border:
   width: "1-2px"
   style: "solid"
   color: "#B8944F"
+
+progress_bar:
+  height: "56px"
+  background: "var(--cream, #F8F4EB)"
+  border_top: "1px solid rgba(140,110,50,0.2)"
+  section_label:
+    font: "var(--font-serif, serif)"
+    size: "12px"
+    weight: "700"
+    color: "var(--muted)"
+    letter_spacing: "0.25em"
+  page_number:
+    font: "var(--font-sans, sans-serif)"
+    size: "16px"
+    weight: "700"
+    color: "var(--gold, #8C6E32)"
+    letter_spacing: "0.1em"
+  segments:
+    shape: "circle"
+    size: "10px"
+    gap: "5px"
+    section_gap: "26px"
+    future: "faint fill; 1px solid rgba(80,60,30,0.2); w=10px, h=10px"
+    past: "medium fill; rgba(140,110,50,0.4)"
+    current: "var(--gold, #8C6E32) fill; var(--gold, #8C6E32); w=14px, h=14px"
+
 ---
 
 # Nouveau（新艺术运动）— Design Specification

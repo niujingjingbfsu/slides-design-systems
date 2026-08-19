@@ -46,6 +46,32 @@ glass:
   background: "rgba(255,255,255,0.12)"
   backdrop_filter: "blur(16px)"
   border: "1px solid rgba(255,255,255,0.2)"
+
+progress_bar:
+  height: "56px"
+  background: "rgba(0,0,0,0.3)"
+  border_top: "1px solid rgba(255,255,255,0.15)"
+  section_label:
+    font: "var(--font-sans)"
+    size: "12px"
+    weight: "700"
+    color: "rgba(255,255,255,0.7)"
+    letter_spacing: "0.25em"
+  page_number:
+    font: "var(--font-sans)"
+    size: "16px"
+    weight: "700"
+    color: "#fff"
+    letter_spacing: "0.1em"
+  segments:
+    shape: "line"
+    size: "6px"
+    gap: "5px"
+    section_gap: "22px"
+    future: "faint fill; w=36px, h=6px"
+    past: "medium fill"
+    current: "#fff fill; shadow: 0 0 10px rgba(255,255,255,0.6)"
+
 ---
 
 # Electric — Design Specification

@@ -55,6 +55,32 @@ border:
   hairline: "1px solid rgba(255, 255, 255, 0.08)"
   gold_dim: "1px solid rgba(201, 169, 110, 0.3)"
   corner_mark: "32px L-shape, rgba(201, 169, 110, 0.3)"
+
+progress_bar:
+  height: "56px"
+  background: "rgba(0,0,0,0.5)"
+  border_top: "rgba(212,175,106,0.2)"
+  section_label:
+    font: "var(--font-sans)"
+    size: "12px"
+    weight: "700"
+    color: "rgba(255,255,255,0.6)"
+    letter_spacing: "0.25em"
+  page_number:
+    font: "var(--font-sans)"
+    size: "16px"
+    weight: "700"
+    color: "var(--gold)"
+    letter_spacing: "0.1em"
+  segments:
+    shape: "square"
+    size: "10px"
+    gap: "5px"
+    section_gap: "26px"
+    future: "faint fill; 1px solid rgba(255,255,255,0.2); w=10px, h=10px"
+    past: "medium fill; rgba(212,175,106,0.5)"
+    current: "var(--gold) fill; var(--gold); shadow: 0 0 8px rgba(212,175,106,0.6)"
+
 ---
 
 # Noir — Design Specification

@@ -57,6 +57,32 @@ shadow:
 border:
   hairline: "1px solid #CCCCCC"
   accent_width: "1px"
+
+progress_bar:
+  height: "56px"
+  background: "transparent"
+  border_top: "var(--faint)"
+  section_label:
+    font: "var(--font-sans)"
+    size: "12px"
+    weight: "700"
+    color: "var(--muted)"
+    letter_spacing: "0.25em"
+  page_number:
+    font: "var(--font-sans)"
+    size: "16px"
+    weight: "700"
+    color: "var(--accent)"
+    letter_spacing: "0.1em"
+  segments:
+    shape: "line"
+    size: "2px"
+    gap: "5px"
+    section_gap: "24px"
+    future: "faint fill; w=40px, h=2px"
+    past: "medium fill"
+    current: "var(--accent) fill; h=3px"
+
 ---
 
 # ESSENTIAL — Design Specification

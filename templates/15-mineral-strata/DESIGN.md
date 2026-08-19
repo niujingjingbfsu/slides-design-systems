@@ -47,6 +47,32 @@ border:
   width: "1-2px"
   style: "solid"
   color: "#C9A227"
+
+progress_bar:
+  height: "50px"
+  background: "transparent"
+  border_top: "none"
+  section_label:
+    font: "var(--font-cn)"
+    size: "12px"
+    weight: "700"
+    color: "rgba(245,240,230,0.75)"
+    letter_spacing: "0.25em"
+  page_number:
+    font: "var(--font-en)"
+    size: "16px"
+    weight: "700"
+    color: "var(--gold)"
+    letter_spacing: "0.1em"
+  segments:
+    shape: "line"
+    size: "4px"
+    gap: "5px"
+    section_gap: "24px"
+    future: "light fill; w=36px, h=4px"
+    past: "medium fill"
+    current: "var(--gold) fill; h=5px; shadow: 0 0 6px rgba(201,162,39,0.5)"
+
 ---
 
 # Mineral Strata（青绿·矿物层叠）— Design Specification

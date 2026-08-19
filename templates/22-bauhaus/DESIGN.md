@@ -42,6 +42,20 @@ border:
   width: "3px"
   style: "solid"
   color: "#111111"
+
+progress_bar:
+  height: "56px"
+  background: "transparent"
+  border_top: "none"
+  segments:
+    shape: "line"
+    size: "6px"
+    gap: "5px"
+    section_gap: "28px"
+    future: "light fill; 1px solid rgba(245,241,232,0.3); w=56px, h=6px"
+    past: "medium fill; rgba(245,241,232,0.7)"
+    current: "var(--yellow) fill; var(--yellow); shadow: 0 0 8px rgba(244,211,94,0.5)"
+
 ---
 
 # Bauhaus — Design Specification

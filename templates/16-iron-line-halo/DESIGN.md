@@ -49,6 +49,32 @@ border:
   width: "1px"
   style: "solid"
   color: "#D4A843"
+
+progress_bar:
+  height: "50px"
+  background: "var(--bg)"
+  border_top: "1px solid rgba(180,100,60,0.2)"
+  section_label:
+    font: "var(--font-cn)"
+    size: "12px"
+    weight: "700"
+    color: "var(--muted)"
+    letter_spacing: "0.25em"
+  page_number:
+    font: "var(--font-cn)"
+    size: "16px"
+    weight: "700"
+    color: "var(--red, #B43C2C)"
+    letter_spacing: "0.1em"
+  segments:
+    shape: "square"
+    size: "9px"
+    gap: "5px"
+    section_gap: "26px"
+    future: "faint fill; 1px solid rgba(80,50,30,0.2); w=9px, h=9px"
+    past: "medium fill; rgba(180,100,60,0.5)"
+    current: "var(--red, #B43C2C) fill; var(--red, #B43C2C)"
+
 ---
 
 # Iron Line & Halo（敦煌·铁线圆光）— Design Specification

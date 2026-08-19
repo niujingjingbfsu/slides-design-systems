@@ -44,6 +44,32 @@ border:
   width: "2px"
   style: "solid"
   color: "#111111"
+
+progress_bar:
+  height: "56px"
+  background: "var(--paper, #F5F0E8)"
+  border_top: "2px solid var(--ink, #222)"
+  section_label:
+    font: "var(--font-sans)"
+    size: "12px"
+    weight: "700"
+    color: "rgba(34,34,34,0.6)"
+    letter_spacing: "0.25em"
+  page_number:
+    font: "var(--font-sans)"
+    size: "16px"
+    weight: "700"
+    color: "var(--red, #E63946)"
+    letter_spacing: "0.1em"
+  segments:
+    shape: "circle"
+    size: "11px"
+    gap: "5px"
+    section_gap: "26px"
+    future: "faint fill; 2px solid rgba(34,34,34,0.2); w=11px, h=11px"
+    past: "medium fill; rgba(34,34,34,0.4)"
+    current: "var(--red, #E63946) fill; var(--red, #E63946); w=15px, h=15px"
+
 ---
 
 # Risograph — Design Specification

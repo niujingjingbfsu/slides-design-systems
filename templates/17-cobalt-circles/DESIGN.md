@@ -49,6 +49,32 @@ border:
   width: "1px"
   style: "solid"
   color: "#8AB0D5"
+
+progress_bar:
+  height: "56px"
+  background: "var(--bg)"
+  border_top: "1px solid rgba(30,80,160,0.15)"
+  section_label:
+    font: "var(--font-cn)"
+    size: "12px"
+    weight: "700"
+    color: "var(--muted)"
+    letter_spacing: "0.25em"
+  page_number:
+    font: "var(--font-cn)"
+    size: "16px"
+    weight: "700"
+    color: "var(--cobalt, #1E50A0)"
+    letter_spacing: "0.1em"
+  segments:
+    shape: "circle"
+    size: "10px"
+    gap: "5px"
+    section_gap: "26px"
+    future: "faint fill; 1px solid rgba(30,80,160,0.2); w=10px, h=10px"
+    past: "medium fill; rgba(30,80,160,0.4)"
+    current: "var(--cobalt, #1E50A0) fill; var(--cobalt, #1E50A0); w=14px, h=14px"
+
 ---
 
 # Cobalt Circles（青花·钴蓝同心圆）— Design Specification

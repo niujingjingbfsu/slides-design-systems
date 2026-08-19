@@ -49,6 +49,32 @@ border:
   style: "solid"
   color: "rgba(26, 26, 26, 0.15)"
   hairline: true
+
+progress_bar:
+  height: "56px"
+  background: "transparent"
+  border_top: "1px solid var(--line)"
+  section_label:
+    font: "var(--font-serif)"
+    size: "12px"
+    weight: "700"
+    color: "var(--muted)"
+    letter_spacing: "0.3em"
+  page_number:
+    font: "var(--font-sans)"
+    size: "13px"
+    weight: "700"
+    color: "var(--muted)"
+    letter_spacing: "0.15em"
+  segments:
+    shape: "circle"
+    size: "10px"
+    gap: "5px"
+    section_gap: "30px"
+    future: "faint fill; w=10px, h=10px"
+    past: "medium fill"
+    current: "var(--accent) fill; w=14px, h=14px"
+
 ---
 
 # 静 (Sei) — Design Specification

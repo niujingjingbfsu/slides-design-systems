@@ -44,6 +44,32 @@ border:
   width: "4px"
   style: "solid"
   color: "#000000"
+
+progress_bar:
+  height: "56px"
+  background: "var(--yellow, #FFE600)"
+  border_top: "3px solid var(--black, #111)"
+  section_label:
+    font: "var(--font-sans)"
+    size: "12px"
+    weight: "700"
+    color: "rgba(0,0,0,0.7)"
+    letter_spacing: "0.25em"
+  page_number:
+    font: "var(--font-sans)"
+    size: "16px"
+    weight: "700"
+    color: "var(--red, #FF3B30)"
+    letter_spacing: "0.1em"
+  segments:
+    shape: "circle"
+    size: "12px"
+    gap: "5px"
+    section_gap: "24px"
+    future: "faint fill; 2px solid rgba(0,0,0,0.3); w=12px, h=12px"
+    past: "medium fill; rgba(0,0,0,0.5)"
+    current: "var(--red, #FF3B30) fill; 3px solid var(--black,#111); w=16px, h=16px"
+
 ---
 
 # Pop! — Design Specification

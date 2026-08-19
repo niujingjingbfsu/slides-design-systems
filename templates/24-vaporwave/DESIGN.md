@@ -44,6 +44,32 @@ border:
   width: "1px"
   style: "solid"
   color: "rgba(255,113,206,0.3)"
+
+progress_bar:
+  height: "56px"
+  background: "rgba(13,5,32,0.85)"
+  border_top: "1px solid rgba(255,113,206,0.3)"
+  section_label:
+    font: "var(--font-display)"
+    size: "12px"
+    weight: "700"
+    color: "rgba(255,255,255,0.6)"
+    letter_spacing: "0.25em"
+  page_number:
+    font: "var(--font-display)"
+    size: "16px"
+    weight: "700"
+    color: "var(--cyan)"
+    letter_spacing: "0.1em"
+  segments:
+    shape: "line"
+    size: "3px"
+    gap: "5px"
+    section_gap: "22px"
+    future: "faint fill; w=34px, h=3px"
+    past: "medium fill"
+    current: "var(--pink) fill; h=4px; shadow: 0 0 10px var(--pink)"
+
 ---
 
 # Vaporwave — Design Specification

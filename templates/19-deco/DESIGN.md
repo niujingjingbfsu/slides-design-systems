@@ -47,6 +47,32 @@ border:
   width: "1-2px"
   style: "solid"
   color: "#C9A961"
+
+progress_bar:
+  height: "56px"
+  background: "rgba(10,15,25,0.8)"
+  border_top: "1px solid rgba(212,175,55,0.3)"
+  section_label:
+    font: "var(--font-sans)"
+    size: "12px"
+    weight: "700"
+    color: "rgba(255,255,255,0.6)"
+    letter_spacing: "0.25em"
+  page_number:
+    font: "var(--font-display)"
+    size: "16px"
+    weight: "700"
+    color: "var(--gold, #D4AF37)"
+    letter_spacing: "0.1em"
+  segments:
+    shape: "square"
+    size: "10px"
+    gap: "5px"
+    section_gap: "26px"
+    future: "faint fill; 1px solid rgba(255,255,255,0.2); w=10px, h=10px"
+    past: "medium fill; rgba(212,175,55,0.5)"
+    current: "var(--gold, #D4AF37) fill; var(--gold, #D4AF37); shadow: 0 0 10px rgba(212,175,55,0.5)"
+
 ---
 
 # Deco（装饰艺术）— Design Specification

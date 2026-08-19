@@ -49,6 +49,32 @@ border:
   width: "1px"
   style: "solid"
   color: "#C4A265"
+
+progress_bar:
+  height: "56px"
+  background: "var(--cream)"
+  border_top: "1px solid var(--gold)"
+  section_label:
+    font: "var(--font-display)"
+    size: "12px"
+    weight: "700"
+    color: "var(--brown-light)"
+    letter_spacing: "0.25em"
+  page_number:
+    font: "var(--font-display)"
+    size: "16px"
+    weight: "700"
+    color: "var(--brown)"
+    letter_spacing: "0.1em"
+  segments:
+    shape: "circle"
+    size: "10px"
+    gap: "5px"
+    section_gap: "26px"
+    future: "faint fill; 1px solid rgba(92,74,50,0.2); w=10px, h=10px"
+    past: "medium fill; rgba(92,74,50,0.4)"
+    current: "var(--pink) fill; var(--pink); w=14px, h=14px"
+
 ---
 
 # Wes Anderson — Design Specification

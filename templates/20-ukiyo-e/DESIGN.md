@@ -47,6 +47,32 @@ border:
   width: "1-2px"
   style: "solid"
   color: "#1B3A6B"
+
+progress_bar:
+  height: "56px"
+  background: "var(--bg)"
+  border_top: "1px solid rgba(30,50,100,0.15)"
+  section_label:
+    font: "var(--font-cn)"
+    size: "12px"
+    weight: "700"
+    color: "var(--muted)"
+    letter_spacing: "0.25em"
+  page_number:
+    font: "var(--font-cn)"
+    size: "16px"
+    weight: "700"
+    color: "var(--indigo, #1E3468)"
+    letter_spacing: "0.1em"
+  segments:
+    shape: "line"
+    size: "5px"
+    gap: "5px"
+    section_gap: "24px"
+    future: "faint fill; w=32px, h=5px"
+    past: "medium fill"
+    current: "var(--indigo, #1E3468) fill"
+
 ---
 
 # Ukiyo-e（浮世绘）— Design Specification

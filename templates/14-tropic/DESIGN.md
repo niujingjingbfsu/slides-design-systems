@@ -42,6 +42,32 @@ radius:
 shadow:
   sun_glow: "0 0 100px rgba(255,210,63,0.3)"
   card: "none"
+
+progress_bar:
+  height: "56px"
+  background: "var(--cream, #FFF8F0)"
+  border_top: "2px solid var(--ink, #2D1B0E)"
+  section_label:
+    font: "var(--font-sans)"
+    size: "12px"
+    weight: "700"
+    color: "rgba(45,27,14,0.6)"
+    letter_spacing: "0.25em"
+  page_number:
+    font: "var(--font-sans)"
+    size: "16px"
+    weight: "700"
+    color: "var(--coral, #FF6B4A)"
+    letter_spacing: "0.1em"
+  segments:
+    shape: "circle"
+    size: "10px"
+    gap: "5px"
+    section_gap: "26px"
+    future: "faint fill; 2px solid rgba(45,27,14,0.2); w=10px, h=10px"
+    past: "medium fill; rgba(45,27,14,0.4)"
+    current: "var(--coral, #FF6B4A) fill; var(--coral, #FF6B4A); w=14px, h=14px"
+
 ---
 
 # Tropic — Design Specification

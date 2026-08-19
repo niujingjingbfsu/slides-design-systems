@@ -56,6 +56,32 @@ glass:
   background: "rgba(255, 255, 255, 0.45)"
   backdrop_filter: "blur(20px) saturate(1.4)"
   border: "1px solid rgba(255, 255, 255, 0.7)"
+
+progress_bar:
+  height: "56px"
+  background: "transparent"
+  border_top: "rgba(0,0,0,0.06)"
+  section_label:
+    font: "var(--font-sans)"
+    size: "12px"
+    weight: "700"
+    color: "var(--muted)"
+    letter_spacing: "0.25em"
+  page_number:
+    font: "var(--font-sans)"
+    size: "16px"
+    weight: "700"
+    color: "var(--accent)"
+    letter_spacing: "0.1em"
+  segments:
+    shape: "circle"
+    size: "10px"
+    gap: "5px"
+    section_gap: "26px"
+    future: "faint fill; w=10px, h=10px"
+    past: "light fill"
+    current: "var(--accent) fill; w=14px, h=14px"
+
 ---
 
 # Light as Air — Design Specification

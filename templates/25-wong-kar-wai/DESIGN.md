@@ -45,6 +45,32 @@ border:
   width: "1px"
   style: "solid"
   color: "rgba(255,200,150,0.2)"
+
+progress_bar:
+  height: "56px"
+  background: "rgba(20,10,5,0.7)"
+  border_top: "1px solid rgba(200,150,80,0.2)"
+  section_label:
+    font: "var(--font-sans)"
+    size: "12px"
+    weight: "700"
+    color: "rgba(255,255,255,0.5)"
+    letter_spacing: "0.25em"
+  page_number:
+    font: "var(--font-sans)"
+    size: "16px"
+    weight: "700"
+    color: "var(--gold, #C89650)"
+    letter_spacing: "0.1em"
+  segments:
+    shape: "circle"
+    size: "9px"
+    gap: "5px"
+    section_gap: "26px"
+    future: "faint fill; w=9px, h=9px"
+    past: "medium fill"
+    current: "var(--gold, #C89650) fill; w=12px, h=12px; shadow: 0 0 8px rgba(200,150,80,0.5)"
+
 ---
 
 # Wong Kar-wai — Design Specification

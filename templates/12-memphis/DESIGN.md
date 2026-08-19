@@ -45,6 +45,33 @@ border:
   width: "3-4px"
   style: "solid"
   color: "#000000"
+
+progress_bar:
+  height: "56px"
+  background: "transparent"
+  border_top: "none"
+  section_label:
+    font: "var(--font-sans)"
+    size: "11px"
+    weight: "700"
+    color: "rgba(0,0,0,0.4)"
+    letter_spacing: "0.3em"
+  page_number:
+    font: "var(--font-display)"
+    size: "14px"
+    weight: "900"
+    color: "var(--black, #222)"
+    letter_spacing: "0.05em"
+    current_color: "var(--pink, #FF6B9D)"
+  segments:
+    shape: "circle"
+    size: "10px"
+    gap: "5px"
+    section_gap: "26px"
+    future: "#fff fill; 2px solid var(--black, #222); w=10px, h=10px"
+    past: "var(--black, #222) fill"
+    current: "var(--pink, #FF6B9D) fill; var(--black, #222); w=14px, h=14px; shadow: 3px 3px 0 var(--black, #222)"
+
 ---
 
 # Memphis — Design Specification

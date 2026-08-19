@@ -44,6 +44,32 @@ shadow:
 border:
   card: "1px solid rgba(255,46,151,0.4)"
   card_cyan: "1px solid rgba(0,240,255,0.4)"
+
+progress_bar:
+  height: "56px"
+  background: "rgba(13,2,33,0.8)"
+  border_top: "1px solid rgba(255,46,151,0.3)"
+  section_label:
+    font: "var(--font-mono)"
+    size: "12px"
+    weight: "700"
+    color: "var(--muted)"
+    letter_spacing: "0.25em"
+  page_number:
+    font: "var(--font-mono)"
+    size: "16px"
+    weight: "700"
+    color: "var(--cyan)"
+    letter_spacing: "0.1em"
+  segments:
+    shape: "line"
+    size: "3px"
+    gap: "5px"
+    section_gap: "22px"
+    future: "faint fill; w=36px, h=3px"
+    past: "medium fill"
+    current: "var(--pink) fill; h=4px; shadow: 0 0 10px var(--pink)"
+
 ---
 
 # Neon — Design Specification

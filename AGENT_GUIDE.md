@@ -470,3 +470,31 @@ Cover and closing slides may have special layouts (larger bands, centered conten
 If a template has `.section-slide .bottom-band { height: 60px }` but `.content-slide .bottom-band { height: 50px }`, the frame will visibly "jump" when navigating. Standardize to one value (typically the content slide's value, since it's the most common).
 
 Section pages are exempt from content alignment (they are centered by design), but their frame must match.
+
+### 9.9 Aesthetic constraints (beauty is mandatory)
+
+A progress bar that meets all functional specs can still be ugly. These rules prevent that.
+
+**Hard rules (never violate):**
+1. **No full-width heavy borders.** A `border-top: 3px solid black` spanning the entire slide width creates a "fence" effect that competes with content. Use `border-top: none` or at most `1px solid rgba(...,0.15)`.
+2. **Progress segments must match the template's primary shape language.** If the template uses circles (soft-space, light-as-air), use circles. If it uses sharp squares (brutal, punk), use squares. Never import a shape that doesn't exist elsewhere in the template.
+3. **Progress bar visual weight ≤ 15% of content area.** The progress bar is navigation chrome, not a design feature. It should be noticed when needed, invisible when not.
+4. **Colors must come from the template's palette.** No generic gray. Use the template's accent color for "current", muted foreground for "past", and a very faint version of foreground for "future".
+5. **Typography must match.** Section label and page number must use fonts already defined in the template (display font for page number if the template has one, body font for section label).
+
+**Soft rules (strongly recommended):**
+- On light backgrounds, prefer transparent progress bar background + subtle 1px separator. On dark backgrounds, a semi-transparent dark bar (rgba(0,0,0,0.5-0.8)) works well.
+- The "current" segment should be 20-40% larger than future segments, with the template's accent color.
+- If the template has a signature effect (offset shadow in Memphis, glow in neon, gold shimmer in deco), apply it subtly to the current segment.
+- Page number format: current page in accent color, total in muted color (e.g., `<span class="cur">03</span> / 09`).
+
+**Verification checklist (must pass before considering done):**
+- [ ] Screenshot the cover, one content page, and one section page
+- [ ] Progress bar does not draw the eye away from content
+- [ ] Segments are clearly visible but not dominant
+- [ ] No heavy full-width lines
+- [ ] Colors and shapes match the template's design language
+- [ ] No overlap with decorative elements (bands, borders, patterns)
+- [ ] Page number and section label are legible
+
+**Reference:** Each template's `DESIGN.md` has a `progress_bar:` section with exact tokens. Read it first. If implementing a new template, write the `progress_bar:` spec BEFORE writing CSS — design it as part of the system, not as an afterthought.

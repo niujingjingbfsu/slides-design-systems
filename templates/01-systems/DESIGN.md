@@ -50,6 +50,32 @@ border:
   style: "solid"
   color: "rgba(26, 26, 26, 0.12)"
   hairline: true
+
+progress_bar:
+  height: "56px"
+  background: "var(--bg)"
+  border_top: "var(--line)"
+  section_label:
+    font: "var(--font-mono)"
+    size: "12px"
+    weight: "700"
+    color: "var(--muted)"
+    letter_spacing: "0.25em"
+  page_number:
+    font: "var(--font-mono)"
+    size: "16px"
+    weight: "700"
+    color: "var(--accent)"
+    letter_spacing: "0.1em"
+  segments:
+    shape: "line"
+    size: "5px"
+    gap: "5px"
+    section_gap: "24px"
+    future: "faint fill; 1px solid rgba(26,26,26,0.2); w=44px, h=5px"
+    past: "light fill; rgba(26,26,26,0.35)"
+    current: "var(--accent) fill; var(--accent)"
+
 ---
 
 # Systems — Design Specification

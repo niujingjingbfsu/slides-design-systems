@@ -161,34 +161,35 @@
     border-top: none;
   }
   .progress-bar .pb-section {
-    font-family: var(--font-sans); font-size: 12px; font-weight: 700;
-    letter-spacing: 0.25em; text-transform: uppercase;
-    color: rgba(0,0,0,0.5); min-width: 180px;
+    font-family: var(--font-sans); font-size: 11px; font-weight: 700;
+    letter-spacing: 0.3em; text-transform: uppercase;
+    color: rgba(0,0,0,0.4); min-width: 180px;
   }
   .progress-bar .pb-page {
-    font-family: var(--font-sans); font-size: 16px; font-weight: 700;
-    letter-spacing: 0.1em; color: var(--pink, #FF6B9D);
+    font-family: var(--font-display); font-size: 14px; font-weight: 900;
+    letter-spacing: 0.05em; color: var(--black, #222);
   }
+  .progress-bar .pb-page .cur { color: var(--pink, #FF6B9D); }
   .progress-strip {
-    position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
-    display: flex; align-items: center; height: 20px;
+    position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+    display: flex; align-items: center; height: 18px;
   }
   .progress-strip .seg {
-    width: 38px; height: 12px; border-radius: 0;
+    width: 10px; height: 10px; border-radius: 50%;
     background: #fff;
     border: 2px solid var(--black, #222);
     margin: 0 5px; transition: all 0.25s;
   }
   .progress-strip .seg.past {
     background: var(--black, #222);
-    border-color: var(--black, #222);
   }
   .progress-strip .seg.current {
     background: var(--pink, #FF6B9D);
     border-color: var(--black, #222);
-    height: 18px;
+    width: 14px; height: 14px;
+    box-shadow: 3px 3px 0 var(--black, #222);
   }
-  .progress-strip .seg.seg-gap { margin-left: 24px; }
+  .progress-strip .seg.seg-gap { margin-left: 26px; }
   .nav-hint { display: none !important; }
 </style>
 </head>
@@ -343,12 +344,13 @@
 
   function updateUI(idx) {
     const sectionName = slides[idx].dataset.section || '';
-    const pageStr = String(idx + 1).padStart(2, '0') + ' / ' + String(total).padStart(2, '0');
+    const curStr = String(idx + 1).padStart(2, '0');
+    const totStr = String(total).padStart(2, '0');
     document.querySelectorAll('.progress-bar').forEach(bar => {
       const label = bar.querySelector('.pb-section');
       const page = bar.querySelector('.pb-page');
       if (label) label.textContent = sectionName;
-      if (page) page.textContent = pageStr;
+      if (page) page.innerHTML = '<span class="cur">' + curStr + '</span> / ' + totStr;
     });
     document.querySelectorAll('.progress-strip').forEach(strip => {
       strip.querySelectorAll('.seg').forEach((seg, i) => {
