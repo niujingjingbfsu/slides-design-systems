@@ -7,10 +7,21 @@
     "category": "calm",
     "mood": "冷静克制",
     "scheme": "light",
-    "colors": ["#F6F5F2", "#1A1A1A", "#B85C38"],
-    "fonts": ["JetBrains Mono", "Inter"],
+    "colors": [
+      "#F6F5F2",
+      "#1A1A1A",
+      "#B85C38"
+    ],
+    "fonts": [
+      "JetBrains Mono",
+      "Inter"
+    ],
     "signature": "32px 栅格底纹、赤陶色方点、等宽字体、零圆角",
-    "best_for": ["技术演讲", "工程评审", "文档型汇报"],
+    "best_for": [
+      "技术演讲",
+      "工程评审",
+      "文档型汇报"
+    ],
     "html": "templates/01-systems/example.html",
     "design": "templates/01-systems/DESIGN.md",
     "preview": "templates/01-systems/preview.png"
@@ -23,10 +34,21 @@
     "category": "calm",
     "mood": "冷静克制",
     "scheme": "light",
-    "colors": ["#F5F2EB", "#1A1A1A", "#B33A2A"],
-    "fonts": ["Noto Serif SC", "Noto Sans SC"],
+    "colors": [
+      "#F5F2EB",
+      "#1A1A1A",
+      "#B33A2A"
+    ],
+    "fonts": [
+      "Noto Serif SC",
+      "Noto Sans SC"
+    ],
     "signature": "宣纸米白、宋体大字、朱红印章、70% 留白",
-    "best_for": ["文化主题", "主旨演讲", "内省型分享"],
+    "best_for": [
+      "文化主题",
+      "主旨演讲",
+      "内省型分享"
+    ],
     "html": "templates/02-sei/example.html",
     "design": "templates/02-sei/DESIGN.md",
     "preview": "templates/02-sei/preview.png"
@@ -39,10 +61,21 @@
     "category": "airy",
     "mood": "轻盈",
     "scheme": "light",
-    "colors": ["#FAF6EF", "#3D3530", "#E8D5D0", "#D4A574"],
-    "fonts": ["Plus Jakarta Sans"],
+    "colors": [
+      "#FAF6EF",
+      "#3D3530",
+      "#E8D5D0",
+      "#D4A574"
+    ],
+    "fonts": [
+      "Plus Jakarta Sans"
+    ],
     "signature": "奶油底、灰粉圆斑、20px 圆角、柔阴影",
-    "best_for": ["友好提案", "团队更新", "生活方式"],
+    "best_for": [
+      "友好提案",
+      "团队更新",
+      "生活方式"
+    ],
     "html": "templates/03-soft-space/example.html",
     "design": "templates/03-soft-space/DESIGN.md",
     "preview": "templates/03-soft-space/preview.png"
@@ -55,10 +88,21 @@
     "category": "airy",
     "mood": "轻盈",
     "scheme": "gradient",
-    "colors": ["#EEF1FA", "#1E2A5E", "#B8C0E8", "#A8D8E8"],
-    "fonts": ["Sora"],
+    "colors": [
+      "#EEF1FA",
+      "#1E2A5E",
+      "#B8C0E8",
+      "#A8D8E8"
+    ],
+    "fonts": [
+      "Sora"
+    ],
     "signature": "磨砂玻璃、蓝紫渐变、模糊光球、24px 圆角",
-    "best_for": ["创意简报", "设计评审", "产品愿景"],
+    "best_for": [
+      "创意简报",
+      "设计评审",
+      "产品愿景"
+    ],
     "html": "templates/04-light-as-air/example.html",
     "design": "templates/04-light-as-air/DESIGN.md",
     "preview": "templates/04-light-as-air/preview.png"
@@ -71,10 +115,21 @@
     "category": "airy",
     "mood": "轻盈",
     "scheme": "light",
-    "colors": ["#FFFFFF", "#2D3D35", "#A8C4A2", "#6B8F6B"],
-    "fonts": ["Manrope"],
+    "colors": [
+      "#FFFFFF",
+      "#2D3D35",
+      "#A8C4A2",
+      "#6B8F6B"
+    ],
+    "fonts": [
+      "Manrope"
+    ],
     "signature": "纯白底、鼠尾草绿、线描叶子、无阴影",
-    "best_for": ["可持续", "健康自然", "教育"],
+    "best_for": [
+      "可持续",
+      "健康自然",
+      "教育"
+    ],
     "html": "templates/05-breathe/example.html",
     "design": "templates/05-breathe/DESIGN.md",
     "preview": "templates/05-breathe/preview.png"
@@ -87,10 +142,21 @@
     "category": "luxury",
     "mood": "高端留白",
     "scheme": "light",
-    "colors": ["#FFFFFF", "#0A0A0A", "#1A3A5C"],
-    "fonts": ["Cormorant Garamond", "Inter"],
+    "colors": [
+      "#FFFFFF",
+      "#0A0A0A",
+      "#1A3A5C"
+    ],
+    "fonts": [
+      "Cormorant Garamond",
+      "Inter"
+    ],
     "signature": "极细衬线、深蓝小方块、70% 留白、无卡片",
-    "best_for": ["奢侈品牌", "艺术画廊", "高端提案"],
+    "best_for": [
+      "奢侈品牌",
+      "艺术画廊",
+      "高端提案"
+    ],
     "html": "templates/06-essential/example.html",
     "design": "templates/06-essential/DESIGN.md",
     "preview": "templates/06-essential/preview.png"
@@ -103,10 +169,21 @@
     "category": "luxury",
     "mood": "高端留白",
     "scheme": "dark",
-    "colors": ["#0A0A0A", "#FFFFFF", "#C9A96E"],
-    "fonts": ["Cormorant Garamond", "Inter"],
+    "colors": [
+      "#0A0A0A",
+      "#FFFFFF",
+      "#C9A96E"
+    ],
+    "fonts": [
+      "Cormorant Garamond",
+      "Inter"
+    ],
     "signature": "纯黑底、香槟金斜体、四角 L 形角线、居中对称",
-    "best_for": ["高端发布", "颁奖盛典", "晚间演讲"],
+    "best_for": [
+      "高端发布",
+      "颁奖盛典",
+      "晚间演讲"
+    ],
     "html": "templates/07-noir/example.html",
     "design": "templates/07-noir/DESIGN.md",
     "preview": "templates/07-noir/preview.png"
@@ -119,10 +196,23 @@
     "category": "bold",
     "mood": "色彩鲜明",
     "scheme": "light",
-    "colors": ["#FFFFFF", "#000000", "#E63946", "#FFD93D", "#2563EB"],
-    "fonts": ["Archivo Black", "Inter"],
+    "colors": [
+      "#FFFFFF",
+      "#000000",
+      "#E63946",
+      "#FFD93D",
+      "#2563EB"
+    ],
+    "fonts": [
+      "Archivo Black",
+      "Inter"
+    ],
     "signature": "4px 黑描边、8px 硬投影、三原色、零圆角",
-    "best_for": ["创意宣言", "设计态度", "朋克提案"],
+    "best_for": [
+      "创意宣言",
+      "设计态度",
+      "朋克提案"
+    ],
     "html": "templates/08-brutal/example.html",
     "design": "templates/08-brutal/DESIGN.md",
     "preview": "templates/08-brutal/preview.png"
@@ -135,10 +225,22 @@
     "category": "bold",
     "mood": "色彩鲜明",
     "scheme": "dark",
-    "colors": ["#1A0533", "#FF2E97", "#00F0FF", "#B026FF"],
-    "fonts": ["Orbitron", "JetBrains Mono"],
+    "colors": [
+      "#1A0533",
+      "#FF2E97",
+      "#00F0FF",
+      "#B026FF"
+    ],
+    "fonts": [
+      "Orbitron",
+      "JetBrains Mono"
+    ],
     "signature": "霓虹辉光、透视网格、条纹太阳、深紫渐变底",
-    "best_for": ["科技发布", "游戏音乐", "赛博朋克"],
+    "best_for": [
+      "科技发布",
+      "游戏音乐",
+      "赛博朋克"
+    ],
     "html": "templates/09-neon/example.html",
     "design": "templates/09-neon/DESIGN.md",
     "preview": "templates/09-neon/preview.png"
@@ -151,10 +253,22 @@
     "category": "bold",
     "mood": "色彩鲜明",
     "scheme": "light",
-    "colors": ["#FFE500", "#000000", "#E63946", "#1D4E89"],
-    "fonts": ["Anton", "Inter"],
+    "colors": [
+      "#FFE500",
+      "#000000",
+      "#E63946",
+      "#1D4E89"
+    ],
+    "fonts": [
+      "Anton",
+      "Inter"
+    ],
     "signature": "亮黄底、Ben-Day 半调网点、爆炸星、对话气泡",
-    "best_for": ["营销活动", "创意 pitch", "轻松活泼"],
+    "best_for": [
+      "营销活动",
+      "创意 pitch",
+      "轻松活泼"
+    ],
     "html": "templates/10-pop/example.html",
     "design": "templates/10-pop/DESIGN.md",
     "preview": "templates/10-pop/preview.png"
@@ -167,10 +281,21 @@
     "category": "bold",
     "mood": "色彩鲜明",
     "scheme": "gradient",
-    "colors": ["#FF6B35", "#FF3D7F", "#7B2FF7", "#FFFFFF"],
-    "fonts": ["Sora"],
+    "colors": [
+      "#FF6B35",
+      "#FF3D7F",
+      "#7B2FF7",
+      "#FFFFFF"
+    ],
+    "fonts": [
+      "Sora"
+    ],
     "signature": "橙粉紫 mesh 渐变、磨砂玻璃卡片、超粗白字",
-    "best_for": ["品牌发布", "高能主旨", "音乐节"],
+    "best_for": [
+      "品牌发布",
+      "高能主旨",
+      "音乐节"
+    ],
     "html": "templates/11-electric/example.html",
     "design": "templates/11-electric/DESIGN.md",
     "preview": "templates/11-electric/preview.png"
@@ -183,10 +308,23 @@
     "category": "bold",
     "mood": "色彩鲜明",
     "scheme": "light",
-    "colors": ["#F5F0E8", "#000000", "#FF6B9D", "#00C9C9", "#FFD93D"],
-    "fonts": ["Archivo Black", "Inter"],
+    "colors": [
+      "#F5F0E8",
+      "#000000",
+      "#FF6B9D",
+      "#00C9C9",
+      "#FFD93D"
+    ],
+    "fonts": [
+      "Archivo Black",
+      "Inter"
+    ],
     "signature": "散落几何图形、黑色波浪线、棋盘格、微旋转",
-    "best_for": ["创意工作坊", "设计教育", "趣味内容"],
+    "best_for": [
+      "创意工作坊",
+      "设计教育",
+      "趣味内容"
+    ],
     "html": "templates/12-memphis/example.html",
     "design": "templates/12-memphis/DESIGN.md",
     "preview": "templates/12-memphis/preview.png"
@@ -199,10 +337,21 @@
     "category": "bold",
     "mood": "色彩鲜明",
     "scheme": "light",
-    "colors": ["#FFFFFF", "#000000", "#E63946"],
-    "fonts": ["Inter", "JetBrains Mono"],
+    "colors": [
+      "#FFFFFF",
+      "#000000",
+      "#E63946"
+    ],
+    "fonts": [
+      "Inter",
+      "JetBrains Mono"
+    ],
     "signature": "黑白红、红色色块切割、旋转错位、竖排文字",
-    "best_for": ["社会议题", "反主流", "raw 能量"],
+    "best_for": [
+      "社会议题",
+      "反主流",
+      "raw 能量"
+    ],
     "html": "templates/13-punk/example.html",
     "design": "templates/13-punk/DESIGN.md",
     "preview": "templates/13-punk/preview.png"
@@ -215,10 +364,23 @@
     "category": "bold",
     "mood": "色彩鲜明",
     "scheme": "dark",
-    "colors": ["#0A3D3D", "#FFFFFF", "#FF6B47", "#FFD23F", "#14A098"],
-    "fonts": ["Fredoka", "Inter"],
+    "colors": [
+      "#0A3D3D",
+      "#FFFFFF",
+      "#FF6B47",
+      "#FFD23F",
+      "#14A098"
+    ],
+    "fonts": [
+      "Fredoka",
+      "Inter"
+    ],
     "signature": "深青底、珊瑚橙黄、大太阳、热带叶子、24px 大圆角",
-    "best_for": ["旅游生活", "夏季主题", "热情品牌"],
+    "best_for": [
+      "旅游生活",
+      "夏季主题",
+      "热情品牌"
+    ],
     "html": "templates/14-tropic/example.html",
     "design": "templates/14-tropic/DESIGN.md",
     "preview": "templates/14-tropic/preview.png"
@@ -231,10 +393,22 @@
     "category": "painterly",
     "mood": "绘画风格",
     "scheme": "light",
-    "colors": ["#F5F0E6", "#2E5A88", "#4A8B6F", "#C4A35A"],
-    "fonts": ["Noto Serif SC", "Cormorant Garamond"],
+    "colors": [
+      "#F5F0E6",
+      "#2E5A88",
+      "#4A8B6F",
+      "#C4A35A"
+    ],
+    "fonts": [
+      "Noto Serif SC",
+      "Cormorant Garamond"
+    ],
     "signature": "石青/石绿水平色带、泥金细线、几何三角山",
-    "best_for": ["文化遗产", "艺术史", "东方美学"],
+    "best_for": [
+      "文化遗产",
+      "艺术史",
+      "东方美学"
+    ],
     "html": "templates/15-mineral-strata/example.html",
     "design": "templates/15-mineral-strata/DESIGN.md",
     "preview": "templates/15-mineral-strata/preview.png"
@@ -247,10 +421,22 @@
     "category": "painterly",
     "mood": "绘画风格",
     "scheme": "warm",
-    "colors": ["#F0E4D0", "#B85C38", "#D4A843", "#E8C868"],
-    "fonts": ["Noto Serif SC", "Cormorant Garamond"],
+    "colors": [
+      "#F0E4D0",
+      "#B85C38",
+      "#D4A843",
+      "#E8C868"
+    ],
+    "fonts": [
+      "Noto Serif SC",
+      "Cormorant Garamond"
+    ],
     "signature": "铁线曲线、泥金金属渐变同心圆光环、忍冬纹边带",
-    "best_for": ["博物馆", "历史叙事", "文化主题"],
+    "best_for": [
+      "博物馆",
+      "历史叙事",
+      "文化主题"
+    ],
     "html": "templates/16-iron-line-halo/example.html",
     "design": "templates/16-iron-line-halo/DESIGN.md",
     "preview": "templates/16-iron-line-halo/preview.png"
@@ -263,10 +449,23 @@
     "category": "painterly",
     "mood": "绘画风格",
     "scheme": "light",
-    "colors": ["#FFFFFF", "#1B4B8A", "#4A7FB5", "#8AB0D5", "#C5D9EC"],
-    "fonts": ["Noto Serif SC", "Josefin Sans"],
+    "colors": [
+      "#FFFFFF",
+      "#1B4B8A",
+      "#4A7FB5",
+      "#8AB0D5",
+      "#C5D9EC"
+    ],
+    "fonts": [
+      "Noto Serif SC",
+      "Josefin Sans"
+    ],
     "signature": "钴蓝五色阶同心圆、海水纹边带、单色明度分层",
-    "best_for": ["艺术陶瓷", "极简东方", "设计展"],
+    "best_for": [
+      "艺术陶瓷",
+      "极简东方",
+      "设计展"
+    ],
     "html": "templates/17-cobalt-circles/example.html",
     "design": "templates/17-cobalt-circles/DESIGN.md",
     "preview": "templates/17-cobalt-circles/preview.png"
@@ -279,10 +478,22 @@
     "category": "painterly",
     "mood": "绘画风格",
     "scheme": "warm",
-    "colors": ["#F0E6D3", "#2D4A3E", "#B8944F", "#7D5A6E"],
-    "fonts": ["Playfair Display", "Cormorant Garamond"],
+    "colors": [
+      "#F0E6D3",
+      "#2D4A3E",
+      "#B8944F",
+      "#7D5A6E"
+    ],
+    "fonts": [
+      "Playfair Display",
+      "Cormorant Garamond"
+    ],
     "signature": "双层金线框、植物角花、圆形纹章、有机曲线",
-    "best_for": ["优雅品牌", "艺术装饰", "正式活动"],
+    "best_for": [
+      "优雅品牌",
+      "艺术装饰",
+      "正式活动"
+    ],
     "html": "templates/18-nouveau/example.html",
     "design": "templates/18-nouveau/DESIGN.md",
     "preview": "templates/18-nouveau/preview.png"
@@ -295,10 +506,21 @@
     "category": "painterly",
     "mood": "绘画风格",
     "scheme": "dark",
-    "colors": ["#0B0F1A", "#C9A961", "#E8D5A3"],
-    "fonts": ["Limelight", "Josefin Sans"],
+    "colors": [
+      "#0B0F1A",
+      "#C9A961",
+      "#E8D5A3"
+    ],
+    "fonts": [
+      "Limelight",
+      "Josefin Sans"
+    ],
     "signature": "旭日放射线、Chevron 角饰、阶梯金字塔、绝对对称",
-    "best_for": ["建筑", "Gatsby 奢华", "盛典"],
+    "best_for": [
+      "建筑",
+      "Gatsby 奢华",
+      "盛典"
+    ],
     "html": "templates/19-deco/example.html",
     "design": "templates/19-deco/DESIGN.md",
     "preview": "templates/19-deco/preview.png"
@@ -311,12 +533,159 @@
     "category": "painterly",
     "mood": "绘画风格",
     "scheme": "warm",
-    "colors": ["#F2EAD8", "#1B3A6B", "#2C5F8A", "#C8362C"],
-    "fonts": ["Shippori Mincho", "Noto Serif SC"],
+    "colors": [
+      "#F2EAD8",
+      "#1B3A6B",
+      "#2C5F8A",
+      "#C8362C"
+    ],
+    "fonts": [
+      "Shippori Mincho",
+      "Noto Serif SC"
+    ],
     "signature": "富士三角、波浪带、朱红印章、木刻双线框",
-    "best_for": ["日本文化", "木刻艺术", "叙事演讲"],
+    "best_for": [
+      "日本文化",
+      "木刻艺术",
+      "叙事演讲"
+    ],
     "html": "templates/20-ukiyo-e/example.html",
     "design": "templates/20-ukiyo-e/DESIGN.md",
     "preview": "templates/20-ukiyo-e/preview.png"
+  },
+  {
+    "id": 21,
+    "slug": "wes-anderson",
+    "name": "Wes Anderson",
+    "name_cn": "韦斯·安德森",
+    "category": "cinematic",
+    "mood": "复古对称",
+    "scheme": "light",
+    "colors": [
+      "#F5E6D3",
+      "#5C4A32",
+      "#E8B4B8",
+      "#A8C4B8",
+      "#C4A265"
+    ],
+    "fonts": [
+      "Jost",
+      "Noto Serif SC"
+    ],
+    "signature": "金色画框角标、粉彩圆点、严格对称构图、Futura 式无衬线",
+    "best_for": [
+      "品牌叙事",
+      "编辑设计",
+      "复古主题",
+      "文化讲座"
+    ]
+  },
+  {
+    "id": 22,
+    "slug": "bauhaus",
+    "name": "Bauhaus",
+    "name_cn": "包豪斯",
+    "category": "art-movement",
+    "mood": "理性几何",
+    "scheme": "light",
+    "colors": [
+      "#F5F1E8",
+      "#111111",
+      "#E63946",
+      "#F4D35E",
+      "#1D3557"
+    ],
+    "fonts": [
+      "Inter",
+      "Noto Sans SC"
+    ],
+    "signature": "三原色圆方三角、粗黑分割线、黑色底栏、功能主义",
+    "best_for": [
+      "设计教育",
+      "现代主义",
+      "功能宣言",
+      "建筑设计"
+    ]
+  },
+  {
+    "id": 23,
+    "slug": "risograph",
+    "name": "Risograph",
+    "name_cn": "孔版印刷",
+    "category": "print-craft",
+    "mood": "独立出版",
+    "scheme": "light",
+    "colors": [
+      "#F8F4E9",
+      "#111111",
+      "#FF6B9D",
+      "#4ECDC4",
+      "#FFE66D"
+    ],
+    "fonts": [
+      "Space Mono",
+      "Noto Sans SC"
+    ],
+    "signature": "套色错位阴影、网点质感、对位标记、荧光色叠印",
+    "best_for": [
+      "Zine 文化",
+      "独立出版",
+      "DIY 美学",
+      "创意工作坊"
+    ]
+  },
+  {
+    "id": 24,
+    "slug": "vaporwave",
+    "name": "Vaporwave",
+    "name_cn": "蒸汽波",
+    "category": "digital-aesthetic",
+    "mood": "复古未来",
+    "scheme": "dark",
+    "colors": [
+      "#1A0B2E",
+      "#FF71CE",
+      "#01CDFE",
+      "#B967FF",
+      "#FFFB96"
+    ],
+    "fonts": [
+      "Orbitron",
+      "Noto Serif SC"
+    ],
+    "signature": "透视网格、横条落日、棕榈树剪影、霓虹发光、扫描线",
+    "best_for": [
+      "科技发布",
+      "互联网文化",
+      "音乐视觉",
+      "复古科技"
+    ]
+  },
+  {
+    "id": 25,
+    "slug": "wong-kar-wai",
+    "name": "Wong Kar-wai",
+    "name_cn": "王家卫",
+    "category": "cinema",
+    "mood": "情绪电影",
+    "scheme": "dark",
+    "colors": [
+      "#1A0E0A",
+      "#FFF0DC",
+      "#C83020",
+      "#2A8060",
+      "#E8A040"
+    ],
+    "fonts": [
+      "Noto Serif SC",
+      "Ma Shan Zheng"
+    ],
+    "signature": "红绿暖色 wash、失焦光斑、胶片颗粒、暗角、手写体点缀",
+    "best_for": [
+      "情感叙事",
+      "电影主题",
+      "品牌故事",
+      "文艺演讲"
+    ]
   }
 ]

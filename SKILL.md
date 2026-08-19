@@ -1,22 +1,22 @@
 ---
 name: slides-design-systems
-description: Create distinctive HTML presentations from 20 curated design systems — from calm minimalism to bold color to painterly styles. Use when the user wants to build a presentation, slides, or a deck with strong visual identity. Helps non-designers pick a style through visual previews rather than abstract choices.
+description: Create distinctive HTML presentations from 25 curated design systems — from calm minimalism to bold color to painterly and cinematic styles. Use when the user wants to build a presentation, slides, or a deck with strong visual identity. Helps non-designers pick a style through visual previews rather than abstract choices.
 ---
 
 # Slides Design Systems
 
-Create zero-dependency HTML presentations using one of 20 hand-crafted design systems. Every deck is a single self-contained HTML file that runs in any browser.
+Create zero-dependency HTML presentations using one of 25 hand-crafted design systems. Every deck is a single self-contained HTML file that runs in any browser.
 
 ## Core Principles
 
 1. **Zero Dependencies** — Single HTML files with inline CSS/JS. No npm, no build tools, no frameworks.
 2. **Show, Don't Tell** — Generate visual previews and let the user pick. People choose what they can see.
-3. **20 Design Systems, Not 20 Themes** — Each system has its own typography, palette, decorative vocabulary, and component grammar. Mixing systems breaks the design; stay inside one.
+3. **25 Design Systems, Not 25 Themes** — Each system has its own typography, palette, decorative vocabulary, and component grammar. Mixing systems breaks the design; stay inside one.
 4. **Fixed 16:9 Stage** — Every deck uses a 1280×720 slide canvas scaled as a whole to the viewport via `transform: scale()`. Slides stay 16:9 on every screen; content never reflows.
 5. **Design Tokens Are Law** — Each system's `DESIGN.md` contains YAML front-matter tokens (colors, fonts, spacing, radius, shadow, border). Read them and obey them. Do not invent colors, fonts, or radii.
 6. **Implementation Rules Are Mandatory** — Read `AGENT_GUIDE.md` before generating any deck. It contains CSS syntax rules, footer/band invariants, CJK typography rules, content length limits, and a verification checklist — all derived from real bugs. Each template's `DESIGN.md` also has a "实现注意事项" section with template-specific gotchas. Skip them and the deck will break.
 
-## The 20 Design Systems
+## The 25 Design Systems
 
 | # | Slug | Name | Mood | Scheme | Best For |
 |---|------|------|------|--------|----------|
@@ -40,8 +40,13 @@ Create zero-dependency HTML presentations using one of 20 hand-crafted design sy
 | 18 | `nouveau` | Nouveau（新艺术运动） | Painterly | Warm | Elegant brands, art nouveau, ornamental design |
 | 19 | `deco` | Deco（装饰艺术） | Painterly | Dark | Gatsby-era luxury, architecture, formal events |
 | 20 | `ukiyo-e` | Ukiyo-e（浮世绘） | Painterly | Warm | Japanese culture, woodblock art, narrative talks |
+| 21 | `wes-anderson` | Wes Anderson（韦斯·安德森） | Cinematic | Light | Quirky brand talks, storytelling, editorial with charm |
+| 22 | `bauhaus` | Bauhaus（包豪斯） | Art Movement | Light | Design education, functionalism, modernist manifestos |
+| 23 | `risograph` | Risograph（孔版印刷） | Print Craft | Light | Zine culture, independent publishing, DIY aesthetics |
+| 24 | `vaporwave` | Vaporwave（蒸汽波） | Digital Aesthetic | Dark | Retro-tech, internet culture, synthwave keynotes |
+| 25 | `wong-kar-wai` | Wong Kar-wai（王家卫） | Cinematic | Dark | Emotional storytelling, film, moody brand narratives |
 
-**Mood groups:** Calm/Restrained (01-02), Light/Airy (03-05), High-end Whitespace (06-07), Bold & Colorful (08-14), Painterly (15-20).
+**Mood groups:** Calm/Restrained (01-02), Light/Airy (03-05), High-end Whitespace (06-07), Bold & Colorful (08-14), Painterly (15-20), Cinematic & Art Movement (21-25).
 
 ## Fixed Stage Rules
 
@@ -139,11 +144,11 @@ Do NOT produce generic AI-presentation aesthetics:
 slides-design-systems/
 ├── SKILL.md                          # This file
 ├── AGENT_GUIDE.md                    # MANDATORY implementation rules & verification checklist
-├── DESIGN_SYSTEMS.md                  # All 20 systems in one reference document
+├── DESIGN_SYSTEMS.md                  # All 25 systems in one reference document
 ├── README.md
 ├── LICENSE
 └── templates/
-    ├── index.json                     # Compact metadata for all 20 systems
+    ├── index.json                     # Compact metadata for all 25 systems
     ├── 01-systems/
     │   ├── example.html               # Working demo deck (7 layouts)
     │   ├── DESIGN.md                  # Design tokens + rules + 实现注意事项 + agent prompt
@@ -152,7 +157,7 @@ slides-design-systems/
     │   ├── example.html
     │   ├── DESIGN.md
     │   └── preview.png
-    └── ... (20 total)
+    └── ... (25 total)
 ```
 
 ## Reading Order (for agents)

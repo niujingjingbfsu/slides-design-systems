@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bauhaus — Slides Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Noto+Sans+SC:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #F5F1E8;
+    --red: #E63946;
+    --yellow: #F4D35E;
+    --blue: #1D3557;
+    --black: #111111;
+    --font-display: 'Inter', 'Noto Sans SC', sans-serif;
+    --font-cn: 'Noto Sans SC', 'Inter', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body { height: 100%; background: #2a2a2a; overflow: hidden; font-family: var(--font-cn); }
+
+  .deck { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center; }
+
+  .slide {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 1280px; height: 720px; background: var(--paper);
+    display: none; flex-direction: column; overflow: hidden;
+  }
+  .slide.active { display: flex; }
+
+  .slide .content-area, .slide .content, .slide .grid { min-height: 0; }
+
+  /* Content area */
+  .content-area { position: relative; z-index: 2; flex: 1; padding: 64px 80px 80px; display: flex; flex-direction: column; }
+
+  /* Typography */
+  .eyebrow { font-family: var(--font-display); font-size: 12px; font-weight: 900; letter-spacing: 0.35em; text-transform: uppercase; color: var(--black); margin-bottom: 24px; }
+  .eyebrow span { background: var(--black); color: var(--yellow); padding: 4px 12px; }
+  h1 { font-family: var(--font-display); font-size: 96px; font-weight: 900; color: var(--black); line-height: 1.15; letter-spacing: -0.02em; }
+  h2 { font-family: var(--font-display); font-size: 44px; font-weight: 900; color: var(--black); line-height: 1.2; letter-spacing: -0.01em; }
+  h3 { font-family: var(--font-display); font-size: 22px; font-weight: 900; color: var(--black); line-height: 1.2; }
+  .subtitle { font-family: var(--font-cn); font-size: 17px; color: #444; line-height: 1.8; margin-top: 20px; font-weight: 400; }
+  p, li { font-family: var(--font-cn); font-size: 15px; color: #333; line-height: 1.8; }
+
+  /* Bottom bar */
+  .bottom-bar { position: absolute; bottom: 0; left: 0; right: 0; height: 60px; background: var(--black); z-index: 5; display: flex; align-items: center; justify-content: space-between; padding: 0 80px; }
+  .bottom-bar span { font-family: var(--font-display); font-size: 11px; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--paper); }
+  .bottom-bar .num { font-size: 28px; font-weight: 900; color: var(--yellow); }
+  .title-slide .bottom-bar { height: 80px; }
+
+  /* Nav hint */
+  .nav-hint { position: absolute; bottom: 76px; left: 50%; transform: translateX(-50%); font-family: var(--font-display); font-size: 10px; letter-spacing: 0.3em; color: rgba(17,17,17,0.3); z-index: 100; pointer-events: none; }
+  .counter { position: absolute; bottom: 76px; right: 60px; font-family: var(--font-display); font-size: 11px; font-weight: 700; letter-spacing: 0.2em; color: var(--black); z-index: 100; }
+  .deck:has(.title-slide.active) .nav-hint { bottom: 96px; color: var(--paper); }
+  .deck:has(.title-slide.active) .counter { bottom: 96px; color: var(--paper); }
+
+  /* Geometry decorations */
+  .geo { position: absolute; z-index: 1; pointer-events: none; }
+
+  /* === TITLE SLIDE === */
+  .title-slide .content-area { padding: 80px 80px 120px; justify-content: center; }
+  .title-slide .red-panel { position: absolute; top: 0; left: 0; width: 380px; height: 720px; background: var(--red); z-index: 0; }
+  .title-slide .yellow-circle { position: absolute; top: -120px; right: -120px; width: 400px; height: 400px; border-radius: 50%; background: var(--yellow); z-index: 0; }
+  .title-slide .blue-tri { position: absolute; bottom: 80px; right: 120px; width: 0; height: 0; border-left: 80px solid transparent; border-right: 80px solid transparent; border-bottom: 140px solid var(--blue); z-index: 1; }
+  .title-slide .black-line-v { position: absolute; top: 0; bottom: 0; left: 380px; width: 4px; background: var(--black); z-index: 3; }
+  .title-slide .black-line-h { position: absolute; left: 0; right: 0; bottom: 80px; height: 4px; background: var(--black); z-index: 3; }
+  .title-slide .content-inner { position: relative; z-index: 4; padding-left: 460px; }
+  .title-slide h1 { font-size: 104px; }
+  .title-slide h1 .accent { color: var(--red); }
+  .title-slide .subtitle { max-width: 440px; }
+  .title-slide .small-square { position: absolute; bottom: 120px; left: 460px; width: 32px; height: 32px; background: var(--blue); z-index: 4; }
+  .title-slide .small-circle { position: absolute; top: 60px; right: 60px; width: 20px; height: 20px; border-radius: 50%; background: var(--red); z-index: 4; }
+
+  /* === SECTION SLIDE === */
+  .section-slide .content-area { justify-content: center; align-items: center; text-align: center; }
+  .section-slide .big-num { font-family: var(--font-display); font-size: 200px; font-weight: 900; color: var(--red); line-height: 0.9; }
+  .section-slide .big-num .outline { -webkit-text-stroke: 3px var(--black); color: transparent; }
+  .section-slide .section-label { font-family: var(--font-display); font-size: 13px; font-weight: 900; letter-spacing: 0.5em; text-transform: uppercase; color: var(--black); margin: 16px 0 20px; }
+  .section-slide h2 { font-size: 56px; }
+  .section-slide .bar { width: 80px; height: 6px; background: var(--yellow); margin: 28px auto 0; border: 2px solid var(--black); }
+  .section-slide .geo-circle { width: 120px; height: 120px; border-radius: 50%; border: 4px solid var(--blue); top: 60px; left: 80px; }
+  .section-slide .geo-square { width: 60px; height: 60px; background: var(--yellow); border: 3px solid var(--black); bottom: 100px; right: 100px; }
+
+  /* === CONTENT SLIDE === */
+  .content-slide .header { margin-bottom: 40px; }
+  .content-slide .body { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; flex: 1; }
+  .content-slide .card { background: var(--paper); border: 3px solid var(--black); padding: 28px 24px; display: flex; flex-direction: column; overflow: hidden; position: relative; }
+  .content-slide .card:nth-child(1) { border-top: 8px solid var(--red); }
+  .content-slide .card:nth-child(2) { border-top: 8px solid var(--yellow); }
+  .content-slide .card:nth-child(3) { border-top: 8px solid var(--blue); }
+  .content-slide .card .card-num { font-family: var(--font-display); font-size: 11px; font-weight: 900; letter-spacing: 0.3em; color: var(--black); margin-bottom: 16px; }
+  .content-slide .card .shape { width: 32px; height: 32px; margin-bottom: 16px; }
+  .content-slide .card:nth-child(1) .shape { background: var(--red); border-radius: 50%; }
+  .content-slide .card:nth-child(2) .shape { background: var(--yellow); }
+  .content-slide .card:nth-child(3) .shape { width: 0; height: 0; border-left: 16px solid transparent; border-right: 16px solid transparent; border-bottom: 28px solid var(--blue); background: none; }
+  .content-slide .card h3 { margin-bottom: 12px; }
+  .content-slide .card p { font-size: 14px; color: #444; line-height: 1.7; }
+
+  /* === TWO COL === */
+  .two-col .header { margin-bottom: 40px; }
+  .two-col .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; flex: 1; }
+  .two-col .col { padding: 40px 36px; display: flex; flex-direction: column; justify-content: center; overflow: hidden; border: 3px solid var(--black); }
+  .two-col .col.a { background: var(--red); color: var(--paper); }
+  .two-col .col.b { background: var(--yellow); }
+  .two-col .col .col-num { font-family: var(--font-display); font-size: 48px; font-weight: 900; line-height: 1; margin-bottom: 20px; }
+  .two-col .col.a .col-num { color: var(--paper); }
+  .two-col .col.b .col-num { color: var(--black); }
+  .two-col .col h3 { font-size: 28px; margin-bottom: 16px; }
+  .two-col .col.a h3, .two-col .col.a p { color: var(--paper); }
+  .two-col .col p { font-size: 15px; line-height: 1.8; }
+
+  /* === QUOTE === */
+  .quote-slide .content-area { justify-content: center; align-items: center; text-align: center; padding: 64px 140px 80px; }
+  .quote-slide blockquote { font-family: var(--font-cn); font-size: 40px; font-weight: 900; line-height: 1.7; color: var(--black); max-width: 860px; }
+  .quote-slide blockquote .red { color: var(--red); }
+  .quote-slide .bar { width: 80px; height: 6px; background: var(--blue); margin: 28px auto; }
+  .quote-slide cite { font-family: var(--font-display); font-size: 12px; font-weight: 700; letter-spacing: 0.35em; text-transform: uppercase; color: #666; font-style: normal; }
+  .quote-slide .geo-circle { width: 100px; height: 100px; border-radius: 50%; background: var(--yellow); opacity: 0.5; top: 80px; right: 100px; }
+  .quote-slide .geo-square { width: 50px; height: 50px; background: var(--red); bottom: 100px; left: 100px; }
+
+  /* === DATA === */
+  .data-slide .header { margin-bottom: 36px; }
+  .data-slide .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; flex: 1; align-content: center; }
+  .data-slide .metric { text-align: center; padding: 36px 16px; border: 3px solid var(--black); overflow: hidden; position: relative; }
+  .data-slide .metric:nth-child(1) { background: var(--paper); }
+  .data-slide .metric:nth-child(2) { background: var(--red); color: var(--paper); }
+  .data-slide .metric:nth-child(3) { background: var(--yellow); }
+  .data-slide .metric:nth-child(4) { background: var(--blue); color: var(--paper); }
+  .data-slide .metric .value { font-family: var(--font-display); font-size: 52px; font-weight: 900; line-height: 1.1; }
+  .data-slide .metric .unit { font-family: var(--font-cn); font-size: 20px; font-weight: 700; }
+  .data-slide .metric .label { margin-top: 12px; font-size: 12px; line-height: 1.6; letter-spacing: 0.05em; }
+  .data-slide .metric:nth-child(1) .label, .data-slide .metric:nth-child(3) .label { color: #444; }
+  .data-slide .metric:nth-child(2) .label, .data-slide .metric:nth-child(4) .label { color: rgba(255,255,255,0.8); }
+
+  /* === CLOSING === */
+  .closing-slide .content-area { justify-content: center; align-items: center; text-align: center; }
+  .closing-slide h2 { font-size: 72px; }
+  .closing-slide h2 .accent { color: var(--red); }
+  .closing-slide .bar { width: 100px; height: 6px; background: var(--black); margin: 28px auto; }
+  .closing-slide p { font-size: 16px; color: #444; letter-spacing: 0.1em; margin-top: 16px; }
+  .closing-slide .shapes { display: flex; gap: 24px; margin-top: 40px; align-items: center; }
+  .closing-slide .shapes .s-circle { width: 40px; height: 40px; border-radius: 50%; background: var(--red); }
+  .closing-slide .shapes .s-square { width: 36px; height: 36px; background: var(--yellow); border: 3px solid var(--black); }
+  .closing-slide .shapes .s-tri { width: 0; height: 0; border-left: 20px solid transparent; border-right: 20px solid transparent; border-bottom: 36px solid var(--blue); }
+
+  /* CJK safeguards */
+  h1, h2, h3 { line-height: 1.2; }
+  .title-slide h1 { line-height: 1.15; }
+  .card, .col, .metric { overflow: hidden; }
+  .card .card-num, .col .col-num, .metric .label { overflow-wrap: break-word; }
+</style>
+</head>
+<body>
+<div class="deck">
+
+  <!-- 1. TITLE -->
+  <section class="slide title-slide active">
+    <div class="red-panel"></div>
+    <div class="yellow-circle"></div>
+    <div class="blue-tri"></div>
+    <div class="black-line-v"></div>
+    <div class="black-line-h"></div>
+    <div class="small-square"></div>
+    <div class="small-circle"></div>
+    <div class="content-area">
+      <div class="content-inner">
+        <div class="eyebrow"><span>BAUHAUS</span></div>
+        <h1>形式追随<br><span class="accent">功能</span></h1>
+        <p class="subtitle">每一个几何元素都有其存在的理由，设计不是装饰，而是沟通。</p>
+      </div>
+    </div>
+    <div class="bottom-bar">
+      <span>FORM FOLLOWS FUNCTION</span>
+      <span class="num">01</span>
+      <span>2026</span>
+    </div>
+  </section>
+
+  <!-- 2. SECTION -->
+  <section class="slide section-slide">
+    <div class="geo geo-circle"></div>
+    <div class="geo geo-square"></div>
+    <div class="content-area">
+      <div class="big-num">01</div>
+      <div class="section-label">CHAPTER ONE</div>
+      <h2>框架总览</h2>
+      <div class="bar"></div>
+    </div>
+    <div class="bottom-bar"><span>BAUHAUS</span><span class="num">02</span><span>SECTION</span></div>
+  </section>
+
+  <!-- 3. CONTENT -->
+  <section class="slide content-slide">
+    <div class="content-area">
+      <div class="header">
+        <div class="eyebrow"><span>THREE LEVELS</span></div>
+        <h2>会议里和 AI 协同，有三个 Level</h2>
+      </div>
+      <div class="body">
+        <div class="card">
+          <div class="shape"></div>
+          <div class="card-num">LEVEL 01</div>
+          <h3>会后总结</h3>
+          <p>开完会后，AI 总结纪要和待办——人类处理待办</p>
+        </div>
+        <div class="card">
+          <div class="shape"></div>
+          <div class="card-num">LEVEL 02</div>
+          <h3>Agent 代办</h3>
+          <p>开完会后，Agent 总结纪要和待办——Agent 主动处理待办</p>
+        </div>
+        <div class="card">
+          <div class="shape"></div>
+          <div class="card-num">LEVEL 03</div>
+          <h3>边聊边干</h3>
+          <p>Agent 加入会议，会上直接处理待办——边聊边干</p>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-bar"><span>BAUHAUS</span><span class="num">03</span><span>CONTENT</span></div>
+  </section>
+
+  <!-- 4. TWO COL -->
+  <section class="slide two-col">
+    <div class="content-area">
+      <div class="header">
+        <div class="eyebrow"><span>LEVEL 03</span></div>
+        <h2>不用等会开完</h2>
+      </div>
+      <div class="cols">
+        <div class="col a">
+          <div class="col-num">01</div>
+          <h3>提问，秒答</h3>
+          <p>数据、进展、结论，问出口的瞬间就有答案</p>
+        </div>
+        <div class="col b">
+          <div class="col-num">02</div>
+          <h3>说需求，秒执行</h3>
+          <p>一句话交代清楚，Agent 会上就动手</p>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-bar"><span>BAUHAUS</span><span class="num">04</span><span>TWO COL</span></div>
+  </section>
+
+  <!-- 5. QUOTE -->
+  <section class="slide quote-slide">
+    <div class="geo geo-circle"></div>
+    <div class="geo geo-square"></div>
+    <div class="content-area">
+      <blockquote>找一个舒服漂亮的地方，喝着咖啡，聊着天，让想法碰撞出<span class="red">火花</span>，剩下的，交给 Agent。</blockquote>
+      <div class="bar"></div>
+      <cite>未来的工作方式 · 2026</cite>
+    </div>
+    <div class="bottom-bar"><span>BAUHAUS</span><span class="num">05</span><span>QUOTE</span></div>
+  </section>
+
+  <!-- 6. DATA -->
+  <section class="slide data-slide">
+    <div class="content-area">
+      <div class="header">
+        <div class="eyebrow"><span>03 · 实录</span></div>
+        <h2>边聊边干，长这样</h2>
+      </div>
+      <div class="metrics">
+        <div class="metric"><div class="value">5.6<span class="unit">万元</span></div><div class="label">华东地区 7 月销售额</div></div>
+        <div class="metric"><div class="value">分钟<span class="unit">级</span></div><div class="label">全国销售数据 HTML 报表</div></div>
+        <div class="metric"><div class="value">0<span class="unit">次</span></div><div class="label">JD 全文直接贴进会中弹幕</div></div>
+        <div class="metric"><div class="value">3<span class="unit"> Level</span></div><div class="label">从会后排待办到会上直接执行</div></div>
+      </div>
+    </div>
+    <div class="bottom-bar"><span>BAUHAUS</span><span class="num">06</span><span>DATA</span></div>
+  </section>
+
+  <!-- 7. CLOSING -->
+  <section class="slide closing-slide">
+    <div class="content-area">
+      <h2>想体验 <span class="accent">Level 3</span>?</h2>
+      <div class="bar"></div>
+      <p>用飞书扫码加入「智能体会」早鸟体验群</p>
+      <div class="shapes"><span class="s-circle"></span><span class="s-square"></span><span class="s-tri"></span></div>
+    </div>
+    <div class="bottom-bar"><span>BAUHAUS</span><span class="num">07</span><span>END</span></div>
+  </section>
+
+  <div class="nav-hint">← → ARROWS TO NAVIGATE</div>
+  <div class="counter" id="counter">01 / 07</div>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const counter = document.getElementById('counter');
+  let current = 0;
+  function show(i) {
+    slides[current].classList.remove('active');
+    current = (i + slides.length) % slides.length;
+    slides[current].classList.add('active');
+    counter.textContent = String(current + 1).padStart(2, '0') + ' / ' + String(slides.length).padStart(2, '0');
+  }
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); show(current + 1); }
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); show(current - 1); }
+    if (e.key === 'Home') { e.preventDefault(); show(0); }
+    if (e.key === 'End') { e.preventDefault(); show(slides.length - 1); }
+  });
+</script>
+</body>
+</html>

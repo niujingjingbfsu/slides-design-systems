@@ -1,6 +1,6 @@
-# HTML Slides Design Systems — 完整合辑（20 套）
+# HTML Slides Design Systems — 完整合辑（25 套）
 
-> 20 套 HTML Slides 模板的设计规范总集，分三批：冷静克制/轻盈/高端留白（7 套）、色彩鲜明（7 套）、绘画风格（6 套）。
+> 25 套 HTML Slides 模板的设计规范总集，分四批：冷静克制/轻盈/高端留白（7 套）、色彩鲜明（7 套）、绘画风格（6 套）、电影与艺术运动（5 套）。
 > 每套包含 YAML design tokens + 设计理念 + 色彩/字体/版式/组件规则 + Do/Don't + Coding Agent 提示词。
 > 将对应章节交给 AI coding agent，即可按规范生成一致风格的幻灯片。
 >
@@ -44,6 +44,16 @@
 | 18 | Nouveau（新艺术运动） | 绘画风格 | 森林绿/暖金·双层金线框·角花纹章 | `24-nouveau.html` |
 | 19 | Deco（装饰艺术） | 绘画风格 | 深夜蓝/金·旭日放射·Chevron·绝对对称 | `25-deco.html` |
 | 20 | Ukiyo-e（浮世绘） | 绘画风格 | 靛蓝/朱红印章·富士三角·波浪带 | `26-ukiyo-e.html` |
+
+### 第四批 · 电影与艺术运动
+
+| 编号 | 名称 | 方向 | 核心特征 | HTML 文件 |
+|---|---|---|---|---|
+| 21 | Wes Anderson（韦斯·安德森） | 电影风格 | 奶油底·粉彩·金色画框·对称构图 | `21-wes-anderson.html` |
+| 22 | Bauhaus（包豪斯） | 艺术运动 | 三原色·圆方三角·粗黑线·黑底栏 | `22-bauhaus.html` |
+| 23 | Risograph（孔版印刷） | 印刷工艺 | 荧光色·套色错位·网点·对位标记 | `23-risograph.html` |
+| 24 | Vaporwave（蒸汽波） | 数字美学 | 霓虹粉青·透视网格·落日棕榈·扫描线 | `24-vaporwave.html` |
+| 25 | Wong Kar-wai（王家卫） | 电影风格 | 暗暖底·红绿 wash·光斑·颗粒·手写体 | `25-wong-kar-wai.html` |
 
 ---
 ---
@@ -846,9 +856,524 @@ typography:
 ---
 ---
 
+# 第四批 · 电影与艺术运动
+
+---
+
+## 21 · Wes Anderson（韦斯·安德森）
+
+> HTML 文件：`21-wes-anderson.html`
+
+```yaml
+name: Wes Anderson
+version: 1.0.0
+category: film-cinematic
+tags: [wes-anderson, symmetry, pastel, vintage, film, cream, centered]
+
+color:
+  background: "#F5E6D3"
+  foreground: "#5C4A32"
+  pink: "#E8B4B8"
+  mint: "#A8C4B8"
+  mustard: "#D4C896"
+  gold: "#C4A265"
+  brown_light: "#8B6F47"
+  white: "#FBF7F0"
+
+typography:
+  heading:
+    family: "Jost, Noto Serif SC, sans-serif"
+    weight: 600
+    letter_spacing: "0.02-0.04em"
+  body:
+    family: "Noto Serif SC, serif"
+    weight: 400
+  display:
+    family: "Jost, Noto Serif SC, sans-serif"
+    weight: "300-600"
+    letter_spacing: "0.3-0.5em"
+  scale:
+    display: "96px"
+    h1: "88px"
+    h2: "44px"
+    body: "15px"
+    caption: "11px"
+
+spacing:
+  slide_padding: "72px 100px"
+  gap_large: "28px"
+  gap_medium: "20px"
+
+radius:
+  base: "0px"
+  dot: "50%"
+
+shadow:
+  none: true
+
+border:
+  width: "1px"
+  style: "solid"
+  color: "#C4A265"
+```
+
+# Wes Anderson — Design Specification
+
+**气质**：
+
+韦斯·安德森电影美学的抽象转译。严格对称的构图、低饱和粉彩色系、复古画框与角标、Futura 式几何无衬线字体。像《布达佩斯大饭店》的粉色电梯、《月升王国》的童子军徽章——精致、怀旧、带一点冷幽默。
+
+**色彩规则**：
+
+- **背景**：暖奶油色 `#F5E6D3`，不是纯白。
+- **三粉彩**：灰粉 `#E8B4B8`、薄荷 `#A8C4B8`、芥末 `#D4C896`，用于色块、圆点、卡片强调。
+- **金色** `#C4A265`：画框线、分隔线、角标。
+- **棕色** `#5C4A32`：所有文字颜色。
+- **禁止**：高饱和色、渐变色、深色背景、阴影。
+
+**字体规则**：
+
+- 英文用 **Jost**（Futura 的 Google Fonts 替代），字重 300-600，大字距。
+- 中文用 **Noto Serif SC**，与 Jost 的几何感搭配。
+- 标签/页脚用小号大写字母 + 0.3-0.5em 字距。
+
+**版式规则**：
+
+- **绝对对称**：所有内容水平居中，左右元素镜像。
+- **复古画框**：每页有 1px 金色内边框 + 四角 L 形角标。
+- **粉彩圆点**：作为装饰元素散落，低透明度，不遮挡内容。
+- 卡片为白底 + 1px 金色边框，无圆角无阴影。
+- 双栏用粉/薄荷实色背景。
+
+**组件模式**：
+
+- **画框**：`position: absolute` 的 1px 金色边框，距边缘 28px。
+- **角标**：四个 16px 的 L 形金色线条。
+- **圆点**：`border-radius: 50%`，粉彩填充，opacity 0.5。
+- **分隔线**：60-80px 宽，1px 金色，居中。
+- **卡片**：白底 + 金色边框，顶部有彩色圆点。
+
+**Do / Don't**：
+
+- **Do** 保持严格对称，所有内容居中。
+- **Do** 用粉彩色块和圆点做装饰。
+- **Do** 用 Jost 大写字母做标签和页脚。
+- **Don't** 不要用圆角、阴影、渐变。
+- **Don't** 不要打破对称构图。
+- **Don't** 不要用高饱和色或深色背景。
+
+**实现注意事项**：
+
+- 字体栈：`'Jost', 'Noto Serif SC', sans-serif`。Jost 是 Futura 的 Google Fonts 替代，不要用其他无衬线字体。
+- 页脚是深色文字在奶油色背景上，无 bottom-band。footer 高 40px，content-area padding-bottom 60px。
+- nav-hint 在 `bottom: 52px`（footer 40px + 12px 间距）。
+- 画框和角标用 `pointer-events: none`，z-index 5-6，内容 z-index 2。
+- 粉彩圆点装饰必须 `pointer-events: none` 且 z-index 1，不能遮挡文字。
+- 所有卡片/双栏/指标容器 `overflow: hidden`。
+- 标签文字（card-num, col-num）加 `white-space: nowrap`。
+- 数据页 4 列指标，第 2、3 个有粉彩背景。
+
+**给 Coding Agent 的提示**：
+
+> 请读取本 DESIGN.md。背景为暖奶油色 #F5E6D3。每页有 1px 金色 #C4A265 复古画框和四角 L 形角标。英文用 Jost（Futura 风格），中文用 Noto Serif SC。装饰元素为灰粉 #E8B4B8、薄荷 #A8C4B8、芥末 #D4C896 的半透明圆点。严格对称居中构图。卡片白底+金色边框无圆角无阴影。禁止渐变、阴影、高饱和色。
+
+---
+
+## 22 · Bauhaus（包豪斯）
+
+> HTML 文件：`22-bauhaus.html`
+
+```yaml
+name: Bauhaus
+version: 1.0.0
+category: art-movement
+tags: [bauhaus, geometric, primary-colors, functional, black-lines, circles, triangles]
+
+color:
+  background: "#F5F1E8"
+  foreground: "#111111"
+  red: "#E63946"
+  yellow: "#F4D35E"
+  blue: "#1D3557"
+
+typography:
+  heading:
+    family: "Inter, Noto Sans SC, sans-serif"
+    weight: 900
+    letter_spacing: "-0.02em"
+  body:
+    family: "Noto Sans SC, Inter, sans-serif"
+    weight: 400
+  scale:
+    display: "104px"
+    h1: "96px"
+    h2: "44px"
+    body: "15px"
+    caption: "11px"
+
+spacing:
+  slide_padding: "64px 80px"
+  gap_large: "24px"
+  gap_medium: "16px"
+
+radius:
+  base: "0px"
+  circle: "50%"
+
+shadow:
+  none: true
+
+border:
+  width: "3px"
+  style: "solid"
+  color: "#111111"
+```
+
+# Bauhaus — Design Specification
+
+**气质**：
+
+包豪斯设计语言的抽象转译。三原色（红/黄/蓝）+ 黑 + 米白，圆方三角几何元素，粗黑线条分割空间，无衬线粗体字。功能主义、理性、经典——每个元素都有其存在的理由。
+
+**色彩规则**：
+
+- **背景**：暖米白 `#F5F1E8`。
+- **三原色**：红 `#E63946`、黄 `#F4D35E`、蓝 `#1D3557`。
+- **黑色** `#111`：线条、边框、文字、底部栏。
+- **禁止**：渐变色、阴影、圆角（圆形元素除外）、中间色。
+
+**字体规则**：
+
+- 英文用 **Inter 900**，紧字距 -0.02em。
+- 中文用 **Noto Sans SC 900**。
+- 标签用小号大写字母 + 0.3-0.5em 字距，黑底黄字或黑字。
+
+**版式规则**：
+
+- **几何分割**：用粗黑线条（3-4px）和色块分割画面。
+- **圆方三角**：圆形=红，方形=黄，三角形=蓝，贯穿全套。
+- **黑色底栏**：每页底部 60px 黑底白字栏（封面 80px）。
+- 卡片为米白底 + 3px 黑边框 + 8px 彩色顶边。
+- 双栏用红/黄实色背景。
+
+**实现注意事项**：
+
+- 字体栈：`'Inter', 'Noto Sans SC', sans-serif`。
+- **底部黑栏高度**：普通页 60px，封面 80px。content-area padding-bottom 80px（封面 120px）。
+- **nav-hint/counter 在 `bottom: 76px`**（60px 栏 + 16px 间距）；封面页在 `bottom: 96px`。
+- 装饰几何元素必须 `pointer-events: none; z-index: 1`，内容 z-index 2+。
+- 封面有红色左面板（380px 宽），注意内容区 padding-left: 460px。
+- 数据页 4 列，颜色交替：米白/红/黄/蓝。
+- 所有容器 `overflow: hidden`。
+
+**给 Coding Agent 的提示**：
+
+> 背景米白 #F5F1E8。三原色红 #E63946、黄 #F4D35E、蓝 #1D3557，黑色 #111。粗黑线条和 3px 黑边框。圆=红、方=黄、三角=蓝。每页底部 60px 黑底白字栏。英文 Inter 900，中文 Noto Sans SC 900。禁止渐变、阴影、圆角。
+
+---
+
+## 23 · Risograph（孔版印刷）
+
+> HTML 文件：`23-risograph.html`
+
+```yaml
+name: Risograph
+version: 1.0.0
+category: print-craft
+tags: [risograph, print, halftone, misregistration, fluorescent, independent-press, zine]
+
+color:
+  background: "#F8F4E9"
+  foreground: "#111111"
+  pink: "#FF6B9D"
+  blue: "#4ECDC4"
+  yellow: "#FFE66D"
+
+typography:
+  heading:
+    family: "Noto Sans SC, Space Mono, sans-serif"
+    weight: 900
+  body:
+    family: "Noto Sans SC, Space Mono, sans-serif"
+    weight: 400
+  mono:
+    family: "Space Mono, Noto Sans SC, monospace"
+    weight: 700
+    letter_spacing: "0.25-0.3em"
+  scale:
+    display: "96px"
+    h1: "88px"
+    h2: "44px"
+    body: "15px"
+    caption: "10px"
+
+spacing:
+  slide_padding: "64px 80px"
+  gap_large: "24px"
+  gap_medium: "16px"
+
+radius:
+  base: "0px"
+
+shadow:
+  none: true
+
+border:
+  width: "2px"
+  style: "solid"
+  color: "#111111"
+```
+
+# Risograph — Design Specification
+
+**气质**：
+
+孔版印刷（Risograph）美学的抽象转译。限定荧光色叠印、套色错位、网点质感、黑色边框、对位标记。像独立出版物、Zine、朋克海报——不完美的、手工感的、每一张都略有不同。
+
+**色彩规则**：
+
+- **背景**：暖纸白 `#F8F4E9`。
+- **三色叠印**：荧光粉 `#FF6B9D`、荧光青 `#4ECDC4`、荧光黄 `#FFE66D`。
+- **黑色** `#111`：文字、边框、对位标记。
+- 色块用 `mix-blend-mode: multiply` 模拟油墨叠印效果。
+- **禁止**：渐变色、阴影、圆角、非限定色。
+
+**字体规则**：
+
+- 英文等宽用 **Space Mono 700**，标签/页脚/数字。
+- 中文用 **Noto Sans SC 900** 标题。
+- 大标题用 `text-shadow` 模拟套色错位（粉/青双色偏移 2-3px）。
+
+**版式规则**：
+
+- **网点质感**：全站覆盖 `radial-gradient` 圆点纹理，opacity 0.08。
+- **对位标记**：四角十字线，印刷套色标记。
+- **2px 黑边框**：所有卡片、标签、按钮。
+- 标签为黑边框 + 荧光黄底。
+- 双栏用粉/青实色背景。
+
+**实现注意事项**：
+
+- 字体栈：标题 `'Noto Sans SC', 'Space Mono', sans-serif`；等宽 `'Space Mono', 'Noto Sans SC', monospace`。
+- 套色错位效果只用于大标题（text-shadow），不要用于正文（影响可读性）。
+- 色块装饰用 `mix-blend-mode: multiply` + `transform: translate()` 偏移 3-4px。
+- 网点纹理用 CSS `radial-gradient(circle, rgba(0,0,0,0.08) 1px, transparent 1px); background-size: 4px 4px`。
+- 对位标记用 `::before` 和 `::after` 画十字线。
+- 页脚深色文字无 bottom-band，高 40px，content-area padding-bottom 64px。
+- nav-hint 在 `bottom: 52px`。
+- 所有容器 `overflow: hidden`。
+
+**给 Coding Agent 的提示**：
+
+> 背景纸白 #F8F4E9。荧光粉 #FF6B9D、青 #4ECDC4、黄 #FFE66D 三色叠印，用 mix-blend-mode: multiply。大标题用 text-shadow 模拟套色错位。全站网点纹理 + 四角对位标记 + 2px 黑边框。英文 Space Mono，中文 Noto Sans SC 900。禁止渐变、阴影、圆角。
+
+---
+
+## 24 · Vaporwave（蒸汽波）
+
+> HTML 文件：`24-vaporwave.html`
+
+```yaml
+name: Vaporwave
+version: 1.0.0
+category: digital-aesthetic
+tags: [vaporwave, neon, 80s, retro-future, synthwave, grid, gradient, glow]
+
+color:
+  background: "linear-gradient(180deg, #2D1B5E, #1A0B2E, #0D0520)"
+  foreground: "#FFFFFF"
+  pink: "#FF71CE"
+  cyan: "#01CDFE"
+  purple: "#B967FF"
+  yellow: "#FFFB96"
+  green: "#05FFA1"
+  dark: "#1A0B2E"
+
+typography:
+  heading:
+    family: "Orbitron, Noto Serif SC, sans-serif"
+    weight: 900
+    letter_spacing: "0.02-0.04em"
+  body:
+    family: "Noto Serif SC, Orbitron, serif"
+    weight: 400
+  scale:
+    display: "88px"
+    h1: "80px"
+    h2: "44px"
+    body: "15px"
+    caption: "10px"
+
+spacing:
+  slide_padding: "64px 80px"
+  gap_large: "24px"
+  gap_medium: "16px"
+
+radius:
+  base: "0px"
+
+shadow:
+  neon: "0 0 20px var(--pink)"
+
+border:
+  width: "1px"
+  style: "solid"
+  color: "rgba(255,113,206,0.3)"
+```
+
+# Vaporwave — Design Specification
+
+**气质**：
+
+蒸汽波美学的抽象转译。粉/青/紫霓虹渐变、透视网格地平线、落日与棕榈树剪影、扫描线、发光文字。80 年代复古未来主义——数字时代的怀旧与反讽。
+
+**色彩规则**：
+
+- **背景**：深紫渐变 `#2D1B5E → #1A0B2E → #0D0520`。
+- **霓虹三色**：粉 `#FF71CE`、青 `#01CDFE`、紫 `#B967FF`。
+- **点缀**：黄 `#FFFB96`、绿 `#05FFA1`。
+- 文字白色 + `text-shadow` 霓虹发光。
+- **禁止**：实色卡片、无发光的彩色文字、暖色渐变。
+
+**字体规则**：
+
+- 英文用 **Orbitron 900**，几何未来感。
+- 中文用 **Noto Serif SC**，与 Orbitron 的几何感形成对比。
+- 标签用小号大写 + 0.3-0.5em 字距 + 青色发光。
+
+**版式规则**：
+
+- **透视网格**：底部 SVG 网格，粉色纵向线 + 青色横向线，低透明度。
+- **扫描线**：全站覆盖 `repeating-linear-gradient` 扫描线。
+- **毛玻璃卡片**：`rgba(255,255,255,0.06)` + `backdrop-filter: blur()` + 霓虹边框。
+- 双栏用粉/青半透明背景。
+- 底部半透明栏 + 模糊效果。
+
+**实现注意事项**：
+
+- 字体栈：`'Orbitron', 'Noto Serif SC', sans-serif`。
+- **卡片必须用毛玻璃半透明**（`rgba(255,255,255,0.06-0.12)` + `backdrop-filter: blur(4-8px)`），禁止实色白卡片。
+- 霓虹发光用 `text-shadow` 和 `box-shadow`，不要用 `filter: drop-shadow`（性能差）。
+- 透视网格用 SVG 绘制，`preserveAspectRatio="none"` 拉伸。
+- 扫描线 z-index: 50，`pointer-events: none`。
+- 底部栏高 50px，`rgba(13,5,32,0.7)` + `backdrop-filter: blur(8px)`。
+- content-area padding-bottom 72px，nav-hint/counter 在 `bottom: 62px`。
+- 所有容器 `overflow: hidden`。
+- 棕榈树剪影用内联 SVG，不要用图片或 emoji。
+
+**给 Coding Agent 的提示**：
+
+> 背景深紫渐变 #2D1B5E→#0D0520。霓虹粉 #FF71CE、青 #01CDFE、紫 #B967FF。底部透视网格（SVG），全站扫描线。英文 Orbitron 900，中文 Noto Serif SC。卡片毛玻璃半透明 + 霓虹边框 + 发光。底部半透明模糊栏。禁止实色卡片、暖色渐变。
+
+---
+
+## 25 · Wong Kar-wai（王家卫）
+
+> HTML 文件：`25-wong-kar-wai.html`
+
+```yaml
+name: Wong Kar-wai
+version: 1.0.0
+category: cinema
+tags: [wong-kar-wai, cinematic, moody, bokeh, film-grain, vignette, warm, nostalgia, handwritten]
+
+color:
+  background: "#1A0E0A"
+  foreground: "#FFF0DC"
+  amber: "#E8A040"
+  red: "#C83020"
+  green: "#2A8060"
+  muted: "rgba(255,200,150,0.5)"
+
+typography:
+  heading:
+    family: "Noto Serif SC, serif"
+    weight: 900
+    letter_spacing: "0.06-0.08em"
+  body:
+    family: "Noto Serif SC, serif"
+    weight: 400
+  accent:
+    family: "Ma Shan Zheng, cursive"
+    weight: 400
+  scale:
+    display: "96px"
+    h1: "88px"
+    h2: "44px"
+    body: "15px"
+    caption: "11px"
+
+spacing:
+  slide_padding: "72px 100px"
+  gap_large: "28px"
+  gap_medium: "16px"
+
+radius:
+  base: "0px"
+
+shadow:
+  glow: "0 0 30px rgba(200,80,40,0.3)"
+
+border:
+  width: "1px"
+  style: "solid"
+  color: "rgba(255,200,150,0.2)"
+```
+
+# Wong Kar-wai — Design Specification
+
+**气质**：
+
+王家卫电影美学的抽象转译。暗暖底色、红绿对比色 wash、失焦光斑、胶片颗粒、暗角、光线条纹。衬线宋体 + 手写体点缀——情绪、暧昧、怀旧、时间感。
+
+**色彩规则**：
+
+- **背景**：深暖黑 `#1A0E0A`。
+- **三色 wash**：红 `#C83020`、绿 `#2A8060`、琥珀 `#E8A040`，用 `radial-gradient` 低透明度叠加。
+- **文字**：暖白 `#FFF0DC`，辅助文字用 `rgba(255,200,150,0.3-0.5)`。
+- 手写体用琥珀色 `#E8A040` + 暖光发光。
+- **禁止**：实色卡片、硬边框、冷色调、高饱和荧光色。
+
+**字体规则**：
+
+- 中文用 **Noto Serif SC**，标题 900，正文 400。
+- **Ma Shan Zheng**（马善政手写体）仅用于关键词点缀，不用于整句。
+- 标签用小号字 + 0.3-0.5em 字距，暖白低透明度。
+
+**版式规则**：
+
+- **色彩 wash**：每页 2-3 个 `radial-gradient` 色块叠加，营造电影色彩氛围。
+- **失焦光斑**：3-5 个 `border-radius: 50%` + `filter: blur(30px)` 的圆形。
+- **胶片颗粒**：SVG `feTurbulence` 噪点纹理，opacity 0.1。
+- **暗角**：`box-shadow: inset 0 0 180px 60px rgba(0,0,0,0.6)`。
+- **光线条纹**：1-2 条斜向渐变细线，`filter: blur(1px)`。
+- 卡片无边框，仅顶部 1px 暖色线 + 40px 短色线。
+- 双栏用红/绿半透明背景 + 左侧 2px 色线。
+
+**实现注意事项**：
+
+- 字体栈：`'Noto Serif SC', serif`；手写体 `'Ma Shan Zheng', cursive`。
+- **Ma Shan Zheng 只用于 2-4 字关键词**（如"相遇""火花""框架"），不用于整句或标题主体。
+- 色彩 wash 透明度控制在 0.12-0.35，不能影响文字可读性。
+- 光斑 blur 至少 30px，直径 100-240px，opacity 通过 rgba alpha 控制。
+- 颗粒用内联 SVG data URI，不要用外部图片。
+- 暗角 z-index: 40，颗粒 z-index: 50，都要 `pointer-events: none`。
+- 页脚无 bottom-band，暖白低透明度文字，高 40px。
+- content-area padding-bottom 64px，nav-hint/counter 在 `bottom: 52px`。
+- 所有容器 `overflow: hidden`。
+- 卡片背景用 `rgba(255,240,220,0.04)`，几乎透明。
+
+**给 Coding Agent 的提示**：
+
+> 背景深暖黑 #1A0E0A。红绿琥珀三色 radial-gradient wash 叠加。失焦光斑（blur 30px）+ 胶片颗粒（SVG noise）+ 暗角 + 光线条纹。中文 Noto Serif SC 900，Ma Shan Zheng 手写体仅点缀关键词。卡片无边框，仅顶部暖色细线。暖白文字。禁止实色卡片、硬边框、冷色。
+
+---
+
+---
+
 # 通用技术约定
 
-所有 20 套模板共享以下技术规范：
+所有 25 套模板共享以下技术规范：
 
 - **画布**：1280×720px（16:9），`transform: scale()` 自适应视口（`@media (max-aspect-ratio: 16/9)` 按宽度缩放，否则按高度）
 - **导航**：← → 方向键翻页，Space 下一页，Home/End 跳首尾

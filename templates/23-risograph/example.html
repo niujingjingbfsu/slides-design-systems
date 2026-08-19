@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Risograph — Slides Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Noto+Sans+SC:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #F8F4E9;
+    --pink: #FF6B9D;
+    --blue: #4ECDC4;
+    --yellow: #FFE66D;
+    --black: #111111;
+    --font-mono: 'Space Mono', 'Noto Sans SC', monospace;
+    --font-cn: 'Noto Sans SC', 'Space Mono', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body { height: 100%; background: #2a2a2a; overflow: hidden; font-family: var(--font-cn); }
+
+  .deck { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center; }
+
+  .slide {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 1280px; height: 720px; background: var(--paper);
+    display: none; flex-direction: column; overflow: hidden;
+  }
+  .slide.active { display: flex; }
+
+  .slide .content-area, .slide .content, .slide .grid { min-height: 0; }
+
+  /* Halftone texture */
+  .tex { position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(0,0,0,0.08) 1px, transparent 1px); background-size: 4px 4px; z-index: 1; pointer-events: none; }
+
+  /* Registration marks */
+  .reg { position: absolute; width: 18px; height: 18px; z-index: 50; }
+  .reg::before { content: ''; position: absolute; top: 50%; left: 0; right: 0; height: 1.5px; background: var(--black); }
+  .reg::after { content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 1.5px; background: var(--black); }
+  .reg.tl { top: 20px; left: 20px; }
+  .reg.tr { top: 20px; right: 20px; }
+  .reg.bl { bottom: 20px; left: 20px; }
+  .reg.br { bottom: 20px; right: 20px; }
+
+  /* Content area */
+  .content-area { position: relative; z-index: 2; flex: 1; padding: 64px 80px 64px; display: flex; flex-direction: column; }
+
+  /* Typography */
+  .eyebrow { font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--black); margin-bottom: 24px; background: var(--yellow); padding: 5px 14px; display: inline-block; border: 2px solid var(--black); align-self: flex-start; }
+  h1 { font-family: var(--font-cn); font-size: 88px; font-weight: 900; color: var(--black); line-height: 1.15; letter-spacing: -0.01em; }
+  h2 { font-family: var(--font-cn); font-size: 44px; font-weight: 900; color: var(--black); line-height: 1.2; }
+  h3 { font-family: var(--font-cn); font-size: 22px; font-weight: 900; color: var(--black); line-height: 1.2; }
+  .subtitle { font-family: var(--font-cn); font-size: 17px; color: #333; line-height: 1.8; margin-top: 20px; font-weight: 400; }
+  p, li { font-family: var(--font-cn); font-size: 15px; color: #222; line-height: 1.8; }
+
+  /* Riso offset effect for headings */
+  .riso-title { text-shadow: 2.5px 1.5px 0 var(--pink), -2.5px -1.5px 0 var(--blue); }
+
+  /* Footer */
+  .footer { position: absolute; bottom: 0; left: 0; right: 0; height: 40px; display: flex; align-items: center; justify-content: space-between; padding: 0 80px; z-index: 10; font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--black); }
+
+  /* Nav hint */
+  .nav-hint { position: absolute; bottom: 52px; left: 50%; transform: translateX(-50%); font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.3em; color: rgba(17,17,17,0.3); z-index: 100; pointer-events: none; }
+  .counter { position: absolute; bottom: 52px; right: 60px; font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.15em; color: var(--black); z-index: 100; }
+
+  /* Color blocks */
+  .color-block { position: absolute; z-index: 0; pointer-events: none; }
+
+  /* === TITLE === */
+  .title-slide .content-area { justify-content: center; }
+  .title-slide .block-pink { top: 0; left: 0; width: 45%; height: 100%; background: var(--pink); opacity: 0.8; mix-blend-mode: multiply; transform: translate(-4px, 3px); }
+  .title-slide .block-blue { top: 0; right: 0; width: 40%; height: 100%; background: var(--blue); opacity: 0.7; mix-blend-mode: multiply; transform: translate(4px, -3px); }
+  .title-slide .block-yellow { bottom: 80px; left: 50%; transform: translateX(-50%); width: 300px; height: 120px; background: var(--yellow); opacity: 0.6; mix-blend-mode: multiply; }
+  .title-slide .content-inner { position: relative; z-index: 3; }
+  .title-slide h1 { font-size: 96px; }
+  .title-slide .edition { font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; margin-top: 28px; display: inline-block; background: var(--paper); padding: 8px 18px; border: 2px solid var(--black); }
+
+  /* === SECTION === */
+  .section-slide .content-area { justify-content: center; align-items: flex-start; }
+  .section-slide .big-num { font-family: var(--font-mono); font-size: 160px; font-weight: 700; color: var(--black); line-height: 0.9; text-shadow: 4px 4px 0 var(--pink), -4px -4px 0 var(--blue); }
+  .section-slide .section-label { font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: 0.4em; text-transform: uppercase; color: var(--black); margin: 20px 0; background: var(--blue); padding: 5px 14px; border: 2px solid var(--black); }
+  .section-slide h2 { font-size: 56px; }
+  .section-slide .deco-circle { position: absolute; right: 100px; top: 50%; transform: translateY(-50%); width: 200px; height: 200px; border-radius: 50%; background: var(--yellow); mix-blend-mode: multiply; opacity: 0.7; z-index: 0; }
+
+  /* === CONTENT === */
+  .content-slide .header { margin-bottom: 40px; }
+  .content-slide .body { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; flex: 1; }
+  .content-slide .card { background: var(--paper); border: 2px solid var(--black); padding: 28px 24px; display: flex; flex-direction: column; overflow: hidden; position: relative; }
+  .content-slide .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 8px; }
+  .content-slide .card:nth-child(1)::before { background: var(--pink); }
+  .content-slide .card:nth-child(2)::before { background: var(--blue); }
+  .content-slide .card:nth-child(3)::before { background: var(--yellow); }
+  .content-slide .card .card-num { font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.25em; color: var(--black); margin-bottom: 16px; }
+  .content-slide .card h3 { margin-bottom: 12px; }
+  .content-slide .card p { font-size: 14px; color: #333; line-height: 1.7; }
+
+  /* === TWO COL === */
+  .two-col .header { margin-bottom: 40px; }
+  .two-col .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; flex: 1; }
+  .two-col .col { padding: 40px 36px; display: flex; flex-direction: column; justify-content: center; overflow: hidden; border: 2px solid var(--black); position: relative; }
+  .two-col .col.a { background: var(--pink); }
+  .two-col .col.b { background: var(--blue); }
+  .two-col .col .col-num { font-family: var(--font-mono); font-size: 48px; font-weight: 700; line-height: 1; margin-bottom: 20px; color: var(--black); }
+  .two-col .col h3 { font-size: 28px; margin-bottom: 16px; }
+  .two-col .col p { font-size: 15px; line-height: 1.8; color: var(--black); }
+
+  /* === QUOTE === */
+  .quote-slide .content-area { justify-content: center; align-items: center; text-align: center; padding: 64px 140px 64px; }
+  .quote-slide blockquote { font-family: var(--font-cn); font-size: 40px; font-weight: 900; line-height: 1.7; color: var(--black); max-width: 860px; text-shadow: 2px 2px 0 var(--pink), -2px -2px 0 var(--blue); }
+  .quote-slide .rule { width: 80px; height: 3px; background: var(--black); margin: 28px auto; }
+  .quote-slide cite { font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: #444; font-style: normal; }
+
+  /* === DATA === */
+  .data-slide .header { margin-bottom: 36px; }
+  .data-slide .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; flex: 1; align-content: center; }
+  .data-slide .metric { text-align: center; padding: 36px 16px; border: 2px solid var(--black); overflow: hidden; position: relative; }
+  .data-slide .metric:nth-child(1) { background: var(--paper); }
+  .data-slide .metric:nth-child(2) { background: var(--pink); }
+  .data-slide .metric:nth-child(3) { background: var(--blue); }
+  .data-slide .metric:nth-child(4) { background: var(--yellow); }
+  .data-slide .metric .value { font-family: var(--font-mono); font-size: 48px; font-weight: 700; color: var(--black); line-height: 1.1; }
+  .data-slide .metric .unit { font-family: var(--font-cn); font-size: 18px; font-weight: 700; }
+  .data-slide .metric .label { margin-top: 12px; font-size: 12px; color: #222; line-height: 1.6; }
+
+  /* === CLOSING === */
+  .closing-slide .content-area { justify-content: center; align-items: center; text-align: center; }
+  .closing-slide h2 { font-size: 64px; }
+  .closing-slide .rule { width: 100px; height: 3px; background: var(--black); margin: 28px auto; }
+  .closing-slide p { font-size: 16px; color: #333; letter-spacing: 0.05em; margin-top: 16px; }
+  .closing-slide .edition { font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; margin-top: 36px; background: var(--paper); padding: 8px 20px; border: 2px solid var(--black); display: inline-block; }
+
+  /* CJK safeguards */
+  h1, h2, h3 { line-height: 1.2; }
+  .title-slide h1 { line-height: 1.15; }
+  .card, .col, .metric { overflow: hidden; }
+  .card .card-num, .eyebrow, .section-label { white-space: nowrap; overflow-wrap: break-word; }
+</style>
+</head>
+<body>
+<div class="deck">
+
+  <!-- 1. TITLE -->
+  <section class="slide title-slide active">
+    <div class="color-block block-pink"></div>
+    <div class="color-block block-blue"></div>
+    <div class="color-block block-yellow"></div>
+    <div class="tex"></div>
+    <div class="reg tl"></div><div class="reg tr"></div><div class="reg bl"></div><div class="reg br"></div>
+    <div class="content-area">
+      <div class="content-inner">
+        <div class="eyebrow">RISOGRAPH · 孔版印刷</div>
+        <h1 class="riso-title">不完美的<br>完美复制</h1>
+        <p class="subtitle">套色错位、网点质感、荧光油墨——<br>Riso 的魅力在于每一张都不同。</p>
+        <div class="edition">EDITION OF 100 · 2026</div>
+      </div>
+    </div>
+    <div class="footer"><span>RISO PRINT</span><span>MISREGISTER · HALFTONE</span></div>
+  </section>
+
+  <!-- 2. SECTION -->
+  <section class="slide section-slide">
+    <div class="deco-circle"></div>
+    <div class="tex"></div>
+    <div class="reg tl"></div><div class="reg tr"></div><div class="reg bl"></div><div class="reg br"></div>
+    <div class="content-area">
+      <div class="big-num">01</div>
+      <div class="section-label">CHAPTER ONE</div>
+      <h2>框架总览</h2>
+    </div>
+    <div class="footer"><span>RISO PRINT</span><span>MISREGISTER · HALFTONE</span></div>
+  </section>
+
+  <!-- 3. CONTENT -->
+  <section class="slide content-slide">
+    <div class="tex"></div>
+    <div class="reg tl"></div><div class="reg tr"></div><div class="reg bl"></div><div class="reg br"></div>
+    <div class="content-area">
+      <div class="header">
+        <div class="eyebrow">THREE LEVELS</div>
+        <h2>会议里和 AI 协同，有三个 Level</h2>
+      </div>
+      <div class="body">
+        <div class="card">
+          <div class="card-num">LEVEL 01</div>
+          <h3>会后总结</h3>
+          <p>开完会后，AI 总结纪要和待办——人类处理待办</p>
+        </div>
+        <div class="card">
+          <div class="card-num">LEVEL 02</div>
+          <h3>Agent 代办</h3>
+          <p>开完会后，Agent 总结纪要和待办——Agent 主动处理待办</p>
+        </div>
+        <div class="card">
+          <div class="card-num">LEVEL 03</div>
+          <h3>边聊边干</h3>
+          <p>Agent 加入会议，会上直接处理待办——边聊边干</p>
+        </div>
+      </div>
+    </div>
+    <div class="footer"><span>RISO PRINT</span><span>MISREGISTER · HALFTONE</span></div>
+  </section>
+
+  <!-- 4. TWO COL -->
+  <section class="slide two-col">
+    <div class="tex"></div>
+    <div class="reg tl"></div><div class="reg tr"></div><div class="reg bl"></div><div class="reg br"></div>
+    <div class="content-area">
+      <div class="header">
+        <div class="eyebrow">LEVEL 03</div>
+        <h2>不用等会开完</h2>
+      </div>
+      <div class="cols">
+        <div class="col a">
+          <div class="col-num">01</div>
+          <h3>提问，秒答</h3>
+          <p>数据、进展、结论，问出口的瞬间就有答案</p>
+        </div>
+        <div class="col b">
+          <div class="col-num">02</div>
+          <h3>说需求，秒执行</h3>
+          <p>一句话交代清楚，Agent 会上就动手</p>
+        </div>
+      </div>
+    </div>
+    <div class="footer"><span>RISO PRINT</span><span>MISREGISTER · HALFTONE</span></div>
+  </section>
+
+  <!-- 5. QUOTE -->
+  <section class="slide quote-slide">
+    <div class="tex"></div>
+    <div class="reg tl"></div><div class="reg tr"></div><div class="reg bl"></div><div class="reg br"></div>
+    <div class="content-area">
+      <blockquote>找一个舒服漂亮的地方，喝着咖啡，聊着天，让想法碰撞出火花，剩下的，交给 Agent。</blockquote>
+      <div class="rule"></div>
+      <cite>未来的工作方式 · 2026</cite>
+    </div>
+    <div class="footer"><span>RISO PRINT</span><span>MISREGISTER · HALFTONE</span></div>
+  </section>
+
+  <!-- 6. DATA -->
+  <section class="slide data-slide">
+    <div class="tex"></div>
+    <div class="reg tl"></div><div class="reg tr"></div><div class="reg bl"></div><div class="reg br"></div>
+    <div class="content-area">
+      <div class="header">
+        <div class="eyebrow">03 · 实录</div>
+        <h2>边聊边干，长这样</h2>
+      </div>
+      <div class="metrics">
+        <div class="metric"><div class="value">5.6<span class="unit">万元</span></div><div class="label">华东地区 7 月销售额</div></div>
+        <div class="metric"><div class="value">分钟<span class="unit">级</span></div><div class="label">全国销售数据 HTML 报表</div></div>
+        <div class="metric"><div class="value">0<span class="unit">次</span></div><div class="label">JD 全文直接贴进会中弹幕</div></div>
+        <div class="metric"><div class="value">3<span class="unit"> Level</span></div><div class="label">从会后排待办到会上直接执行</div></div>
+      </div>
+    </div>
+    <div class="footer"><span>RISO PRINT</span><span>MISREGISTER · HALFTONE</span></div>
+  </section>
+
+  <!-- 7. CLOSING -->
+  <section class="slide closing-slide">
+    <div class="tex"></div>
+    <div class="reg tl"></div><div class="reg tr"></div><div class="reg bl"></div><div class="reg br"></div>
+    <div class="content-area">
+      <h2 class="riso-title">想体验 Level 3?</h2>
+      <div class="rule"></div>
+      <p>用飞书扫码加入「智能体会」早鸟体验群</p>
+      <div class="edition">THANK YOU · 2026</div>
+    </div>
+    <div class="footer"><span>RISO PRINT</span><span>MISREGISTER · HALFTONE</span></div>
+  </section>
+
+  <div class="nav-hint">← → ARROWS TO NAVIGATE</div>
+  <div class="counter" id="counter">01 / 07</div>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const counter = document.getElementById('counter');
+  let current = 0;
+  function show(i) {
+    slides[current].classList.remove('active');
+    current = (i + slides.length) % slides.length;
+    slides[current].classList.add('active');
+    counter.textContent = String(current + 1).padStart(2, '0') + ' / ' + String(slides.length).padStart(2, '0');
+  }
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); show(current + 1); }
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); show(current - 1); }
+    if (e.key === 'Home') { e.preventDefault(); show(0); }
+    if (e.key === 'End') { e.preventDefault(); show(slides.length - 1); }
+  });
+</script>
+</body>
+</html>

@@ -4,19 +4,19 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 [![Live Preview](https://img.shields.io/badge/Live_Preview-GitHub_Pages-green?style=flat-square)](https://niujingjingbfsu.github.io/slides-design-systems/)
 
-> 20 套精心设计的 HTML 演示文稿模板，每套都是一套完整的设计系统——从色彩、字体到装饰语法全部锁定。
+> 25 套精心设计的 HTML 演示文稿模板，每套都是一套完整的设计系统——从色彩、字体到装饰语法全部锁定。
 > 零依赖、单文件、浏览器直接打开，也可作为 Claude Code / Cursor / Codex 等 AI 编程助手的 Skill 使用。
 
 **[在 GitHub 上查看源码 →](https://github.com/niujingjingbfsu/slides-design-systems)**
 
 ## 为什么做这个项目
 
-大多数 AI 生成的幻灯片都长一个样：紫渐变、Inter 字体、圆角卡片。这个项目提供 20 套**有明确审美主张**的设计系统，AI 照抄 token 就能生成视觉一致的幻灯片，不再"自由发挥"。
+大多数 AI 生成的幻灯片都长一个样：紫渐变、Inter 字体、圆角卡片。这个项目提供 25 套**有明确审美主张**的设计系统，AI 照抄 token 就能生成视觉一致的幻灯片，不再"自由发挥"。
 
 ## 特性
 
 - **零依赖** — 每个模板是单个 HTML 文件，内联 CSS/JS，无需 npm 或构建工具
-- **20 套设计系统** — 涵盖冷静克制、轻盈、高端留白、色彩鲜明、绘画风格五大方向
+- **25 套设计系统** — 涵盖冷静克制、轻盈、高端留白、色彩鲜明、绘画风格、电影与艺术运动六大方向
 - **DESIGN.md 规范** — 每套模板附带 YAML design tokens + 设计规则 + Do/Don't + Agent 提示词
 - **16:9 固定画布** — 1280×720 设计尺寸，`transform: scale()` 自适应任何屏幕
 - **键盘导航** — ← → 方向键、Space、Home/End
@@ -149,6 +149,38 @@
 
 <img src="templates/20-ukiyo-e/preview.png" width="800" alt="20 Ukiyo-e">
 
+---
+
+### 电影与艺术运动
+
+**21 Wes Anderson · 韦斯·安德森**
+
+<img src="templates/21-wes-anderson/preview.png" width="800" alt="21 Wes Anderson">
+
+---
+
+**22 Bauhaus · 包豪斯**
+
+<img src="templates/22-bauhaus/preview.png" width="800" alt="22 Bauhaus">
+
+---
+
+**23 Risograph · 孔版印刷**
+
+<img src="templates/23-risograph/preview.png" width="800" alt="23 Risograph">
+
+---
+
+**24 Vaporwave · 蒸汽波**
+
+<img src="templates/24-vaporwave/preview.png" width="800" alt="24 Vaporwave">
+
+---
+
+**25 Wong Kar-wai · 王家卫**
+
+<img src="templates/25-wong-kar-wai/preview.png" width="800" alt="25 Wong Kar-wai">
+
 ## 快速开始
 
 ### 直接使用
@@ -182,17 +214,17 @@ AI 会读取 `SKILL.md`，按照工作流：先确认需求 → 生成风格预�
 ```
 slides-design-systems/
 ├── SKILL.md                    # AI Skill 入口（工作流、规则、模板索引）
-├── DESIGN_SYSTEMS.md           # 20 套设计规范合辑（一份文件看全部）
+├── DESIGN_SYSTEMS.md           # 25 套设计规范合辑（一份文件看全部）
 ├── README.md
 ├── LICENSE
 └── templates/
-    ├── index.json              # 20 套模板的结构化元数据
+    ├── index.json              # 25 套模板的结构化元数据
     ├── 01-systems/
     │   ├── example.html        # 可运行的演示模板（7 个版式）
     │   ├── DESIGN.md           # 设计规范（YAML tokens + 规则 + Agent 提示词）
     │   └── preview.png         # 封面截图
     ├── 02-sei/
-    └── ... (共 20 套)
+    └── ... (共 25 套)
 ```
 
 ## DESIGN.md 是什么

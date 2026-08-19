@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wes Anderson — Slides Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F5E6D3;
+    --pink: #E8B4B8;
+    --mint: #A8C4B8;
+    --mustard: #D4C896;
+    --brown: #5C4A32;
+    --brown-light: #8B6F47;
+    --gold: #C4A265;
+    --white: #FBF7F0;
+    --font-display: 'Jost', 'Noto Serif SC', sans-serif;
+    --font-cn: 'Noto Serif SC', serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body { height: 100%; background: #2a2a2a; overflow: hidden; font-family: var(--font-cn); }
+
+  .deck { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center; }
+
+  .slide {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 1280px; height: 720px; background: var(--cream);
+    display: none; flex-direction: column; overflow: hidden;
+  }
+  .slide.active { display: flex; }
+
+  .slide .content-area, .slide .content, .slide .grid { min-height: 0; }
+
+  /* Frame */
+  .frame { position: absolute; top: 28px; left: 28px; right: 28px; bottom: 28px; border: 1px solid var(--gold); z-index: 5; pointer-events: none; }
+  .corner { position: absolute; width: 16px; height: 16px; border-color: var(--gold); border-style: solid; z-index: 6; }
+  .corner.tl { top: 27px; left: 27px; border-width: 2px 0 0 2px; }
+  .corner.tr { top: 27px; right: 27px; border-width: 2px 2px 0 0; }
+  .corner.bl { bottom: 27px; left: 27px; border-width: 0 0 2px 2px; }
+  .corner.br { bottom: 27px; right: 27px; border-width: 0 2px 2px 0; }
+
+  /* Content area */
+  .content-area { position: relative; z-index: 2; flex: 1; padding: 72px 100px 60px; display: flex; flex-direction: column; }
+
+  /* Typography */
+  .eyebrow { font-family: var(--font-display); font-size: 12px; font-weight: 600; letter-spacing: 0.4em; text-transform: uppercase; color: var(--brown-light); margin-bottom: 24px; }
+  h1 { font-family: var(--font-display); font-size: 88px; font-weight: 600; color: var(--brown); line-height: 1.15; letter-spacing: 0.04em; }
+  h2 { font-family: var(--font-display); font-size: 44px; font-weight: 600; color: var(--brown); line-height: 1.2; letter-spacing: 0.02em; }
+  .subtitle { font-family: var(--font-cn); font-size: 17px; color: var(--brown-light); line-height: 1.8; margin-top: 20px; font-weight: 400; }
+  p, li { font-family: var(--font-cn); font-size: 15px; color: var(--brown); line-height: 1.8; }
+
+  /* Footer */
+  .footer { position: absolute; bottom: 0; left: 0; right: 0; height: 40px; display: flex; align-items: center; justify-content: space-between; padding: 0 100px; z-index: 10; font-family: var(--font-display); font-size: 11px; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; color: var(--brown-light); }
+
+  /* Nav hint */
+  .nav-hint { position: absolute; bottom: 52px; left: 50%; transform: translateX(-50%); font-family: var(--font-display); font-size: 10px; letter-spacing: 0.3em; color: rgba(92,74,50,0.3); z-index: 100; pointer-events: none; }
+  .counter { position: absolute; bottom: 52px; right: 60px; font-family: var(--font-display); font-size: 11px; font-weight: 500; letter-spacing: 0.2em; color: var(--brown-light); z-index: 100; }
+
+  /* === TITLE SLIDE === */
+  .title-slide { justify-content: center; align-items: center; text-align: center; }
+  .title-slide .content-area { justify-content: center; align-items: center; text-align: center; padding: 72px 120px 60px; }
+  .title-slide .top-label { font-family: var(--font-display); font-size: 12px; font-weight: 600; letter-spacing: 0.5em; text-transform: uppercase; color: var(--brown-light); margin-bottom: 40px; }
+  .title-slide h1 { font-size: 96px; margin-bottom: 16px; }
+  .title-slide .rule { width: 80px; height: 1px; background: var(--gold); margin: 24px auto; }
+  .title-slide .meta { display: flex; gap: 48px; margin-top: 32px; font-family: var(--font-display); font-size: 11px; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; color: var(--brown-light); }
+  .title-dot { width: 100px; height: 100px; border-radius: 50%; opacity: 0.5; position: absolute; z-index: 1; }
+  .title-dot.pink { background: var(--pink); top: 140px; }
+  .title-dot.mint { background: var(--mint); bottom: 120px; left: 140px; width: 70px; height: 70px; }
+  .title-dot.mustard { background: var(--mustard); bottom: 120px; right: 140px; width: 70px; height: 70px; }
+
+  /* === SECTION SLIDE === */
+  .section-slide { justify-content: center; align-items: center; text-align: center; }
+  .section-slide .content-area { justify-content: center; align-items: center; text-align: center; }
+  .section-slide .num { font-family: var(--font-display); font-size: 120px; font-weight: 300; color: var(--pink); line-height: 1; margin-bottom: 16px; }
+  .section-slide .num-label { font-family: var(--font-display); font-size: 13px; font-weight: 600; letter-spacing: 0.5em; text-transform: uppercase; color: var(--brown-light); margin-bottom: 24px; }
+  .section-slide h2 { font-size: 56px; font-weight: 500; }
+  .section-slide .rule { width: 60px; height: 1px; background: var(--gold); margin: 28px auto 0; }
+
+  /* === CONTENT SLIDE === */
+  .content-slide .header { margin-bottom: 40px; }
+  .content-slide .body { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; flex: 1; }
+  .content-slide .card { background: var(--white); border: 1px solid var(--gold); padding: 32px 28px; display: flex; flex-direction: column; overflow: hidden; }
+  .content-slide .card .card-num { font-family: var(--font-display); font-size: 11px; font-weight: 600; letter-spacing: 0.3em; color: var(--brown-light); margin-bottom: 16px; }
+  .content-slide .card .card-dot { width: 36px; height: 36px; border-radius: 50%; margin-bottom: 20px; }
+  .content-slide .card:nth-child(1) .card-dot { background: var(--pink); }
+  .content-slide .card:nth-child(2) .card-dot { background: var(--mint); }
+  .content-slide .card:nth-child(3) .card-dot { background: var(--mustard); }
+  .content-slide .card h3 { font-family: var(--font-display); font-size: 22px; font-weight: 600; color: var(--brown); margin-bottom: 12px; line-height: 1.2; }
+  .content-slide .card p { font-size: 14px; color: var(--brown-light); line-height: 1.8; }
+
+  /* === TWO COL === */
+  .two-col .header { margin-bottom: 40px; }
+  .two-col .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; flex: 1; }
+  .two-col .col { padding: 40px 36px; display: flex; flex-direction: column; justify-content: center; overflow: hidden; }
+  .two-col .col.a { background: var(--pink); }
+  .two-col .col.b { background: var(--mint); }
+  .two-col .col .col-num { font-family: var(--font-display); font-size: 11px; font-weight: 600; letter-spacing: 0.3em; color: var(--brown); margin-bottom: 20px; opacity: 0.7; }
+  .two-col .col h3 { font-family: var(--font-display); font-size: 28px; font-weight: 600; color: var(--brown); margin-bottom: 16px; line-height: 1.2; }
+  .two-col .col p { font-size: 15px; color: var(--brown); line-height: 1.8; }
+
+  /* === QUOTE === */
+  .quote-slide { justify-content: center; align-items: center; text-align: center; }
+  .quote-slide .content-area { justify-content: center; align-items: center; text-align: center; padding: 72px 140px 60px; }
+  .quote-slide blockquote { font-family: var(--font-cn); font-size: 40px; font-weight: 700; line-height: 1.7; color: var(--brown); max-width: 820px; }
+  .quote-slide .rule { width: 60px; height: 1px; background: var(--gold); margin: 28px auto; }
+  .quote-slide cite { font-family: var(--font-display); font-size: 12px; font-weight: 500; letter-spacing: 0.35em; text-transform: uppercase; color: var(--brown-light); font-style: normal; }
+
+  /* === DATA === */
+  .data-slide .header { margin-bottom: 36px; }
+  .data-slide .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; flex: 1; align-content: center; }
+  .data-slide .metric { text-align: center; padding: 36px 16px; border-top: 2px solid var(--gold); background: var(--white); overflow: hidden; }
+  .data-slide .metric:nth-child(2) { background: var(--pink); }
+  .data-slide .metric:nth-child(3) { background: var(--mint); }
+  .data-slide .metric .value { font-family: var(--font-display); font-size: 52px; font-weight: 600; color: var(--brown); line-height: 1.1; }
+  .data-slide .metric:nth-child(2) .value, .data-slide .metric:nth-child(3) .value { color: var(--brown); }
+  .data-slide .metric .unit { font-family: var(--font-cn); font-size: 20px; font-weight: 400; }
+  .data-slide .metric .label { margin-top: 12px; font-size: 12px; color: var(--brown-light); line-height: 1.6; letter-spacing: 0.05em; }
+
+  /* === CLOSING === */
+  .closing-slide { justify-content: center; align-items: center; text-align: center; }
+  .closing-slide .content-area { justify-content: center; align-items: center; text-align: center; }
+  .closing-slide h2 { font-size: 64px; font-weight: 500; margin-bottom: 20px; }
+  .closing-slide .rule { width: 80px; height: 1px; background: var(--gold); margin: 24px auto; }
+  .closing-slide p { font-size: 16px; color: var(--brown-light); letter-spacing: 0.1em; margin-top: 16px; }
+  .closing-slide .dots { display: flex; gap: 16px; margin-top: 40px; }
+  .closing-slide .dots span { width: 16px; height: 16px; border-radius: 50%; }
+  .closing-slide .dots span:nth-child(1) { background: var(--pink); }
+  .closing-slide .dots span:nth-child(2) { background: var(--mint); }
+  .closing-slide .dots span:nth-child(3) { background: var(--mustard); }
+
+  /* CJK safeguards */
+  h1, h2, h3 { line-height: 1.2; }
+  .title-slide h1 { line-height: 1.15; }
+  .card, .col, .metric { overflow: hidden; }
+  .card .card-num, .col .col-num, .metric .label { white-space: nowrap; overflow-wrap: break-word; }
+</style>
+</head>
+<body>
+<div class="deck">
+
+  <!-- 1. TITLE -->
+  <section class="slide title-slide active">
+    <div class="title-dot pink"></div>
+    <div class="title-dot mint"></div>
+    <div class="title-dot mustard"></div>
+    <div class="frame"></div><div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+    <div class="content-area">
+      <div class="top-label">A PRESENTATION</div>
+      <h1>年度产品回顾</h1>
+      <div class="rule"></div>
+      <p class="subtitle">2026 · 飞书 AI Friendly</p>
+      <div class="meta"><span>PRODUCT REVIEW</span><span>2026</span><span>01 / 07</span></div>
+    </div>
+    <div class="footer"><span>WES ANDERSON</span><span>SYMMETRY · PASTEL</span></div>
+  </section>
+
+  <!-- 2. SECTION -->
+  <section class="slide section-slide">
+    <div class="frame"></div><div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+    <div class="content-area">
+      <div class="num">01</div>
+      <div class="num-label">CHAPTER ONE</div>
+      <h2>框架总览</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="footer"><span>WES ANDERSON</span><span>SYMMETRY · PASTEL</span></div>
+  </section>
+
+  <!-- 3. CONTENT 3-COL -->
+  <section class="slide content-slide">
+    <div class="frame"></div><div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+    <div class="content-area">
+      <div class="header">
+        <div class="eyebrow">THREE LEVELS</div>
+        <h2>会议里和 AI 协同，有三个 Level</h2>
+      </div>
+      <div class="body">
+        <div class="card">
+          <div class="card-dot"></div>
+          <div class="card-num">LEVEL 01</div>
+          <h3>会后总结</h3>
+          <p>开完会后，AI 总结纪要和待办——人类处理待办</p>
+        </div>
+        <div class="card">
+          <div class="card-dot"></div>
+          <div class="card-num">LEVEL 02</div>
+          <h3>Agent 代办</h3>
+          <p>开完会后，Agent 总结纪要和待办——Agent 主动处理待办</p>
+        </div>
+        <div class="card">
+          <div class="card-dot"></div>
+          <div class="card-num">LEVEL 03</div>
+          <h3>边聊边干</h3>
+          <p>Agent 加入会议，会上直接处理待办——边聊边干</p>
+        </div>
+      </div>
+    </div>
+    <div class="footer"><span>WES ANDERSON</span><span>SYMMETRY · PASTEL</span></div>
+  </section>
+
+  <!-- 4. TWO COL -->
+  <section class="slide two-col">
+    <div class="frame"></div><div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+    <div class="content-area">
+      <div class="header">
+        <div class="eyebrow">LEVEL 03</div>
+        <h2>不用等会开完</h2>
+      </div>
+      <div class="cols">
+        <div class="col a">
+          <div class="col-num">01</div>
+          <h3>提问，秒答</h3>
+          <p>数据、进展、结论，问出口的瞬间就有答案</p>
+        </div>
+        <div class="col b">
+          <div class="col-num">02</div>
+          <h3>说需求，秒执行</h3>
+          <p>一句话交代清楚，Agent 会上就动手</p>
+        </div>
+      </div>
+    </div>
+    <div class="footer"><span>WES ANDERSON</span><span>SYMMETRY · PASTEL</span></div>
+  </section>
+
+  <!-- 5. QUOTE -->
+  <section class="slide quote-slide">
+    <div class="frame"></div><div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+    <div class="content-area">
+      <blockquote>找一个舒服漂亮的地方，喝着咖啡，聊着天，让想法碰撞出火花，剩下的，交给 Agent。</blockquote>
+      <div class="rule"></div>
+      <cite>未来的工作方式 · 2026</cite>
+    </div>
+    <div class="footer"><span>WES ANDERSON</span><span>SYMMETRY · PASTEL</span></div>
+  </section>
+
+  <!-- 6. DATA -->
+  <section class="slide data-slide">
+    <div class="frame"></div><div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+    <div class="content-area">
+      <div class="header">
+        <div class="eyebrow">03 · 实录</div>
+        <h2>边聊边干，长这样</h2>
+      </div>
+      <div class="metrics">
+        <div class="metric"><div class="value">5.6<span class="unit">万元</span></div><div class="label">华东地区 7 月销售额</div></div>
+        <div class="metric"><div class="value">分钟<span class="unit">级</span></div><div class="label">全国销售数据 HTML 报表</div></div>
+        <div class="metric"><div class="value">0<span class="unit">次</span></div><div class="label">JD 全文直接贴进会中弹幕</div></div>
+        <div class="metric"><div class="value">3<span class="unit"> Level</span></div><div class="label">从会后排待办到会上直接执行</div></div>
+      </div>
+    </div>
+    <div class="footer"><span>WES ANDERSON</span><span>SYMMETRY · PASTEL</span></div>
+  </section>
+
+  <!-- 7. CLOSING -->
+  <section class="slide closing-slide">
+    <div class="frame"></div><div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+    <div class="content-area">
+      <h2>想体验 Level 3?</h2>
+      <div class="rule"></div>
+      <p>用飞书扫码加入「智能体会」早鸟体验群</p>
+      <div class="dots"><span></span><span></span><span></span></div>
+    </div>
+    <div class="footer"><span>WES ANDERSON</span><span>SYMMETRY · PASTEL</span></div>
+  </section>
+
+  <div class="nav-hint">← → ARROWS TO NAVIGATE</div>
+  <div class="counter" id="counter">01 / 07</div>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const counter = document.getElementById('counter');
+  let current = 0;
+  function show(i) {
+    slides[current].classList.remove('active');
+    current = (i + slides.length) % slides.length;
+    slides[current].classList.add('active');
+    counter.textContent = String(current + 1).padStart(2, '0') + ' / ' + String(slides.length).padStart(2, '0');
+  }
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); show(current + 1); }
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); show(current - 1); }
+    if (e.key === 'Home') { e.preventDefault(); show(0); }
+    if (e.key === 'End') { e.preventDefault(); show(slides.length - 1); }
+  });
+</script>
+</body>
+</html>
