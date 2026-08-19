@@ -432,6 +432,11 @@
     overflow-wrap: break-word; word-break: break-word;
   }
 
+
+  /* Footer spacing fix */
+  .slide > .footer { margin-top: 24px; flex-shrink: 0; }
+  .slide > .cards, .slide > .cols, .slide > .metrics, .slide > .body { flex-shrink: 1; min-height: 0; }
+
 </style>
 </head>
 <body>

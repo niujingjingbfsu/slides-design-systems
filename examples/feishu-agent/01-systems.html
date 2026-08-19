@@ -17,8 +17,8 @@
     --accent-soft: rgba(184, 92, 56, 0.10);
     --line: rgba(26, 26, 26, 0.12);
     --grid: rgba(26, 26, 26, 0.035);
-    --font-mono: 'JetBrains Mono', 'Noto Sans SC', ui-monospace, 'SF Mono', Menlo, monospace
-    --font-sans: 'Inter', 'Noto Sans SC', -apple-system, sans-serif
+    --font-mono: 'JetBrains Mono', 'Noto Sans SC', ui-monospace, 'SF Mono', Menlo, monospace;
+    --font-sans: 'Inter', 'Noto Sans SC', -apple-system, sans-serif;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -26,8 +26,7 @@
   html, body {
     height: 100%;
     background: #2A2926;
-    font-family: var(--font-mono)
-    overflow: hidden
+    font-family: var(--font-mono); overflow: hidden
     }
 
   .deck { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; }
@@ -72,9 +71,7 @@
   }
 
   .slide-title {
-    font-family: var(--font-mono)
-    font-size: 44px
-    font-weight: 700;
+    font-family: var(--font-mono); font-size: 44px; font-weight: 700;
     letter-spacing: -0.02em;
     line-height: 1.1;
     margin-top: 20px;
@@ -125,9 +122,7 @@
   .title-slide h1 .accent { color: var(--accent); }
   .title-slide .subtitle {
     margin-top: 28px;
-    font-family: var(--font-sans)
-    font-size: 18px
-    color: var(--muted);
+    font-family: var(--font-sans); font-size: 18px; color: var(--muted);
     font-weight: 300;
     max-width: 520px;
     line-height: 1.6;
@@ -182,9 +177,7 @@
     flex: 1;
   }
   .content-slide .lead {
-    font-family: var(--font-sans)
-    font-size: 17px
-    line-height: 1.7;
+    font-family: var(--font-sans); font-size: 17px; line-height: 1.7;
     color: #44403C;
     font-weight: 300;
   }
@@ -195,9 +188,7 @@
     gap: 20px;
   }
   .content-slide li {
-    font-family: var(--font-sans)
-    font-size: 15px
-    line-height: 1.6;
+    font-family: var(--font-sans); font-size: 15px; line-height: 1.6;
     padding-left: 24px;
     position: relative;
     color: #3A3733;
@@ -212,9 +203,7 @@
     background: var(--accent);
   }
   .content-slide li strong {
-    font-family: var(--font-mono)
-    font-weight: 500
-    color: var(--fg);
+    font-family: var(--font-mono); font-weight: 500; color: var(--fg);
     display: block;
     font-size: 13px;
     margin-bottom: 4px;
@@ -244,15 +233,11 @@
     margin-bottom: 16px;
   }
   .two-col .col h3 {
-    font-family: var(--font-mono)
-    font-size: 22px
-    font-weight: 700;
+    font-family: var(--font-mono); font-size: 22px; font-weight: 700;
     margin-bottom: 16px;
   }
   .two-col .col p {
-    font-family: var(--font-sans)
-    font-size: 14px
-    line-height: 1.7;
+    font-family: var(--font-sans); font-size: 14px; line-height: 1.7;
     color: #555049;
     font-weight: 300;
   }
@@ -276,10 +261,7 @@
     font-family: var(--font-sans)
   }
   .quote-slide blockquote::before {
-    content: '"'
-    font-family: var(--font-mono)
-    color: var(--accent)
-    font-size: 80px;
+    content: '"'; font-family: var(--font-mono); color: var(--accent); font-size: 80px;
     line-height: 0;
     position: relative;
     top: 20px;
@@ -324,9 +306,7 @@
     font-weight: 500;
   }
   .data-slide .metric .label {
-    font-family: var(--font-sans)
-    font-size: 13px
-    color: var(--muted);
+    font-family: var(--font-sans); font-size: 13px; color: var(--muted);
     line-height: 1.5;
     margin-top: 12px;
   }
@@ -347,9 +327,7 @@
   .closing-slide h2 .accent { color: var(--accent); }
   .closing-slide p {
     margin-top: 24px;
-    font-family: var(--font-sans)
-    font-size: 16px
-    color: var(--muted);
+    font-family: var(--font-sans); font-size: 16px; color: var(--muted);
     font-weight: 300;
   }
   .closing-slide .corner-mark {
@@ -370,9 +348,7 @@
     left: 50%;
     transform: translateX(-50%);
     color: rgba(255,255,255,0.35);
-    font-family: var(--font-mono)
-    font-size: 11px
-    letter-spacing: 0.15em;
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em;
     z-index: 100;
     pointer-events: none;
   }
@@ -381,9 +357,7 @@
     bottom: 16px;
     right: 24px;
     color: rgba(255,255,255,0.5);
-    font-family: var(--font-mono)
-    font-size: 12px
-    z-index: 100;
+    font-family: var(--font-mono); font-size: 12px; z-index: 100;
     letter-spacing: 0.1em;
   }
 
@@ -426,6 +400,11 @@
   .slide blockquote, .slide span, .slide div {
     overflow-wrap: break-word; word-break: break-word;
   }
+
+
+  /* Footer spacing fix */
+  .slide > .footer { margin-top: 24px; flex-shrink: 0; }
+  .slide > .cards, .slide > .cols, .slide > .metrics, .slide > .body { flex-shrink: 1; min-height: 0; }
 
 </style>
 </head>
