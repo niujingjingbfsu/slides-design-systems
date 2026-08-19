@@ -446,7 +446,7 @@ Some templates have their own decorative elements at the bottom (colored bands, 
 
 **Strategy A — Integrate into the band** (e.g., 15-mineral-strata): If the template has a colored bottom band, make `.progress-bar` background transparent, use light text on the dark band, and set its height to match the band height per slide type. The progress strip sits at the top edge of the band.
 
-**Strategy B — Position above the decoration** (e.g., 16-iron-line-halo): If the template has a decorative border (32px SVG wave, etc.), set `.progress-bar { bottom: <decoration-height>px; }` so it sits above the decoration on the slide background. Increase `.slide { padding-bottom }` accordingly.
+**Strategy B — Position above the decoration** (e.g., 16-iron-line-halo, 17-cobalt-circles): If the template has a decorative border (32px SVG wave, fret-border, etc.), set `.progress-bar { bottom: <decoration-height>px; }` so it sits above the decoration on the slide background. Increase `.slide { padding-bottom }` accordingly (must be ≥ decoration-height + progress-bar-height). This was the #1 cause of "text cut off at bottom" bugs — always check for bottom:0 elements before setting progress bar to bottom:0.
 
 **Always remove old navigation elements**: Before adding the progress system, scan for and remove any pre-existing `.bottom-bar`, `.counter`, `.footer`, `.page-num`, `.page-indicator` elements — they will overlap with the new progress bar. The migration script handles `.footer`/`.counter`/`.page-num` but templates may use custom class names (e.g., vaporwave's `.bottom-bar`).
 
