@@ -1,12 +1,13 @@
 <!DOCTYPE html>
+
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>BRUTAL — Slide Template</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;600;800;900&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&amp;family=Inter:wght@400;600;800;900&amp;family=Noto+Sans+SC:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
 <style>
   :root {
     --bg: #FFFFFF;
@@ -145,138 +146,245 @@
   .slide > .footer { margin-top: auto; flex-shrink: 0; }
   .slide > .cards, .slide > .cols, .slide > .metrics, .slide > .body { flex-shrink: 1; min-height: 0; }
 
+
+  /* === Progress system === */
+  .slide { padding-bottom: 80px !important; }
+  .title-slide { padding-bottom: 90px !important; }
+  .progress-bar {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 56px; display: flex; align-items: center; justify-content: space-between;
+    padding: 0 60px; z-index: 50;
+    background: var(--black, #111);
+    border-top: none;
+  }
+  .progress-bar .pb-section {
+    font-family: var(--font-sans); font-size: 12px; font-weight: 700;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    color: rgba(255,255,255,0.7); min-width: 180px;
+  }
+  .progress-bar .pb-page {
+    font-family: var(--font-sans); font-size: 16px; font-weight: 700;
+    letter-spacing: 0.1em; color: var(--yellow, #FFD600);
+  }
+  .progress-strip {
+    position: absolute; top: -8px; left: 50%; transform: translateX(-50%);
+    display: flex; align-items: center; height: 14px;
+  }
+  .progress-strip .seg {
+    width: 40px; height: 6px; border-radius: 0;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    margin: 0 4px; transition: all 0.25s;
+    
+  }
+  .progress-strip .seg.past {
+    background: rgba(255,255,255,0.5);
+    border-color: rgba(255,255,255,0.5);
+  }
+  .progress-strip .seg.current {
+    background: var(--yellow, #FFD600);
+    border-color: var(--yellow, #FFD600);
+    
+  }
+  .progress-strip .seg.seg-gap { margin-left: 22px; }
+  .nav-hint { display: none !important; }
 </style>
 </head>
 <body>
 <div class="deck">
 
-  <section class="slide title-slide active">
-    <div class="shapes">
-      <div class="shape sq-y"></div>
-      <div class="shape cr"></div>
-      <div class="shape tr"></div>
-    </div>
-    <span class="badge">// RAW DESIGN SYSTEM</span>
-    <h1>BRU<span class="yellow-bg">TAL</span><br><span class="red-text">ISM</span></h1>
-    <p class="subtitle">Thick borders. Hard shadows. Primary colors. No apologies — a presentation template that hits back.</p>
-    <div class="footer">
-      <span><span class="tag">BRUTAL</span></span>
-      <span>01 / 07</span>
-    </div>
-  </section>
 
-  <section class="slide section-slide">
-    <div class="big-num">02</div>
-    <div class="content">
-      <span class="label">SECTION 02</span>
-      <h2>NO <span class="accent">MERCY</span><br>DESIGN.</h2>
-    </div>
-    <div class="footer">
-      <span><span class="tag">BRUTAL</span></span>
-      <span>02 / 07</span>
-    </div>
-  </section>
 
-  <section class="slide content-slide">
-    <div class="header">
-      <div class="icon">✦</div>
-      <h2>Three rules</h2>
-    </div>
-    <div class="cards">
-      <div class="card">
-        <div class="num">01</div>
-        <h3>Thick borders</h3>
-        <p>Every element gets a 4px black border. No invisible edges, no subtle separators.</p>
-      </div>
-      <div class="card">
-        <div class="num">02</div>
-        <h3>Hard shadows</h3>
-        <p>8px offset, zero blur, pure black. Shadows are structural, not decorative.</p>
-      </div>
-      <div class="card">
-        <div class="num">03</div>
-        <h3>Loud colors</h3>
-        <p>Red, yellow, blue — straight from the tube. No pastels, no gradients, no fear.</p>
-      </div>
-    </div>
-    <div class="footer">
-      <span><span class="tag">BRUTAL</span></span>
-      <span>03 / 07</span>
-    </div>
-  </section>
 
-  <section class="slide two-col">
-    <div class="header">
-      <h2>Pick your weapon</h2>
-    </div>
-    <div class="cols">
-      <div class="col a">
-        <span class="col-label">Light</span>
-        <h3>White heat</h3>
-        <p>White background with black borders and primary-color blocks. Maximum contrast, maximum energy. Best for slides that need to shout.</p>
-        <div class="big">100%</div>
-      </div>
-      <div class="col b">
-        <span class="col-label">Dark</span>
-        <h3>Black out</h3>
-        <p>Black background with yellow and red accents. Turns the aggression up to eleven. Best for keynote closers and bold statements.</p>
-        <div class="big">11/10</div>
-      </div>
-    </div>
-    <div class="footer">
-      <span><span class="tag">BRUTAL</span></span>
-      <span>04 / 07</span>
-    </div>
-  </section>
 
-  <section class="slide quote-slide">
-    <div class="quote-box">
-      <blockquote>Good design is <span class="red">invisible.</span><br>Bad design is <span class="red">unforgettable.</span></blockquote>
-      <cite>— BRUTALIST MANIFESTO</cite>
-    </div>
-    <div class="footer">
-      <span><span class="tag">BRUTAL</span></span>
-      <span>05 / 07</span>
-    </div>
-  </section>
 
-  <section class="slide data-slide">
-    <div class="header">
-      <h2>By the numbers</h2>
-    </div>
-    <div class="metrics">
-      <div class="metric"><div class="value">4px</div><div class="label">Border width</div></div>
-      <div class="metric"><div class="value">8px</div><div class="label">Shadow offset</div></div>
-      <div class="metric"><div class="value">3</div><div class="label">Primary colors</div></div>
-      <div class="metric"><div class="value">0</div><div class="label">Rounded corners</div></div>
-    </div>
-    <div class="footer">
-      <span><span class="tag">BRUTAL</span></span>
-      <span>06 / 07</span>
-    </div>
-  </section>
 
-  <section class="slide closing-slide">
-    <h2>THE <span class="red">END.</span></h2>
-    <p>Questions? Bring them.</p>
-    <div class="btn">Get in touch →</div>
-    <div class="footer">
-      <span><span class="tag">BRUTAL</span></span>
-      <span>07 / 07</span>
-    </div>
-  </section>
-
-  <div class="nav-hint">← → ARROWS TO NAVIGATE</div>
+<div class="nav-hint">← → ARROWS TO NAVIGATE</div>
+<section class="slide title-slide active" data-section="BRUTAL">
+<div class="shapes">
+<div class="shape sq-y"></div>
+<div class="shape cr"></div>
+<div class="shape tr"></div>
 </div>
+<span class="badge">// RAW DESIGN SYSTEM</span>
+<h1>BRU<span class="yellow-bg">TAL</span><br/><span class="red-text">ISM</span></h1>
+<p class="subtitle">Thick borders. Hard shadows. Primary colors. No apologies — a presentation template that hits back.</p>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide section-slide" data-section="结构">
+<div class="big-num">02</div>
+<div class="content">
+<span class="label">SECTION 02</span>
+<h2>NO <span class="accent">MERCY</span><br/>DESIGN.</h2>
+</div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide content-slide" data-section="结构">
+<div class="header">
+<div class="icon">✦</div>
+<h2>Three rules</h2>
+</div>
+<div class="cards">
+<div class="card">
+<div class="num">01</div>
+<h3>Thick borders</h3>
+<p>Every element gets a 4px black border. No invisible edges, no subtle separators.</p>
+</div>
+<div class="card">
+<div class="num">02</div>
+<h3>Hard shadows</h3>
+<p>8px offset, zero blur, pure black. Shadows are structural, not decorative.</p>
+</div>
+<div class="card">
+<div class="num">03</div>
+<h3>Loud colors</h3>
+<p>Red, yellow, blue — straight from the tube. No pastels, no gradients, no fear.</p>
+</div>
+</div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide two-col" data-section="结构">
+<div class="header">
+<h2>Pick your weapon</h2>
+</div>
+<div class="cols">
+<div class="col a">
+<span class="col-label">Light</span>
+<h3>White heat</h3>
+<p>White background with black borders and primary-color blocks. Maximum contrast, maximum energy. Best for slides that need to shout.</p>
+<div class="big">100%</div>
+</div>
+<div class="col b">
+<span class="col-label">Dark</span>
+<h3>Black out</h3>
+<p>Black background with yellow and red accents. Turns the aggression up to eleven. Best for keynote closers and bold statements.</p>
+<div class="big">11/10</div>
+</div>
+</div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide section-slide" data-section="力量">
+<div class="big-num">02</div>
+<div class="content">
+<span class="label">SECTION 02</span>
+<h2>力量</h2>
+</div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide data-slide" data-section="力量">
+<div class="header">
+<h2>By the numbers</h2>
+</div>
+<div class="metrics">
+<div class="metric"><div class="value">4px</div><div class="label">Border width</div></div>
+<div class="metric"><div class="value">8px</div><div class="label">Shadow offset</div></div>
+<div class="metric"><div class="value">3</div><div class="label">Primary colors</div></div>
+<div class="metric"><div class="value">0</div><div class="label">Rounded corners</div></div>
+</div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide section-slide" data-section="真实">
+<div class="big-num">03</div>
+<div class="content">
+<span class="label">SECTION 02</span>
+<h2>真实</h2>
+</div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide quote-slide" data-section="真实">
+<div class="quote-box">
+<blockquote>Good design is <span class="red">invisible.</span><br/>Bad design is <span class="red">unforgettable.</span></blockquote>
+<cite>— BRUTALIST MANIFESTO</cite>
+</div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide closing-slide" data-section="END">
+<h2>THE <span class="red">END.</span></h2>
+<p>Questions? Bring them.</p>
+<div class="btn">Get in touch →</div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section></div>
+
 <script>
-  const slides = document.querySelectorAll('.slide'); let current = 0;
-  function show(i) { slides[current].classList.remove('active'); current = (i + slides.length) % slides.length; slides[current].classList.add('active'); }
-  document.addEventListener('keydown', e => {
-    if (e.key==='ArrowRight'||e.key==='ArrowDown'||e.key===' ') { e.preventDefault(); show(current+1); }
-    if (e.key==='ArrowLeft'||e.key==='ArrowUp') { e.preventDefault(); show(current-1); }
-    if (e.key==='Home') { e.preventDefault(); show(0); }
-    if (e.key==='End') { e.preventDefault(); show(slides.length-1); }
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
+  let current = 0;
+  slides.forEach((s, i) => { if (s.classList.contains('active')) current = i; });
+
+  function buildProgress() {
+    const sections = Array.from(slides).map(s => s.dataset.section || '');
+    document.querySelectorAll('.progress-strip').forEach(strip => {
+      let lastSection = null;
+      sections.forEach((section, i) => {
+        const seg = document.createElement('div');
+        seg.className = 'seg';
+        if (lastSection !== null && section !== lastSection) seg.classList.add('seg-gap');
+        strip.appendChild(seg);
+        lastSection = section;
+      });
+    });
+  }
+
+  function updateUI(idx) {
+    const sectionName = slides[idx].dataset.section || '';
+    const pageStr = String(idx + 1).padStart(2, '0') + ' / ' + String(total).padStart(2, '0');
+    document.querySelectorAll('.progress-bar').forEach(bar => {
+      const label = bar.querySelector('.pb-section');
+      const page = bar.querySelector('.pb-page');
+      if (label) label.textContent = sectionName;
+      if (page) page.textContent = pageStr;
+    });
+    document.querySelectorAll('.progress-strip').forEach(strip => {
+      strip.querySelectorAll('.seg').forEach((seg, i) => {
+        seg.classList.toggle('current', i === idx);
+        seg.classList.toggle('past', i < idx);
+      });
+    });
+  }
+
+  function show(i) {
+    slides[current].classList.remove('active');
+    current = (i + total) % total;
+    slides[current].classList.add('active');
+    updateUI(current);
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); show(current + 1); }
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); show(current - 1); }
+    if (e.key === 'Home') { e.preventDefault(); show(0); }
+    if (e.key === 'End') { e.preventDefault(); show(total - 1); }
   });
-</script>
-</body>
+
+  buildProgress();
+  updateUI(current);
+</script></body>
 </html>

@@ -1,12 +1,13 @@
 <!DOCTYPE html>
+
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>NOUVEAU — Slide Template</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Noto+Serif+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&amp;family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&amp;family=Noto+Serif+SC:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
 <style>
   :root {
     --bg: #F0E6D3;
@@ -146,139 +147,269 @@
   .slide > .footer { margin-top: auto; flex-shrink: 0; }
   .slide > .cards, .slide > .cols, .slide > .metrics, .slide > .body { flex-shrink: 1; min-height: 0; }
 
+
+  /* === Progress system === */
+  .slide { padding-bottom: 80px !important; }
+  .title-slide { padding-bottom: 90px !important; }
+  .progress-bar {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 56px; display: flex; align-items: center; justify-content: space-between;
+    padding: 0 60px; z-index: 50;
+    background: var(--cream, #F8F4EB);
+    border-top: 1px solid rgba(140,110,50,0.2);
+  }
+  .progress-bar .pb-section {
+    font-family: var(--font-serif, serif); font-size: 12px; font-weight: 700;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--muted); min-width: 180px;
+  }
+  .progress-bar .pb-page {
+    font-family: var(--font-sans, sans-serif); font-size: 16px; font-weight: 700;
+    letter-spacing: 0.1em; color: var(--gold, #8C6E32);
+  }
+  .progress-strip {
+    position: absolute; top: -8px; left: 50%; transform: translateX(-50%);
+    display: flex; align-items: center; height: 14px;
+  }
+  .progress-strip .seg {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: rgba(80,60,30,0.12);
+    border: 1px solid rgba(80,60,30,0.2);
+    margin: 0 4px; transition: all 0.25s;
+    
+  }
+  .progress-strip .seg.past {
+    background: rgba(140,110,50,0.4);
+    border-color: rgba(140,110,50,0.4);
+  }
+  .progress-strip .seg.current {
+    background: var(--gold, #8C6E32);
+    border-color: var(--gold, #8C6E32);
+    width:14px;height:14px;
+  }
+  .progress-strip .seg.seg-gap { margin-left: 26px; }
+  .nav-hint { display: none !important; }
 </style>
 </head>
 <body>
 <div class="deck">
 
-  <section class="slide title-slide active">
-    <div class="border-frame"></div>
-    <div class="corner tl"><svg viewBox="0 0 40 40"><path d="M2 38 Q2 2 38 2" stroke="#B8944F" stroke-width="1.5" fill="none"/><circle cx="2" cy="38" r="3" fill="#B8944F"/><path d="M8 32 Q8 8 32 8" stroke="#B8944F" stroke-width="0.5" fill="none" opacity="0.5"/></svg></div>
-    <div class="corner tr"><svg viewBox="0 0 40 40"><path d="M2 38 Q2 2 38 2" stroke="#B8944F" stroke-width="1.5" fill="none"/><circle cx="2" cy="38" r="3" fill="#B8944F"/><path d="M8 32 Q8 8 32 8" stroke="#B8944F" stroke-width="0.5" fill="none" opacity="0.5"/></svg></div>
-    <div class="corner bl"><svg viewBox="0 0 40 40"><path d="M2 38 Q2 2 38 2" stroke="#B8944F" stroke-width="1.5" fill="none"/><circle cx="2" cy="38" r="3" fill="#B8944F"/><path d="M8 32 Q8 8 32 8" stroke="#B8944F" stroke-width="0.5" fill="none" opacity="0.5"/></svg></div>
-    <div class="corner br"><svg viewBox="0 0 40 40"><path d="M2 38 Q2 2 38 2" stroke="#B8944F" stroke-width="1.5" fill="none"/><circle cx="2" cy="38" r="3" fill="#B8944F"/><path d="M8 32 Q8 8 32 8" stroke="#B8944F" stroke-width="0.5" fill="none" opacity="0.5"/></svg></div>
-    <div class="medallion">
-      <svg viewBox="0 0 320 320">
-        <circle cx="160" cy="160" r="150" fill="none" stroke="#B8944F" stroke-width="1.5"/>
-        <circle cx="160" cy="160" r="140" fill="none" stroke="#B8944F" stroke-width="0.5" opacity="0.5"/>
-        <path d="M160 20 Q180 80 160 160 Q140 80 160 20" fill="#2D4A3E" opacity="0.15"/>
-        <path d="M160 300 Q140 240 160 160 Q180 240 160 300" fill="#7D5A6E" opacity="0.15"/>
-        <path d="M20 160 Q80 140 160 160 Q80 180 20 160" fill="#2D4A3E" opacity="0.1"/>
-        <path d="M300 160 Q240 180 160 160 Q240 140 300 160" fill="#7D5A6E" opacity="0.1"/>
-        <circle cx="160" cy="160" r="60" fill="none" stroke="#B8944F" stroke-width="1"/>
-        <path d="M160 100 Q200 130 160 160 Q120 130 160 100" fill="#B8944F" opacity="0.2"/>
-        <path d="M160 220 Q120 190 160 160 Q200 190 160 220" fill="#2D4A3E" opacity="0.15"/>
-      </svg>
-    </div>
-    <div class="label">Chapitre Vingt-Quatre</div>
-    <h1>L'Art <em>Nouveau</em></h1>
-    <div class="ornament-divider">&#10086;</div>
-    <p class="subtitle">A presentation system inspired by 1900s Paris — flowing curves, floral ornament, and the beauty of the organic line.</p>
-    <div class="footer"><span>Art Nouveau</span><span class="ornament">&#10086;</span><span>01 / 07</span></div>
-  </section>
 
-  <section class="slide section-slide">
-    <div class="border-frame"></div>
-    <div class="deco"><svg viewBox="0 0 500 500"><circle cx="250" cy="250" r="240" fill="none" stroke="#2D4A3E" stroke-width="2"/><circle cx="250" cy="250" r="200" fill="none" stroke="#B8944F" stroke-width="1"/><path d="M250 10 Q300 150 250 250 Q200 150 250 10" fill="#2D4A3E" opacity="0.3"/><path d="M250 490 Q200 350 250 250 Q300 350 250 490" fill="#7D5A6E" opacity="0.3"/></svg></div>
-    <div class="num">— II —</div>
-    <h2>The <em>Organic</em> Line</h2>
-    <div class="ornament-divider">&#10086;</div>
-    <p>Every border is a vine. Every curve is a stem. Structure grows from nature, not from the grid.</p>
-    <div class="footer"><span>Art Nouveau</span><span class="ornament">&#10086;</span><span>02 / 07</span></div>
-  </section>
 
-  <section class="slide content-slide">
-    <div class="border-frame"></div>
-    <div class="header">
-      <div class="label">Principes</div>
-      <h2>Three <em>ornaments</em></h2>
-    </div>
-    <div class="cards">
-      <div class="card">
-        <div class="ornament-circle">&#10048;</div>
-        <h3>Floral <em>motifs</em></h3>
-        <div class="divider"></div>
-        <p>Lilies, vines, and irises wind through borders and medallions. Nature is the only ornament that never repeats itself.</p>
-      </div>
-      <div class="card">
-        <div class="ornament-circle">&#9705;</div>
-        <h3>Flowing <em>curves</em></h3>
-        <div class="divider"></div>
-        <p>The whiplash line — a single, uninterrupted curve that moves like a stem reaching for light. No straight edges where a curve will do.</p>
-      </div>
-      <div class="card">
-        <div class="ornament-circle">&#10022;</div>
-        <h3>Muted <em>palette</em></h3>
-        <div class="divider"></div>
-        <p>Moss green, ochre gold, dusty purple on aged cream. Colors that look like they've lived on a wall for a hundred years.</p>
-      </div>
-    </div>
-    <div class="footer"><span>Art Nouveau</span><span class="ornament">&#10086;</span><span>03 / 07</span></div>
-  </section>
 
-  <section class="slide two-col">
-    <div class="border-frame"></div>
-    <div class="header"><h2>Two <em>movements</em></h2></div>
-    <div class="cols">
-      <div class="col a">
-        <div class="tag">— Ecole de Paris</div>
-        <h3>Guimard & <em>Mucha</em></h3>
-        <p>The French branch: theatrical posters, arched frames, women with hair of flowing vines. Ornament as celebration.</p>
-        <div class="stat">1895<em> — Paris</em></div>
-      </div>
-      <div class="col b">
-        <div class="tag">— Wiener Secession</div>
-        <h3>Klimt & <em>Hoffmann</em></h3>
-        <p>The Viennese branch: geometric restraint, gold leaf, squares within squares. Ornament as meditation.</p>
-        <div class="stat">1897<em> — Vienna</em></div>
-      </div>
-    </div>
-    <div class="footer"><span>Art Nouveau</span><span class="ornament">&#10086;</span><span>04 / 07</span></div>
-  </section>
 
-  <section class="slide quote-slide">
-    <div class="border-frame"></div>
-    <div class="quote-frame">
-      <div class="big-quote">&ldquo;</div>
-      <blockquote>The curve is more <strong>powerful</strong> than the straight line, the curve is the line of <strong>life.</strong></blockquote>
-      <cite>— William Blake</cite>
-    </div>
-    <div class="footer"><span>Art Nouveau</span><span class="ornament">&#10086;</span><span>05 / 07</span></div>
-  </section>
 
-  <section class="slide data-slide">
-    <div class="border-frame"></div>
-    <div class="header"><h2>By the <em>numbers</em></h2></div>
-    <div class="metrics">
-      <div class="metric"><div class="value">1890<em>s</em></div><div class="label">Decade of origin</div></div>
-      <div class="metric"><div class="value">4</div><div class="label">Signature hues</div></div>
-      <div class="metric"><div class="value">&infin;</div><div class="label">Curves & vines</div></div>
-      <div class="metric"><div class="value">0</div><div class="label">Right angles</div></div>
-    </div>
-    <div class="footer"><span>Art Nouveau</span><span class="ornament">&#10086;</span><span>06 / 07</span></div>
-  </section>
 
-  <section class="slide closing-slide">
-    <div class="border-frame"></div>
-    <div class="deco"><svg viewBox="0 0 400 400"><circle cx="200" cy="200" r="190" fill="none" stroke="#B8944F" stroke-width="2"/><path d="M200 10 Q250 120 200 200 Q150 120 200 10" fill="#2D4A3E" opacity="0.2"/></svg></div>
-    <h2>La <em>Fin</em></h2>
-    <div class="ornament-divider">&#10086;</div>
-    <p>Thank you — stay ornamental.</p>
-    <div class="btn">Encore &rarr;</div>
-    <div class="footer"><span>Art Nouveau</span><span class="ornament">&#10086;</span><span>07 / 07</span></div>
-  </section>
-
-  <div class="nav-hint">← → ARROWS TO NAVIGATE</div>
+<div class="nav-hint">← → ARROWS TO NAVIGATE</div>
+<section class="slide title-slide active" data-section="ART NOUVEAU">
+<div class="border-frame"></div>
+<div class="corner tl"><svg viewbox="0 0 40 40"><path d="M2 38 Q2 2 38 2" fill="none" stroke="#B8944F" stroke-width="1.5"></path><circle cx="2" cy="38" fill="#B8944F" r="3"></circle><path d="M8 32 Q8 8 32 8" fill="none" opacity="0.5" stroke="#B8944F" stroke-width="0.5"></path></svg></div>
+<div class="corner tr"><svg viewbox="0 0 40 40"><path d="M2 38 Q2 2 38 2" fill="none" stroke="#B8944F" stroke-width="1.5"></path><circle cx="2" cy="38" fill="#B8944F" r="3"></circle><path d="M8 32 Q8 8 32 8" fill="none" opacity="0.5" stroke="#B8944F" stroke-width="0.5"></path></svg></div>
+<div class="corner bl"><svg viewbox="0 0 40 40"><path d="M2 38 Q2 2 38 2" fill="none" stroke="#B8944F" stroke-width="1.5"></path><circle cx="2" cy="38" fill="#B8944F" r="3"></circle><path d="M8 32 Q8 8 32 8" fill="none" opacity="0.5" stroke="#B8944F" stroke-width="0.5"></path></svg></div>
+<div class="corner br"><svg viewbox="0 0 40 40"><path d="M2 38 Q2 2 38 2" fill="none" stroke="#B8944F" stroke-width="1.5"></path><circle cx="2" cy="38" fill="#B8944F" r="3"></circle><path d="M8 32 Q8 8 32 8" fill="none" opacity="0.5" stroke="#B8944F" stroke-width="0.5"></path></svg></div>
+<div class="medallion">
+<svg viewbox="0 0 320 320">
+<circle cx="160" cy="160" fill="none" r="150" stroke="#B8944F" stroke-width="1.5"></circle>
+<circle cx="160" cy="160" fill="none" opacity="0.5" r="140" stroke="#B8944F" stroke-width="0.5"></circle>
+<path d="M160 20 Q180 80 160 160 Q140 80 160 20" fill="#2D4A3E" opacity="0.15"></path>
+<path d="M160 300 Q140 240 160 160 Q180 240 160 300" fill="#7D5A6E" opacity="0.15"></path>
+<path d="M20 160 Q80 140 160 160 Q80 180 20 160" fill="#2D4A3E" opacity="0.1"></path>
+<path d="M300 160 Q240 180 160 160 Q240 140 300 160" fill="#7D5A6E" opacity="0.1"></path>
+<circle cx="160" cy="160" fill="none" r="60" stroke="#B8944F" stroke-width="1"></circle>
+<path d="M160 100 Q200 130 160 160 Q120 130 160 100" fill="#B8944F" opacity="0.2"></path>
+<path d="M160 220 Q120 190 160 160 Q200 190 160 220" fill="#2D4A3E" opacity="0.15"></path>
+</svg>
 </div>
+<div class="label">Chapitre Vingt-Quatre</div>
+<h1>L'Art <em>Nouveau</em></h1>
+<div class="ornament-divider">❦</div>
+<p class="subtitle">A presentation system inspired by 1900s Paris — flowing curves, floral ornament, and the beauty of the organic line.</p>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide section-slide" data-section="藤蔓">
+<div class="border-frame"></div>
+<div class="deco"><svg viewbox="0 0 500 500"><circle cx="250" cy="250" fill="none" r="240" stroke="#2D4A3E" stroke-width="2"></circle><circle cx="250" cy="250" fill="none" r="200" stroke="#B8944F" stroke-width="1"></circle><path d="M250 10 Q300 150 250 250 Q200 150 250 10" fill="#2D4A3E" opacity="0.3"></path><path d="M250 490 Q200 350 250 250 Q300 350 250 490" fill="#7D5A6E" opacity="0.3"></path></svg></div>
+<div class="num">— II —</div>
+<h2>The <em>Organic</em> Line</h2>
+<div class="ornament-divider">❦</div>
+<p>Every border is a vine. Every curve is a stem. Structure grows from nature, not from the grid.</p>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide content-slide" data-section="藤蔓">
+<div class="border-frame"></div>
+<div class="header">
+<div class="label">Principes</div>
+<h2>Three <em>ornaments</em></h2>
+</div>
+<div class="cards">
+<div class="card">
+<div class="ornament-circle">❀</div>
+<h3>Floral <em>motifs</em></h3>
+<div class="divider"></div>
+<p>Lilies, vines, and irises wind through borders and medallions. Nature is the only ornament that never repeats itself.</p>
+</div>
+<div class="card">
+<div class="ornament-circle">◩</div>
+<h3>Flowing <em>curves</em></h3>
+<div class="divider"></div>
+<p>The whiplash line — a single, uninterrupted curve that moves like a stem reaching for light. No straight edges where a curve will do.</p>
+</div>
+<div class="card">
+<div class="ornament-circle">✦</div>
+<h3>Muted <em>palette</em></h3>
+<div class="divider"></div>
+<p>Moss green, ochre gold, dusty purple on aged cream. Colors that look like they've lived on a wall for a hundred years.</p>
+</div>
+</div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide two-col" data-section="藤蔓">
+<div class="border-frame"></div>
+<div class="header"><h2>Two <em>movements</em></h2></div>
+<div class="cols">
+<div class="col a">
+<div class="tag">— Ecole de Paris</div>
+<h3>Guimard &amp; <em>Mucha</em></h3>
+<p>The French branch: theatrical posters, arched frames, women with hair of flowing vines. Ornament as celebration.</p>
+<div class="stat">1895<em> — Paris</em></div>
+</div>
+<div class="col b">
+<div class="tag">— Wiener Secession</div>
+<h3>Klimt &amp; <em>Hoffmann</em></h3>
+<p>The Viennese branch: geometric restraint, gold leaf, squares within squares. Ornament as meditation.</p>
+<div class="stat">1897<em> — Vienna</em></div>
+</div>
+</div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide section-slide" data-section="金花">
+<div class="border-frame"></div>
+<div class="deco"><svg viewbox="0 0 500 500"><circle cx="250" cy="250" fill="none" r="240" stroke="#2D4A3E" stroke-width="2"></circle><circle cx="250" cy="250" fill="none" r="200" stroke="#B8944F" stroke-width="1"></circle><path d="M250 10 Q300 150 250 250 Q200 150 250 10" fill="#2D4A3E" opacity="0.3"></path><path d="M250 490 Q200 350 250 250 Q300 350 250 490" fill="#7D5A6E" opacity="0.3"></path></svg></div>
+<div class="num">— II —</div>
+<h2>金花</h2>
+<div class="ornament-divider">❦</div>
+<p>Every border is a vine. Every curve is a stem. Structure grows from nature, not from the grid.</p>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide data-slide" data-section="金花">
+<div class="border-frame"></div>
+<div class="header"><h2>By the <em>numbers</em></h2></div>
+<div class="metrics">
+<div class="metric"><div class="value">1890<em>s</em></div><div class="label">Decade of origin</div></div>
+<div class="metric"><div class="value">4</div><div class="label">Signature hues</div></div>
+<div class="metric"><div class="value">∞</div><div class="label">Curves &amp; vines</div></div>
+<div class="metric"><div class="value">0</div><div class="label">Right angles</div></div>
+</div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide section-slide" data-section="自然">
+<div class="border-frame"></div>
+<div class="deco"><svg viewbox="0 0 500 500"><circle cx="250" cy="250" fill="none" r="240" stroke="#2D4A3E" stroke-width="2"></circle><circle cx="250" cy="250" fill="none" r="200" stroke="#B8944F" stroke-width="1"></circle><path d="M250 10 Q300 150 250 250 Q200 150 250 10" fill="#2D4A3E" opacity="0.3"></path><path d="M250 490 Q200 350 250 250 Q300 350 250 490" fill="#7D5A6E" opacity="0.3"></path></svg></div>
+<div class="num">— II —</div>
+<h2>自然</h2>
+<div class="ornament-divider">❦</div>
+<p>Every border is a vine. Every curve is a stem. Structure grows from nature, not from the grid.</p>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide quote-slide" data-section="自然">
+<div class="border-frame"></div>
+<div class="quote-frame">
+<div class="big-quote">“</div>
+<blockquote>The curve is more <strong>powerful</strong> than the straight line, the curve is the line of <strong>life.</strong></blockquote>
+<cite>— William Blake</cite>
+</div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide closing-slide" data-section="END">
+<div class="border-frame"></div>
+<div class="deco"><svg viewbox="0 0 400 400"><circle cx="200" cy="200" fill="none" r="190" stroke="#B8944F" stroke-width="2"></circle><path d="M200 10 Q250 120 200 200 Q150 120 200 10" fill="#2D4A3E" opacity="0.2"></path></svg></div>
+<h2>La <em>Fin</em></h2>
+<div class="ornament-divider">❦</div>
+<p>Thank you — stay ornamental.</p>
+<div class="btn">Encore →</div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section></div>
+
 <script>
-  const slides = document.querySelectorAll('.slide'); let current = 0;
-  function show(i) { slides[current].classList.remove('active'); current = (i + slides.length) % slides.length; slides[current].classList.add('active'); }
-  document.addEventListener('keydown', e => {
-    if (e.key==='ArrowRight'||e.key==='ArrowDown'||e.key===' ') { e.preventDefault(); show(current+1); }
-    if (e.key==='ArrowLeft'||e.key==='ArrowUp') { e.preventDefault(); show(current-1); }
-    if (e.key==='Home') { e.preventDefault(); show(0); }
-    if (e.key==='End') { e.preventDefault(); show(slides.length-1); }
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
+  let current = 0;
+  slides.forEach((s, i) => { if (s.classList.contains('active')) current = i; });
+
+  function buildProgress() {
+    const sections = Array.from(slides).map(s => s.dataset.section || '');
+    document.querySelectorAll('.progress-strip').forEach(strip => {
+      let lastSection = null;
+      sections.forEach((section, i) => {
+        const seg = document.createElement('div');
+        seg.className = 'seg';
+        if (lastSection !== null && section !== lastSection) seg.classList.add('seg-gap');
+        strip.appendChild(seg);
+        lastSection = section;
+      });
+    });
+  }
+
+  function updateUI(idx) {
+    const sectionName = slides[idx].dataset.section || '';
+    const pageStr = String(idx + 1).padStart(2, '0') + ' / ' + String(total).padStart(2, '0');
+    document.querySelectorAll('.progress-bar').forEach(bar => {
+      const label = bar.querySelector('.pb-section');
+      const page = bar.querySelector('.pb-page');
+      if (label) label.textContent = sectionName;
+      if (page) page.textContent = pageStr;
+    });
+    document.querySelectorAll('.progress-strip').forEach(strip => {
+      strip.querySelectorAll('.seg').forEach((seg, i) => {
+        seg.classList.toggle('current', i === idx);
+        seg.classList.toggle('past', i < idx);
+      });
+    });
+  }
+
+  function show(i) {
+    slides[current].classList.remove('active');
+    current = (i + total) % total;
+    slides[current].classList.add('active');
+    updateUI(current);
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); show(current + 1); }
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); show(current - 1); }
+    if (e.key === 'Home') { e.preventDefault(); show(0); }
+    if (e.key === 'End') { e.preventDefault(); show(total - 1); }
   });
-</script>
-</body>
+
+  buildProgress();
+  updateUI(current);
+</script></body>
 </html>

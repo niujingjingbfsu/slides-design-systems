@@ -1,12 +1,13 @@
 <!DOCTYPE html>
+
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Soft Space — Slide Template</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;family=Noto+Sans+SC:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
 <style>
   :root {
     --bg: #FAF6EF;
@@ -365,170 +366,269 @@
   .slide > .footer { margin-top: auto; flex-shrink: 0; }
   .slide > .cards, .slide > .cols, .slide > .metrics, .slide > .body { flex-shrink: 1; min-height: 0; }
 
+
+  /* === Progress system === */
+  .slide { padding-bottom: 80px !important; }
+  .title-slide { padding-bottom: 90px !important; }
+  .progress-bar {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 56px; display: flex; align-items: center; justify-content: space-between;
+    padding: 0 60px; z-index: 50;
+    background: var(--bg);
+    border-top: rgba(0,0,0,0.06);
+  }
+  .progress-bar .pb-section {
+    font-family: var(--font-sans); font-size: 12px; font-weight: 700;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--muted); min-width: 180px;
+  }
+  .progress-bar .pb-page {
+    font-family: var(--font-sans); font-size: 16px; font-weight: 700;
+    letter-spacing: 0.1em; color: var(--accent);
+  }
+  .progress-strip {
+    position: absolute; top: -8px; left: 50%; transform: translateX(-50%);
+    display: flex; align-items: center; height: 14px;
+  }
+  .progress-strip .seg {
+    width: 40px; height: 6px; border-radius: 3px;
+    background: rgba(0,0,0,0.12);
+    
+    margin: 0 4px; transition: all 0.25s;
+    
+  }
+  .progress-strip .seg.past {
+    background: rgba(0,0,0,0.3);
+    
+  }
+  .progress-strip .seg.current {
+    background: var(--accent);
+    
+    
+  }
+  .progress-strip .seg.seg-gap { margin-left: 22px; }
+  .nav-hint { display: none !important; }
 </style>
 </head>
 <body>
-
 <div class="deck">
+<!-- 1. Title -->
 
-  <!-- 1. Title -->
-  <section class="slide title-slide active">
-    <div class="blob b1"></div>
-    <div class="blob b2"></div>
-    <div class="blob b3"></div>
-    <span class="tag">✦ WELCOME</span>
-    <h1>Soft<br><span class="soft">Space</span></h1>
-    <p class="subtitle">A warm, gentle presentation template with rounded cards, soft shadows, and a quiet palette.</p>
-    <div class="chips">
-      <span class="chip">Cream</span>
-      <span class="chip">Rounded</span>
-      <span class="chip">Calm</span>
-    </div>
-    <div class="footer">
-      <span><span class="dot"></span>SOFT SPACE</span>
-      <span>01 / 07</span>
-    </div>
-  </section>
+<!-- 2. Section -->
 
-  <!-- 2. Section -->
-  <section class="slide section-slide">
-    <div class="blob b1"></div>
-    <div class="num">CHAPTER 02</div>
-    <h2>Warm <span class="light">foundations</span></h2>
-    <p>Build every slide on soft surfaces, rounded forms, and gentle hierarchy.</p>
-    <div class="footer">
-      <span><span class="dot"></span>SOFT SPACE</span>
-      <span>02 / 07</span>
-    </div>
-  </section>
+<!-- 3. Content cards -->
 
-  <!-- 3. Content cards -->
-  <section class="slide content-slide">
-    <div class="header">
-      <span class="tag">PRINCIPLES</span>
-      <h2 style="margin-top:14px;">Three soft pillars</h2>
-    </div>
-    <div class="cards">
-      <div class="card">
-        <div class="icon">🌸</div>
-        <h3>Gentle hierarchy</h3>
-        <p>Weight and size create order without shouting. Every element earns its place through quiet contrast.</p>
-      </div>
-      <div class="card">
-        <div class="icon">◐</div>
-        <h3>Soft surfaces</h3>
-        <p>Rounded corners and diffused shadows make cards feel approachable, never cold or mechanical.</p>
-      </div>
-      <div class="card">
-        <div class="icon">❋</div>
-        <h3>Warm palette</h3>
-        <p>Cream, blush, and ochre create a cozy atmosphere that keeps audiences at ease.</p>
-      </div>
-    </div>
-    <div class="footer">
-      <span><span class="dot"></span>SOFT SPACE</span>
-      <span>03 / 07</span>
-    </div>
-  </section>
+<!-- 4. Two column -->
 
-  <!-- 4. Two column -->
-  <section class="slide two-col">
-    <div class="header">
-      <span class="tag">OPTIONS</span>
-      <h2 style="margin-top:14px;">Choose your tone</h2>
-    </div>
-    <div class="cols">
-      <div class="col">
-        <div class="col-tag">LIGHT</div>
-        <h3>Day mode</h3>
-        <p>Cream surfaces with soft pink accents. Best for well-lit rooms and friendly, conversational decks.</p>
-        <div class="price">Free <small>forever</small></div>
-      </div>
-      <div class="col featured">
-        <div class="col-tag">RECOMMENDED</div>
-        <h3>Warm mode</h3>
-        <p>Deep cocoa surface with cream text. Adds intimacy and focus for keynote moments.</p>
-        <div class="price">Pro <small>best value</small></div>
-      </div>
-    </div>
-    <div class="footer">
-      <span><span class="dot"></span>SOFT SPACE</span>
-      <span>04 / 07</span>
-    </div>
-  </section>
+<!-- 5. Quote -->
 
-  <!-- 5. Quote -->
-  <section class="slide quote-slide">
-    <div class="blob b1"></div>
-    <div class="blob b2"></div>
-    <div class="quote-card">
-      <blockquote>Softness is not weakness. It is the <span class="warm">confidence</span> to be quiet when others shout.</blockquote>
-      <cite>— DESIGN PHILOSOPHY</cite>
-    </div>
-    <div class="footer">
-      <span><span class="dot"></span>SOFT SPACE</span>
-      <span>05 / 07</span>
-    </div>
-  </section>
+<!-- 6. Data -->
 
-  <!-- 6. Data -->
-  <section class="slide data-slide">
-    <div class="header">
-      <span class="tag">METRICS</span>
-      <h2 style="margin-top:14px;">By the numbers</h2>
-    </div>
-    <div class="metrics">
-      <div class="metric">
-        <div class="value">20<span style="font-size:24px">px</span></div>
-        <div class="label">Card radius</div>
-      </div>
-      <div class="metric">
-        <div class="value">3<span style="font-size:24px">hues</span></div>
-        <div class="label">Warm core palette</div>
-      </div>
-      <div class="metric">
-        <div class="value">8<span style="font-size:24px">px</span></div>
-        <div class="label">Soft shadow blur</div>
-      </div>
-      <div class="metric">
-        <div class="value">100<span style="font-size:24px">%</span></div>
-        <div class="label">Rounded corners</div>
-      </div>
-    </div>
-    <div class="footer">
-      <span><span class="dot"></span>SOFT SPACE</span>
-      <span>06 / 07</span>
-    </div>
-  </section>
+<!-- 7. Closing -->
 
-  <!-- 7. Closing -->
-  <section class="slide closing-slide">
-    <div class="blob b1"></div>
-    <h2>Thank <span class="soft">you</span></h2>
-    <p>Questions? Let's talk softly.</p>
-    <div class="btn">Get in touch →</div>
-    <div class="footer">
-      <span><span class="dot"></span>SOFT SPACE</span>
-      <span>07 / 07</span>
-    </div>
-  </section>
-
-  <div class="nav-hint">← → ARROWS TO NAVIGATE</div>
+<div class="nav-hint">← → ARROWS TO NAVIGATE</div>
+<section class="slide title-slide active" data-section="SOFT SPACE">
+<div class="blob b1"></div>
+<div class="blob b2"></div>
+<div class="blob b3"></div>
+<span class="tag">✦ WELCOME</span>
+<h1>Soft<br/><span class="soft">Space</span></h1>
+<p class="subtitle">A warm, gentle presentation template with rounded cards, soft shadows, and a quiet palette.</p>
+<div class="chips">
+<span class="chip">Cream</span>
+<span class="chip">Rounded</span>
+<span class="chip">Calm</span>
 </div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide section-slide" data-section="柔和">
+<div class="blob b1"></div>
+<div class="num">CHAPTER 02</div>
+<h2>Warm <span class="light">foundations</span></h2>
+<p>Build every slide on soft surfaces, rounded forms, and gentle hierarchy.</p>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide content-slide" data-section="柔和">
+<div class="header">
+<span class="tag">PRINCIPLES</span>
+<h2 style="margin-top:14px;">Three soft pillars</h2>
+</div>
+<div class="cards">
+<div class="card">
+<div class="icon">🌸</div>
+<h3>Gentle hierarchy</h3>
+<p>Weight and size create order without shouting. Every element earns its place through quiet contrast.</p>
+</div>
+<div class="card">
+<div class="icon">◐</div>
+<h3>Soft surfaces</h3>
+<p>Rounded corners and diffused shadows make cards feel approachable, never cold or mechanical.</p>
+</div>
+<div class="card">
+<div class="icon">❋</div>
+<h3>Warm palette</h3>
+<p>Cream, blush, and ochre create a cozy atmosphere that keeps audiences at ease.</p>
+</div>
+</div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide two-col" data-section="柔和">
+<div class="header">
+<span class="tag">OPTIONS</span>
+<h2 style="margin-top:14px;">Choose your tone</h2>
+</div>
+<div class="cols">
+<div class="col">
+<div class="col-tag">LIGHT</div>
+<h3>Day mode</h3>
+<p>Cream surfaces with soft pink accents. Best for well-lit rooms and friendly, conversational decks.</p>
+<div class="price">Free <small>forever</small></div>
+</div>
+<div class="col featured">
+<div class="col-tag">RECOMMENDED</div>
+<h3>Warm mode</h3>
+<p>Deep cocoa surface with cream text. Adds intimacy and focus for keynote moments.</p>
+<div class="price">Pro <small>best value</small></div>
+</div>
+</div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide section-slide" data-section="层次">
+<div class="blob b1"></div>
+<div class="num">CHAPTER 03</div>
+<h2>层次</h2>
+<p>Build every slide on soft surfaces, rounded forms, and gentle hierarchy.</p>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide data-slide" data-section="层次">
+<div class="header">
+<span class="tag">METRICS</span>
+<h2 style="margin-top:14px;">By the numbers</h2>
+</div>
+<div class="metrics">
+<div class="metric">
+<div class="value">20<span style="font-size:24px">px</span></div>
+<div class="label">Card radius</div>
+</div>
+<div class="metric">
+<div class="value">3<span style="font-size:24px">hues</span></div>
+<div class="label">Warm core palette</div>
+</div>
+<div class="metric">
+<div class="value">8<span style="font-size:24px">px</span></div>
+<div class="label">Soft shadow blur</div>
+</div>
+<div class="metric">
+<div class="value">100<span style="font-size:24px">%</span></div>
+<div class="label">Rounded corners</div>
+</div>
+</div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide section-slide" data-section="呼吸">
+<div class="blob b1"></div>
+<div class="num">CHAPTER 03</div>
+<h2>呼吸</h2>
+<p>Build every slide on soft surfaces, rounded forms, and gentle hierarchy.</p>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide quote-slide" data-section="呼吸">
+<div class="blob b1"></div>
+<div class="blob b2"></div>
+<div class="quote-card">
+<blockquote>Softness is not weakness. It is the <span class="warm">confidence</span> to be quiet when others shout.</blockquote>
+<cite>— DESIGN PHILOSOPHY</cite>
+</div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide closing-slide" data-section="END">
+<div class="blob b1"></div>
+<h2>Thank <span class="soft">you</span></h2>
+<p>Questions? Let's talk softly.</p>
+<div class="btn">Get in touch →</div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section></div>
+
 <script>
   const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
   let current = 0;
+  slides.forEach((s, i) => { if (s.classList.contains('active')) current = i; });
+
+  function buildProgress() {
+    const sections = Array.from(slides).map(s => s.dataset.section || '');
+    document.querySelectorAll('.progress-strip').forEach(strip => {
+      let lastSection = null;
+      sections.forEach((section, i) => {
+        const seg = document.createElement('div');
+        seg.className = 'seg';
+        if (lastSection !== null && section !== lastSection) seg.classList.add('seg-gap');
+        strip.appendChild(seg);
+        lastSection = section;
+      });
+    });
+  }
+
+  function updateUI(idx) {
+    const sectionName = slides[idx].dataset.section || '';
+    const pageStr = String(idx + 1).padStart(2, '0') + ' / ' + String(total).padStart(2, '0');
+    document.querySelectorAll('.progress-bar').forEach(bar => {
+      const label = bar.querySelector('.pb-section');
+      const page = bar.querySelector('.pb-page');
+      if (label) label.textContent = sectionName;
+      if (page) page.textContent = pageStr;
+    });
+    document.querySelectorAll('.progress-strip').forEach(strip => {
+      strip.querySelectorAll('.seg').forEach((seg, i) => {
+        seg.classList.toggle('current', i === idx);
+        seg.classList.toggle('past', i < idx);
+      });
+    });
+  }
+
   function show(i) {
     slides[current].classList.remove('active');
-    current = (i + slides.length) % slides.length;
+    current = (i + total) % total;
     slides[current].classList.add('active');
+    updateUI(current);
   }
-  document.addEventListener('keydown', (e) => {
+
+  document.addEventListener('keydown', function(e) {
     if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); show(current + 1); }
     if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); show(current - 1); }
     if (e.key === 'Home') { e.preventDefault(); show(0); }
-    if (e.key === 'End') { e.preventDefault(); show(slides.length - 1); }
+    if (e.key === 'End') { e.preventDefault(); show(total - 1); }
   });
-</script>
-</body>
+
+  buildProgress();
+  updateUI(current);
+</script></body>
 </html>

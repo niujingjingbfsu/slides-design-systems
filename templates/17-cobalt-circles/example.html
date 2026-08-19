@@ -1,12 +1,13 @@
 <!DOCTYPE html>
+
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>青花 COBALT CIRCLES — Slide Template</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&family=Josefin+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&amp;family=Josefin+Sans:wght@300;400;600;700&amp;display=swap" rel="stylesheet"/>
 <style>
   :root {
     --bg: #FFFFFF;
@@ -164,207 +165,338 @@
   .slide > .footer { margin-top: auto; flex-shrink: 0; }
   .slide > .cards, .slide > .cols, .slide > .metrics, .slide > .body { flex-shrink: 1; min-height: 0; }
 
+
+  /* === Progress system === */
+  .slide { padding-bottom: 80px !important; }
+  .title-slide { padding-bottom: 90px !important; }
+  .progress-bar {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 56px; display: flex; align-items: center; justify-content: space-between;
+    padding: 0 60px; z-index: 50;
+    background: var(--bg);
+    border-top: 1px solid rgba(30,80,160,0.15);
+  }
+  .progress-bar .pb-section {
+    font-family: var(--font-cn); font-size: 12px; font-weight: 700;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--muted); min-width: 180px;
+  }
+  .progress-bar .pb-page {
+    font-family: var(--font-cn); font-size: 16px; font-weight: 700;
+    letter-spacing: 0.1em; color: var(--cobalt, #1E50A0);
+  }
+  .progress-strip {
+    position: absolute; top: -8px; left: 50%; transform: translateX(-50%);
+    display: flex; align-items: center; height: 14px;
+  }
+  .progress-strip .seg {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: rgba(30,80,160,0.12);
+    border: 1px solid rgba(30,80,160,0.2);
+    margin: 0 4px; transition: all 0.25s;
+    
+  }
+  .progress-strip .seg.past {
+    background: rgba(30,80,160,0.4);
+    border-color: rgba(30,80,160,0.4);
+  }
+  .progress-strip .seg.current {
+    background: var(--cobalt, #1E50A0);
+    border-color: var(--cobalt, #1E50A0);
+    width:14px;height:14px;
+  }
+  .progress-strip .seg.seg-gap { margin-left: 26px; }
+  .nav-hint { display: none !important; }
 </style>
 </head>
 <body>
 <div class="deck">
 
-  <section class="slide title-slide active">
-    <div class="fret-top"></div>
-    <div class="fret-border">
-      <svg viewBox="0 0 1280 24" preserveAspectRatio="none">
-        <g fill="#FFFFFF" opacity="0.9">
-          <rect x="0" y="0" width="1280" height="24" fill="#1B4B8A"/>
-          <g>
-            <!-- repeating 回纹 fret pattern -->
-            <path d="M0 4 L16 4 L16 12 L8 12 L8 8 L12 8 L12 16 L4 16 L4 20 L20 20 L20 4 L24 4 L24 20 L0 20Z" fill="#FFFFFF" opacity="0.8"/>
-          </g>
-        </g>
-        <g fill="#FFFFFF" opacity="0.8">
-          <path d="M0 4 L16 4 L16 12 L8 12 L8 8 L12 8 L12 16 L4 16 L4 20 L20 20 L20 4 L24 4 L24 20 L0 20Z" fill="#FFFFFF"/>
-          <path d="M32 4 L48 4 L48 12 L40 12 L40 8 L44 8 L44 16 L36 16 L36 20 L52 20 L52 4 L56 4 L56 20 L32 20Z" fill="#FFFFFF"/>
-          <path d="M64 4 L80 4 L80 12 L72 12 L72 8 L76 8 L76 16 L68 16 L68 20 L84 20 L84 4 L88 4 L88 20 L64 20Z" fill="#FFFFFF"/>
-          <path d="M96 4 L112 4 L112 12 L104 12 L104 8 L108 8 L108 16 L100 16 L100 20 L116 20 L116 4 L120 4 L120 20 L96 20Z" fill="#FFFFFF"/>
-          <path d="M128 4 L144 4 L144 12 L136 12 L136 8 L140 8 L140 16 L132 16 L132 20 L148 20 L148 4 L152 4 L152 20 L128 20Z" fill="#FFFFFF"/>
-          <path d="M160 4 L176 4 L176 12 L168 12 L168 8 L172 8 L172 16 L164 16 L164 20 L180 20 L180 4 L184 4 L184 20 L160 20Z" fill="#FFFFFF"/>
-          <path d="M192 4 L208 4 L208 12 L200 12 L200 8 L204 8 L204 16 L196 16 L196 20 L212 20 L212 4 L216 4 L216 20 L192 20Z" fill="#FFFFFF"/>
-          <path d="M224 4 L240 4 L240 12 L232 12 L232 8 L236 8 L236 16 L228 16 L228 20 L244 20 L244 4 L248 4 L248 20 L224 20Z" fill="#FFFFFF"/>
-          <path d="M256 4 L272 4 L272 12 L264 12 L264 8 L268 8 L268 16 L260 16 L260 20 L276 20 L276 4 L280 4 L280 20 L256 20Z" fill="#FFFFFF"/>
-          <path d="M288 4 L304 4 L304 12 L296 12 L296 8 L300 8 L300 16 L292 16 L292 20 L308 20 L308 4 L312 4 L312 20 L288 20Z" fill="#FFFFFF"/>
-          <path d="M320 4 L336 4 L336 12 L328 12 L328 8 L332 8 L332 16 L324 16 L324 20 L340 20 L340 4 L344 4 L344 20 L320 20Z" fill="#FFFFFF"/>
-          <path d="M352 4 L368 4 L368 12 L360 12 L360 8 L364 8 L364 16 L356 16 L356 20 L372 20 L372 4 L376 4 L376 20 L352 20Z" fill="#FFFFFF"/>
-          <path d="M384 4 L400 4 L400 12 L392 12 L392 8 L396 8 L396 16 L388 16 L388 20 L404 20 L404 4 L408 4 L408 20 L384 20Z" fill="#FFFFFF"/>
-          <path d="M416 4 L432 4 L432 12 L424 12 L424 8 L428 8 L428 16 L420 16 L420 20 L436 20 L436 4 L440 4 L440 20 L416 20Z" fill="#FFFFFF"/>
-          <path d="M448 4 L464 4 L464 12 L456 12 L456 8 L460 8 L460 16 L452 16 L452 20 L468 20 L468 4 L472 4 L472 20 L448 20Z" fill="#FFFFFF"/>
-          <path d="M480 4 L496 4 L496 12 L488 12 L488 8 L492 8 L492 16 L484 16 L484 20 L500 20 L500 4 L504 4 L504 20 L480 20Z" fill="#FFFFFF"/>
-          <path d="M512 4 L528 4 L528 12 L520 12 L520 8 L524 8 L524 16 L516 16 L516 20 L532 20 L532 4 L536 4 L536 20 L512 20Z" fill="#FFFFFF"/>
-          <path d="M544 4 L560 4 L560 12 L552 12 L552 8 L556 8 L556 16 L548 16 L548 20 L564 20 L564 4 L568 4 L568 20 L544 20Z" fill="#FFFFFF"/>
-          <path d="M576 4 L592 4 L592 12 L584 12 L584 8 L588 8 L588 16 L580 16 L580 20 L596 20 L596 4 L600 4 L600 20 L576 20Z" fill="#FFFFFF"/>
-          <path d="M608 4 L624 4 L624 12 L616 12 L616 8 L620 8 L620 16 L612 16 L612 20 L628 20 L628 4 L632 4 L632 20 L608 20Z" fill="#FFFFFF"/>
-          <path d="M640 4 L656 4 L656 12 L648 12 L648 8 L652 8 L652 16 L644 16 L644 20 L660 20 L660 4 L664 4 L664 20 L640 20Z" fill="#FFFFFF"/>
-          <path d="M672 4 L688 4 L688 12 L680 12 L680 8 L684 8 L684 16 L676 16 L676 20 L692 20 L692 4 L696 4 L696 20 L672 20Z" fill="#FFFFFF"/>
-          <path d="M704 4 L720 4 L720 12 L712 12 L712 8 L716 8 L716 16 L708 16 L708 20 L724 20 L724 4 L728 4 L728 20 L704 20Z" fill="#FFFFFF"/>
-          <path d="M736 4 L752 4 L752 12 L744 12 L744 8 L748 8 L748 16 L740 16 L740 20 L756 20 L756 4 L760 4 L760 20 L736 20Z" fill="#FFFFFF"/>
-          <path d="M768 4 L784 4 L784 12 L776 12 L776 8 L780 8 L780 16 L772 16 L772 20 L788 20 L788 4 L792 4 L792 20 L768 20Z" fill="#FFFFFF"/>
-          <path d="M800 4 L816 4 L816 12 L808 12 L808 8 L812 8 L812 16 L804 16 L804 20 L820 20 L820 4 L824 4 L824 20 L800 20Z" fill="#FFFFFF"/>
-          <path d="M832 4 L848 4 L848 12 L840 12 L840 8 L844 8 L844 16 L836 16 L836 20 L852 20 L852 4 L856 4 L856 20 L832 20Z" fill="#FFFFFF"/>
-          <path d="M864 4 L880 4 L880 12 L872 12 L872 8 L876 8 L876 16 L868 16 L868 20 L884 20 L884 4 L888 4 L888 20 L864 20Z" fill="#FFFFFF"/>
-          <path d="M896 4 L912 4 L912 12 L904 12 L904 8 L908 8 L908 16 L900 16 L900 20 L916 20 L916 4 L920 4 L920 20 L896 20Z" fill="#FFFFFF"/>
-          <path d="M928 4 L944 4 L944 12 L936 12 L936 8 L940 8 L940 16 L932 16 L932 20 L948 20 L948 4 L952 4 L952 20 L928 20Z" fill="#FFFFFF"/>
-          <path d="M960 4 L976 4 L976 12 L968 12 L968 8 L972 8 L972 16 L964 16 L964 20 L980 20 L980 4 L984 4 L984 20 L960 20Z" fill="#FFFFFF"/>
-          <path d="M992 4 L1008 4 L1008 12 L1000 12 L1000 8 L1004 8 L1004 16 L996 16 L996 20 L1012 20 L1012 4 L1016 4 L1016 20 L992 20Z" fill="#FFFFFF"/>
-          <path d="M1024 4 L1040 4 L1040 12 L1032 12 L1032 8 L1036 8 L1036 16 L1028 16 L1028 20 L1044 20 L1044 4 L1048 4 L1048 20 L1024 20Z" fill="#FFFFFF"/>
-          <path d="M1056 4 L1072 4 L1072 12 L1064 12 L1064 8 L1068 8 L1068 16 L1060 16 L1060 20 L1076 20 L1076 4 L1080 4 L1080 20 L1056 20Z" fill="#FFFFFF"/>
-          <path d="M1088 4 L1104 4 L1104 12 L1096 12 L1096 8 L1100 8 L1100 16 L1092 16 L1092 20 L1108 20 L1108 4 L1112 4 L1112 20 L1088 20Z" fill="#FFFFFF"/>
-          <path d="M1120 4 L1136 4 L1136 12 L1128 12 L1128 8 L1132 8 L1132 16 L1124 16 L1124 20 L1140 20 L1140 4 L1144 4 L1144 20 L1120 20Z" fill="#FFFFFF"/>
-          <path d="M1152 4 L1168 4 L1168 12 L1160 12 L1160 8 L1164 8 L1164 16 L1156 16 L1156 20 L1172 20 L1172 4 L1176 4 L1176 20 L1152 20Z" fill="#FFFFFF"/>
-          <path d="M1184 4 L1200 4 L1200 12 L1192 12 L1192 8 L1196 8 L1196 16 L1188 16 L1188 20 L1204 20 L1204 4 L1208 4 L1208 20 L1184 20Z" fill="#FFFFFF"/>
-          <path d="M1216 4 L1232 4 L1232 12 L1224 12 L1224 8 L1228 8 L1228 16 L1220 16 L1220 20 L1236 20 L1236 4 L1240 4 L1240 20 L1216 20Z" fill="#FFFFFF"/>
-          <path d="M1248 4 L1264 4 L1264 12 L1256 12 L1256 8 L1260 8 L1260 16 L1252 16 L1252 20 L1268 20 L1268 4 L1272 4 L1272 20 L1248 20Z" fill="#FFFFFF"/>
-        </g>
-      </svg>
-    </div>
 
-    <div class="circles">
-      <svg viewBox="0 0 700 700">
-        <circle cx="350" cy="350" r="340" fill="none" stroke="#1B4B8A" stroke-width="2"/>
-        <circle cx="350" cy="350" r="290" fill="none" stroke="#4A7FB5" stroke-width="1.5"/>
-        <circle cx="350" cy="350" r="240" fill="none" stroke="#8AB0D5" stroke-width="1"/>
-        <circle cx="350" cy="350" r="190" fill="none" stroke="#C5D9EC" stroke-width="1"/>
-        <circle cx="350" cy="350" r="140" fill="none" stroke="#1B4B8A" stroke-width="1" opacity="0.3"/>
-        <circle cx="350" cy="350" r="80" fill="#1B4B8A" opacity="0.06"/>
-      </svg>
-    </div>
 
-    <div class="corner-dot"><span class="blue-dot"></span></div>
 
-    <div class="content-area">
-      <div class="label-cn">第二十三章</div>
-      <h1>青花</h1>
-      <div class="en">Cobalt Circles</div>
-      <p class="subtitle">以同心圆与钴蓝浓淡色阶重构青花瓷的视觉语法——<br>不画瓷，而以圆环与分水见青韵。</p>
-    </div>
-    <div class="footer"><span class="cn">青花</span><span>COBALT CIRCLES</span><span>01 / 07</span></div>
-  </section>
 
-  <section class="slide section-slide">
-    <div class="fret-top"></div>
-    <div class="fret-border"><svg viewBox="0 0 1280 24" preserveAspectRatio="none"><rect width="1280" height="24" fill="#1B4B8A"/></svg></div>
-    <div class="circles"><svg viewBox="0 0 500 500"><circle cx="250" cy="250" r="240" fill="none" stroke="#1B4B8A" stroke-width="2"/><circle cx="250" cy="250" r="190" fill="none" stroke="#4A7FB5" stroke-width="1"/><circle cx="250" cy="250" r="140" fill="none" stroke="#8AB0D5" stroke-width="1"/></svg></div>
-    <div class="content-area">
-      <div class="num">— II —</div>
-      <h2>圆融</h2>
-      <p>同心圆是瓷盘的抽象，也是宇宙的隐喻。<br>从中心向外，蓝色渐淡，如水墨氤氲。</p>
-    </div>
-    <div class="footer"><span class="cn">青花</span><span>COBALT CIRCLES</span><span>02 / 07</span></div>
-  </section>
 
-  <section class="slide content-slide">
-    <div class="fret-top"></div>
-    <div class="fret-border"><svg viewBox="0 0 1280 24" preserveAspectRatio="none"><rect width="1280" height="24" fill="#1B4B8A"/></svg></div>
-    <div class="content-area">
-      <div class="header">
-        <div class="label-cn">三法</div>
-        <h2>三个视觉法则</h2>
-      </div>
-      <div class="cards">
-        <div class="card">
-          <div class="ring"></div>
-          <h3>同心圆</h3>
-          <p>从瓷盘构图抽象而来。内容围绕圆心组织，圆环既是装饰也是容器——最内一环最浓，向外渐淡。</p>
-          <div class="en-term">Concentric</div>
-        </div>
-        <div class="card">
-          <div class="ring"></div>
-          <h3>分水色阶</h3>
-          <p>钴蓝分四至五个浓淡层级（头浓、正浓、二浓、正淡），靠单色的明度变化建立层次，不依赖第二色。</p>
-          <div class="en-term">Shaded Blue</div>
-        </div>
-        <div class="card">
-          <div class="ring"></div>
-          <h3>几何边饰</h3>
-          <p>回纹、海水纹、如意云头简化为极简几何线条，只做窄边装饰带，不侵入内容区域。</p>
-          <div class="en-term">Geometric Border</div>
-        </div>
-      </div>
-    </div>
-    <div class="footer"><span class="cn">青花</span><span>COBALT CIRCLES</span><span>03 / 07</span></div>
-  </section>
 
-  <section class="slide two-col">
-    <div class="fret-top"></div>
-    <div class="fret-border"><svg viewBox="0 0 1280 24" preserveAspectRatio="none"><rect width="1280" height="24" fill="#1B4B8A"/></svg></div>
-    <div class="content-area">
-      <div class="header"><h2>二境</h2></div>
-      <div class="cols">
-        <div class="col a">
-          <div class="tag">— DEEP —</div>
-          <h3>头浓</h3>
-          <p>最深的钴蓝，饱和而沉静。用于主标题、实心圆和关键数据，是画面中最有力量的颜色。</p>
-          <div class="stat">#1B4B8A</div>
-        </div>
-        <div class="col b">
-          <div class="tag">— LIGHT —</div>
-          <h3>正淡</h3>
-          <p>最浅的天蓝，近乎透明。用于外圈圆环、辅助线和背景层次，像瓷釉上最淡的一笔分水。</p>
-          <div class="stat">#C5D9EC</div>
-        </div>
-      </div>
-    </div>
-    <div class="footer"><span class="cn">青花</span><span>COBALT CIRCLES</span><span>04 / 07</span></div>
-  </section>
-
-  <section class="slide quote-slide">
-    <div class="fret-top"></div>
-    <div class="fret-border"><svg viewBox="0 0 1280 24" preserveAspectRatio="none"><rect width="1280" height="24" fill="#1B4B8A"/></svg></div>
-    <div class="circles"><svg viewBox="0 0 600 600"><circle cx="300" cy="300" r="290" fill="none" stroke="#1B4B8A" stroke-width="2"/><circle cx="300" cy="300" r="230" fill="none" stroke="#4A7FB5" stroke-width="1"/><circle cx="300" cy="300" r="170" fill="none" stroke="#8AB0D5" stroke-width="1"/><circle cx="300" cy="300" r="110" fill="none" stroke="#C5D9EC" stroke-width="1"/></svg></div>
-    <div class="content-area">
-      <blockquote>
-        白釉青花一火成，<br>
-        <span class="light">花从釉里透分明。</span>
-      </blockquote>
-      <cite>— 龚轼《景德镇陶歌》</cite>
-    </div>
-    <div class="footer"><span class="cn">青花</span><span>COBALT CIRCLES</span><span>05 / 07</span></div>
-  </section>
-
-  <section class="slide data-slide">
-    <div class="fret-top"></div>
-    <div class="fret-border"><svg viewBox="0 0 1280 24" preserveAspectRatio="none"><rect width="1280" height="24" fill="#1B4B8A"/></svg></div>
-    <div class="content-area">
-      <div class="header"><h2>数字</h2></div>
-      <div class="metrics">
-        <div class="metric"><div class="value">1</div><div class="label">色相（钴蓝）</div></div>
-        <div class="metric"><div class="value">5</div><div class="label">浓淡色阶</div></div>
-        <div class="metric"><div class="value">∞</div><div class="label">同心圆环</div></div>
-        <div class="metric"><div class="value">0</div><div class="label">第二色彩</div></div>
-      </div>
-    </div>
-    <div class="footer"><span class="cn">青花</span><span>COBALT CIRCLES</span><span>06 / 07</span></div>
-  </section>
-
-  <section class="slide closing-slide">
-    <div class="fret-top"></div>
-    <div class="fret-border"><svg viewBox="0 0 1280 24" preserveAspectRatio="none"><rect width="1280" height="24" fill="#1B4B8A"/></svg></div>
-    <div class="circles"><svg viewBox="0 0 400 400"><circle cx="200" cy="200" r="190" fill="none" stroke="#1B4B8A" stroke-width="2"/><circle cx="200" cy="200" r="140" fill="none" stroke="#4A7FB5" stroke-width="1"/><circle cx="200" cy="200" r="90" fill="none" stroke="#8AB0D5" stroke-width="1"/></svg></div>
-    <div class="content-area">
-      <h2>收</h2>
-      <p>素胚勾勒，青花落笔</p>
-    </div>
-    <div class="footer"><span class="cn">青花</span><span>COBALT CIRCLES</span><span>07 / 07</span></div>
-  </section>
-
-  <div class="nav-hint">← → ARROWS TO NAVIGATE</div>
+<div class="nav-hint">← → ARROWS TO NAVIGATE</div>
+<section class="slide title-slide active" data-section="青花">
+<div class="fret-top"></div>
+<div class="fret-border">
+<svg preserveaspectratio="none" viewbox="0 0 1280 24">
+<g fill="#FFFFFF" opacity="0.9">
+<rect fill="#1B4B8A" height="24" width="1280" x="0" y="0"></rect>
+<g>
+<!-- repeating 回纹 fret pattern -->
+<path d="M0 4 L16 4 L16 12 L8 12 L8 8 L12 8 L12 16 L4 16 L4 20 L20 20 L20 4 L24 4 L24 20 L0 20Z" fill="#FFFFFF" opacity="0.8"></path>
+</g>
+</g>
+<g fill="#FFFFFF" opacity="0.8">
+<path d="M0 4 L16 4 L16 12 L8 12 L8 8 L12 8 L12 16 L4 16 L4 20 L20 20 L20 4 L24 4 L24 20 L0 20Z" fill="#FFFFFF"></path>
+<path d="M32 4 L48 4 L48 12 L40 12 L40 8 L44 8 L44 16 L36 16 L36 20 L52 20 L52 4 L56 4 L56 20 L32 20Z" fill="#FFFFFF"></path>
+<path d="M64 4 L80 4 L80 12 L72 12 L72 8 L76 8 L76 16 L68 16 L68 20 L84 20 L84 4 L88 4 L88 20 L64 20Z" fill="#FFFFFF"></path>
+<path d="M96 4 L112 4 L112 12 L104 12 L104 8 L108 8 L108 16 L100 16 L100 20 L116 20 L116 4 L120 4 L120 20 L96 20Z" fill="#FFFFFF"></path>
+<path d="M128 4 L144 4 L144 12 L136 12 L136 8 L140 8 L140 16 L132 16 L132 20 L148 20 L148 4 L152 4 L152 20 L128 20Z" fill="#FFFFFF"></path>
+<path d="M160 4 L176 4 L176 12 L168 12 L168 8 L172 8 L172 16 L164 16 L164 20 L180 20 L180 4 L184 4 L184 20 L160 20Z" fill="#FFFFFF"></path>
+<path d="M192 4 L208 4 L208 12 L200 12 L200 8 L204 8 L204 16 L196 16 L196 20 L212 20 L212 4 L216 4 L216 20 L192 20Z" fill="#FFFFFF"></path>
+<path d="M224 4 L240 4 L240 12 L232 12 L232 8 L236 8 L236 16 L228 16 L228 20 L244 20 L244 4 L248 4 L248 20 L224 20Z" fill="#FFFFFF"></path>
+<path d="M256 4 L272 4 L272 12 L264 12 L264 8 L268 8 L268 16 L260 16 L260 20 L276 20 L276 4 L280 4 L280 20 L256 20Z" fill="#FFFFFF"></path>
+<path d="M288 4 L304 4 L304 12 L296 12 L296 8 L300 8 L300 16 L292 16 L292 20 L308 20 L308 4 L312 4 L312 20 L288 20Z" fill="#FFFFFF"></path>
+<path d="M320 4 L336 4 L336 12 L328 12 L328 8 L332 8 L332 16 L324 16 L324 20 L340 20 L340 4 L344 4 L344 20 L320 20Z" fill="#FFFFFF"></path>
+<path d="M352 4 L368 4 L368 12 L360 12 L360 8 L364 8 L364 16 L356 16 L356 20 L372 20 L372 4 L376 4 L376 20 L352 20Z" fill="#FFFFFF"></path>
+<path d="M384 4 L400 4 L400 12 L392 12 L392 8 L396 8 L396 16 L388 16 L388 20 L404 20 L404 4 L408 4 L408 20 L384 20Z" fill="#FFFFFF"></path>
+<path d="M416 4 L432 4 L432 12 L424 12 L424 8 L428 8 L428 16 L420 16 L420 20 L436 20 L436 4 L440 4 L440 20 L416 20Z" fill="#FFFFFF"></path>
+<path d="M448 4 L464 4 L464 12 L456 12 L456 8 L460 8 L460 16 L452 16 L452 20 L468 20 L468 4 L472 4 L472 20 L448 20Z" fill="#FFFFFF"></path>
+<path d="M480 4 L496 4 L496 12 L488 12 L488 8 L492 8 L492 16 L484 16 L484 20 L500 20 L500 4 L504 4 L504 20 L480 20Z" fill="#FFFFFF"></path>
+<path d="M512 4 L528 4 L528 12 L520 12 L520 8 L524 8 L524 16 L516 16 L516 20 L532 20 L532 4 L536 4 L536 20 L512 20Z" fill="#FFFFFF"></path>
+<path d="M544 4 L560 4 L560 12 L552 12 L552 8 L556 8 L556 16 L548 16 L548 20 L564 20 L564 4 L568 4 L568 20 L544 20Z" fill="#FFFFFF"></path>
+<path d="M576 4 L592 4 L592 12 L584 12 L584 8 L588 8 L588 16 L580 16 L580 20 L596 20 L596 4 L600 4 L600 20 L576 20Z" fill="#FFFFFF"></path>
+<path d="M608 4 L624 4 L624 12 L616 12 L616 8 L620 8 L620 16 L612 16 L612 20 L628 20 L628 4 L632 4 L632 20 L608 20Z" fill="#FFFFFF"></path>
+<path d="M640 4 L656 4 L656 12 L648 12 L648 8 L652 8 L652 16 L644 16 L644 20 L660 20 L660 4 L664 4 L664 20 L640 20Z" fill="#FFFFFF"></path>
+<path d="M672 4 L688 4 L688 12 L680 12 L680 8 L684 8 L684 16 L676 16 L676 20 L692 20 L692 4 L696 4 L696 20 L672 20Z" fill="#FFFFFF"></path>
+<path d="M704 4 L720 4 L720 12 L712 12 L712 8 L716 8 L716 16 L708 16 L708 20 L724 20 L724 4 L728 4 L728 20 L704 20Z" fill="#FFFFFF"></path>
+<path d="M736 4 L752 4 L752 12 L744 12 L744 8 L748 8 L748 16 L740 16 L740 20 L756 20 L756 4 L760 4 L760 20 L736 20Z" fill="#FFFFFF"></path>
+<path d="M768 4 L784 4 L784 12 L776 12 L776 8 L780 8 L780 16 L772 16 L772 20 L788 20 L788 4 L792 4 L792 20 L768 20Z" fill="#FFFFFF"></path>
+<path d="M800 4 L816 4 L816 12 L808 12 L808 8 L812 8 L812 16 L804 16 L804 20 L820 20 L820 4 L824 4 L824 20 L800 20Z" fill="#FFFFFF"></path>
+<path d="M832 4 L848 4 L848 12 L840 12 L840 8 L844 8 L844 16 L836 16 L836 20 L852 20 L852 4 L856 4 L856 20 L832 20Z" fill="#FFFFFF"></path>
+<path d="M864 4 L880 4 L880 12 L872 12 L872 8 L876 8 L876 16 L868 16 L868 20 L884 20 L884 4 L888 4 L888 20 L864 20Z" fill="#FFFFFF"></path>
+<path d="M896 4 L912 4 L912 12 L904 12 L904 8 L908 8 L908 16 L900 16 L900 20 L916 20 L916 4 L920 4 L920 20 L896 20Z" fill="#FFFFFF"></path>
+<path d="M928 4 L944 4 L944 12 L936 12 L936 8 L940 8 L940 16 L932 16 L932 20 L948 20 L948 4 L952 4 L952 20 L928 20Z" fill="#FFFFFF"></path>
+<path d="M960 4 L976 4 L976 12 L968 12 L968 8 L972 8 L972 16 L964 16 L964 20 L980 20 L980 4 L984 4 L984 20 L960 20Z" fill="#FFFFFF"></path>
+<path d="M992 4 L1008 4 L1008 12 L1000 12 L1000 8 L1004 8 L1004 16 L996 16 L996 20 L1012 20 L1012 4 L1016 4 L1016 20 L992 20Z" fill="#FFFFFF"></path>
+<path d="M1024 4 L1040 4 L1040 12 L1032 12 L1032 8 L1036 8 L1036 16 L1028 16 L1028 20 L1044 20 L1044 4 L1048 4 L1048 20 L1024 20Z" fill="#FFFFFF"></path>
+<path d="M1056 4 L1072 4 L1072 12 L1064 12 L1064 8 L1068 8 L1068 16 L1060 16 L1060 20 L1076 20 L1076 4 L1080 4 L1080 20 L1056 20Z" fill="#FFFFFF"></path>
+<path d="M1088 4 L1104 4 L1104 12 L1096 12 L1096 8 L1100 8 L1100 16 L1092 16 L1092 20 L1108 20 L1108 4 L1112 4 L1112 20 L1088 20Z" fill="#FFFFFF"></path>
+<path d="M1120 4 L1136 4 L1136 12 L1128 12 L1128 8 L1132 8 L1132 16 L1124 16 L1124 20 L1140 20 L1140 4 L1144 4 L1144 20 L1120 20Z" fill="#FFFFFF"></path>
+<path d="M1152 4 L1168 4 L1168 12 L1160 12 L1160 8 L1164 8 L1164 16 L1156 16 L1156 20 L1172 20 L1172 4 L1176 4 L1176 20 L1152 20Z" fill="#FFFFFF"></path>
+<path d="M1184 4 L1200 4 L1200 12 L1192 12 L1192 8 L1196 8 L1196 16 L1188 16 L1188 20 L1204 20 L1204 4 L1208 4 L1208 20 L1184 20Z" fill="#FFFFFF"></path>
+<path d="M1216 4 L1232 4 L1232 12 L1224 12 L1224 8 L1228 8 L1228 16 L1220 16 L1220 20 L1236 20 L1236 4 L1240 4 L1240 20 L1216 20Z" fill="#FFFFFF"></path>
+<path d="M1248 4 L1264 4 L1264 12 L1256 12 L1256 8 L1260 8 L1260 16 L1252 16 L1252 20 L1268 20 L1268 4 L1272 4 L1272 20 L1248 20Z" fill="#FFFFFF"></path>
+</g>
+</svg>
 </div>
+<div class="circles">
+<svg viewbox="0 0 700 700">
+<circle cx="350" cy="350" fill="none" r="340" stroke="#1B4B8A" stroke-width="2"></circle>
+<circle cx="350" cy="350" fill="none" r="290" stroke="#4A7FB5" stroke-width="1.5"></circle>
+<circle cx="350" cy="350" fill="none" r="240" stroke="#8AB0D5" stroke-width="1"></circle>
+<circle cx="350" cy="350" fill="none" r="190" stroke="#C5D9EC" stroke-width="1"></circle>
+<circle cx="350" cy="350" fill="none" opacity="0.3" r="140" stroke="#1B4B8A" stroke-width="1"></circle>
+<circle cx="350" cy="350" fill="#1B4B8A" opacity="0.06" r="80"></circle>
+</svg>
+</div>
+<div class="corner-dot"><span class="blue-dot"></span></div>
+<div class="content-area">
+<div class="label-cn">第二十三章</div>
+<h1>青花</h1>
+<div class="en">Cobalt Circles</div>
+<p class="subtitle">以同心圆与钴蓝浓淡色阶重构青花瓷的视觉语法——<br/>不画瓷，而以圆环与分水见青韵。</p>
+</div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide section-slide" data-section="钴蓝">
+<div class="fret-top"></div>
+<div class="fret-border"><svg preserveaspectratio="none" viewbox="0 0 1280 24"><rect fill="#1B4B8A" height="24" width="1280"></rect></svg></div>
+<div class="circles"><svg viewbox="0 0 500 500"><circle cx="250" cy="250" fill="none" r="240" stroke="#1B4B8A" stroke-width="2"></circle><circle cx="250" cy="250" fill="none" r="190" stroke="#4A7FB5" stroke-width="1"></circle><circle cx="250" cy="250" fill="none" r="140" stroke="#8AB0D5" stroke-width="1"></circle></svg></div>
+<div class="content-area">
+<div class="num">— II —</div>
+<h2>圆融</h2>
+<p>同心圆是瓷盘的抽象，也是宇宙的隐喻。<br/>从中心向外，蓝色渐淡，如水墨氤氲。</p>
+</div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide content-slide" data-section="钴蓝">
+<div class="fret-top"></div>
+<div class="fret-border"><svg preserveaspectratio="none" viewbox="0 0 1280 24"><rect fill="#1B4B8A" height="24" width="1280"></rect></svg></div>
+<div class="content-area">
+<div class="header">
+<div class="label-cn">三法</div>
+<h2>三个视觉法则</h2>
+</div>
+<div class="cards">
+<div class="card">
+<div class="ring"></div>
+<h3>同心圆</h3>
+<p>从瓷盘构图抽象而来。内容围绕圆心组织，圆环既是装饰也是容器——最内一环最浓，向外渐淡。</p>
+<div class="en-term">Concentric</div>
+</div>
+<div class="card">
+<div class="ring"></div>
+<h3>分水色阶</h3>
+<p>钴蓝分四至五个浓淡层级（头浓、正浓、二浓、正淡），靠单色的明度变化建立层次，不依赖第二色。</p>
+<div class="en-term">Shaded Blue</div>
+</div>
+<div class="card">
+<div class="ring"></div>
+<h3>几何边饰</h3>
+<p>回纹、海水纹、如意云头简化为极简几何线条，只做窄边装饰带，不侵入内容区域。</p>
+<div class="en-term">Geometric Border</div>
+</div>
+</div>
+</div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide two-col" data-section="钴蓝">
+<div class="fret-top"></div>
+<div class="fret-border"><svg preserveaspectratio="none" viewbox="0 0 1280 24"><rect fill="#1B4B8A" height="24" width="1280"></rect></svg></div>
+<div class="content-area">
+<div class="header"><h2>二境</h2></div>
+<div class="cols">
+<div class="col a">
+<div class="tag">— DEEP —</div>
+<h3>头浓</h3>
+<p>最深的钴蓝，饱和而沉静。用于主标题、实心圆和关键数据，是画面中最有力量的颜色。</p>
+<div class="stat">#1B4B8A</div>
+</div>
+<div class="col b">
+<div class="tag">— LIGHT —</div>
+<h3>正淡</h3>
+<p>最浅的天蓝，近乎透明。用于外圈圆环、辅助线和背景层次，像瓷釉上最淡的一笔分水。</p>
+<div class="stat">#C5D9EC</div>
+</div>
+</div>
+</div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide section-slide" data-section="纹样">
+<div class="fret-top"></div>
+<div class="fret-border"><svg preserveaspectratio="none" viewbox="0 0 1280 24"><rect fill="#1B4B8A" height="24" width="1280"></rect></svg></div>
+<div class="circles"><svg viewbox="0 0 500 500"><circle cx="250" cy="250" fill="none" r="240" stroke="#1B4B8A" stroke-width="2"></circle><circle cx="250" cy="250" fill="none" r="190" stroke="#4A7FB5" stroke-width="1"></circle><circle cx="250" cy="250" fill="none" r="140" stroke="#8AB0D5" stroke-width="1"></circle></svg></div>
+<div class="content-area">
+<div class="num">— II —</div>
+<h2>纹样</h2>
+<p>同心圆是瓷盘的抽象，也是宇宙的隐喻。<br/>从中心向外，蓝色渐淡，如水墨氤氲。</p>
+</div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide data-slide" data-section="纹样">
+<div class="fret-top"></div>
+<div class="fret-border"><svg preserveaspectratio="none" viewbox="0 0 1280 24"><rect fill="#1B4B8A" height="24" width="1280"></rect></svg></div>
+<div class="content-area">
+<div class="header"><h2>数字</h2></div>
+<div class="metrics">
+<div class="metric"><div class="value">1</div><div class="label">色相（钴蓝）</div></div>
+<div class="metric"><div class="value">5</div><div class="label">浓淡色阶</div></div>
+<div class="metric"><div class="value">∞</div><div class="label">同心圆环</div></div>
+<div class="metric"><div class="value">0</div><div class="label">第二色彩</div></div>
+</div>
+</div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide section-slide" data-section="釉色">
+<div class="fret-top"></div>
+<div class="fret-border"><svg preserveaspectratio="none" viewbox="0 0 1280 24"><rect fill="#1B4B8A" height="24" width="1280"></rect></svg></div>
+<div class="circles"><svg viewbox="0 0 500 500"><circle cx="250" cy="250" fill="none" r="240" stroke="#1B4B8A" stroke-width="2"></circle><circle cx="250" cy="250" fill="none" r="190" stroke="#4A7FB5" stroke-width="1"></circle><circle cx="250" cy="250" fill="none" r="140" stroke="#8AB0D5" stroke-width="1"></circle></svg></div>
+<div class="content-area">
+<div class="num">— II —</div>
+<h2>釉色</h2>
+<p>同心圆是瓷盘的抽象，也是宇宙的隐喻。<br/>从中心向外，蓝色渐淡，如水墨氤氲。</p>
+</div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide quote-slide" data-section="釉色">
+<div class="fret-top"></div>
+<div class="fret-border"><svg preserveaspectratio="none" viewbox="0 0 1280 24"><rect fill="#1B4B8A" height="24" width="1280"></rect></svg></div>
+<div class="circles"><svg viewbox="0 0 600 600"><circle cx="300" cy="300" fill="none" r="290" stroke="#1B4B8A" stroke-width="2"></circle><circle cx="300" cy="300" fill="none" r="230" stroke="#4A7FB5" stroke-width="1"></circle><circle cx="300" cy="300" fill="none" r="170" stroke="#8AB0D5" stroke-width="1"></circle><circle cx="300" cy="300" fill="none" r="110" stroke="#C5D9EC" stroke-width="1"></circle></svg></div>
+<div class="content-area">
+<blockquote>
+        白釉青花一火成，<br/>
+<span class="light">花从釉里透分明。</span>
+</blockquote>
+<cite>— 龚轼《景德镇陶歌》</cite>
+</div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide closing-slide" data-section="END">
+<div class="fret-top"></div>
+<div class="fret-border"><svg preserveaspectratio="none" viewbox="0 0 1280 24"><rect fill="#1B4B8A" height="24" width="1280"></rect></svg></div>
+<div class="circles"><svg viewbox="0 0 400 400"><circle cx="200" cy="200" fill="none" r="190" stroke="#1B4B8A" stroke-width="2"></circle><circle cx="200" cy="200" fill="none" r="140" stroke="#4A7FB5" stroke-width="1"></circle><circle cx="200" cy="200" fill="none" r="90" stroke="#8AB0D5" stroke-width="1"></circle></svg></div>
+<div class="content-area">
+<h2>收</h2>
+<p>素胚勾勒，青花落笔</p>
+</div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section></div>
+
 <script>
-  const slides = document.querySelectorAll('.slide'); let current = 0;
-  function show(i) { slides[current].classList.remove('active'); current = (i + slides.length) % slides.length; slides[current].classList.add('active'); }
-  document.addEventListener('keydown', e => {
-    if (e.key==='ArrowRight'||e.key==='ArrowDown'||e.key===' ') { e.preventDefault(); show(current+1); }
-    if (e.key==='ArrowLeft'||e.key==='ArrowUp') { e.preventDefault(); show(current-1); }
-    if (e.key==='Home') { e.preventDefault(); show(0); }
-    if (e.key==='End') { e.preventDefault(); show(slides.length-1); }
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
+  let current = 0;
+  slides.forEach((s, i) => { if (s.classList.contains('active')) current = i; });
+
+  function buildProgress() {
+    const sections = Array.from(slides).map(s => s.dataset.section || '');
+    document.querySelectorAll('.progress-strip').forEach(strip => {
+      let lastSection = null;
+      sections.forEach((section, i) => {
+        const seg = document.createElement('div');
+        seg.className = 'seg';
+        if (lastSection !== null && section !== lastSection) seg.classList.add('seg-gap');
+        strip.appendChild(seg);
+        lastSection = section;
+      });
+    });
+  }
+
+  function updateUI(idx) {
+    const sectionName = slides[idx].dataset.section || '';
+    const pageStr = String(idx + 1).padStart(2, '0') + ' / ' + String(total).padStart(2, '0');
+    document.querySelectorAll('.progress-bar').forEach(bar => {
+      const label = bar.querySelector('.pb-section');
+      const page = bar.querySelector('.pb-page');
+      if (label) label.textContent = sectionName;
+      if (page) page.textContent = pageStr;
+    });
+    document.querySelectorAll('.progress-strip').forEach(strip => {
+      strip.querySelectorAll('.seg').forEach((seg, i) => {
+        seg.classList.toggle('current', i === idx);
+        seg.classList.toggle('past', i < idx);
+      });
+    });
+  }
+
+  function show(i) {
+    slides[current].classList.remove('active');
+    current = (i + total) % total;
+    slides[current].classList.add('active');
+    updateUI(current);
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); show(current + 1); }
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); show(current - 1); }
+    if (e.key === 'Home') { e.preventDefault(); show(0); }
+    if (e.key === 'End') { e.preventDefault(); show(total - 1); }
   });
-</script>
-</body>
+
+  buildProgress();
+  updateUI(current);
+</script></body>
 </html>

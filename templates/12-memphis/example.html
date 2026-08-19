@@ -1,12 +1,13 @@
 <!DOCTYPE html>
+
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>MEMPHIS — Slide Template</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;600;800&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&amp;family=Inter:wght@400;600;800&amp;family=Noto+Sans+SC:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
 <style>
   :root {
     --bg: #F5F0E8;
@@ -148,103 +149,231 @@
   .slide > .footer { margin-top: auto; flex-shrink: 0; }
   .slide > .cards, .slide > .cols, .slide > .metrics, .slide > .body { flex-shrink: 1; min-height: 0; }
 
+
+  /* === Progress system === */
+  .slide { padding-bottom: 80px !important; }
+  .title-slide { padding-bottom: 90px !important; }
+  .progress-bar {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 56px; display: flex; align-items: center; justify-content: space-between;
+    padding: 0 60px; z-index: 50;
+    background: var(--cream, #F5EFE0);
+    border-top: 3px solid var(--black, #222);
+  }
+  .progress-bar .pb-section {
+    font-family: var(--font-sans); font-size: 12px; font-weight: 700;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    color: rgba(0,0,0,0.6); min-width: 180px;
+  }
+  .progress-bar .pb-page {
+    font-family: var(--font-sans); font-size: 16px; font-weight: 700;
+    letter-spacing: 0.1em; color: var(--pink, #FF6B9D);
+  }
+  .progress-strip {
+    position: absolute; top: -8px; left: 50%; transform: translateX(-50%);
+    display: flex; align-items: center; height: 14px;
+  }
+  .progress-strip .seg {
+    width: 36px; height: 8px; border-radius: 0;
+    background: rgba(0,0,0,0.12);
+    border: 2px solid rgba(0,0,0,0.2);
+    margin: 0 4px; transition: all 0.25s;
+    
+  }
+  .progress-strip .seg.past {
+    background: rgba(0,0,0,0.4);
+    border-color: rgba(0,0,0,0.4);
+  }
+  .progress-strip .seg.current {
+    background: var(--pink, #FF6B9D);
+    border-color: var(--pink, #FF6B9D);
+    
+  }
+  .progress-strip .seg.seg-gap { margin-left: 22px; }
+  .nav-hint { display: none !important; }
 </style>
 </head>
 <body>
 <div class="deck">
 
-  <section class="slide title-slide active">
-    <div class="shapes">
-      <div class="deco circle" style="width:120px;height:120px;background:var(--pink);top:0;right:40px;"></div>
-      <div class="deco" style="width:100px;height:100px;background:var(--yellow);border:4px solid #000;top:140px;right:0;transform:rotate(15deg);"></div>
-      <div class="deco" style="width:0;height:0;border-left:50px solid transparent;border-right:50px solid transparent;border-bottom:90px solid var(--cyan);filter:drop-shadow(3px 3px 0 #000);top:260px;right:80px;"></div>
-      <svg class="deco squiggle" style="top:380px;right:40px;" viewBox="0 0 80 20"><path d="M0 10 Q10 0 20 10 T40 10 T60 10 T80 10"/></svg>
-      <div class="deco checker" style="width:50px;height:50px;border:3px solid #000;top:420px;right:160px;"></div>
-      <div class="deco" style="width:24px;height:24px;background:var(--red);border-radius:50%;border:3px solid #000;top:100px;right:180px;"></div>
-      <svg class="deco squiggle" style="top:200px;right:200px;transform:rotate(45deg);" viewBox="0 0 80 20"><path d="M0 10 Q10 0 20 10 T40 10 T60 10 T80 10"/></svg>
-    </div>
-    <span class="badge">★ Postmodern Design ★</span>
-    <h1>MEM<span class="pink">PHIS</span><br><span class="cyan">STYLE</span></h1>
-    <p class="subtitle">A playful, rebellious presentation template inspired by 1980s Milan — geometric shapes, squiggles, and colors that refuse to behave.</p>
-    <div class="footer"><span><span class="tag">MEMPHIS</span></span><span>01 / 07</span></div>
-  </section>
 
-  <section class="slide section-slide">
-    <div class="deco circle" style="width:200px;height:200px;background:var(--pink);opacity:0.2;right:-60px;top:-60px;"></div>
-    <div class="deco" style="width:80px;height:80px;background:var(--cyan);border:4px solid #000;bottom:80px;left:80px;transform:rotate(-10deg);"></div>
-    <svg class="deco squiggle" style="bottom:120px;right:120px;width:120px;height:30px;" viewBox="0 0 120 30"><path d="M0 15 Q15 0 30 15 T60 15 T90 15 T120 15" stroke-width="4"/></svg>
-    <span class="label">Section 02</span>
-    <h2>BREAK THE<br><span class="yellow-bg">GRID.</span></h2>
-    <div class="footer"><span><span class="tag">MEMPHIS</span></span><span>02 / 07</span></div>
-  </section>
 
-  <section class="slide content-slide">
-    <div class="deco" style="width:60px;height:60px;background:var(--yellow);border:4px solid #000;border-radius:50%;top:60px;right:80px;"></div>
-    <div class="deco checker" style="width:40px;height:40px;top:140px;right:200px;"></div>
-    <div class="header"><span class="label">Rules? What rules?</span><h2>Three vibes</h2></div>
-    <div class="cards">
-      <div class="card"><div class="shape-icon">●</div><h3>Color clash</h3><p>Pink, cyan, yellow, red — all at once. Clash is the point. Harmony is boring.</p></div>
-      <div class="card"><div class="shape-icon">▲</div><h3>Shape party</h3><p>Circles, triangles, rotated squares, checkerboards, squiggles — scattered like confetti.</p></div>
-      <div class="card"><div class="shape-icon">≈</div><h3>Hand-drawn energy</h3><p>Black squiggles and slight rotations make everything feel alive and slightly off-kilter.</p></div>
-    </div>
-    <div class="footer"><span><span class="tag">MEMPHIS</span></span><span>03 / 07</span></div>
-  </section>
 
-  <section class="slide two-col">
-    <div class="deco" style="width:50px;height:50px;background:var(--pink);border:3px solid #000;border-radius:50%;bottom:100px;right:100px;"></div>
-    <svg class="deco squiggle" style="top:80px;right:60px;" viewBox="0 0 80 20"><path d="M0 10 Q10 0 20 10 T40 10 T60 10 T80 10"/></svg>
-    <div class="header"><h2>Two moods</h2></div>
-    <div class="cols">
-      <div class="col a"><span class="tag">Day</span><h3>Bright chaos</h3><p>Cream background with every color screaming at once. Best for creative pitches and fun decks.</p><div class="big">YAY!</div></div>
-      <div class="col b"><span class="tag">Night</span><h3>Dark order</h3><p>Black background with neon-bright shapes. The chaos stays, but it gets a spotlight.</p><div class="big">WOW!</div></div>
-    </div>
-    <div class="footer"><span><span class="tag">MEMPHIS</span></span><span>04 / 07</span></div>
-  </section>
 
-  <section class="slide quote-slide">
-    <div class="deco" style="width:100px;height:100px;background:var(--yellow);border:4px solid #000;border-radius:50%;top:60px;left:80px;opacity:0.5;"></div>
-    <div class="deco" style="width:70px;height:70px;background:var(--cyan);border:4px solid #000;bottom:80px;right:100px;transform:rotate(20deg);"></div>
-    <div class="box">
-      <blockquote>Style is a way to say<br>who you are without<br>having to <span class="cyan">speak.</span></blockquote>
-      <cite>— RACHEL ZOE</cite>
-    </div>
-    <div class="footer"><span><span class="tag">MEMPHIS</span></span><span>05 / 07</span></div>
-  </section>
 
-  <section class="slide data-slide">
-    <div class="deco checker" style="width:50px;height:50px;top:80px;right:100px;"></div>
-    <svg class="deco squiggle" style="bottom:120px;left:60px;width:100px;" viewBox="0 0 80 20"><path d="M0 10 Q10 0 20 10 T40 10 T60 10 T80 10"/></svg>
-    <div class="header"><h2>By the numbers</h2></div>
-    <div class="metrics">
-      <div class="metric"><div class="value">4+</div><div class="label">Loud colors</div></div>
-      <div class="metric"><div class="value">∞</div><div class="label">Shapes & squiggles</div></div>
-      <div class="metric"><div class="value">80s</div><div class="label">Reference era</div></div>
-      <div class="metric"><div class="value">0</div><div class="label">Straight faces</div></div>
-    </div>
-    <div class="footer"><span><span class="tag">MEMPHIS</span></span><span>06 / 07</span></div>
-  </section>
 
-  <section class="slide closing-slide">
-    <div class="deco circle" style="width:160px;height:160px;background:var(--pink);opacity:0.15;left:50%;top:50%;transform:translate(-50%,-50%);"></div>
-    <div class="deco" style="width:80px;height:80px;background:var(--cyan);border:4px solid #000;top:80px;left:100px;transform:rotate(-15deg);"></div>
-    <div class="deco" style="width:60px;height:60px;background:var(--yellow);border:4px solid #000;border-radius:50%;bottom:100px;right:120px;"></div>
-    <h2>THAT'S<br><span class="pink">ALL FOLKS!</span></h2>
-    <p>Stay weird. Stay colorful.</p>
-    <div class="btn">▶ Encore</div>
-    <div class="footer"><span><span class="tag">MEMPHIS</span></span><span>07 / 07</span></div>
-  </section>
-
-  <div class="nav-hint">← → ARROWS TO NAVIGATE</div>
+<div class="nav-hint">← → ARROWS TO NAVIGATE</div>
+<section class="slide title-slide active" data-section="MEMPHIS">
+<div class="shapes">
+<div class="deco circle" style="width:120px;height:120px;background:var(--pink);top:0;right:40px;"></div>
+<div class="deco" style="width:100px;height:100px;background:var(--yellow);border:4px solid #000;top:140px;right:0;transform:rotate(15deg);"></div>
+<div class="deco" style="width:0;height:0;border-left:50px solid transparent;border-right:50px solid transparent;border-bottom:90px solid var(--cyan);filter:drop-shadow(3px 3px 0 #000);top:260px;right:80px;"></div>
+<svg class="deco squiggle" style="top:380px;right:40px;" viewbox="0 0 80 20"><path d="M0 10 Q10 0 20 10 T40 10 T60 10 T80 10"></path></svg>
+<div class="deco checker" style="width:50px;height:50px;border:3px solid #000;top:420px;right:160px;"></div>
+<div class="deco" style="width:24px;height:24px;background:var(--red);border-radius:50%;border:3px solid #000;top:100px;right:180px;"></div>
+<svg class="deco squiggle" style="top:200px;right:200px;transform:rotate(45deg);" viewbox="0 0 80 20"><path d="M0 10 Q10 0 20 10 T40 10 T60 10 T80 10"></path></svg>
 </div>
+<span class="badge">★ Postmodern Design ★</span>
+<h1>MEM<span class="pink">PHIS</span><br/><span class="cyan">STYLE</span></h1>
+<p class="subtitle">A playful, rebellious presentation template inspired by 1980s Milan — geometric shapes, squiggles, and colors that refuse to behave.</p>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide section-slide" data-section="图案">
+<div class="deco circle" style="width:200px;height:200px;background:var(--pink);opacity:0.2;right:-60px;top:-60px;"></div>
+<div class="deco" style="width:80px;height:80px;background:var(--cyan);border:4px solid #000;bottom:80px;left:80px;transform:rotate(-10deg);"></div>
+<svg class="deco squiggle" style="bottom:120px;right:120px;width:120px;height:30px;" viewbox="0 0 120 30"><path d="M0 15 Q15 0 30 15 T60 15 T90 15 T120 15" stroke-width="4"></path></svg>
+<span class="label">Section 02</span>
+<h2>BREAK THE<br/><span class="yellow-bg">GRID.</span></h2>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide content-slide" data-section="图案">
+<div class="deco" style="width:60px;height:60px;background:var(--yellow);border:4px solid #000;border-radius:50%;top:60px;right:80px;"></div>
+<div class="deco checker" style="width:40px;height:40px;top:140px;right:200px;"></div>
+<div class="header"><span class="label">Rules? What rules?</span><h2>Three vibes</h2></div>
+<div class="cards">
+<div class="card"><div class="shape-icon">●</div><h3>Color clash</h3><p>Pink, cyan, yellow, red — all at once. Clash is the point. Harmony is boring.</p></div>
+<div class="card"><div class="shape-icon">▲</div><h3>Shape party</h3><p>Circles, triangles, rotated squares, checkerboards, squiggles — scattered like confetti.</p></div>
+<div class="card"><div class="shape-icon">≈</div><h3>Hand-drawn energy</h3><p>Black squiggles and slight rotations make everything feel alive and slightly off-kilter.</p></div>
+</div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide two-col" data-section="图案">
+<div class="deco" style="width:50px;height:50px;background:var(--pink);border:3px solid #000;border-radius:50%;bottom:100px;right:100px;"></div>
+<svg class="deco squiggle" style="top:80px;right:60px;" viewbox="0 0 80 20"><path d="M0 10 Q10 0 20 10 T40 10 T60 10 T80 10"></path></svg>
+<div class="header"><h2>Two moods</h2></div>
+<div class="cols">
+<div class="col a"><span class="tag">Day</span><h3>Bright chaos</h3><p>Cream background with every color screaming at once. Best for creative pitches and fun decks.</p><div class="big">YAY!</div></div>
+<div class="col b"><span class="tag">Night</span><h3>Dark order</h3><p>Black background with neon-bright shapes. The chaos stays, but it gets a spotlight.</p><div class="big">WOW!</div></div>
+</div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide section-slide" data-section="色彩">
+<div class="deco circle" style="width:200px;height:200px;background:var(--pink);opacity:0.2;right:-60px;top:-60px;"></div>
+<div class="deco" style="width:80px;height:80px;background:var(--cyan);border:4px solid #000;bottom:80px;left:80px;transform:rotate(-10deg);"></div>
+<svg class="deco squiggle" style="bottom:120px;right:120px;width:120px;height:30px;" viewbox="0 0 120 30"><path d="M0 15 Q15 0 30 15 T60 15 T90 15 T120 15" stroke-width="4"></path></svg>
+<span class="label">Section 02</span>
+<h2>色彩</h2>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide data-slide" data-section="色彩">
+<div class="deco checker" style="width:50px;height:50px;top:80px;right:100px;"></div>
+<svg class="deco squiggle" style="bottom:120px;left:60px;width:100px;" viewbox="0 0 80 20"><path d="M0 10 Q10 0 20 10 T40 10 T60 10 T80 10"></path></svg>
+<div class="header"><h2>By the numbers</h2></div>
+<div class="metrics">
+<div class="metric"><div class="value">4+</div><div class="label">Loud colors</div></div>
+<div class="metric"><div class="value">∞</div><div class="label">Shapes &amp; squiggles</div></div>
+<div class="metric"><div class="value">80s</div><div class="label">Reference era</div></div>
+<div class="metric"><div class="value">0</div><div class="label">Straight faces</div></div>
+</div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide section-slide" data-section="趣味">
+<div class="deco circle" style="width:200px;height:200px;background:var(--pink);opacity:0.2;right:-60px;top:-60px;"></div>
+<div class="deco" style="width:80px;height:80px;background:var(--cyan);border:4px solid #000;bottom:80px;left:80px;transform:rotate(-10deg);"></div>
+<svg class="deco squiggle" style="bottom:120px;right:120px;width:120px;height:30px;" viewbox="0 0 120 30"><path d="M0 15 Q15 0 30 15 T60 15 T90 15 T120 15" stroke-width="4"></path></svg>
+<span class="label">Section 02</span>
+<h2>趣味</h2>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide quote-slide" data-section="趣味">
+<div class="deco" style="width:100px;height:100px;background:var(--yellow);border:4px solid #000;border-radius:50%;top:60px;left:80px;opacity:0.5;"></div>
+<div class="deco" style="width:70px;height:70px;background:var(--cyan);border:4px solid #000;bottom:80px;right:100px;transform:rotate(20deg);"></div>
+<div class="box">
+<blockquote>Style is a way to say<br/>who you are without<br/>having to <span class="cyan">speak.</span></blockquote>
+<cite>— RACHEL ZOE</cite>
+</div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide closing-slide" data-section="END">
+<div class="deco circle" style="width:160px;height:160px;background:var(--pink);opacity:0.15;left:50%;top:50%;transform:translate(-50%,-50%);"></div>
+<div class="deco" style="width:80px;height:80px;background:var(--cyan);border:4px solid #000;top:80px;left:100px;transform:rotate(-15deg);"></div>
+<div class="deco" style="width:60px;height:60px;background:var(--yellow);border:4px solid #000;border-radius:50%;bottom:100px;right:120px;"></div>
+<h2>THAT'S<br/><span class="pink">ALL FOLKS!</span></h2>
+<p>Stay weird. Stay colorful.</p>
+<div class="btn">▶ Encore</div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section></div>
+
 <script>
-  const slides = document.querySelectorAll('.slide'); let current = 0;
-  function show(i) { slides[current].classList.remove('active'); current = (i + slides.length) % slides.length; slides[current].classList.add('active'); }
-  document.addEventListener('keydown', e => {
-    if (e.key==='ArrowRight'||e.key==='ArrowDown'||e.key===' ') { e.preventDefault(); show(current+1); }
-    if (e.key==='ArrowLeft'||e.key==='ArrowUp') { e.preventDefault(); show(current-1); }
-    if (e.key==='Home') { e.preventDefault(); show(0); }
-    if (e.key==='End') { e.preventDefault(); show(slides.length-1); }
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
+  let current = 0;
+  slides.forEach((s, i) => { if (s.classList.contains('active')) current = i; });
+
+  function buildProgress() {
+    const sections = Array.from(slides).map(s => s.dataset.section || '');
+    document.querySelectorAll('.progress-strip').forEach(strip => {
+      let lastSection = null;
+      sections.forEach((section, i) => {
+        const seg = document.createElement('div');
+        seg.className = 'seg';
+        if (lastSection !== null && section !== lastSection) seg.classList.add('seg-gap');
+        strip.appendChild(seg);
+        lastSection = section;
+      });
+    });
+  }
+
+  function updateUI(idx) {
+    const sectionName = slides[idx].dataset.section || '';
+    const pageStr = String(idx + 1).padStart(2, '0') + ' / ' + String(total).padStart(2, '0');
+    document.querySelectorAll('.progress-bar').forEach(bar => {
+      const label = bar.querySelector('.pb-section');
+      const page = bar.querySelector('.pb-page');
+      if (label) label.textContent = sectionName;
+      if (page) page.textContent = pageStr;
+    });
+    document.querySelectorAll('.progress-strip').forEach(strip => {
+      strip.querySelectorAll('.seg').forEach((seg, i) => {
+        seg.classList.toggle('current', i === idx);
+        seg.classList.toggle('past', i < idx);
+      });
+    });
+  }
+
+  function show(i) {
+    slides[current].classList.remove('active');
+    current = (i + total) % total;
+    slides[current].classList.add('active');
+    updateUI(current);
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); show(current + 1); }
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); show(current - 1); }
+    if (e.key === 'Home') { e.preventDefault(); show(0); }
+    if (e.key === 'End') { e.preventDefault(); show(total - 1); }
   });
-</script>
-</body>
+
+  buildProgress();
+  updateUI(current);
+</script></body>
 </html>

@@ -1,12 +1,13 @@
 <!DOCTYPE html>
+
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>SYSTEMS — Slide Template</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Inter:wght@300;400;500&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&amp;family=Inter:wght@300;400;500&amp;family=Noto+Sans+SC:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
 <style>
   :root {
     --bg: #F6F5F2;
@@ -379,157 +380,252 @@
   .slide > .footer { margin-top: auto; flex-shrink: 0; }
   .slide > .cards, .slide > .cols, .slide > .metrics, .slide > .body { flex-shrink: 1; min-height: 0; }
 
+
+  /* === Progress system === */
+  .slide { padding-bottom: 80px !important; }
+  .title-slide { padding-bottom: 90px !important; }
+  .progress-bar {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 56px; display: flex; align-items: center; justify-content: space-between;
+    padding: 0 60px; z-index: 50;
+    background: var(--bg);
+    border-top: var(--line);
+  }
+  .progress-bar .pb-section {
+    font-family: var(--font-mono); font-size: 12px; font-weight: 700;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--muted); min-width: 180px;
+  }
+  .progress-bar .pb-page {
+    font-family: var(--font-mono); font-size: 16px; font-weight: 700;
+    letter-spacing: 0.1em; color: var(--accent);
+  }
+  .progress-strip {
+    position: absolute; top: -8px; left: 50%; transform: translateX(-50%);
+    display: flex; align-items: center; height: 14px;
+  }
+  .progress-strip .seg {
+    width: 44px; height: 5px; border-radius: 0;
+    background: rgba(26,26,26,0.15);
+    border: 1px solid rgba(26,26,26,0.2);
+    margin: 0 4px; transition: all 0.25s;
+    
+  }
+  .progress-strip .seg.past {
+    background: rgba(26,26,26,0.35);
+    border-color: rgba(26,26,26,0.35);
+  }
+  .progress-strip .seg.current {
+    background: var(--accent);
+    border-color: var(--accent);
+    
+  }
+  .progress-strip .seg.seg-gap { margin-left: 24px; }
+  .nav-hint { display: none !important; }
 </style>
 </head>
 <body>
-
 <div class="deck">
+<!-- 1. Title -->
 
-  <!-- 1. Title -->
-  <section class="slide title-slide active">
-    <div class="section-tag">// TECHNICAL DOCUMENTATION</div>
-    <h1>SYSTEMS<br><span class="accent">/</span> DESIGN</h1>
-    <p class="subtitle">A blueprint-driven presentation template built on grid, type, and precise spacing tokens.</p>
-    <div class="meta">
-      <span>VERSION<strong>01.0</strong></span>
-      <span>DATE<strong>2026.08</strong></span>
-      <span>AUTHOR<strong>ENGINEERING</strong></span>
-    </div>
-    <div class="footer">
-      <span><span class="dot"></span>SYSTEMS TEMPLATE</span>
-      <span>01 / 07</span>
-    </div>
-  </section>
+<!-- 2. Section divider -->
 
-  <!-- 2. Section divider -->
-  <section class="slide section-slide">
-    <div class="section-label">SECTION 02</div>
-    <h2>Architecture<br>of the system.</h2>
-    <div class="big-num">02</div>
-    <div class="footer">
-      <span><span class="dot"></span>SYSTEMS TEMPLATE</span>
-      <span>02 / 07</span>
-    </div>
-  </section>
+<!-- 3. Content -->
 
-  <!-- 3. Content -->
-  <section class="slide content-slide">
-    <div class="eyebrow">FOUNDATIONS</div>
-    <h2 class="slide-title"><span class="underline">Core principles</span></h2>
-    <div class="body">
-      <p class="lead">Every decision in this template traces back to a small set of rules. The grid is not decoration — it is the contract that keeps every slide aligned.</p>
-      <ul>
-        <li><strong>GRID // 32PX BASELINE</strong>All spacing is a multiple of 32px. No arbitrary values.</li>
-        <li><strong>TYPE // MONOSPACE FIRST</strong>JetBrains Mono carries structure; Inter supports reading.</li>
-        <li><strong>COLOR // TERRACOTTA ACCENT</strong>One accent color, used only for emphasis and markers.</li>
-        <li><strong>BORDER // 1PX HAIRLINE</strong>Separation comes from lines, never from shadows.</li>
-      </ul>
-    </div>
-    <div class="footer">
-      <span><span class="dot"></span>SYSTEMS TEMPLATE</span>
-      <span>03 / 07</span>
-    </div>
-  </section>
+<!-- 4. Two column -->
 
-  <!-- 4. Two column -->
-  <section class="slide two-col">
-    <div class="eyebrow">COMPARISON</div>
-    <h2 class="slide-title"><span class="underline">Two approaches</span></h2>
-    <div class="cols">
-      <div class="col">
-        <div class="col-num">A — RIGID</div>
-        <h3>Fixed grid</h3>
-        <p>Predictable alignment at every breakpoint. Best for technical content, data-heavy slides, and documentation where consistency matters more than surprise.</p>
-        <div class="spec">RADIUS: 0PX · SHADOW: NONE</div>
-      </div>
-      <div class="col">
-        <div class="col-num">B — FLUID</div>
-        <h3>Elastic spacing</h3>
-        <p>Spacing scales with viewport while maintaining proportional rhythm. Best for narrative decks where breathing room changes with screen size.</p>
-        <div class="spec">RADIUS: 0PX · SHADOW: NONE</div>
-      </div>
-    </div>
-    <div class="footer">
-      <span><span class="dot"></span>SYSTEMS TEMPLATE</span>
-      <span>04 / 07</span>
-    </div>
-  </section>
+<!-- 5. Quote -->
 
-  <!-- 5. Quote -->
-  <section class="slide quote-slide">
-    <blockquote>Good design is as little design as possible. Less, but better — because it concentrates on the essential aspects.</blockquote>
-    <cite><strong>DIETER RAMS</strong> — TEN PRINCIPLES</cite>
-    <div class="footer">
-      <span><span class="dot"></span>SYSTEMS TEMPLATE</span>
-      <span>05 / 07</span>
-    </div>
-  </section>
+<!-- 6. Data -->
 
-  <!-- 6. Data -->
-  <section class="slide data-slide">
-    <div class="eyebrow">METRICS</div>
-    <h2 class="slide-title"><span class="underline">By the numbers</span></h2>
-    <div class="metrics">
-      <div class="metric">
-        <div>
-          <div class="tag">SPACING</div>
-          <div class="value">32<span class="unit">px</span></div>
-        </div>
-        <div class="label">Baseline grid unit used across all slide layouts and component spacing.</div>
-      </div>
-      <div class="metric">
-        <div>
-          <div class="tag">TYPE SCALE</div>
-          <div class="value">7<span class="unit">steps</span></div>
-        </div>
-        <div class="label">From 11px caption to 96px display, each step multiplies by 1.25.</div>
-      </div>
-      <div class="metric">
-        <div>
-          <div class="tag">COLORS</div>
-          <div class="value">3<span class="unit">core</span></div>
-        </div>
-        <div class="label">Background, foreground, and a single terracotta accent. Nothing more.</div>
-      </div>
-    </div>
-    <div class="footer">
-      <span><span class="dot"></span>SYSTEMS TEMPLATE</span>
-      <span>06 / 07</span>
-    </div>
-  </section>
+<!-- 7. Closing -->
 
-  <!-- 7. Closing -->
-  <section class="slide closing-slide">
-    <div class="corner-mark tl"></div>
-    <div class="corner-mark tr"></div>
-    <div class="corner-mark bl"></div>
-    <div class="corner-mark br"></div>
-    <h2>END<span class="accent">.</span></h2>
-    <p>Thank you — questions welcome.</p>
-    <div class="footer">
-      <span><span class="dot"></span>SYSTEMS TEMPLATE</span>
-      <span>07 / 07</span>
-    </div>
-  </section>
-
-  <div class="nav-hint">← → ARROWS TO NAVIGATE</div>
+<div class="nav-hint">← → ARROWS TO NAVIGATE</div>
+<section class="slide title-slide active" data-section="SYSTEMS">
+<div class="section-tag">// TECHNICAL DOCUMENTATION</div>
+<h1>SYSTEMS<br/><span class="accent">/</span> DESIGN</h1>
+<p class="subtitle">A blueprint-driven presentation template built on grid, type, and precise spacing tokens.</p>
+<div class="meta">
+<span>VERSION<strong>01.0</strong></span>
+<span>DATE<strong>2026.08</strong></span>
+<span>AUTHOR<strong>ENGINEERING</strong></span>
 </div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide section-slide" data-section="概览">
+<div class="section-label">SECTION 02</div>
+<h2>Architecture<br/>of the system.</h2>
+<div class="big-num">02</div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide content-slide" data-section="概览">
+<div class="eyebrow">FOUNDATIONS</div>
+<h2 class="slide-title"><span class="underline">Core principles</span></h2>
+<div class="body">
+<p class="lead">Every decision in this template traces back to a small set of rules. The grid is not decoration — it is the contract that keeps every slide aligned.</p>
+<ul>
+<li><strong>GRID // 32PX BASELINE</strong>All spacing is a multiple of 32px. No arbitrary values.</li>
+<li><strong>TYPE // MONOSPACE FIRST</strong>JetBrains Mono carries structure; Inter supports reading.</li>
+<li><strong>COLOR // TERRACOTTA ACCENT</strong>One accent color, used only for emphasis and markers.</li>
+<li><strong>BORDER // 1PX HAIRLINE</strong>Separation comes from lines, never from shadows.</li>
+</ul>
+</div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide two-col" data-section="概览">
+<div class="eyebrow">COMPARISON</div>
+<h2 class="slide-title"><span class="underline">Two approaches</span></h2>
+<div class="cols">
+<div class="col">
+<div class="col-num">A — RIGID</div>
+<h3>Fixed grid</h3>
+<p>Predictable alignment at every breakpoint. Best for technical content, data-heavy slides, and documentation where consistency matters more than surprise.</p>
+<div class="spec">RADIUS: 0PX · SHADOW: NONE</div>
+</div>
+<div class="col">
+<div class="col-num">B — FLUID</div>
+<h3>Elastic spacing</h3>
+<p>Spacing scales with viewport while maintaining proportional rhythm. Best for narrative decks where breathing room changes with screen size.</p>
+<div class="spec">RADIUS: 0PX · SHADOW: NONE</div>
+</div>
+</div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide section-slide" data-section="数据">
+<div class="section-label">SECTION 02</div>
+<h2>数据</h2>
+<div class="big-num">02</div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide data-slide" data-section="数据">
+<div class="eyebrow">METRICS</div>
+<h2 class="slide-title"><span class="underline">By the numbers</span></h2>
+<div class="metrics">
+<div class="metric">
+<div>
+<div class="tag">SPACING</div>
+<div class="value">32<span class="unit">px</span></div>
+</div>
+<div class="label">Baseline grid unit used across all slide layouts and component spacing.</div>
+</div>
+<div class="metric">
+<div>
+<div class="tag">TYPE SCALE</div>
+<div class="value">7<span class="unit">steps</span></div>
+</div>
+<div class="label">From 11px caption to 96px display, each step multiplies by 1.25.</div>
+</div>
+<div class="metric">
+<div>
+<div class="tag">COLORS</div>
+<div class="value">3<span class="unit">core</span></div>
+</div>
+<div class="label">Background, foreground, and a single terracotta accent. Nothing more.</div>
+</div>
+</div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide section-slide" data-section="原则">
+<div class="section-label">SECTION 02</div>
+<h2>原则</h2>
+<div class="big-num">03</div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide quote-slide" data-section="原则">
+<blockquote>Good design is as little design as possible. Less, but better — because it concentrates on the essential aspects.</blockquote>
+<cite><strong>DIETER RAMS</strong> — TEN PRINCIPLES</cite>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide closing-slide" data-section="END">
+<div class="corner-mark tl"></div>
+<div class="corner-mark tr"></div>
+<div class="corner-mark bl"></div>
+<div class="corner-mark br"></div>
+<h2>END<span class="accent">.</span></h2>
+<p>Thank you — questions welcome.</p>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section></div>
+
 <script>
   const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
   let current = 0;
+  slides.forEach((s, i) => { if (s.classList.contains('active')) current = i; });
+
+  function buildProgress() {
+    const sections = Array.from(slides).map(s => s.dataset.section || '');
+    document.querySelectorAll('.progress-strip').forEach(strip => {
+      let lastSection = null;
+      sections.forEach((section, i) => {
+        const seg = document.createElement('div');
+        seg.className = 'seg';
+        if (lastSection !== null && section !== lastSection) seg.classList.add('seg-gap');
+        strip.appendChild(seg);
+        lastSection = section;
+      });
+    });
+  }
+
+  function updateUI(idx) {
+    const sectionName = slides[idx].dataset.section || '';
+    const pageStr = String(idx + 1).padStart(2, '0') + ' / ' + String(total).padStart(2, '0');
+    document.querySelectorAll('.progress-bar').forEach(bar => {
+      const label = bar.querySelector('.pb-section');
+      const page = bar.querySelector('.pb-page');
+      if (label) label.textContent = sectionName;
+      if (page) page.textContent = pageStr;
+    });
+    document.querySelectorAll('.progress-strip').forEach(strip => {
+      strip.querySelectorAll('.seg').forEach((seg, i) => {
+        seg.classList.toggle('current', i === idx);
+        seg.classList.toggle('past', i < idx);
+      });
+    });
+  }
 
   function show(i) {
     slides[current].classList.remove('active');
-    current = (i + slides.length) % slides.length;
+    current = (i + total) % total;
     slides[current].classList.add('active');
+    updateUI(current);
   }
 
-  document.addEventListener('keydown', (e) => {
+  document.addEventListener('keydown', function(e) {
     if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); show(current + 1); }
     if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); show(current - 1); }
     if (e.key === 'Home') { e.preventDefault(); show(0); }
-    if (e.key === 'End') { e.preventDefault(); show(slides.length - 1); }
+    if (e.key === 'End') { e.preventDefault(); show(total - 1); }
   });
-</script>
-</body>
+
+  buildProgress();
+  updateUI(current);
+</script></body>
 </html>

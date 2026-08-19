@@ -1,12 +1,13 @@
 <!DOCTYPE html>
+
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Breathe — Slide Template</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;family=Noto+Sans+SC:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
 <style>
   :root {
     --bg: #FFFFFF;
@@ -466,210 +467,325 @@
   .slide > .footer { margin-top: auto; flex-shrink: 0; }
   .slide > .cards, .slide > .cols, .slide > .metrics, .slide > .body { flex-shrink: 1; min-height: 0; }
 
+
+  /* === Progress system === */
+  .slide { padding-bottom: 80px !important; }
+  .title-slide { padding-bottom: 90px !important; }
+  .progress-bar {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 56px; display: flex; align-items: center; justify-content: space-between;
+    padding: 0 60px; z-index: 50;
+    background: var(--bg);
+    border-top: rgba(0,0,0,0.06);
+  }
+  .progress-bar .pb-section {
+    font-family: var(--font-sans); font-size: 12px; font-weight: 700;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--muted); min-width: 180px;
+  }
+  .progress-bar .pb-page {
+    font-family: var(--font-sans); font-size: 16px; font-weight: 700;
+    letter-spacing: 0.1em; color: var(--accent);
+  }
+  .progress-strip {
+    position: absolute; top: -8px; left: 50%; transform: translateX(-50%);
+    display: flex; align-items: center; height: 14px;
+  }
+  .progress-strip .seg {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: rgba(0,0,0,0.13);
+    
+    margin: 0 4px; transition: all 0.25s;
+    
+  }
+  .progress-strip .seg.past {
+    background: rgba(0,0,0,0.3);
+    
+  }
+  .progress-strip .seg.current {
+    background: var(--accent);
+    
+    width:14px;height:14px;
+  }
+  .progress-strip .seg.seg-gap { margin-left: 26px; }
+  .nav-hint { display: none !important; }
 </style>
 </head>
 <body>
-
 <div class="deck">
+<!-- 1. Title -->
 
-  <!-- 1. Title -->
-  <section class="slide title-slide active">
-    <div class="organic-shape"></div>
-    <svg class="leaf-svg" viewBox="0 0 200 280" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M100 10 C60 50 20 120 30 200 C35 240 60 270 100 270 C140 270 165 240 170 200 C180 120 140 50 100 10Z" stroke="#A8C4A2" stroke-width="1.5" fill="none"/>
-      <path d="M100 30 L100 260" stroke="#A8C4A2" stroke-width="1"/>
-      <path d="M100 70 Q70 80 55 110" stroke="#A8C4A2" stroke-width="0.8" fill="none"/>
-      <path d="M100 70 Q130 80 145 110" stroke="#A8C4A2" stroke-width="0.8" fill="none"/>
-      <path d="M100 120 Q65 135 48 170" stroke="#A8C4A2" stroke-width="0.8" fill="none"/>
-      <path d="M100 120 Q135 135 152 170" stroke="#A8C4A2" stroke-width="0.8" fill="none"/>
-      <path d="M100 180 Q75 195 60 225" stroke="#A8C4A2" stroke-width="0.8" fill="none"/>
-      <path d="M100 180 Q125 195 140 225" stroke="#A8C4A2" stroke-width="0.8" fill="none"/>
-      <path d="M100 10 C80 30 60 60 50 100" stroke="#A8C4A2" stroke-width="0.6" fill="none" opacity="0.5"/>
-      <path d="M100 10 C120 30 140 60 150 100" stroke="#A8C4A2" stroke-width="0.6" fill="none" opacity="0.5"/>
-    </svg>
-    <span class="tag">FRESH DESIGN</span>
-    <h1>Breathe<br><span class="light">in.</span></h1>
-    <p class="subtitle">A clean, nature-inspired presentation template with sage greens, organic shapes, and generous breathing room.</p>
-    <div class="meta-row">
-      <div class="meta-item"><div class="num">100%</div><div class="lbl">WHITE SPACE</div></div>
-      <div class="meta-item"><div class="num">1</div><div class="lbl">SAGE TONE</div></div>
-      <div class="meta-item"><div class="num">0</div><div class="lbl">SHADOWS</div></div>
-    </div>
-    <div class="footer">
-      <span><span class="leaf-dot"></span>BREATHE</span>
-      <span>01 / 07</span>
-    </div>
-  </section>
+<!-- 2. Section -->
 
-  <!-- 2. Section -->
-  <section class="slide section-slide">
-    <div class="organic-circle"></div>
-    <svg class="leaf-deco" viewBox="0 0 100 140" fill="none">
-      <path d="M50 5 C25 30 5 70 12 110 C16 130 32 138 50 138 C68 138 84 130 88 110 C95 70 75 30 50 5Z" stroke="#A8C4A2" stroke-width="1.2" fill="none"/>
-      <path d="M50 15 L50 130" stroke="#A8C4A2" stroke-width="0.8"/>
-      <path d="M50 45 Q30 55 20 75" stroke="#A8C4A2" stroke-width="0.6" fill="none"/>
-      <path d="M50 45 Q70 55 80 75" stroke="#A8C4A2" stroke-width="0.6" fill="none"/>
-      <path d="M50 85 Q32 95 22 115" stroke="#A8C4A2" stroke-width="0.6" fill="none"/>
-      <path d="M50 85 Q68 95 78 115" stroke="#A8C4A2" stroke-width="0.6" fill="none"/>
-    </svg>
-    <div class="num">CHAPTER 02</div>
-    <h2>Clean <span class="light">slate</span></h2>
-    <p>Start with white space. Let sage green be the only color that speaks.</p>
-    <div class="footer">
-      <span><span class="leaf-dot"></span>BREATHE</span>
-      <span>02 / 07</span>
-    </div>
-  </section>
+<!-- 3. Content -->
 
-  <!-- 3. Content -->
-  <section class="slide content-slide">
-    <div class="header">
-      <span class="tag">PRINCIPLES</span>
-      <h2>Breathe easy</h2>
-    </div>
-    <div class="body">
-      <p class="lead">Great presentations feel like <span class="highlight">fresh air</span>. Every slide has room to breathe, every element has space to be itself. The sage palette calms the eye and focuses the mind.</p>
-      <ul>
-        <li>
-          <div class="leaf-icon">🌿</div>
-          <div>
-            <h4>White space first</h4>
-            <p>Generous padding and line-height let content rest, never crowded.</p>
-          </div>
-        </li>
-        <li>
-          <div class="leaf-icon">◐</div>
-          <div>
-            <h4>One green voice</h4>
-            <p>Sage green carries all emphasis — no competing accents, no noise.</p>
-          </div>
-        </li>
-        <li>
-          <div class="leaf-icon">❋</div>
-          <div>
-            <h4>Organic lines</h4>
-            <p>Hand-drawn leaf motifs add warmth without decorative clutter.</p>
-          </div>
-        </li>
-      </ul>
-    </div>
-    <div class="footer">
-      <span><span class="leaf-dot"></span>BREATHE</span>
-      <span>03 / 07</span>
-    </div>
-  </section>
+<!-- 4. Two column -->
 
-  <!-- 4. Two column -->
-  <section class="slide two-col">
-    <div class="header">
-      <span class="tag">APPROACH</span>
-      <h2>Two paths, one calm</h2>
-    </div>
-    <div class="cols">
-      <div class="col">
-        <div class="col-tag">MINIMAL</div>
-        <h3>Pure white</h3>
-        <p>White background with sage accents and thin rules. Best for content-heavy decks where readability is paramount.</p>
-        <ul class="check-list">
-          <li>Maximum contrast</li>
-          <li>Print-friendly</li>
-          <li>Timeless feel</li>
-        </ul>
-      </div>
-      <div class="col accent">
-        <div class="col-tag">SOFT</div>
-        <h3>Pale sage wash</h3>
-        <p>A whisper of sage background for section breaks and quiet moments. Adds warmth without losing clarity.</p>
-        <ul class="check-list">
-          <li>Gentle on eyes</li>
-          <li>Natural warmth</li>
-          <li>Soft hierarchy</li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer">
-      <span><span class="leaf-dot"></span>BREATHE</span>
-      <span>04 / 07</span>
-    </div>
-  </section>
+<!-- 5. Quote -->
 
-  <!-- 5. Quote -->
-  <section class="slide quote-slide">
-    <svg class="leaf-bg" viewBox="0 0 200 280" fill="none">
-      <path d="M100 10 C60 50 20 120 30 200 C35 240 60 270 100 270 C140 270 165 240 170 200 C180 120 140 50 100 10Z" stroke="#6B8F6B" stroke-width="2" fill="none"/>
-      <path d="M100 30 L100 260" stroke="#6B8F6B" stroke-width="1.5"/>
-    </svg>
-    <blockquote>Nature does not hurry,<br>yet everything is <span class="sage">accomplished</span>.</blockquote>
-    <cite>— LAO TZU</cite>
-    <div class="footer">
-      <span><span class="leaf-dot"></span>BREATHE</span>
-      <span>05 / 07</span>
-    </div>
-  </section>
+<!-- 6. Data -->
 
-  <!-- 6. Data -->
-  <section class="slide data-slide">
-    <div class="header">
-      <span class="tag">METRICS</span>
-      <h2>Growth, naturally</h2>
-    </div>
-    <div class="metrics">
-      <div class="metric">
-        <div class="value">1.8<span class="unit">x</span></div>
-        <div class="label">Line-height ratio</div>
-        <div class="bar"><span style="width:72%"></span></div>
-      </div>
-      <div class="metric">
-        <div class="value">96<span class="unit">px</span></div>
-        <div class="label">Slide padding</div>
-        <div class="bar"><span style="width:85%"></span></div>
-      </div>
-      <div class="metric">
-        <div class="value">1<span class="unit">hue</span></div>
-        <div class="label">Sage green only</div>
-        <div class="bar"><span style="width:30%"></span></div>
-      </div>
-      <div class="metric">
-        <div class="value">0<span class="unit">shadow</span></div>
-        <div class="label">Flat & clean</div>
-        <div class="bar"><span style="width:5%"></span></div>
-      </div>
-    </div>
-    <div class="footer">
-      <span><span class="leaf-dot"></span>BREATHE</span>
-      <span>06 / 07</span>
-    </div>
-  </section>
+<!-- 7. Closing -->
 
-  <!-- 7. Closing -->
-  <section class="slide closing-slide">
-    <div class="organic-circle"></div>
-    <div class="leaf-center">🌱</div>
-    <h2>Thank <span class="light">you</span></h2>
-    <p>Breathe out. Questions welcome.</p>
-    <div class="btn">Say hello →</div>
-    <div class="footer">
-      <span><span class="leaf-dot"></span>BREATHE</span>
-      <span>07 / 07</span>
-    </div>
-  </section>
-
-  <div class="nav-hint">← → ARROWS TO NAVIGATE</div>
+<div class="nav-hint">← → ARROWS TO NAVIGATE</div>
+<section class="slide title-slide active" data-section="BREATHE">
+<div class="organic-shape"></div>
+<svg class="leaf-svg" fill="none" viewbox="0 0 200 280" xmlns="http://www.w3.org/2000/svg">
+<path d="M100 10 C60 50 20 120 30 200 C35 240 60 270 100 270 C140 270 165 240 170 200 C180 120 140 50 100 10Z" fill="none" stroke="#A8C4A2" stroke-width="1.5"></path>
+<path d="M100 30 L100 260" stroke="#A8C4A2" stroke-width="1"></path>
+<path d="M100 70 Q70 80 55 110" fill="none" stroke="#A8C4A2" stroke-width="0.8"></path>
+<path d="M100 70 Q130 80 145 110" fill="none" stroke="#A8C4A2" stroke-width="0.8"></path>
+<path d="M100 120 Q65 135 48 170" fill="none" stroke="#A8C4A2" stroke-width="0.8"></path>
+<path d="M100 120 Q135 135 152 170" fill="none" stroke="#A8C4A2" stroke-width="0.8"></path>
+<path d="M100 180 Q75 195 60 225" fill="none" stroke="#A8C4A2" stroke-width="0.8"></path>
+<path d="M100 180 Q125 195 140 225" fill="none" stroke="#A8C4A2" stroke-width="0.8"></path>
+<path d="M100 10 C80 30 60 60 50 100" fill="none" opacity="0.5" stroke="#A8C4A2" stroke-width="0.6"></path>
+<path d="M100 10 C120 30 140 60 150 100" fill="none" opacity="0.5" stroke="#A8C4A2" stroke-width="0.6"></path>
+</svg>
+<span class="tag">FRESH DESIGN</span>
+<h1>Breathe<br/><span class="light">in.</span></h1>
+<p class="subtitle">A clean, nature-inspired presentation template with sage greens, organic shapes, and generous breathing room.</p>
+<div class="meta-row">
+<div class="meta-item"><div class="num">100%</div><div class="lbl">WHITE SPACE</div></div>
+<div class="meta-item"><div class="num">1</div><div class="lbl">SAGE TONE</div></div>
+<div class="meta-item"><div class="num">0</div><div class="lbl">SHADOWS</div></div>
 </div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide section-slide" data-section="自然">
+<div class="organic-circle"></div>
+<svg class="leaf-deco" fill="none" viewbox="0 0 100 140">
+<path d="M50 5 C25 30 5 70 12 110 C16 130 32 138 50 138 C68 138 84 130 88 110 C95 70 75 30 50 5Z" fill="none" stroke="#A8C4A2" stroke-width="1.2"></path>
+<path d="M50 15 L50 130" stroke="#A8C4A2" stroke-width="0.8"></path>
+<path d="M50 45 Q30 55 20 75" fill="none" stroke="#A8C4A2" stroke-width="0.6"></path>
+<path d="M50 45 Q70 55 80 75" fill="none" stroke="#A8C4A2" stroke-width="0.6"></path>
+<path d="M50 85 Q32 95 22 115" fill="none" stroke="#A8C4A2" stroke-width="0.6"></path>
+<path d="M50 85 Q68 95 78 115" fill="none" stroke="#A8C4A2" stroke-width="0.6"></path>
+</svg>
+<div class="num">CHAPTER 02</div>
+<h2>Clean <span class="light">slate</span></h2>
+<p>Start with white space. Let sage green be the only color that speaks.</p>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide content-slide" data-section="自然">
+<div class="header">
+<span class="tag">PRINCIPLES</span>
+<h2>Breathe easy</h2>
+</div>
+<div class="body">
+<p class="lead">Great presentations feel like <span class="highlight">fresh air</span>. Every slide has room to breathe, every element has space to be itself. The sage palette calms the eye and focuses the mind.</p>
+<ul>
+<li>
+<div class="leaf-icon">🌿</div>
+<div>
+<h4>White space first</h4>
+<p>Generous padding and line-height let content rest, never crowded.</p>
+</div>
+</li>
+<li>
+<div class="leaf-icon">◐</div>
+<div>
+<h4>One green voice</h4>
+<p>Sage green carries all emphasis — no competing accents, no noise.</p>
+</div>
+</li>
+<li>
+<div class="leaf-icon">❋</div>
+<div>
+<h4>Organic lines</h4>
+<p>Hand-drawn leaf motifs add warmth without decorative clutter.</p>
+</div>
+</li>
+</ul>
+</div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide two-col" data-section="自然">
+<div class="header">
+<span class="tag">APPROACH</span>
+<h2>Two paths, one calm</h2>
+</div>
+<div class="cols">
+<div class="col">
+<div class="col-tag">MINIMAL</div>
+<h3>Pure white</h3>
+<p>White background with sage accents and thin rules. Best for content-heavy decks where readability is paramount.</p>
+<ul class="check-list">
+<li>Maximum contrast</li>
+<li>Print-friendly</li>
+<li>Timeless feel</li>
+</ul>
+</div>
+<div class="col accent">
+<div class="col-tag">SOFT</div>
+<h3>Pale sage wash</h3>
+<p>A whisper of sage background for section breaks and quiet moments. Adds warmth without losing clarity.</p>
+<ul class="check-list">
+<li>Gentle on eyes</li>
+<li>Natural warmth</li>
+<li>Soft hierarchy</li>
+</ul>
+</div>
+</div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide section-slide" data-section="生长">
+<div class="organic-circle"></div>
+<svg class="leaf-deco" fill="none" viewbox="0 0 100 140">
+<path d="M50 5 C25 30 5 70 12 110 C16 130 32 138 50 138 C68 138 84 130 88 110 C95 70 75 30 50 5Z" fill="none" stroke="#A8C4A2" stroke-width="1.2"></path>
+<path d="M50 15 L50 130" stroke="#A8C4A2" stroke-width="0.8"></path>
+<path d="M50 45 Q30 55 20 75" fill="none" stroke="#A8C4A2" stroke-width="0.6"></path>
+<path d="M50 45 Q70 55 80 75" fill="none" stroke="#A8C4A2" stroke-width="0.6"></path>
+<path d="M50 85 Q32 95 22 115" fill="none" stroke="#A8C4A2" stroke-width="0.6"></path>
+<path d="M50 85 Q68 95 78 115" fill="none" stroke="#A8C4A2" stroke-width="0.6"></path>
+</svg>
+<div class="num">CHAPTER 03</div>
+<h2>生长</h2>
+<p>Start with white space. Let sage green be the only color that speaks.</p>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide data-slide" data-section="生长">
+<div class="header">
+<span class="tag">METRICS</span>
+<h2>Growth, naturally</h2>
+</div>
+<div class="metrics">
+<div class="metric">
+<div class="value">1.8<span class="unit">x</span></div>
+<div class="label">Line-height ratio</div>
+<div class="bar"><span style="width:72%"></span></div>
+</div>
+<div class="metric">
+<div class="value">96<span class="unit">px</span></div>
+<div class="label">Slide padding</div>
+<div class="bar"><span style="width:85%"></span></div>
+</div>
+<div class="metric">
+<div class="value">1<span class="unit">hue</span></div>
+<div class="label">Sage green only</div>
+<div class="bar"><span style="width:30%"></span></div>
+</div>
+<div class="metric">
+<div class="value">0<span class="unit">shadow</span></div>
+<div class="label">Flat &amp; clean</div>
+<div class="bar"><span style="width:5%"></span></div>
+</div>
+</div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide section-slide" data-section="呼吸">
+<div class="organic-circle"></div>
+<svg class="leaf-deco" fill="none" viewbox="0 0 100 140">
+<path d="M50 5 C25 30 5 70 12 110 C16 130 32 138 50 138 C68 138 84 130 88 110 C95 70 75 30 50 5Z" fill="none" stroke="#A8C4A2" stroke-width="1.2"></path>
+<path d="M50 15 L50 130" stroke="#A8C4A2" stroke-width="0.8"></path>
+<path d="M50 45 Q30 55 20 75" fill="none" stroke="#A8C4A2" stroke-width="0.6"></path>
+<path d="M50 45 Q70 55 80 75" fill="none" stroke="#A8C4A2" stroke-width="0.6"></path>
+<path d="M50 85 Q32 95 22 115" fill="none" stroke="#A8C4A2" stroke-width="0.6"></path>
+<path d="M50 85 Q68 95 78 115" fill="none" stroke="#A8C4A2" stroke-width="0.6"></path>
+</svg>
+<div class="num">CHAPTER 03</div>
+<h2>呼吸</h2>
+<p>Start with white space. Let sage green be the only color that speaks.</p>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide quote-slide" data-section="呼吸">
+<svg class="leaf-bg" fill="none" viewbox="0 0 200 280">
+<path d="M100 10 C60 50 20 120 30 200 C35 240 60 270 100 270 C140 270 165 240 170 200 C180 120 140 50 100 10Z" fill="none" stroke="#6B8F6B" stroke-width="2"></path>
+<path d="M100 30 L100 260" stroke="#6B8F6B" stroke-width="1.5"></path>
+</svg>
+<blockquote>Nature does not hurry,<br/>yet everything is <span class="sage">accomplished</span>.</blockquote>
+<cite>— LAO TZU</cite>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide closing-slide" data-section="END">
+<div class="organic-circle"></div>
+<div class="leaf-center">🌱</div>
+<h2>Thank <span class="light">you</span></h2>
+<p>Breathe out. Questions welcome.</p>
+<div class="btn">Say hello →</div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section></div>
+
 <script>
   const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
   let current = 0;
+  slides.forEach((s, i) => { if (s.classList.contains('active')) current = i; });
+
+  function buildProgress() {
+    const sections = Array.from(slides).map(s => s.dataset.section || '');
+    document.querySelectorAll('.progress-strip').forEach(strip => {
+      let lastSection = null;
+      sections.forEach((section, i) => {
+        const seg = document.createElement('div');
+        seg.className = 'seg';
+        if (lastSection !== null && section !== lastSection) seg.classList.add('seg-gap');
+        strip.appendChild(seg);
+        lastSection = section;
+      });
+    });
+  }
+
+  function updateUI(idx) {
+    const sectionName = slides[idx].dataset.section || '';
+    const pageStr = String(idx + 1).padStart(2, '0') + ' / ' + String(total).padStart(2, '0');
+    document.querySelectorAll('.progress-bar').forEach(bar => {
+      const label = bar.querySelector('.pb-section');
+      const page = bar.querySelector('.pb-page');
+      if (label) label.textContent = sectionName;
+      if (page) page.textContent = pageStr;
+    });
+    document.querySelectorAll('.progress-strip').forEach(strip => {
+      strip.querySelectorAll('.seg').forEach((seg, i) => {
+        seg.classList.toggle('current', i === idx);
+        seg.classList.toggle('past', i < idx);
+      });
+    });
+  }
+
   function show(i) {
     slides[current].classList.remove('active');
-    current = (i + slides.length) % slides.length;
+    current = (i + total) % total;
     slides[current].classList.add('active');
+    updateUI(current);
   }
-  document.addEventListener('keydown', (e) => {
+
+  document.addEventListener('keydown', function(e) {
     if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); show(current + 1); }
     if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); show(current - 1); }
     if (e.key === 'Home') { e.preventDefault(); show(0); }
-    if (e.key === 'End') { e.preventDefault(); show(slides.length - 1); }
+    if (e.key === 'End') { e.preventDefault(); show(total - 1); }
   });
-</script>
-</body>
+
+  buildProgress();
+  updateUI(current);
+</script></body>
 </html>

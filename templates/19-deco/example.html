@@ -1,12 +1,13 @@
 <!DOCTYPE html>
+
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>DECO — Slide Template</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Limelight&family=Josefin+Sans:wght@300;400;600;700&family=Noto+Serif+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Limelight&amp;family=Josefin+Sans:wght@300;400;600;700&amp;family=Noto+Serif+SC:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
 <style>
   :root {
     --bg: #0B0F1A;
@@ -151,169 +152,285 @@
   .slide > .footer { margin-top: auto; flex-shrink: 0; }
   .slide > .cards, .slide > .cols, .slide > .metrics, .slide > .body { flex-shrink: 1; min-height: 0; }
 
+
+  /* === Progress system === */
+  .slide { padding-bottom: 80px !important; }
+  .title-slide { padding-bottom: 90px !important; }
+  .progress-bar {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 56px; display: flex; align-items: center; justify-content: space-between;
+    padding: 0 60px; z-index: 50;
+    background: rgba(10,15,25,0.8);
+    border-top: 1px solid rgba(212,175,55,0.3);
+  }
+  .progress-bar .pb-section {
+    font-family: var(--font-sans); font-size: 12px; font-weight: 700;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    color: rgba(255,255,255,0.6); min-width: 180px;
+  }
+  .progress-bar .pb-page {
+    font-family: var(--font-display); font-size: 16px; font-weight: 700;
+    letter-spacing: 0.1em; color: var(--gold, #D4AF37);
+  }
+  .progress-strip {
+    position: absolute; top: -8px; left: 50%; transform: translateX(-50%);
+    display: flex; align-items: center; height: 14px;
+  }
+  .progress-strip .seg {
+    width: 10px; height: 10px; border-radius: 0;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+    margin: 0 4px; transition: all 0.25s;
+    transform:rotate(45deg);
+  }
+  .progress-strip .seg.past {
+    background: rgba(212,175,55,0.5);
+    border-color: rgba(212,175,55,0.5);
+  }
+  .progress-strip .seg.current {
+    background: var(--gold, #D4AF37);
+    border-color: var(--gold, #D4AF37);
+    transform:rotate(45deg);box-shadow:0 0 10px rgba(212,175,55,0.5);
+  }
+  .progress-strip .seg.seg-gap { margin-left: 26px; }
+  .nav-hint { display: none !important; }
 </style>
 </head>
 <body>
 <div class="deck">
 
-  <section class="slide title-slide active">
-    <div class="deco-frame"></div>
-    <div class="chevron tl"><svg viewBox="0 0 50 50"><path d="M4 4 L46 4 L46 10 L10 10 L10 46 L4 46 Z" fill="#C9A961"/><path d="M14 14 L40 14 L40 18 L18 18 L18 40 L14 40 Z" fill="#C9A961" opacity="0.5"/></svg></div>
-    <div class="chevron tr"><svg viewBox="0 0 50 50"><path d="M4 4 L46 4 L46 10 L10 10 L10 46 L4 46 Z" fill="#C9A961"/><path d="M14 14 L40 14 L40 18 L18 18 L18 40 L14 40 Z" fill="#C9A961" opacity="0.5"/></svg></div>
-    <div class="chevron bl"><svg viewBox="0 0 50 50"><path d="M4 4 L46 4 L46 10 L10 10 L10 46 L4 46 Z" fill="#C9A961"/><path d="M14 14 L40 14 L40 18 L18 18 L18 40 L14 40 Z" fill="#C9A961" opacity="0.5"/></svg></div>
-    <div class="chevron br"><svg viewBox="0 0 50 50"><path d="M4 4 L46 4 L46 10 L10 10 L10 46 L4 46 Z" fill="#C9A961"/><path d="M14 14 L40 14 L40 18 L18 18 L18 40 L14 40 Z" fill="#C9A961" opacity="0.5"/></svg></div>
-    <svg class="pyramid" viewBox="0 0 200 80"><path d="M100 0 L140 80 L60 80 Z" fill="none" stroke="#C9A961" stroke-width="1"/><path d="M100 0 L120 80 L80 80 Z" fill="none" stroke="#C9A961" stroke-width="0.5" opacity="0.5"/><path d="M60 80 L140 80" stroke="#C9A961" stroke-width="1"/></svg>
-    <svg class="sunburst" viewBox="0 0 600 600">
-      <g transform="translate(300,300)">
-        <circle r="80" fill="none" stroke="#C9A961" stroke-width="1"/>
-        <circle r="120" fill="none" stroke="#C9A961" stroke-width="0.5" opacity="0.5"/>
-        <g id="rays"></g>
-      </g>
-    </svg>
-    <div class="label">Chapter Twenty-Five</div>
-    <h1>DECO</h1>
-    <div class="gold-rule"></div>
-    <p class="subtitle">A presentation system of geometric luxury —<br>symmetry, gold, and the glamour of the Jazz Age.</p>
-    <div class="footer"><span>Art Deco</span><span class="gold-dot">&#9670;</span><span>01 / 07</span></div>
-  </section>
 
-  <section class="slide section-slide">
-    <div class="deco-frame"></div>
-    <svg class="sunburst" viewBox="0 0 500 500">
-      <g transform="translate(250,250)">
-        <circle r="60" fill="none" stroke="#C9A961" stroke-width="1"/>
-        <g id="rays2"></g>
-      </g>
-    </svg>
-    <div class="num">— II —</div>
-    <h2>GEOMETRIC<br>LUXURY</h2>
-    <div class="gold-rule"></div>
-    <p>Every element aligned. Every line deliberate. Order is the ultimate ornament.</p>
-    <div class="footer"><span>Art Deco</span><span class="gold-dot">&#9670;</span><span>02 / 07</span></div>
-  </section>
 
-  <section class="slide content-slide">
-    <div class="deco-frame"></div>
-    <div class="header">
-      <div class="label">Principles</div>
-      <h2>Three Pillars</h2>
-    </div>
-    <div class="cards">
-      <div class="card">
-        <div class="icon-frame"><span>&#9670;</span></div>
-        <h3>SYMMETRY</h3>
-        <p>Absolute bilateral symmetry. The composition mirrors itself down the center axis — balance as a statement of power.</p>
-      </div>
-      <div class="card">
-        <div class="icon-frame"><span>&#9728;</span></div>
-        <h3>SUNBURST</h3>
-        <p>Radiating lines, stepped forms, and chevron patterns borrowed from Egyptian and Aztec geometry — the signature motif.</p>
-      </div>
-      <div class="card">
-        <div class="icon-frame"><span>&#9830;</span></div>
-        <h3>GOLD & BLACK</h3>
-        <p>Midnight black and antique gold. Nothing else. Luxury needs no third color.</p>
-      </div>
-    </div>
-    <div class="footer"><span>Art Deco</span><span class="gold-dot">&#9670;</span><span>03 / 07</span></div>
-  </section>
 
-  <section class="slide two-col">
-    <div class="deco-frame"></div>
-    <div class="header"><h2>Two Cities</h2></div>
-    <div class="cols">
-      <div class="col a">
-        <div class="tag">— Paris 1925</div>
-        <h3>L'EXPOSITION</h3>
-        <p>The birthplace. Ruhlmann furniture, Lalique glass, lacquer and ivory. Deco as exotic, luxurious craft.</p>
-        <div class="stat">1925<small> — PARIS</small></div>
-      </div>
-      <div class="col b">
-        <div class="tag">— New York 1930</div>
-        <h3>SKYSCRAPER</h3>
-        <p>The American translation. Chrysler Building spires, Rockefeller Center, stepped silhouettes reaching for the sky.</p>
-        <div class="stat">1930<small> — NEW YORK</small></div>
-      </div>
-    </div>
-    <div class="footer"><span>Art Deco</span><span class="gold-dot">&#9670;</span><span>04 / 07</span></div>
-  </section>
 
-  <section class="slide quote-slide">
-    <div class="deco-frame"></div>
-    <svg class="sunburst" viewBox="0 0 600 600">
-      <g transform="translate(300,300)">
-        <circle r="100" fill="none" stroke="#C9A961" stroke-width="1"/>
-        <g id="rays3"></g>
-      </g>
-    </svg>
-    <blockquote>Too much of a good thing<br>can be <em style="font-style:italic;color:var(--gold);">wonderful.</em></blockquote>
-    <div class="gold-rule"></div>
-    <cite>— Mae West</cite>
-    <div class="footer"><span>Art Deco</span><span class="gold-dot">&#9670;</span><span>05 / 07</span></div>
-  </section>
 
-  <section class="slide data-slide">
-    <div class="deco-frame"></div>
-    <div class="header"><h2>By The Numbers</h2></div>
-    <div class="metrics">
-      <div class="metric"><div class="value">2</div><div class="label">Colors only</div></div>
-      <div class="metric"><div class="value">100%</div><div class="label">Symmetry</div></div>
-      <div class="metric"><div class="value">1925</div><div class="label">Birth year</div></div>
-      <div class="metric"><div class="value">&#8734;</div><div class="label">Radiating lines</div></div>
-    </div>
-    <div class="footer"><span>Art Deco</span><span class="gold-dot">&#9670;</span><span>06 / 07</span></div>
-  </section>
 
-  <section class="slide closing-slide">
-    <div class="deco-frame"></div>
-    <svg class="sunburst" viewBox="0 0 500 500">
-      <g transform="translate(250,250)">
-        <circle r="80" fill="none" stroke="#C9A961" stroke-width="1"/>
-        <g id="rays4"></g>
-      </g>
-    </svg>
-    <h2>FIN</h2>
-    <div class="gold-rule"></div>
-    <p>Thank you — stay golden.</p>
-    <div class="btn">Encore &rarr;</div>
-    <div class="footer"><span>Art Deco</span><span class="gold-dot">&#9670;</span><span>07 / 07</span></div>
-  </section>
+<div class="nav-hint">← → ARROWS TO NAVIGATE</div>
+<section class="slide title-slide active" data-section="ART DECO">
+<div class="deco-frame"></div>
+<div class="chevron tl"><svg viewbox="0 0 50 50"><path d="M4 4 L46 4 L46 10 L10 10 L10 46 L4 46 Z" fill="#C9A961"></path><path d="M14 14 L40 14 L40 18 L18 18 L18 40 L14 40 Z" fill="#C9A961" opacity="0.5"></path></svg></div>
+<div class="chevron tr"><svg viewbox="0 0 50 50"><path d="M4 4 L46 4 L46 10 L10 10 L10 46 L4 46 Z" fill="#C9A961"></path><path d="M14 14 L40 14 L40 18 L18 18 L18 40 L14 40 Z" fill="#C9A961" opacity="0.5"></path></svg></div>
+<div class="chevron bl"><svg viewbox="0 0 50 50"><path d="M4 4 L46 4 L46 10 L10 10 L10 46 L4 46 Z" fill="#C9A961"></path><path d="M14 14 L40 14 L40 18 L18 18 L18 40 L14 40 Z" fill="#C9A961" opacity="0.5"></path></svg></div>
+<div class="chevron br"><svg viewbox="0 0 50 50"><path d="M4 4 L46 4 L46 10 L10 10 L10 46 L4 46 Z" fill="#C9A961"></path><path d="M14 14 L40 14 L40 18 L18 18 L18 40 L14 40 Z" fill="#C9A961" opacity="0.5"></path></svg></div>
+<svg class="pyramid" viewbox="0 0 200 80"><path d="M100 0 L140 80 L60 80 Z" fill="none" stroke="#C9A961" stroke-width="1"></path><path d="M100 0 L120 80 L80 80 Z" fill="none" opacity="0.5" stroke="#C9A961" stroke-width="0.5"></path><path d="M60 80 L140 80" stroke="#C9A961" stroke-width="1"></path></svg>
+<svg class="sunburst" viewbox="0 0 600 600">
+<g transform="translate(300,300)">
+<circle fill="none" r="80" stroke="#C9A961" stroke-width="1"></circle>
+<circle fill="none" opacity="0.5" r="120" stroke="#C9A961" stroke-width="0.5"></circle>
+<g id="rays"></g>
+</g>
+</svg>
+<div class="label">Chapter Twenty-Five</div>
+<h1>DECO</h1>
+<div class="gold-rule"></div>
+<p class="subtitle">A presentation system of geometric luxury —<br/>symmetry, gold, and the glamour of the Jazz Age.</p>
 
-  <div class="nav-hint">← → ARROWS TO NAVIGATE</div>
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide section-slide" data-section="几何">
+<div class="deco-frame"></div>
+<svg class="sunburst" viewbox="0 0 500 500">
+<g transform="translate(250,250)">
+<circle fill="none" r="60" stroke="#C9A961" stroke-width="1"></circle>
+<g id="rays2"></g>
+</g>
+</svg>
+<div class="num">— II —</div>
+<h2>GEOMETRIC<br/>LUXURY</h2>
+<div class="gold-rule"></div>
+<p>Every element aligned. Every line deliberate. Order is the ultimate ornament.</p>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide content-slide" data-section="几何">
+<div class="deco-frame"></div>
+<div class="header">
+<div class="label">Principles</div>
+<h2>Three Pillars</h2>
 </div>
-<script>
-  // Generate sunburst rays
-  function addRays(groupId, count, inner, outer, width) {
-    const g = document.getElementById(groupId);
-    if (!g) return;
-    for (let i = 0; i < count; i++) {
-      const angle = (i * 360 / count) * Math.PI / 180;
-      const x1 = Math.cos(angle) * inner;
-      const y1 = Math.sin(angle) * inner;
-      const x2 = Math.cos(angle) * outer;
-      const y2 = Math.sin(angle) * outer;
-      const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-      line.setAttribute('x1', x1); line.setAttribute('y1', y1);
-      line.setAttribute('x2', x2); line.setAttribute('y2', y2);
-      line.setAttribute('stroke', '#C9A961');
-      line.setAttribute('stroke-width', width || 1);
-      line.setAttribute('opacity', i % 2 === 0 ? '0.8' : '0.3');
-      g.appendChild(line);
-    }
-  }
-  addRays('rays', 48, 90, 280, 1);
-  addRays('rays2', 36, 70, 230, 1);
-  addRays('rays3', 60, 110, 290, 1);
-  addRays('rays4', 40, 90, 240, 1);
+<div class="cards">
+<div class="card">
+<div class="icon-frame"><span>◆</span></div>
+<h3>SYMMETRY</h3>
+<p>Absolute bilateral symmetry. The composition mirrors itself down the center axis — balance as a statement of power.</p>
+</div>
+<div class="card">
+<div class="icon-frame"><span>☀</span></div>
+<h3>SUNBURST</h3>
+<p>Radiating lines, stepped forms, and chevron patterns borrowed from Egyptian and Aztec geometry — the signature motif.</p>
+</div>
+<div class="card">
+<div class="icon-frame"><span>♦</span></div>
+<h3>GOLD &amp; BLACK</h3>
+<p>Midnight black and antique gold. Nothing else. Luxury needs no third color.</p>
+</div>
+</div>
 
-  const slides = document.querySelectorAll('.slide'); let current = 0;
-  function show(i) { slides[current].classList.remove('active'); current = (i + slides.length) % slides.length; slides[current].classList.add('active'); }
-  document.addEventListener('keydown', e => {
-    if (e.key==='ArrowRight'||e.key==='ArrowDown'||e.key===' ') { e.preventDefault(); show(current+1); }
-    if (e.key==='ArrowLeft'||e.key==='ArrowUp') { e.preventDefault(); show(current-1); }
-    if (e.key==='Home') { e.preventDefault(); show(0); }
-    if (e.key==='End') { e.preventDefault(); show(slides.length-1); }
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide two-col" data-section="几何">
+<div class="deco-frame"></div>
+<div class="header"><h2>Two Cities</h2></div>
+<div class="cols">
+<div class="col a">
+<div class="tag">— Paris 1925</div>
+<h3>L'EXPOSITION</h3>
+<p>The birthplace. Ruhlmann furniture, Lalique glass, lacquer and ivory. Deco as exotic, luxurious craft.</p>
+<div class="stat">1925<small> — PARIS</small></div>
+</div>
+<div class="col b">
+<div class="tag">— New York 1930</div>
+<h3>SKYSCRAPER</h3>
+<p>The American translation. Chrysler Building spires, Rockefeller Center, stepped silhouettes reaching for the sky.</p>
+<div class="stat">1930<small> — NEW YORK</small></div>
+</div>
+</div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide section-slide" data-section="黄金">
+<div class="deco-frame"></div>
+<svg class="sunburst" viewbox="0 0 500 500">
+<g transform="translate(250,250)">
+<circle fill="none" r="60" stroke="#C9A961" stroke-width="1"></circle>
+<g id="rays2"></g>
+</g>
+</svg>
+<div class="num">— II —</div>
+<h2>黄金</h2>
+<div class="gold-rule"></div>
+<p>Every element aligned. Every line deliberate. Order is the ultimate ornament.</p>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide data-slide" data-section="黄金">
+<div class="deco-frame"></div>
+<div class="header"><h2>By The Numbers</h2></div>
+<div class="metrics">
+<div class="metric"><div class="value">2</div><div class="label">Colors only</div></div>
+<div class="metric"><div class="value">100%</div><div class="label">Symmetry</div></div>
+<div class="metric"><div class="value">1925</div><div class="label">Birth year</div></div>
+<div class="metric"><div class="value">∞</div><div class="label">Radiating lines</div></div>
+</div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide section-slide" data-section="对称">
+<div class="deco-frame"></div>
+<svg class="sunburst" viewbox="0 0 500 500">
+<g transform="translate(250,250)">
+<circle fill="none" r="60" stroke="#C9A961" stroke-width="1"></circle>
+<g id="rays2"></g>
+</g>
+</svg>
+<div class="num">— II —</div>
+<h2>对称</h2>
+<div class="gold-rule"></div>
+<p>Every element aligned. Every line deliberate. Order is the ultimate ornament.</p>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide quote-slide" data-section="对称">
+<div class="deco-frame"></div>
+<svg class="sunburst" viewbox="0 0 600 600">
+<g transform="translate(300,300)">
+<circle fill="none" r="100" stroke="#C9A961" stroke-width="1"></circle>
+<g id="rays3"></g>
+</g>
+</svg>
+<blockquote>Too much of a good thing<br/>can be <em style="font-style:italic;color:var(--gold);">wonderful.</em></blockquote>
+<div class="gold-rule"></div>
+<cite>— Mae West</cite>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide closing-slide" data-section="END">
+<div class="deco-frame"></div>
+<svg class="sunburst" viewbox="0 0 500 500">
+<g transform="translate(250,250)">
+<circle fill="none" r="80" stroke="#C9A961" stroke-width="1"></circle>
+<g id="rays4"></g>
+</g>
+</svg>
+<h2>FIN</h2>
+<div class="gold-rule"></div>
+<p>Thank you — stay golden.</p>
+<div class="btn">Encore →</div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section></div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
+  let current = 0;
+  slides.forEach((s, i) => { if (s.classList.contains('active')) current = i; });
+
+  function buildProgress() {
+    const sections = Array.from(slides).map(s => s.dataset.section || '');
+    document.querySelectorAll('.progress-strip').forEach(strip => {
+      let lastSection = null;
+      sections.forEach((section, i) => {
+        const seg = document.createElement('div');
+        seg.className = 'seg';
+        if (lastSection !== null && section !== lastSection) seg.classList.add('seg-gap');
+        strip.appendChild(seg);
+        lastSection = section;
+      });
+    });
+  }
+
+  function updateUI(idx) {
+    const sectionName = slides[idx].dataset.section || '';
+    const pageStr = String(idx + 1).padStart(2, '0') + ' / ' + String(total).padStart(2, '0');
+    document.querySelectorAll('.progress-bar').forEach(bar => {
+      const label = bar.querySelector('.pb-section');
+      const page = bar.querySelector('.pb-page');
+      if (label) label.textContent = sectionName;
+      if (page) page.textContent = pageStr;
+    });
+    document.querySelectorAll('.progress-strip').forEach(strip => {
+      strip.querySelectorAll('.seg').forEach((seg, i) => {
+        seg.classList.toggle('current', i === idx);
+        seg.classList.toggle('past', i < idx);
+      });
+    });
+  }
+
+  function show(i) {
+    slides[current].classList.remove('active');
+    current = (i + total) % total;
+    slides[current].classList.add('active');
+    updateUI(current);
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); show(current + 1); }
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); show(current - 1); }
+    if (e.key === 'Home') { e.preventDefault(); show(0); }
+    if (e.key === 'End') { e.preventDefault(); show(total - 1); }
   });
-</script>
-</body>
+
+  buildProgress();
+  updateUI(current);
+</script></body>
 </html>

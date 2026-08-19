@@ -1,12 +1,13 @@
 <!DOCTYPE html>
+
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>TROPIC — Slide Template</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;600;800&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&amp;family=Inter:wght@400;600;800&amp;family=Noto+Sans+SC:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
 <style>
   :root {
     --bg: #0A3D3D;
@@ -149,109 +150,235 @@
   .slide > .footer { margin-top: auto; flex-shrink: 0; }
   .slide > .cards, .slide > .cols, .slide > .metrics, .slide > .body { flex-shrink: 1; min-height: 0; }
 
+
+  /* === Progress system === */
+  .slide { padding-bottom: 80px !important; }
+  .title-slide { padding-bottom: 90px !important; }
+  .progress-bar {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 56px; display: flex; align-items: center; justify-content: space-between;
+    padding: 0 60px; z-index: 50;
+    background: var(--cream, #FFF8F0);
+    border-top: 2px solid var(--ink, #2D1B0E);
+  }
+  .progress-bar .pb-section {
+    font-family: var(--font-sans); font-size: 12px; font-weight: 700;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    color: rgba(45,27,14,0.6); min-width: 180px;
+  }
+  .progress-bar .pb-page {
+    font-family: var(--font-sans); font-size: 16px; font-weight: 700;
+    letter-spacing: 0.1em; color: var(--coral, #FF6B4A);
+  }
+  .progress-strip {
+    position: absolute; top: -8px; left: 50%; transform: translateX(-50%);
+    display: flex; align-items: center; height: 14px;
+  }
+  .progress-strip .seg {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: rgba(45,27,14,0.12);
+    border: 2px solid rgba(45,27,14,0.2);
+    margin: 0 4px; transition: all 0.25s;
+    
+  }
+  .progress-strip .seg.past {
+    background: rgba(45,27,14,0.4);
+    border-color: rgba(45,27,14,0.4);
+  }
+  .progress-strip .seg.current {
+    background: var(--coral, #FF6B4A);
+    border-color: var(--coral, #FF6B4A);
+    width:14px;height:14px;
+  }
+  .progress-strip .seg.seg-gap { margin-left: 26px; }
+  .nav-hint { display: none !important; }
 </style>
 </head>
 <body>
 <div class="deck">
 
-  <section class="slide title-slide active">
-    <div class="sun"></div>
-    <svg class="leaf" viewBox="0 0 200 300" fill="none">
-      <path d="M100 20 C60 80 30 160 50 240 C60 270 80 290 100 290 C120 290 140 270 150 240 C170 160 140 80 100 20Z" fill="#FF6B47" opacity="0.85"/>
-      <path d="M100 40 L100 280" stroke="#0A3D3D" stroke-width="2" opacity="0.3"/>
-      <path d="M100 100 Q60 120 40 160" stroke="#0A3D3D" stroke-width="1.5" fill="none" opacity="0.3"/>
-      <path d="M100 100 Q140 120 160 160" stroke="#0A3D3D" stroke-width="1.5" fill="none" opacity="0.3"/>
-      <path d="M100 170 Q65 190 48 230" stroke="#0A3D3D" stroke-width="1.5" fill="none" opacity="0.3"/>
-      <path d="M100 170 Q135 190 152 230" stroke="#0A3D3D" stroke-width="1.5" fill="none" opacity="0.3"/>
-    </svg>
-    <svg class="leaf" style="right:200px;top:55%;width:180px;transform:translateY(-20%) rotate(20deg);" viewBox="0 0 200 300" fill="none">
-      <path d="M100 20 C60 80 30 160 50 240 C60 270 80 290 100 290 C120 290 140 270 150 240 C170 160 140 80 100 20Z" fill="#FFD23F" opacity="0.7"/>
-    </svg>
-    <span class="pill">Tropical Design System</span>
-    <h1>TR<span class="o"></span>PIC</h1>
-    <p class="subtitle">A hot, high-energy presentation template powered by coral, sunlight, and the rhythm of the tropics.</p>
-    <div class="chips">
-      <span class="chip">Hot</span>
-      <span class="chip">Bold</span>
-      <span class="chip">Alive</span>
-    </div>
-    <div class="footer"><span><span class="dot"></span>TROPIC</span><span>01 / 07</span></div>
-  </section>
 
-  <section class="slide section-slide">
-    <div class="sun"></div>
-    <div class="num">CHAPTER 02</div>
-    <h2>FEEL THE <span class="coral">HEAT.</span></h2>
-    <p>Deep teal nights, coral sunsets, and yellow so bright it casts a shadow. This is design with a pulse.</p>
-    <div class="footer"><span><span class="dot"></span>TROPIC</span><span>02 / 07</span></div>
-  </section>
 
-  <section class="slide content-slide">
-    <div class="header"><span class="pill">Vibes</span><h2>Three elements</h2></div>
-    <div class="cards">
-      <div class="card"><div class="icon">🔥</div><h3>Coral fire</h3><p>#FF6B47 burns through the teal. It's the CTA color, the energy color, the color that says "look here."</p></div>
-      <div class="card"><div class="icon">☀</div><h3>Yellow sun</h3><p>#FFD23F is pure warmth. It highlights, it tags, it makes every slide feel like golden hour.</p></div>
-      <div class="card"><div class="icon">🌿</div><h3>Deep teal</h3><p>#0A3D3D is the jungle at dusk — the rich, dark base that makes the hot colors sing even louder.</p></div>
-    </div>
-    <div class="footer"><span><span class="dot"></span>TROPIC</span><span>03 / 07</span></div>
-  </section>
 
-  <section class="slide two-col">
-    <div class="header"><span class="pill">Compare</span><h2>Day & night</h2></div>
-    <div class="cols">
-      <div class="col a">
-        <div class="tag">Sunset</div>
-        <h3>Golden hour</h3>
-        <p>Teal base with coral and yellow accents. The signature look — warm, energetic, unmistakably tropical.</p>
-        <div class="stat">32°C</div>
-      </div>
-      <div class="col b">
-        <div class="tag">Midday</div>
-        <h3>Full sun</h3>
-        <p>Yellow-dominant panel for maximum brightness. Best for key stats and moments that need to explode with energy.</p>
-        <div class="stat">38°C</div>
-      </div>
-    </div>
-    <div class="footer"><span><span class="dot"></span>TROPIC</span><span>04 / 07</span></div>
-  </section>
 
-  <section class="slide quote-slide">
-    <div class="sun"></div>
-    <blockquote>Live in the <span class="yellow">sunshine,</span><br>swim the sea,<br>drink the wild air.</blockquote>
-    <cite>— EMERSON</cite>
-    <div class="footer"><span><span class="dot"></span>TROPIC</span><span>05 / 07</span></div>
-  </section>
 
-  <section class="slide data-slide">
-    <div class="header"><span class="pill">Metrics</span><h2>Temperature check</h2></div>
-    <div class="metrics">
-      <div class="metric"><div class="value">3</div><div class="label">Hot colors</div></div>
-      <div class="metric"><div class="value">24px</div><div class="label">Corner radius</div></div>
-      <div class="metric"><div class="value">700</div><div class="label">Display weight</div></div>
-      <div class="metric"><div class="value">∞</div><div class="label">Summer energy</div></div>
-    </div>
-    <div class="footer"><span><span class="dot"></span>TROPIC</span><span>06 / 07</span></div>
-  </section>
 
-  <section class="slide closing-slide">
-    <div class="sun"></div>
-    <h2>MAHALO.</h2>
-    <p>Thank you — stay tropical.</p>
-    <div class="btn">Ride the wave →</div>
-    <div class="footer"><span><span class="dot"></span>TROPIC</span><span>07 / 07</span></div>
-  </section>
-
-  <div class="nav-hint">← → ARROWS TO NAVIGATE</div>
+<div class="nav-hint">← → ARROWS TO NAVIGATE</div>
+<section class="slide title-slide active" data-section="TROPIC">
+<div class="sun"></div>
+<svg class="leaf" fill="none" viewbox="0 0 200 300">
+<path d="M100 20 C60 80 30 160 50 240 C60 270 80 290 100 290 C120 290 140 270 150 240 C170 160 140 80 100 20Z" fill="#FF6B47" opacity="0.85"></path>
+<path d="M100 40 L100 280" opacity="0.3" stroke="#0A3D3D" stroke-width="2"></path>
+<path d="M100 100 Q60 120 40 160" fill="none" opacity="0.3" stroke="#0A3D3D" stroke-width="1.5"></path>
+<path d="M100 100 Q140 120 160 160" fill="none" opacity="0.3" stroke="#0A3D3D" stroke-width="1.5"></path>
+<path d="M100 170 Q65 190 48 230" fill="none" opacity="0.3" stroke="#0A3D3D" stroke-width="1.5"></path>
+<path d="M100 170 Q135 190 152 230" fill="none" opacity="0.3" stroke="#0A3D3D" stroke-width="1.5"></path>
+</svg>
+<svg class="leaf" fill="none" style="right:200px;top:55%;width:180px;transform:translateY(-20%) rotate(20deg);" viewbox="0 0 200 300">
+<path d="M100 20 C60 80 30 160 50 240 C60 270 80 290 100 290 C120 290 140 270 150 240 C170 160 140 80 100 20Z" fill="#FFD23F" opacity="0.7"></path>
+</svg>
+<span class="pill">Tropical Design System</span>
+<h1>TR<span class="o"></span>PIC</h1>
+<p class="subtitle">A hot, high-energy presentation template powered by coral, sunlight, and the rhythm of the tropics.</p>
+<div class="chips">
+<span class="chip">Hot</span>
+<span class="chip">Bold</span>
+<span class="chip">Alive</span>
 </div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide section-slide" data-section="阳光">
+<div class="sun"></div>
+<div class="num">CHAPTER 02</div>
+<h2>FEEL THE <span class="coral">HEAT.</span></h2>
+<p>Deep teal nights, coral sunsets, and yellow so bright it casts a shadow. This is design with a pulse.</p>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide content-slide" data-section="阳光">
+<div class="header"><span class="pill">Vibes</span><h2>Three elements</h2></div>
+<div class="cards">
+<div class="card"><div class="icon">🔥</div><h3>Coral fire</h3><p>#FF6B47 burns through the teal. It's the CTA color, the energy color, the color that says "look here."</p></div>
+<div class="card"><div class="icon">☀</div><h3>Yellow sun</h3><p>#FFD23F is pure warmth. It highlights, it tags, it makes every slide feel like golden hour.</p></div>
+<div class="card"><div class="icon">🌿</div><h3>Deep teal</h3><p>#0A3D3D is the jungle at dusk — the rich, dark base that makes the hot colors sing even louder.</p></div>
+</div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide two-col" data-section="阳光">
+<div class="header"><span class="pill">Compare</span><h2>Day &amp; night</h2></div>
+<div class="cols">
+<div class="col a">
+<div class="tag">Sunset</div>
+<h3>Golden hour</h3>
+<p>Teal base with coral and yellow accents. The signature look — warm, energetic, unmistakably tropical.</p>
+<div class="stat">32°C</div>
+</div>
+<div class="col b">
+<div class="tag">Midday</div>
+<h3>Full sun</h3>
+<p>Yellow-dominant panel for maximum brightness. Best for key stats and moments that need to explode with energy.</p>
+<div class="stat">38°C</div>
+</div>
+</div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide section-slide" data-section="岛屿">
+<div class="sun"></div>
+<div class="num">CHAPTER 03</div>
+<h2>岛屿</h2>
+<p>Deep teal nights, coral sunsets, and yellow so bright it casts a shadow. This is design with a pulse.</p>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide data-slide" data-section="岛屿">
+<div class="header"><span class="pill">Metrics</span><h2>Temperature check</h2></div>
+<div class="metrics">
+<div class="metric"><div class="value">3</div><div class="label">Hot colors</div></div>
+<div class="metric"><div class="value">24px</div><div class="label">Corner radius</div></div>
+<div class="metric"><div class="value">700</div><div class="label">Display weight</div></div>
+<div class="metric"><div class="value">∞</div><div class="label">Summer energy</div></div>
+</div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide section-slide" data-section="日落">
+<div class="sun"></div>
+<div class="num">CHAPTER 03</div>
+<h2>日落</h2>
+<p>Deep teal nights, coral sunsets, and yellow so bright it casts a shadow. This is design with a pulse.</p>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide quote-slide" data-section="日落">
+<div class="sun"></div>
+<blockquote>Live in the <span class="yellow">sunshine,</span><br/>swim the sea,<br/>drink the wild air.</blockquote>
+<cite>— EMERSON</cite>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide closing-slide" data-section="END">
+<div class="sun"></div>
+<h2>MAHALO.</h2>
+<p>Thank you — stay tropical.</p>
+<div class="btn">Ride the wave →</div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section></div>
+
 <script>
-  const slides = document.querySelectorAll('.slide'); let current = 0;
-  function show(i) { slides[current].classList.remove('active'); current = (i + slides.length) % slides.length; slides[current].classList.add('active'); }
-  document.addEventListener('keydown', e => {
-    if (e.key==='ArrowRight'||e.key==='ArrowDown'||e.key===' ') { e.preventDefault(); show(current+1); }
-    if (e.key==='ArrowLeft'||e.key==='ArrowUp') { e.preventDefault(); show(current-1); }
-    if (e.key==='Home') { e.preventDefault(); show(0); }
-    if (e.key==='End') { e.preventDefault(); show(slides.length-1); }
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
+  let current = 0;
+  slides.forEach((s, i) => { if (s.classList.contains('active')) current = i; });
+
+  function buildProgress() {
+    const sections = Array.from(slides).map(s => s.dataset.section || '');
+    document.querySelectorAll('.progress-strip').forEach(strip => {
+      let lastSection = null;
+      sections.forEach((section, i) => {
+        const seg = document.createElement('div');
+        seg.className = 'seg';
+        if (lastSection !== null && section !== lastSection) seg.classList.add('seg-gap');
+        strip.appendChild(seg);
+        lastSection = section;
+      });
+    });
+  }
+
+  function updateUI(idx) {
+    const sectionName = slides[idx].dataset.section || '';
+    const pageStr = String(idx + 1).padStart(2, '0') + ' / ' + String(total).padStart(2, '0');
+    document.querySelectorAll('.progress-bar').forEach(bar => {
+      const label = bar.querySelector('.pb-section');
+      const page = bar.querySelector('.pb-page');
+      if (label) label.textContent = sectionName;
+      if (page) page.textContent = pageStr;
+    });
+    document.querySelectorAll('.progress-strip').forEach(strip => {
+      strip.querySelectorAll('.seg').forEach((seg, i) => {
+        seg.classList.toggle('current', i === idx);
+        seg.classList.toggle('past', i < idx);
+      });
+    });
+  }
+
+  function show(i) {
+    slides[current].classList.remove('active');
+    current = (i + total) % total;
+    slides[current].classList.add('active');
+    updateUI(current);
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); show(current + 1); }
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); show(current - 1); }
+    if (e.key === 'Home') { e.preventDefault(); show(0); }
+    if (e.key === 'End') { e.preventDefault(); show(total - 1); }
   });
-</script>
-</body>
+
+  buildProgress();
+  updateUI(current);
+</script></body>
 </html>

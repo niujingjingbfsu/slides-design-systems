@@ -46,16 +46,20 @@
   p, li { font-family: var(--font-cn); font-size: 15px; color: #333; line-height: 1.8; }
 
   /* Bottom bar */
-  .bottom-bar { position: absolute; bottom: 0; left: 0; right: 0; height: 60px; background: var(--black); z-index: 5; display: flex; align-items: center; justify-content: space-between; padding: 0 80px; }
-  .bottom-bar span { font-family: var(--font-display); font-size: 11px; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--paper); }
-  .bottom-bar .num { font-size: 28px; font-weight: 900; color: var(--yellow); }
+  .bottom-bar { position: absolute; bottom: 0; left: 0; right: 0; height: 60px; background: var(--black); z-index: 5; display: flex; align-items: center; justify-content: space-between; padding: 0 60px; }
+  .bottom-bar .bar-label { font-family: var(--font-display); font-size: 13px; font-weight: 900; letter-spacing: 0.25em; text-transform: uppercase; color: var(--paper); min-width: 200px; }
+  .bottom-bar .bar-page { font-family: var(--font-display); font-size: 18px; font-weight: 900; letter-spacing: 0.1em; color: var(--yellow); }
   .title-slide .bottom-bar { height: 80px; }
 
+  /* Progress strip */
+  .progress-strip { position: absolute; top: -10px; left: 60px; right: 60px; height: 6px; display: flex; align-items: center; justify-content: center; gap: 0; z-index: 6; pointer-events: none; }
+  .progress-strip .seg { width: 56px; height: 6px; background: rgba(245,241,232,0.25); border: 1px solid rgba(245,241,232,0.3); margin: 0 3px; transition: background 0.25s, border-color 0.25s; }
+  .progress-strip .seg.past { background: rgba(245,241,232,0.7); border-color: rgba(245,241,232,0.7); }
+  .progress-strip .seg.current { background: var(--yellow); border-color: var(--yellow); box-shadow: 0 0 8px rgba(244,211,94,0.5); }
+  .progress-strip .seg.seg-gap { margin-left: 28px; }
+
   /* Nav hint */
-  .nav-hint { position: absolute; bottom: 76px; left: 50%; transform: translateX(-50%); font-family: var(--font-display); font-size: 10px; letter-spacing: 0.3em; color: rgba(17,17,17,0.3); z-index: 100; pointer-events: none; }
-  .counter { position: absolute; bottom: 76px; right: 60px; font-family: var(--font-display); font-size: 11px; font-weight: 700; letter-spacing: 0.2em; color: var(--black); z-index: 100; }
-  .deck:has(.title-slide.active) .nav-hint { bottom: 96px; color: var(--paper); }
-  .deck:has(.title-slide.active) .counter { bottom: 96px; color: var(--paper); }
+  .nav-hint { display: none; }
 
   /* Geometry decorations */
   .geo { position: absolute; z-index: 1; pointer-events: none; }
@@ -157,7 +161,7 @@
 <div class="deck">
 
   <!-- 1. TITLE -->
-  <section class="slide title-slide active">
+  <section class="slide title-slide active" data-section="FORM FOLLOWS FUNCTION">
     <div class="red-panel"></div>
     <div class="yellow-circle"></div>
     <div class="blue-tri"></div>
@@ -173,14 +177,14 @@
       </div>
     </div>
     <div class="bottom-bar">
-      <span>FORM FOLLOWS FUNCTION</span>
-      <span class="num">01</span>
-      <span>2026</span>
+      <div class="progress-strip"></div>
+      <span class="bar-label"></span>
+      <span class="bar-page"></span>
     </div>
   </section>
 
   <!-- 2. SECTION -->
-  <section class="slide section-slide">
+  <section class="slide section-slide" data-section="框架">
     <div class="geo geo-circle"></div>
     <div class="geo geo-square"></div>
     <div class="content-area">
@@ -189,11 +193,15 @@
       <h2>框架总览</h2>
       <div class="bar"></div>
     </div>
-    <div class="bottom-bar"><span>BAUHAUS</span><span class="num">02</span><span>SECTION</span></div>
+    <div class="bottom-bar">
+      <div class="progress-strip"></div>
+      <span class="bar-label"></span>
+      <span class="bar-page"></span>
+    </div>
   </section>
 
   <!-- 3. CONTENT -->
-  <section class="slide content-slide">
+  <section class="slide content-slide" data-section="框架">
     <div class="content-area">
       <div class="header">
         <div class="eyebrow"><span>THREE LEVELS</span></div>
@@ -220,11 +228,15 @@
         </div>
       </div>
     </div>
-    <div class="bottom-bar"><span>BAUHAUS</span><span class="num">03</span><span>CONTENT</span></div>
+    <div class="bottom-bar">
+      <div class="progress-strip"></div>
+      <span class="bar-label"></span>
+      <span class="bar-page"></span>
+    </div>
   </section>
 
   <!-- 4. TWO COL -->
-  <section class="slide two-col">
+  <section class="slide two-col" data-section="框架">
     <div class="content-area">
       <div class="header">
         <div class="eyebrow"><span>LEVEL 03</span></div>
@@ -243,26 +255,35 @@
         </div>
       </div>
     </div>
-    <div class="bottom-bar"><span>BAUHAUS</span><span class="num">04</span><span>TWO COL</span></div>
+    <div class="bottom-bar">
+      <div class="progress-strip"></div>
+      <span class="bar-label"></span>
+      <span class="bar-page"></span>
+    </div>
   </section>
 
-  <!-- 5. QUOTE -->
-  <section class="slide quote-slide">
-    <div class="geo geo-circle"></div>
-    <div class="geo geo-square"></div>
+  <!-- 5. SECTION 02 -->
+  <section class="slide section-slide" data-section="实录">
+    <div class="geo geo-circle" style="border-color:var(--red);"></div>
+    <div class="geo geo-square" style="background:var(--blue);border-color:var(--black);"></div>
     <div class="content-area">
-      <blockquote>找一个舒服漂亮的地方，喝着咖啡，聊着天，让想法碰撞出<span class="red">火花</span>，剩下的，交给 Agent。</blockquote>
+      <div class="big-num">02</div>
+      <div class="section-label">CHAPTER TWO</div>
+      <h2>实录数据</h2>
       <div class="bar"></div>
-      <cite>未来的工作方式 · 2026</cite>
     </div>
-    <div class="bottom-bar"><span>BAUHAUS</span><span class="num">05</span><span>QUOTE</span></div>
+    <div class="bottom-bar">
+      <div class="progress-strip"></div>
+      <span class="bar-label"></span>
+      <span class="bar-page"></span>
+    </div>
   </section>
 
   <!-- 6. DATA -->
-  <section class="slide data-slide">
+  <section class="slide data-slide" data-section="实录">
     <div class="content-area">
       <div class="header">
-        <div class="eyebrow"><span>03 · 实录</span></div>
+        <div class="eyebrow"><span>02 · 实录</span></div>
         <h2>边聊边干，长这样</h2>
       </div>
       <div class="metrics">
@@ -272,39 +293,134 @@
         <div class="metric"><div class="value">3<span class="unit"> Level</span></div><div class="label">从会后排待办到会上直接执行</div></div>
       </div>
     </div>
-    <div class="bottom-bar"><span>BAUHAUS</span><span class="num">06</span><span>DATA</span></div>
+    <div class="bottom-bar">
+      <div class="progress-strip"></div>
+      <span class="bar-label"></span>
+      <span class="bar-page"></span>
+    </div>
   </section>
 
-  <!-- 7. CLOSING -->
-  <section class="slide closing-slide">
+  <!-- 7. SECTION 03 -->
+  <section class="slide section-slide" data-section="展望">
+    <div class="geo geo-circle" style="background:var(--yellow);border:4px solid var(--red);"></div>
+    <div class="geo geo-square" style="background:var(--red);border-color:var(--black);"></div>
+    <div class="content-area">
+      <div class="big-num">03</div>
+      <div class="section-label">CHAPTER THREE</div>
+      <h2>未来展望</h2>
+      <div class="bar"></div>
+    </div>
+    <div class="bottom-bar">
+      <div class="progress-strip"></div>
+      <span class="bar-label"></span>
+      <span class="bar-page"></span>
+    </div>
+  </section>
+
+  <!-- 8. QUOTE -->
+  <section class="slide quote-slide" data-section="展望">
+    <div class="geo geo-circle"></div>
+    <div class="geo geo-square"></div>
+    <div class="content-area">
+      <blockquote>找一个舒服漂亮的地方，喝着咖啡，聊着天，让想法碰撞出<span class="red">火花</span>，剩下的，交给 Agent。</blockquote>
+      <div class="bar"></div>
+      <cite>未来的工作方式 · 2026</cite>
+    </div>
+    <div class="bottom-bar">
+      <div class="progress-strip"></div>
+      <span class="bar-label"></span>
+      <span class="bar-page"></span>
+    </div>
+  </section>
+
+  <!-- 9. CLOSING -->
+  <section class="slide closing-slide" data-section="THANK YOU">
     <div class="content-area">
       <h2>想体验 <span class="accent">Level 3</span>?</h2>
       <div class="bar"></div>
       <p>用飞书扫码加入「智能体会」早鸟体验群</p>
       <div class="shapes"><span class="s-circle"></span><span class="s-square"></span><span class="s-tri"></span></div>
     </div>
-    <div class="bottom-bar"><span>BAUHAUS</span><span class="num">07</span><span>END</span></div>
+    <div class="bottom-bar">
+      <div class="progress-strip"></div>
+      <span class="bar-label"></span>
+      <span class="bar-page"></span>
+    </div>
   </section>
 
   <div class="nav-hint">← → ARROWS TO NAVIGATE</div>
-  <div class="counter" id="counter">01 / 07</div>
 </div>
 
 <script>
   const slides = document.querySelectorAll('.slide');
-  const counter = document.getElementById('counter');
+  const total = slides.length;
+
+  // Build progress segments once, then clone to all bottom-bars
+  function buildProgress() {
+    // Determine section boundaries
+    const sections = [];
+    let currentSection = null;
+    slides.forEach((slide, i) => {
+      const sec = slide.dataset.section || '';
+      if (sec !== currentSection) {
+        sections.push({ start: i, name: sec });
+        currentSection = sec;
+      }
+    });
+
+    // Build segment HTML
+    let segHTML = '';
+    slides.forEach((slide, i) => {
+      const sec = slide.dataset.section || '';
+      const isSectionStart = sections.some(s => s.start === i);
+      const gapClass = (isSectionStart && i > 0) ? ' seg-gap' : '';
+      segHTML += `<div class="seg${gapClass}" data-idx="${i}"></div>`;
+    });
+
+    // Populate all progress strips
+    document.querySelectorAll('.progress-strip').forEach(strip => {
+      strip.innerHTML = segHTML;
+    });
+  }
+
+  function updateUI(idx) {
+    const sectionName = slides[idx].dataset.section || '';
+    const pageStr = String(idx + 1).padStart(2, '0') + ' / ' + String(total).padStart(2, '0');
+
+    // Update all bottom bars
+    document.querySelectorAll('.bottom-bar').forEach(bar => {
+      bar.querySelector('.bar-label').textContent = sectionName;
+      bar.querySelector('.bar-page').textContent = pageStr;
+    });
+
+    // Update progress segments
+    document.querySelectorAll('.progress-strip').forEach(strip => {
+      strip.querySelectorAll('.seg').forEach((seg, i) => {
+        seg.classList.remove('past', 'current');
+        if (i < idx) seg.classList.add('past');
+        else if (i === idx) seg.classList.add('current');
+      });
+    });
+  }
+
   let current = 0;
+  slides.forEach((slide, i) => { if (slide.classList.contains('active')) current = i; });
+
   function show(i) {
     slides[current].classList.remove('active');
-    current = (i + slides.length) % slides.length;
+    current = (i + total) % total;
     slides[current].classList.add('active');
-    counter.textContent = String(current + 1).padStart(2, '0') + ' / ' + String(slides.length).padStart(2, '0');
+    updateUI(current);
   }
+
+  buildProgress();
+  updateUI(current);
+
   document.addEventListener('keydown', function(e) {
     if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); show(current + 1); }
     if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); show(current - 1); }
     if (e.key === 'Home') { e.preventDefault(); show(0); }
-    if (e.key === 'End') { e.preventDefault(); show(slides.length - 1); }
+    if (e.key === 'End') { e.preventDefault(); show(total - 1); }
   });
 </script>
 </body>

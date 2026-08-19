@@ -33,7 +33,7 @@
     position: absolute; top: 50%; left: 50%; width: 1280px; height: 720px;
     background: var(--bg);
     color: var(--fg);
-    padding: 72px 96px;
+    padding: 72px 96px 80px;
     display: none;
     flex-direction: column;
     overflow: hidden;
@@ -61,23 +61,63 @@
     flex-shrink: 0;
   }
 
-  .footer { align-self: stretch; line-height: 1;
-    margin-top: auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 11px;
-    color: var(--muted);
-    letter-spacing: 0.2em;
-    padding-top: 20px;
-    border-top: 1px solid var(--line);
-  }
-
   .hairline {
     height: 1px;
     background: var(--fg);
     width: 100%;
   }
+
+  /* ---- Progress bar (shared) ---- */
+  .progress-bar {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 96px;
+    border-top: 1px solid var(--line);
+    z-index: 10;
+  }
+  .progress-bar .pb-section {
+    font-family: var(--font-serif);
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.3em;
+    min-width: 160px;
+  }
+  .progress-bar .pb-page {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    color: var(--muted);
+    letter-spacing: 0.15em;
+  }
+  .progress-strip {
+    position: absolute;
+    top: -16px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    height: 14px;
+  }
+  .progress-strip .seg {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(26,26,26,0.18);
+    margin: 0 7px;
+    transition: all 0.3s;
+  }
+  .progress-strip .seg.past {
+    background: rgba(26,26,26,0.5);
+  }
+  .progress-strip .seg.current {
+    background: var(--accent);
+    width: 14px;
+    height: 14px;
+  }
+  .progress-strip .seg.seg-gap { margin-left: 30px; }
 
   /* ---- Slide 1: Title ---- */
   .title-slide { justify-content: center; align-items: center; text-align: center; }
@@ -119,7 +159,7 @@
     font-weight: 300;
   }
 
-  /* ---- Slide 2: Section ---- */
+  /* ---- Slide: Section divider ---- */
   .section-slide { justify-content: center; }
   .section-slide .section-label {
     font-size: 12px;
@@ -147,7 +187,7 @@
   .section-slide .big-char {
     position: absolute;
     right: 80px;
-    bottom: 60px;
+    bottom: 80px;
     font-family: var(--font-serif);
     font-size: 280px;
     font-weight: 900;
@@ -155,7 +195,7 @@
     line-height: 1;
   }
 
-  /* ---- Slide 3: Content ---- */
+  /* ---- Slide: Content ---- */
   .content-slide .top-row {
     display: flex;
     align-items: flex-start;
@@ -221,7 +261,7 @@
     margin-bottom: 4px;
   }
 
-  /* ---- Slide 4: Two column ---- */
+  /* ---- Slide: Two column ---- */
   .two-col .top-row {
     display: flex;
     align-items: center;
@@ -266,7 +306,7 @@
     font-weight: 300;
   }
 
-  /* ---- Slide 5: Quote ---- */
+  /* ---- Slide: Quote ---- */
   .quote-slide { justify-content: center; align-items: center; text-align: center; }
   .quote-slide blockquote {
     font-family: var(--font-serif);
@@ -293,7 +333,7 @@
     letter-spacing: 0.25em;
   }
 
-  /* ---- Slide 6: Data ---- */
+  /* ---- Slide: Data ---- */
   .data-slide .top-row {
     display: flex;
     align-items: center;
@@ -339,7 +379,7 @@
     line-height: 1.6;
   }
 
-  /* ---- Slide 7: Closing ---- */
+  /* ---- Slide: Closing ---- */
   .closing-slide { justify-content: center; align-items: center; text-align: center; }
   .closing-slide .seal-big {
     width: 72px;
@@ -368,47 +408,18 @@
     letter-spacing: 0.3em;
   }
 
-  /* ---- Nav ---- */
-  .nav-hint {
-    position: absolute;
-    bottom: 16px;
-    left: 50%;
-    transform: translateX(-50%);
-    color: rgba(255,255,255,0.3);
-    font-family: var(--font-sans);
-    font-size: 11px;
-    letter-spacing: 0.15em;
-    z-index: 100;
-    pointer-events: none;
-  }
-/* CJK readability fixes */
-    h1, h2, h3, h4 { line-height: 1.2; }
-    .title-slide h1 { line-height: 1.18; }
-    .content-slide .header, .two-col .header, .data-slide .header { margin-bottom: 40px; }
-    .content-slide .body { gap: 32px; }
-    .two-col .cols { gap: 32px; }
-    .data-slide .metrics { gap: 24px; }
-    .content-slide ul { gap: 4px; }
-    .content-slide li { padding: 20px 0; }
-    .two-col .col { padding: 36px 40px; }
-    .data-slide .metric { padding: 32px 28px; }
-    .content-slide .card, .two-col .col { margin-bottom: 0; }
-  /* === Content overflow safeguards === */
+  /* CJK readability */
+  h1, h2, h3, h4 { line-height: 1.2; }
+  .title-slide h1 { line-height: 1.18; }
+
+  /* Content overflow safeguards */
   *, *::before, *::after { box-sizing: border-box; }
   .slide > * { min-width: 0; min-height: 0; }
-  .slide .body, .slide .cols, .slide .cards, .slide .metrics,
-  .slide .content-area, .slide .content, .slide .grid { min-height: 0; }
-  .slide .card, .slide .col, .slide .metric { overflow: hidden; }
+  .slide .body, .slide .cols, .slide .metrics { min-height: 0; }
   .slide p, .slide li, .slide h1, .slide h2, .slide h3, .slide h4,
   .slide blockquote, .slide span, .slide div {
     overflow-wrap: break-word; word-break: break-word;
   }
-
-
-  /* Footer spacing fix */
-  .slide > .footer { margin-top: auto; flex-shrink: 0; }
-  .slide > .cards, .slide > .cols, .slide > .metrics, .slide > .body { flex-shrink: 1; min-height: 0; }
-
 </style>
 </head>
 <body>
@@ -416,7 +427,7 @@
 <div class="deck">
 
   <!-- 1. Title -->
-  <section class="slide title-slide active">
+  <section class="slide title-slide active" data-section="靜">
     <div class="seal-row">
       <span class="line"></span>
       <div class="seal">静</div>
@@ -425,25 +436,27 @@
     <h1>静</h1>
     <p class="subtitle">留白 · 平衡 · 克制</p>
     <div class="vertical-text">PRESENTATION TEMPLATE</div>
-    <div class="footer">
-      <span>静 — TEMPLATE</span>
-      <span>01 / 07</span>
+    <div class="progress-bar">
+      <div class="progress-strip"></div>
+      <span class="pb-section"></span>
+      <span class="pb-page"></span>
     </div>
   </section>
 
-  <!-- 2. Section -->
-  <section class="slide section-slide">
-    <div class="section-label">第二章</div>
-    <h2>间<br><span class="light">即留白</span></h2>
-    <div class="big-char">間</div>
-    <div class="footer">
-      <span>静 — TEMPLATE</span>
-      <span>02 / 07</span>
+  <!-- 2. Section 01 -->
+  <section class="slide section-slide" data-section="留白">
+    <div class="section-label">第一章</div>
+    <h2>留白</h2>
+    <div class="big-char">白</div>
+    <div class="progress-bar">
+      <div class="progress-strip"></div>
+      <span class="pb-section"></span>
+      <span class="pb-page"></span>
     </div>
   </section>
 
   <!-- 3. Content -->
-  <section class="slide content-slide">
+  <section class="slide content-slide" data-section="留白">
     <div class="top-row">
       <div class="seal">念</div>
       <div class="text">
@@ -459,14 +472,15 @@
         <li><strong>克制</strong>一色、一字、一线，足以传达全部意图。</li>
       </ul>
     </div>
-    <div class="footer">
-      <span>静 — TEMPLATE</span>
-      <span>03 / 07</span>
+    <div class="progress-bar">
+      <div class="progress-strip"></div>
+      <span class="pb-section"></span>
+      <span class="pb-page"></span>
     </div>
   </section>
 
   <!-- 4. Two column -->
-  <section class="slide two-col">
+  <section class="slide two-col" data-section="留白">
     <div class="top-row">
       <div class="seal">對</div>
       <h2>两种境界</h2>
@@ -483,25 +497,27 @@
         <p>字与字之间、行与行之间、形与形之间，都需要气的流动。紧凑令人窒息，松散令人涣散，恰到好处的间距是经年累月的修养。</p>
       </div>
     </div>
-    <div class="footer">
-      <span>静 — TEMPLATE</span>
-      <span>04 / 07</span>
+    <div class="progress-bar">
+      <div class="progress-strip"></div>
+      <span class="pb-section"></span>
+      <span class="pb-page"></span>
     </div>
   </section>
 
-  <!-- 5. Quote -->
-  <section class="slide quote-slide">
-    <div class="quote-mark">「</div>
-    <blockquote>大音希声，<br><span class="accent">大象无形</span>。</blockquote>
-    <cite>老子 — 道德经</cite>
-    <div class="footer">
-      <span>静 — TEMPLATE</span>
-      <span>05 / 07</span>
+  <!-- 5. Section 02 -->
+  <section class="slide section-slide" data-section="數">
+    <div class="section-label">第二章</div>
+    <h2>数</h2>
+    <div class="big-char">數</div>
+    <div class="progress-bar">
+      <div class="progress-strip"></div>
+      <span class="pb-section"></span>
+      <span class="pb-page"></span>
     </div>
   </section>
 
   <!-- 6. Data -->
-  <section class="slide data-slide">
+  <section class="slide data-slide" data-section="數">
     <div class="top-row">
       <div class="seal">數</div>
       <h2>数中见静</h2>
@@ -520,39 +536,107 @@
         <div class="label">留白占比，呼吸为先</div>
       </div>
     </div>
-    <div class="footer">
-      <span>静 — TEMPLATE</span>
-      <span>06 / 07</span>
+    <div class="progress-bar">
+      <div class="progress-strip"></div>
+      <span class="pb-section"></span>
+      <span class="pb-page"></span>
     </div>
   </section>
 
-  <!-- 7. Closing -->
-  <section class="slide closing-slide">
+  <!-- 7. Section 03 -->
+  <section class="slide section-slide" data-section="道">
+    <div class="section-label">第三章</div>
+    <h2>道</h2>
+    <div class="big-char">道</div>
+    <div class="progress-bar">
+      <div class="progress-strip"></div>
+      <span class="pb-section"></span>
+      <span class="pb-page"></span>
+    </div>
+  </section>
+
+  <!-- 8. Quote -->
+  <section class="slide quote-slide" data-section="道">
+    <div class="quote-mark">「</div>
+    <blockquote>大音希声，<br><span class="accent">大象无形</span>。</blockquote>
+    <cite>老子 — 道德经</cite>
+    <div class="progress-bar">
+      <div class="progress-strip"></div>
+      <span class="pb-section"></span>
+      <span class="pb-page"></span>
+    </div>
+  </section>
+
+  <!-- 9. Closing -->
+  <section class="slide closing-slide" data-section="敬請指正">
     <div class="seal-big">終</div>
     <h2>敬 請 指 正</h2>
     <p>THANK YOU</p>
-    <div class="footer">
-      <span>静 — TEMPLATE</span>
-      <span>07 / 07</span>
+    <div class="progress-bar">
+      <div class="progress-strip"></div>
+      <span class="pb-section"></span>
+      <span class="pb-page"></span>
     </div>
   </section>
 
-  <div class="nav-hint">← → 方向键翻页</div>
 </div>
 <script>
   const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
   let current = 0;
+
+  // Find initial active slide
+  slides.forEach((s, i) => { if (s.classList.contains('active')) current = i; });
+
+  // Build progress strips
+  function buildProgress() {
+    const sections = Array.from(slides).map(s => s.dataset.section || '');
+    slides.forEach(slide => {
+      const strip = slide.querySelector('.progress-strip');
+      if (!strip) return;
+      let lastSection = null;
+      sections.forEach((section, i) => {
+        const seg = document.createElement('div');
+        seg.className = 'seg';
+        if (lastSection !== null && section !== lastSection) seg.classList.add('seg-gap');
+        strip.appendChild(seg);
+        lastSection = section;
+      });
+    });
+  }
+
+  function updateUI(idx) {
+    const sectionName = slides[idx].dataset.section || '';
+    const pageStr = String(idx + 1).padStart(2, '0') + ' / ' + String(total).padStart(2, '0');
+    document.querySelectorAll('.progress-bar').forEach(bar => {
+      bar.querySelector('.pb-section').textContent = sectionName;
+      bar.querySelector('.pb-page').textContent = pageStr;
+    });
+    document.querySelectorAll('.progress-strip').forEach(strip => {
+      const segs = strip.querySelectorAll('.seg');
+      segs.forEach((seg, i) => {
+        seg.classList.toggle('current', i === idx);
+        seg.classList.toggle('past', i < idx);
+      });
+    });
+  }
+
   function show(i) {
     slides[current].classList.remove('active');
     current = (i + slides.length) % slides.length;
     slides[current].classList.add('active');
+    updateUI(current);
   }
+
   document.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); show(current + 1); }
     if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); show(current - 1); }
     if (e.key === 'Home') { e.preventDefault(); show(0); }
     if (e.key === 'End') { e.preventDefault(); show(slides.length - 1); }
   });
+
+  buildProgress();
+  updateUI(current);
 </script>
 </body>
 </html>

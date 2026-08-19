@@ -1,12 +1,13 @@
 <!DOCTYPE html>
+
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>浮世绘 UKIYO-E — Slide Template</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700;900&family=Shippori+Mincho:wght@400;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700;900&amp;family=Shippori+Mincho:wght@400;700;800&amp;display=swap" rel="stylesheet"/>
 <style>
   :root {
     --bg: #F2EAD8;
@@ -164,149 +165,279 @@
   .slide > .footer { margin-top: auto; flex-shrink: 0; }
   .slide > .cards, .slide > .cols, .slide > .metrics, .slide > .body { flex-shrink: 1; min-height: 0; }
 
+
+  /* === Progress system === */
+  .slide { padding-bottom: 80px !important; }
+  .title-slide { padding-bottom: 90px !important; }
+  .progress-bar {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 56px; display: flex; align-items: center; justify-content: space-between;
+    padding: 0 60px; z-index: 50;
+    background: var(--bg);
+    border-top: 1px solid rgba(30,50,100,0.15);
+  }
+  .progress-bar .pb-section {
+    font-family: var(--font-cn); font-size: 12px; font-weight: 700;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--muted); min-width: 180px;
+  }
+  .progress-bar .pb-page {
+    font-family: var(--font-cn); font-size: 16px; font-weight: 700;
+    letter-spacing: 0.1em; color: var(--indigo, #1E3468);
+  }
+  .progress-strip {
+    position: absolute; top: -8px; left: 50%; transform: translateX(-50%);
+    display: flex; align-items: center; height: 14px;
+  }
+  .progress-strip .seg {
+    width: 32px; height: 5px; border-radius: 0;
+    background: rgba(30,50,100,0.1);
+    
+    margin: 0 4px; transition: all 0.25s;
+    
+  }
+  .progress-strip .seg.past {
+    background: rgba(30,50,100,0.4);
+    
+  }
+  .progress-strip .seg.current {
+    background: var(--indigo, #1E3468);
+    
+    
+  }
+  .progress-strip .seg.seg-gap { margin-left: 24px; }
+  .nav-hint { display: none !important; }
 </style>
 </head>
 <body>
 <div class="deck">
 
-  <section class="slide title-slide active">
-    <div class="wood-frame"></div>
-    <div class="fuji">
-      <svg viewBox="0 0 280 200">
-        <path d="M20 180 L140 30 L260 180 Z" fill="#1B3A6B"/>
-        <path d="M100 90 L140 30 L180 90 Q160 80 140 85 Q120 80 100 90Z" fill="#F2EAD8"/>
-        <path d="M20 180 L140 30 L260 180" fill="none" stroke="#1A1A1A" stroke-width="2"/>
-        <path d="M60 180 Q80 160 100 170 Q120 180 140 165" fill="none" stroke="#2C5F8A" stroke-width="1" opacity="0.5"/>
-        <path d="M140 165 Q160 180 180 170 Q200 160 220 180" fill="none" stroke="#2C5F8A" stroke-width="1" opacity="0.5"/>
-      </svg>
-    </div>
-    <svg class="wave-band" viewBox="0 0 1280 120" preserveAspectRatio="none" style="height:100px;bottom:40px;opacity:0.15;">
-      <path d="M0 60 Q40 20 80 60 T160 60 T240 60 T320 60 T400 60 T480 60 T560 60 T640 60 T720 60 T800 60 T880 60 T960 60 T1040 60 T1120 60 T1200 60 T1280 60 V120 H0Z" fill="#1B3A6B"/>
-    </svg>
-    <div class="label">第二十六章</div>
-    <div class="title-row">
-      <h1>浮世絵</h1>
-      <div class="seal-stamp">絵</div>
-    </div>
-    <div class="subtitle-en">UKIYO-E · FLOATING WORLD</div>
-    <p class="subtitle">江戸木版画の美学を現代のプレゼンテーションに。<br>平塗りの色、力強い輪郭、そして波。</p>
-    <div class="footer"><span class="seal"><span class="seal-stamp" style="width:24px;height:24px;font-size:11px;">印</span> UKIYO-E</span><span>01 / 07</span></div>
-  </section>
 
-  <section class="slide section-slide">
-    <div class="wood-frame"></div>
-    <svg class="deco" viewBox="0 0 400 400"><circle cx="200" cy="200" r="180" fill="none" stroke="#1B3A6B" stroke-width="2"/><path d="M20 200 Q60 140 100 200 T180 200 T260 200 T340 200 T380 200" fill="none" stroke="#1B3A6B" stroke-width="1.5"/></svg>
-    <div class="num">— 二 —</div>
-    <h2>波の<span class="red">美学</span></h2>
-    <div class="divider"></div>
-    <p>余白は沈黙ではない。それは呼吸である。<br>一枚の版画に、無限の空間が宿る。</p>
-    <div class="footer"><span class="seal"><span class="seal-stamp" style="width:24px;height:24px;font-size:11px;">印</span> UKIYO-E</span><span>02 / 07</span></div>
-  </section>
 
-  <section class="slide content-slide">
-    <div class="wood-frame"></div>
-    <div class="header">
-      <div class="seal-stamp">三</div>
-      <h2>三つの要素</h2>
-    </div>
-    <div class="cards">
-      <div class="card">
-        <div class="num">一</div>
-        <svg class="wave-icon" viewBox="0 0 48 32"><path d="M0 20 Q12 5 24 20 T48 20" fill="none" stroke="#1B3A6B" stroke-width="2.5"/><path d="M0 28 Q12 13 24 28 T48 28" fill="none" stroke="#2C5F8A" stroke-width="1.5"/></svg>
-        <h3>波</h3>
-        <p>Indigo waves roll across every surface. The seigaiha pattern is the heartbeat of ukiyo-e — repetition with variation, order with movement.</p>
-      </div>
-      <div class="card">
-        <div class="num">二</div>
-        <svg class="wave-icon" viewBox="0 0 48 32"><path d="M24 4 L44 28 L4 28 Z" fill="none" stroke="#1B3A6B" stroke-width="2.5"/><path d="M18 16 L24 8 L30 16" fill="#F2EAD8" stroke="#1B3A6B" stroke-width="1.5"/></svg>
-        <h3>山</h3>
-        <p>Mt. Fuji — the silent geometric anchor. A single triangle with a snow cap, instantly recognizable across four centuries.</p>
-      </div>
-      <div class="card">
-        <div class="num">三</div>
-        <svg class="wave-icon" viewBox="0 0 48 32"><rect x="12" y="4" width="24" height="24" rx="2" fill="#C8362C"/><text x="24" y="22" text-anchor="middle" fill="#fff" font-size="14" font-weight="bold">印</text></svg>
-        <h3>印</h3>
-        <p>The red hanko seal. A single vermilion square that signs the work — the artist's presence in a field of blue and cream.</p>
-      </div>
-    </div>
-    <div class="footer"><span class="seal"><span class="seal-stamp" style="width:24px;height:24px;font-size:11px;">印</span> UKIYO-E</span><span>03 / 07</span></div>
-  </section>
 
-  <section class="slide two-col">
-    <div class="wood-frame"></div>
-    <div class="header">
-      <div class="seal-stamp">四</div>
-      <h2>二つの流派</h2>
-    </div>
-    <div class="cols">
-      <div class="col a">
-        <div class="tag">— 狩野派 —</div>
-        <h3>金と力</h3>
-        <p>Gold leaf, bold outlines, dramatic compositions. The Kano school painted for shoguns — power made visible on folding screens.</p>
-        <div class="stat">1603</div>
-      </div>
-      <div class="col b">
-        <div class="tag">— 浮世絵 —</div>
-        <h3>藍と日常</h3>
-        <p>Indigo on paper, actors and landscapes, the floating world of Edo. Hokusai and Hiroshige made art for the merchant class.</p>
-        <div class="stat">1831</div>
-      </div>
-    </div>
-    <div class="footer"><span class="seal"><span class="seal-stamp" style="width:24px;height:24px;font-size:11px;">印</span> UKIYO-E</span><span>04 / 07</span></div>
-  </section>
 
-  <section class="slide quote-slide">
-    <div class="wood-frame"></div>
-    <svg class="wave-band" viewBox="0 0 1280 120" preserveAspectRatio="none" style="height:80px;top:60px;opacity:0.08;transform:scaleY(-1);">
-      <path d="M0 60 Q40 20 80 60 T160 60 T240 60 T320 60 T400 60 T480 60 T560 60 T640 60 T720 60 T800 60 T880 60 T960 60 T1040 60 T1120 60 T1200 60 T1280 60 V120 H0Z" fill="#1B3A6B"/>
-    </svg>
-    <blockquote>
-      波は<span class="red">繰り返す</span>が、<br>
+
+
+<div class="nav-hint">← → ARROWS TO NAVIGATE</div>
+<section class="slide title-slide active" data-section="浮世绘">
+<div class="wood-frame"></div>
+<div class="fuji">
+<svg viewbox="0 0 280 200">
+<path d="M20 180 L140 30 L260 180 Z" fill="#1B3A6B"></path>
+<path d="M100 90 L140 30 L180 90 Q160 80 140 85 Q120 80 100 90Z" fill="#F2EAD8"></path>
+<path d="M20 180 L140 30 L260 180" fill="none" stroke="#1A1A1A" stroke-width="2"></path>
+<path d="M60 180 Q80 160 100 170 Q120 180 140 165" fill="none" opacity="0.5" stroke="#2C5F8A" stroke-width="1"></path>
+<path d="M140 165 Q160 180 180 170 Q200 160 220 180" fill="none" opacity="0.5" stroke="#2C5F8A" stroke-width="1"></path>
+</svg>
+</div>
+<svg class="wave-band" preserveaspectratio="none" style="height:100px;bottom:40px;opacity:0.15;" viewbox="0 0 1280 120">
+<path d="M0 60 Q40 20 80 60 T160 60 T240 60 T320 60 T400 60 T480 60 T560 60 T640 60 T720 60 T800 60 T880 60 T960 60 T1040 60 T1120 60 T1200 60 T1280 60 V120 H0Z" fill="#1B3A6B"></path>
+</svg>
+<div class="label">第二十六章</div>
+<div class="title-row">
+<h1>浮世絵</h1>
+<div class="seal-stamp">絵</div>
+</div>
+<div class="subtitle-en">UKIYO-E · FLOATING WORLD</div>
+<p class="subtitle">江戸木版画の美学を現代のプレゼンテーションに。<br/>平塗りの色、力強い輪郭、そして波。</p>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide section-slide" data-section="风景">
+<div class="wood-frame"></div>
+<svg class="deco" viewbox="0 0 400 400"><circle cx="200" cy="200" fill="none" r="180" stroke="#1B3A6B" stroke-width="2"></circle><path d="M20 200 Q60 140 100 200 T180 200 T260 200 T340 200 T380 200" fill="none" stroke="#1B3A6B" stroke-width="1.5"></path></svg>
+<div class="num">— 二 —</div>
+<h2>波の<span class="red">美学</span></h2>
+<div class="divider"></div>
+<p>余白は沈黙ではない。それは呼吸である。<br/>一枚の版画に、無限の空間が宿る。</p>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide content-slide" data-section="风景">
+<div class="wood-frame"></div>
+<div class="header">
+<div class="seal-stamp">三</div>
+<h2>三つの要素</h2>
+</div>
+<div class="cards">
+<div class="card">
+<div class="num">一</div>
+<svg class="wave-icon" viewbox="0 0 48 32"><path d="M0 20 Q12 5 24 20 T48 20" fill="none" stroke="#1B3A6B" stroke-width="2.5"></path><path d="M0 28 Q12 13 24 28 T48 28" fill="none" stroke="#2C5F8A" stroke-width="1.5"></path></svg>
+<h3>波</h3>
+<p>Indigo waves roll across every surface. The seigaiha pattern is the heartbeat of ukiyo-e — repetition with variation, order with movement.</p>
+</div>
+<div class="card">
+<div class="num">二</div>
+<svg class="wave-icon" viewbox="0 0 48 32"><path d="M24 4 L44 28 L4 28 Z" fill="none" stroke="#1B3A6B" stroke-width="2.5"></path><path d="M18 16 L24 8 L30 16" fill="#F2EAD8" stroke="#1B3A6B" stroke-width="1.5"></path></svg>
+<h3>山</h3>
+<p>Mt. Fuji — the silent geometric anchor. A single triangle with a snow cap, instantly recognizable across four centuries.</p>
+</div>
+<div class="card">
+<div class="num">三</div>
+<svg class="wave-icon" viewbox="0 0 48 32"><rect fill="#C8362C" height="24" rx="2" width="24" x="12" y="4"></rect><text fill="#fff" font-size="14" font-weight="bold" text-anchor="middle" x="24" y="22">印</text></svg>
+<h3>印</h3>
+<p>The red hanko seal. A single vermilion square that signs the work — the artist's presence in a field of blue and cream.</p>
+</div>
+</div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide two-col" data-section="风景">
+<div class="wood-frame"></div>
+<div class="header">
+<div class="seal-stamp">四</div>
+<h2>二つの流派</h2>
+</div>
+<div class="cols">
+<div class="col a">
+<div class="tag">— 狩野派 —</div>
+<h3>金と力</h3>
+<p>Gold leaf, bold outlines, dramatic compositions. The Kano school painted for shoguns — power made visible on folding screens.</p>
+<div class="stat">1603</div>
+</div>
+<div class="col b">
+<div class="tag">— 浮世絵 —</div>
+<h3>藍と日常</h3>
+<p>Indigo on paper, actors and landscapes, the floating world of Edo. Hokusai and Hiroshige made art for the merchant class.</p>
+<div class="stat">1831</div>
+</div>
+</div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide section-slide" data-section="人物">
+<div class="wood-frame"></div>
+<svg class="deco" viewbox="0 0 400 400"><circle cx="200" cy="200" fill="none" r="180" stroke="#1B3A6B" stroke-width="2"></circle><path d="M20 200 Q60 140 100 200 T180 200 T260 200 T340 200 T380 200" fill="none" stroke="#1B3A6B" stroke-width="1.5"></path></svg>
+<div class="num">— 二 —</div>
+<h2>人物</h2>
+<div class="divider"></div>
+<p>余白は沈黙ではない。それは呼吸である。<br/>一枚の版画に、無限の空間が宿る。</p>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide data-slide" data-section="人物">
+<div class="wood-frame"></div>
+<div class="header">
+<div class="seal-stamp">六</div>
+<h2>数字で見る</h2>
+</div>
+<div class="metrics">
+<div class="metric"><div class="value">3</div><div class="label">Signature colors</div></div>
+<div class="metric"><div class="value">36</div><div class="label">Views of Fuji</div></div>
+<div class="metric"><div class="value">1831</div><div class="label">Great Wave year</div></div>
+<div class="metric"><div class="value">∞</div><div class="label">Waves drawn</div></div>
+</div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide section-slide" data-section="世相">
+<div class="wood-frame"></div>
+<svg class="deco" viewbox="0 0 400 400"><circle cx="200" cy="200" fill="none" r="180" stroke="#1B3A6B" stroke-width="2"></circle><path d="M20 200 Q60 140 100 200 T180 200 T260 200 T340 200 T380 200" fill="none" stroke="#1B3A6B" stroke-width="1.5"></path></svg>
+<div class="num">— 二 —</div>
+<h2>世相</h2>
+<div class="divider"></div>
+<p>余白は沈黙ではない。それは呼吸である。<br/>一枚の版画に、無限の空間が宿る。</p>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide quote-slide" data-section="世相">
+<div class="wood-frame"></div>
+<svg class="wave-band" preserveaspectratio="none" style="height:80px;top:60px;opacity:0.08;transform:scaleY(-1);" viewbox="0 0 1280 120">
+<path d="M0 60 Q40 20 80 60 T160 60 T240 60 T320 60 T400 60 T480 60 T560 60 T640 60 T720 60 T800 60 T880 60 T960 60 T1040 60 T1120 60 T1200 60 T1280 60 V120 H0Z" fill="#1B3A6B"></path>
+</svg>
+<blockquote>
+      波は<span class="red">繰り返す</span>が、<br/>
       同じ波は二度と来ない。
     </blockquote>
-    <cite>— 葛飾北斎</cite>
-    <div class="quote-seal"><div class="seal-stamp">印</div></div>
-    <div class="footer"><span class="seal"><span class="seal-stamp" style="width:24px;height:24px;font-size:11px;">印</span> UKIYO-E</span><span>05 / 07</span></div>
-  </section>
+<cite>— 葛飾北斎</cite>
+<div class="quote-seal"><div class="seal-stamp">印</div></div>
 
-  <section class="slide data-slide">
-    <div class="wood-frame"></div>
-    <div class="header">
-      <div class="seal-stamp">六</div>
-      <h2>数字で見る</h2>
-    </div>
-    <div class="metrics">
-      <div class="metric"><div class="value">3</div><div class="label">Signature colors</div></div>
-      <div class="metric"><div class="value">36</div><div class="label">Views of Fuji</div></div>
-      <div class="metric"><div class="value">1831</div><div class="label">Great Wave year</div></div>
-      <div class="metric"><div class="value">∞</div><div class="label">Waves drawn</div></div>
-    </div>
-    <div class="footer"><span class="seal"><span class="seal-stamp" style="width:24px;height:24px;font-size:11px;">印</span> UKIYO-E</span><span>06 / 07</span></div>
-  </section>
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide closing-slide" data-section="END">
+<div class="wood-frame"></div>
+<svg class="wave-band" preserveaspectratio="none" style="height:100px;bottom:40px;opacity:0.12;" viewbox="0 0 1280 120">
+<path d="M0 60 Q40 20 80 60 T160 60 T240 60 T320 60 T400 60 T480 60 T560 60 T640 60 T720 60 T800 60 T880 60 T960 60 T1040 60 T1120 60 T1200 60 T1280 60 V120 H0Z" fill="#1B3A6B"></path>
+</svg>
+<h2>完</h2>
+<div class="divider"></div>
+<p>ありがとうございました</p>
+<div class="seal-stamp">終</div>
 
-  <section class="slide closing-slide">
-    <div class="wood-frame"></div>
-    <svg class="wave-band" viewBox="0 0 1280 120" preserveAspectRatio="none" style="height:100px;bottom:40px;opacity:0.12;">
-      <path d="M0 60 Q40 20 80 60 T160 60 T240 60 T320 60 T400 60 T480 60 T560 60 T640 60 T720 60 T800 60 T880 60 T960 60 T1040 60 T1120 60 T1200 60 T1280 60 V120 H0Z" fill="#1B3A6B"/>
-    </svg>
-    <h2>完</h2>
-    <div class="divider"></div>
-    <p>ありがとうございました</p>
-    <div class="seal-stamp">終</div>
-    <div class="footer"><span class="seal"><span class="seal-stamp" style="width:24px;height:24px;font-size:11px;">印</span> UKIYO-E</span><span>07 / 07</span></div>
-  </section>
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section></div>
 
-  <div class="nav-hint">← → ARROWS TO NAVIGATE</div>
-</div>
 <script>
-  const slides = document.querySelectorAll('.slide'); let current = 0;
-  function show(i) { slides[current].classList.remove('active'); current = (i + slides.length) % slides.length; slides[current].classList.add('active'); }
-  document.addEventListener('keydown', e => {
-    if (e.key==='ArrowRight'||e.key==='ArrowDown'||e.key===' ') { e.preventDefault(); show(current+1); }
-    if (e.key==='ArrowLeft'||e.key==='ArrowUp') { e.preventDefault(); show(current-1); }
-    if (e.key==='Home') { e.preventDefault(); show(0); }
-    if (e.key==='End') { e.preventDefault(); show(slides.length-1); }
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
+  let current = 0;
+  slides.forEach((s, i) => { if (s.classList.contains('active')) current = i; });
+
+  function buildProgress() {
+    const sections = Array.from(slides).map(s => s.dataset.section || '');
+    document.querySelectorAll('.progress-strip').forEach(strip => {
+      let lastSection = null;
+      sections.forEach((section, i) => {
+        const seg = document.createElement('div');
+        seg.className = 'seg';
+        if (lastSection !== null && section !== lastSection) seg.classList.add('seg-gap');
+        strip.appendChild(seg);
+        lastSection = section;
+      });
+    });
+  }
+
+  function updateUI(idx) {
+    const sectionName = slides[idx].dataset.section || '';
+    const pageStr = String(idx + 1).padStart(2, '0') + ' / ' + String(total).padStart(2, '0');
+    document.querySelectorAll('.progress-bar').forEach(bar => {
+      const label = bar.querySelector('.pb-section');
+      const page = bar.querySelector('.pb-page');
+      if (label) label.textContent = sectionName;
+      if (page) page.textContent = pageStr;
+    });
+    document.querySelectorAll('.progress-strip').forEach(strip => {
+      strip.querySelectorAll('.seg').forEach((seg, i) => {
+        seg.classList.toggle('current', i === idx);
+        seg.classList.toggle('past', i < idx);
+      });
+    });
+  }
+
+  function show(i) {
+    slides[current].classList.remove('active');
+    current = (i + total) % total;
+    slides[current].classList.add('active');
+    updateUI(current);
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); show(current + 1); }
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); show(current - 1); }
+    if (e.key === 'Home') { e.preventDefault(); show(0); }
+    if (e.key === 'End') { e.preventDefault(); show(total - 1); }
   });
-</script>
-</body>
+
+  buildProgress();
+  updateUI(current);
+</script></body>
 </html>

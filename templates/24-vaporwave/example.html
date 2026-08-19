@@ -1,12 +1,13 @@
 <!DOCTYPE html>
+
 <html lang="zh">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Vaporwave — Slides Design System</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Noto+Serif+SC:wght@400;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&amp;family=Noto+Serif+SC:wght@400;700;900&amp;display=swap" rel="stylesheet"/>
 <style>
   :root {
     --pink: #FF71CE;
@@ -143,219 +144,358 @@
   .title-slide h1 { line-height: 1.15; }
   .card, .col, .metric { overflow: hidden; }
   .card .card-num, .eyebrow, .section-label { white-space: nowrap; overflow-wrap: break-word; }
+
+  /* === Progress system === */
+  .slide { padding-bottom: 80px !important; }
+  .title-slide { padding-bottom: 90px !important; }
+  .progress-bar {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 56px; display: flex; align-items: center; justify-content: space-between;
+    padding: 0 60px; z-index: 50;
+    background: rgba(13,5,32,0.85);
+    border-top: 1px solid rgba(255,113,206,0.3);
+  }
+  .progress-bar .pb-section {
+    font-family: var(--font-display); font-size: 12px; font-weight: 700;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    color: rgba(255,255,255,0.6); min-width: 180px;
+  }
+  .progress-bar .pb-page {
+    font-family: var(--font-display); font-size: 16px; font-weight: 700;
+    letter-spacing: 0.1em; color: var(--cyan);
+  }
+  .progress-strip {
+    position: absolute; top: -8px; left: 50%; transform: translateX(-50%);
+    display: flex; align-items: center; height: 14px;
+  }
+  .progress-strip .seg {
+    width: 34px; height: 3px; border-radius: 2px;
+    background: rgba(255,255,255,0.12);
+    
+    margin: 0 4px; transition: all 0.25s;
+    
+  }
+  .progress-strip .seg.past {
+    background: rgba(1,205,254,0.5);
+    
+  }
+  .progress-strip .seg.current {
+    background: var(--pink);
+    
+    height:4px;box-shadow:0 0 10px var(--pink);
+  }
+  .progress-strip .seg.seg-gap { margin-left: 22px; }
+  .nav-hint { display: none !important; }
 </style>
 </head>
 <body>
 <div class="deck">
+<!-- 1. TITLE -->
+<!-- 2. SECTION -->
+<!-- 3. CONTENT -->
+<!-- 4. TWO COL -->
+<!-- 5. QUOTE -->
+<!-- 6. DATA -->
+<!-- 7. CLOSING -->
+<div class="nav-hint">← → ARROWS TO NAVIGATE</div>
 
-  <!-- 1. TITLE -->
-  <section class="slide title-slide active">
-    <div class="sun"></div>
-    <svg class="palm left" width="100" height="180" viewBox="0 0 100 180"><path d="M50 180 Q45 100 40 50 Q38 30 45 15" stroke="#0D0520" stroke-width="5" fill="none"/><path d="M45 20 Q15 5 0 25 Q25 20 45 30" fill="#0D0520"/><path d="M45 20 Q75 5 95 30 Q70 22 45 32" fill="#0D0520"/><path d="M45 25 Q20 40 5 55 Q30 40 45 38" fill="#0D0520"/><path d="M45 25 Q75 40 95 58 Q70 42 45 40" fill="#0D0520"/></svg>
-    <svg class="palm right" width="100" height="180" viewBox="0 0 100 180"><path d="M50 180 Q45 100 40 50 Q38 30 45 15" stroke="#0D0520" stroke-width="5" fill="none"/><path d="M45 20 Q15 5 0 25 Q25 20 45 30" fill="#0D0520"/><path d="M45 20 Q75 5 95 30 Q70 22 45 32" fill="#0D0520"/><path d="M45 25 Q20 40 5 55 Q30 40 45 38" fill="#0D0520"/><path d="M45 25 Q75 40 95 58 Q70 42 45 40" fill="#0D0520"/></svg>
-    <div class="grid-floor">
-      <svg viewBox="0 0 1280 280" preserveAspectRatio="none">
-        <g stroke="rgba(255,113,206,0.4)" stroke-width="1" fill="none">
-          <line x1="0" y1="280" x2="640" y2="0"/><line x1="128" y1="280" x2="640" y2="0"/>
-          <line x1="256" y1="280" x2="640" y2="0"/><line x1="384" y1="280" x2="640" y2="0"/>
-          <line x1="512" y1="280" x2="640" y2="0"/><line x1="640" y1="280" x2="640" y2="0"/>
-          <line x1="768" y1="280" x2="640" y2="0"/><line x1="896" y1="280" x2="640" y2="0"/>
-          <line x1="1024" y1="280" x2="640" y2="0"/><line x1="1152" y1="280" x2="640" y2="0"/>
-          <line x1="1280" y1="280" x2="640" y2="0"/>
-        </g>
-        <g stroke="rgba(1,205,254,0.4)" stroke-width="1" fill="none">
-          <line x1="0" y1="40" x2="1280" y2="40"/><line x1="0" y1="80" x2="1280" y2="80"/>
-          <line x1="0" y1="120" x2="1280" y2="120"/><line x1="0" y1="160" x2="1280" y2="160"/>
-          <line x1="0" y1="200" x2="1280" y2="200"/><line x1="0" y1="240" x2="1280" y2="240"/>
-          <line x1="0" y1="280" x2="1280" y2="280"/>
-        </g>
-      </svg>
-    </div>
-    <div class="content-area">
-      <div class="eyebrow">A E S T H E T I C</div>
-      <h1>未来复古<br>主义</h1>
-      <p class="subtitle">VAPORWAVE · 2026</p>
-    </div>
-    <div class="bottom-bar"><span>► NEON DREAMS</span><span class="num">01</span><span>2026</span></div>
-    <div class="scanlines"></div>
-  </section>
-
-  <!-- 2. SECTION -->
-  <section class="slide section-slide">
-    <div class="grid-floor">
-      <svg viewBox="0 0 1280 280" preserveAspectRatio="none">
-        <g stroke="rgba(255,113,206,0.3)" stroke-width="1" fill="none">
-          <line x1="0" y1="280" x2="640" y2="0"/><line x1="128" y1="280" x2="640" y2="0"/>
-          <line x1="256" y1="280" x2="640" y2="0"/><line x1="384" y1="280" x2="640" y2="0"/>
-          <line x1="512" y1="280" x2="640" y2="0"/><line x1="640" y1="280" x2="640" y2="0"/>
-          <line x1="768" y1="280" x2="640" y2="0"/><line x1="896" y1="280" x2="640" y2="0"/>
-          <line x1="1024" y1="280" x2="640" y2="0"/><line x1="1152" y1="280" x2="640" y2="0"/>
-          <line x1="1280" y1="280" x2="640" y2="0"/>
-        </g>
-        <g stroke="rgba(1,205,254,0.3)" stroke-width="1" fill="none">
-          <line x1="0" y1="40" x2="1280" y2="40"/><line x1="0" y1="80" x2="1280" y2="80"/>
-          <line x1="0" y1="120" x2="1280" y2="120"/><line x1="0" y1="160" x2="1280" y2="160"/>
-          <line x1="0" y1="200" x2="1280" y2="200"/><line x1="0" y1="240" x2="1280" y2="240"/>
-        </g>
-      </svg>
-    </div>
-    <div class="content-area">
-      <div class="big-num">01</div>
-      <div class="section-label">CHAPTER ONE</div>
-      <h2>框架总览</h2>
-    </div>
-    <div class="bottom-bar"><span>VAPORWAVE</span><span class="num">02</span><span>SECTION</span></div>
-    <div class="scanlines"></div>
-  </section>
-
-  <!-- 3. CONTENT -->
-  <section class="slide content-slide">
-    <div class="content-area">
-      <div class="header">
-        <div class="eyebrow">THREE LEVELS</div>
-        <h2>会议里和 AI 协同，有三个 Level</h2>
-      </div>
-      <div class="body">
-        <div class="card">
-          <div class="card-num">LEVEL 01</div>
-          <h3>会后总结</h3>
-          <p>开完会后，AI 总结纪要和待办——人类处理待办</p>
-        </div>
-        <div class="card">
-          <div class="card-num">LEVEL 02</div>
-          <h3>Agent 代办</h3>
-          <p>开完会后，Agent 总结纪要和待办——Agent 主动处理待办</p>
-        </div>
-        <div class="card">
-          <div class="card-num">LEVEL 03</div>
-          <h3>边聊边干</h3>
-          <p>Agent 加入会议，会上直接处理待办——边聊边干</p>
-        </div>
-      </div>
-    </div>
-    <div class="bottom-bar"><span>VAPORWAVE</span><span class="num">03</span><span>CONTENT</span></div>
-    <div class="scanlines"></div>
-  </section>
-
-  <!-- 4. TWO COL -->
-  <section class="slide two-col">
-    <div class="content-area">
-      <div class="header">
-        <div class="eyebrow">LEVEL 03</div>
-        <h2>不用等会开完</h2>
-      </div>
-      <div class="cols">
-        <div class="col a">
-          <div class="col-num">01</div>
-          <h3>提问，秒答</h3>
-          <p>数据、进展、结论，问出口的瞬间就有答案</p>
-        </div>
-        <div class="col b">
-          <div class="col-num">02</div>
-          <h3>说需求，秒执行</h3>
-          <p>一句话交代清楚，Agent 会上就动手</p>
-        </div>
-      </div>
-    </div>
-    <div class="bottom-bar"><span>VAPORWAVE</span><span class="num">04</span><span>TWO COL</span></div>
-    <div class="scanlines"></div>
-  </section>
-
-  <!-- 5. QUOTE -->
-  <section class="slide quote-slide">
-    <div class="grid-floor">
-      <svg viewBox="0 0 1280 280" preserveAspectRatio="none">
-        <g stroke="rgba(255,113,206,0.2)" stroke-width="1" fill="none">
-          <line x1="0" y1="280" x2="640" y2="0"/><line x1="128" y1="280" x2="640" y2="0"/>
-          <line x1="256" y1="280" x2="640" y2="0"/><line x1="384" y1="280" x2="640" y2="0"/>
-          <line x1="512" y1="280" x2="640" y2="0"/><line x1="640" y1="280" x2="640" y2="0"/>
-          <line x1="768" y1="280" x2="640" y2="0"/><line x1="896" y1="280" x2="640" y2="0"/>
-          <line x1="1024" y1="280" x2="640" y2="0"/><line x1="1152" y1="280" x2="640" y2="0"/>
-          <line x1="1280" y1="280" x2="640" y2="0"/>
-        </g>
-        <g stroke="rgba(1,205,254,0.2)" stroke-width="1" fill="none">
-          <line x1="0" y1="40" x2="1280" y2="40"/><line x1="0" y1="80" x2="1280" y2="80"/>
-          <line x1="0" y1="120" x2="1280" y2="120"/><line x1="0" y1="160" x2="1280" y2="160"/>
-          <line x1="0" y1="200" x2="1280" y2="200"/><line x1="0" y1="240" x2="1280" y2="240"/>
-        </g>
-      </svg>
-    </div>
-    <div class="content-area">
-      <blockquote>找一个舒服漂亮的地方，喝着咖啡，聊着天，让想法碰撞出火花，剩下的，交给 Agent。</blockquote>
-      <div class="rule"></div>
-      <cite>未来的工作方式 · 2026</cite>
-    </div>
-    <div class="bottom-bar"><span>VAPORWAVE</span><span class="num">05</span><span>QUOTE</span></div>
-    <div class="scanlines"></div>
-  </section>
-
-  <!-- 6. DATA -->
-  <section class="slide data-slide">
-    <div class="content-area">
-      <div class="header">
-        <div class="eyebrow">03 · 实录</div>
-        <h2>边聊边干，长这样</h2>
-      </div>
-      <div class="metrics">
-        <div class="metric"><div class="value">5.6<span class="unit">万元</span></div><div class="label">华东地区 7 月销售额</div></div>
-        <div class="metric"><div class="value">分钟<span class="unit">级</span></div><div class="label">全国销售数据 HTML 报表</div></div>
-        <div class="metric"><div class="value">0<span class="unit">次</span></div><div class="label">JD 全文直接贴进会中弹幕</div></div>
-        <div class="metric"><div class="value">3<span class="unit"> Level</span></div><div class="label">从会后排待办到会上直接执行</div></div>
-      </div>
-    </div>
-    <div class="bottom-bar"><span>VAPORWAVE</span><span class="num">06</span><span>DATA</span></div>
-    <div class="scanlines"></div>
-  </section>
-
-  <!-- 7. CLOSING -->
-  <section class="slide closing-slide">
-    <div class="grid-floor">
-      <svg viewBox="0 0 1280 280" preserveAspectRatio="none">
-        <g stroke="rgba(255,113,206,0.3)" stroke-width="1" fill="none">
-          <line x1="0" y1="280" x2="640" y2="0"/><line x1="128" y1="280" x2="640" y2="0"/>
-          <line x1="256" y1="280" x2="640" y2="0"/><line x1="384" y1="280" x2="640" y2="0"/>
-          <line x1="512" y1="280" x2="640" y2="0"/><line x1="640" y1="280" x2="640" y2="0"/>
-          <line x1="768" y1="280" x2="640" y2="0"/><line x1="896" y1="280" x2="640" y2="0"/>
-          <line x1="1024" y1="280" x2="640" y2="0"/><line x1="1152" y1="280" x2="640" y2="0"/>
-          <line x1="1280" y1="280" x2="640" y2="0"/>
-        </g>
-        <g stroke="rgba(1,205,254,0.3)" stroke-width="1" fill="none">
-          <line x1="0" y1="40" x2="1280" y2="40"/><line x1="0" y1="80" x2="1280" y2="80"/>
-          <line x1="0" y1="120" x2="1280" y2="120"/><line x1="0" y1="160" x2="1280" y2="160"/>
-          <line x1="0" y1="200" x2="1280" y2="200"/><line x1="0" y1="240" x2="1280" y2="240"/>
-        </g>
-      </svg>
-    </div>
-    <div class="content-area">
-      <h2>想体验 Level 3?</h2>
-      <div class="rule"></div>
-      <p>用飞书扫码加入「智能体会」早鸟体验群</p>
-      <div class="dots"><span></span><span></span><span></span></div>
-    </div>
-    <div class="bottom-bar"><span>VAPORWAVE</span><span class="num">07</span><span>END</span></div>
-    <div class="scanlines"></div>
-  </section>
-
-  <div class="nav-hint">← → ARROWS TO NAVIGATE</div>
-  <div class="counter" id="counter">01 / 07</div>
+<section class="slide title-slide active" data-section="VAPORWAVE">
+<div class="sun"></div>
+<svg class="palm left" height="180" viewbox="0 0 100 180" width="100"><path d="M50 180 Q45 100 40 50 Q38 30 45 15" fill="none" stroke="#0D0520" stroke-width="5"></path><path d="M45 20 Q15 5 0 25 Q25 20 45 30" fill="#0D0520"></path><path d="M45 20 Q75 5 95 30 Q70 22 45 32" fill="#0D0520"></path><path d="M45 25 Q20 40 5 55 Q30 40 45 38" fill="#0D0520"></path><path d="M45 25 Q75 40 95 58 Q70 42 45 40" fill="#0D0520"></path></svg>
+<svg class="palm right" height="180" viewbox="0 0 100 180" width="100"><path d="M50 180 Q45 100 40 50 Q38 30 45 15" fill="none" stroke="#0D0520" stroke-width="5"></path><path d="M45 20 Q15 5 0 25 Q25 20 45 30" fill="#0D0520"></path><path d="M45 20 Q75 5 95 30 Q70 22 45 32" fill="#0D0520"></path><path d="M45 25 Q20 40 5 55 Q30 40 45 38" fill="#0D0520"></path><path d="M45 25 Q75 40 95 58 Q70 42 45 40" fill="#0D0520"></path></svg>
+<div class="grid-floor">
+<svg preserveaspectratio="none" viewbox="0 0 1280 280">
+<g fill="none" stroke="rgba(255,113,206,0.4)" stroke-width="1">
+<line x1="0" x2="640" y1="280" y2="0"></line><line x1="128" x2="640" y1="280" y2="0"></line>
+<line x1="256" x2="640" y1="280" y2="0"></line><line x1="384" x2="640" y1="280" y2="0"></line>
+<line x1="512" x2="640" y1="280" y2="0"></line><line x1="640" x2="640" y1="280" y2="0"></line>
+<line x1="768" x2="640" y1="280" y2="0"></line><line x1="896" x2="640" y1="280" y2="0"></line>
+<line x1="1024" x2="640" y1="280" y2="0"></line><line x1="1152" x2="640" y1="280" y2="0"></line>
+<line x1="1280" x2="640" y1="280" y2="0"></line>
+</g>
+<g fill="none" stroke="rgba(1,205,254,0.4)" stroke-width="1">
+<line x1="0" x2="1280" y1="40" y2="40"></line><line x1="0" x2="1280" y1="80" y2="80"></line>
+<line x1="0" x2="1280" y1="120" y2="120"></line><line x1="0" x2="1280" y1="160" y2="160"></line>
+<line x1="0" x2="1280" y1="200" y2="200"></line><line x1="0" x2="1280" y1="240" y2="240"></line>
+<line x1="0" x2="1280" y1="280" y2="280"></line>
+</g>
+</svg>
 </div>
-
+<div class="content-area">
+<div class="eyebrow">A E S T H E T I C</div>
+<h1>未来复古<br/>主义</h1>
+<p class="subtitle">VAPORWAVE · 2026</p>
+</div>
+<div class="scanlines"></div>
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide section-slide" data-section="复古">
+<div class="grid-floor">
+<svg preserveaspectratio="none" viewbox="0 0 1280 280">
+<g fill="none" stroke="rgba(255,113,206,0.3)" stroke-width="1">
+<line x1="0" x2="640" y1="280" y2="0"></line><line x1="128" x2="640" y1="280" y2="0"></line>
+<line x1="256" x2="640" y1="280" y2="0"></line><line x1="384" x2="640" y1="280" y2="0"></line>
+<line x1="512" x2="640" y1="280" y2="0"></line><line x1="640" x2="640" y1="280" y2="0"></line>
+<line x1="768" x2="640" y1="280" y2="0"></line><line x1="896" x2="640" y1="280" y2="0"></line>
+<line x1="1024" x2="640" y1="280" y2="0"></line><line x1="1152" x2="640" y1="280" y2="0"></line>
+<line x1="1280" x2="640" y1="280" y2="0"></line>
+</g>
+<g fill="none" stroke="rgba(1,205,254,0.3)" stroke-width="1">
+<line x1="0" x2="1280" y1="40" y2="40"></line><line x1="0" x2="1280" y1="80" y2="80"></line>
+<line x1="0" x2="1280" y1="120" y2="120"></line><line x1="0" x2="1280" y1="160" y2="160"></line>
+<line x1="0" x2="1280" y1="200" y2="200"></line><line x1="0" x2="1280" y1="240" y2="240"></line>
+</g>
+</svg>
+</div>
+<div class="content-area">
+<div class="big-num">01</div>
+<div class="section-label">CHAPTER ONE</div>
+<h2>框架总览</h2>
+</div>
+<div class="scanlines"></div>
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide content-slide" data-section="复古">
+<div class="content-area">
+<div class="header">
+<div class="eyebrow">THREE LEVELS</div>
+<h2>会议里和 AI 协同，有三个 Level</h2>
+</div>
+<div class="body">
+<div class="card">
+<div class="card-num">LEVEL 01</div>
+<h3>会后总结</h3>
+<p>开完会后，AI 总结纪要和待办——人类处理待办</p>
+</div>
+<div class="card">
+<div class="card-num">LEVEL 02</div>
+<h3>Agent 代办</h3>
+<p>开完会后，Agent 总结纪要和待办——Agent 主动处理待办</p>
+</div>
+<div class="card">
+<div class="card-num">LEVEL 03</div>
+<h3>边聊边干</h3>
+<p>Agent 加入会议，会上直接处理待办——边聊边干</p>
+</div>
+</div>
+</div>
+<div class="scanlines"></div>
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide two-col" data-section="复古">
+<div class="content-area">
+<div class="header">
+<div class="eyebrow">LEVEL 03</div>
+<h2>不用等会开完</h2>
+</div>
+<div class="cols">
+<div class="col a">
+<div class="col-num">01</div>
+<h3>提问，秒答</h3>
+<p>数据、进展、结论，问出口的瞬间就有答案</p>
+</div>
+<div class="col b">
+<div class="col-num">02</div>
+<h3>说需求，秒执行</h3>
+<p>一句话交代清楚，Agent 会上就动手</p>
+</div>
+</div>
+</div>
+<div class="scanlines"></div>
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide section-slide" data-section="霓虹">
+<div class="grid-floor">
+<svg preserveaspectratio="none" viewbox="0 0 1280 280">
+<g fill="none" stroke="rgba(255,113,206,0.3)" stroke-width="1">
+<line x1="0" x2="640" y1="280" y2="0"></line><line x1="128" x2="640" y1="280" y2="0"></line>
+<line x1="256" x2="640" y1="280" y2="0"></line><line x1="384" x2="640" y1="280" y2="0"></line>
+<line x1="512" x2="640" y1="280" y2="0"></line><line x1="640" x2="640" y1="280" y2="0"></line>
+<line x1="768" x2="640" y1="280" y2="0"></line><line x1="896" x2="640" y1="280" y2="0"></line>
+<line x1="1024" x2="640" y1="280" y2="0"></line><line x1="1152" x2="640" y1="280" y2="0"></line>
+<line x1="1280" x2="640" y1="280" y2="0"></line>
+</g>
+<g fill="none" stroke="rgba(1,205,254,0.3)" stroke-width="1">
+<line x1="0" x2="1280" y1="40" y2="40"></line><line x1="0" x2="1280" y1="80" y2="80"></line>
+<line x1="0" x2="1280" y1="120" y2="120"></line><line x1="0" x2="1280" y1="160" y2="160"></line>
+<line x1="0" x2="1280" y1="200" y2="200"></line><line x1="0" x2="1280" y1="240" y2="240"></line>
+</g>
+</svg>
+</div>
+<div class="content-area">
+<div class="big-num">02</div>
+<div class="section-label">CHAPTER TWO</div>
+<h2>霓虹</h2>
+</div>
+<div class="scanlines"></div>
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide data-slide" data-section="霓虹">
+<div class="content-area">
+<div class="header">
+<div class="eyebrow">03 · 实录</div>
+<h2>边聊边干，长这样</h2>
+</div>
+<div class="metrics">
+<div class="metric"><div class="value">5.6<span class="unit">万元</span></div><div class="label">华东地区 7 月销售额</div></div>
+<div class="metric"><div class="value">分钟<span class="unit">级</span></div><div class="label">全国销售数据 HTML 报表</div></div>
+<div class="metric"><div class="value">0<span class="unit">次</span></div><div class="label">JD 全文直接贴进会中弹幕</div></div>
+<div class="metric"><div class="value">3<span class="unit"> Level</span></div><div class="label">从会后排待办到会上直接执行</div></div>
+</div>
+</div>
+<div class="scanlines"></div>
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide section-slide" data-section="虚拟">
+<div class="grid-floor">
+<svg preserveaspectratio="none" viewbox="0 0 1280 280">
+<g fill="none" stroke="rgba(255,113,206,0.3)" stroke-width="1">
+<line x1="0" x2="640" y1="280" y2="0"></line><line x1="128" x2="640" y1="280" y2="0"></line>
+<line x1="256" x2="640" y1="280" y2="0"></line><line x1="384" x2="640" y1="280" y2="0"></line>
+<line x1="512" x2="640" y1="280" y2="0"></line><line x1="640" x2="640" y1="280" y2="0"></line>
+<line x1="768" x2="640" y1="280" y2="0"></line><line x1="896" x2="640" y1="280" y2="0"></line>
+<line x1="1024" x2="640" y1="280" y2="0"></line><line x1="1152" x2="640" y1="280" y2="0"></line>
+<line x1="1280" x2="640" y1="280" y2="0"></line>
+</g>
+<g fill="none" stroke="rgba(1,205,254,0.3)" stroke-width="1">
+<line x1="0" x2="1280" y1="40" y2="40"></line><line x1="0" x2="1280" y1="80" y2="80"></line>
+<line x1="0" x2="1280" y1="120" y2="120"></line><line x1="0" x2="1280" y1="160" y2="160"></line>
+<line x1="0" x2="1280" y1="200" y2="200"></line><line x1="0" x2="1280" y1="240" y2="240"></line>
+</g>
+</svg>
+</div>
+<div class="content-area">
+<div class="big-num">03</div>
+<div class="section-label">CHAPTER TWO</div>
+<h2>虚拟</h2>
+</div>
+<div class="scanlines"></div>
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide quote-slide" data-section="虚拟">
+<div class="grid-floor">
+<svg preserveaspectratio="none" viewbox="0 0 1280 280">
+<g fill="none" stroke="rgba(255,113,206,0.2)" stroke-width="1">
+<line x1="0" x2="640" y1="280" y2="0"></line><line x1="128" x2="640" y1="280" y2="0"></line>
+<line x1="256" x2="640" y1="280" y2="0"></line><line x1="384" x2="640" y1="280" y2="0"></line>
+<line x1="512" x2="640" y1="280" y2="0"></line><line x1="640" x2="640" y1="280" y2="0"></line>
+<line x1="768" x2="640" y1="280" y2="0"></line><line x1="896" x2="640" y1="280" y2="0"></line>
+<line x1="1024" x2="640" y1="280" y2="0"></line><line x1="1152" x2="640" y1="280" y2="0"></line>
+<line x1="1280" x2="640" y1="280" y2="0"></line>
+</g>
+<g fill="none" stroke="rgba(1,205,254,0.2)" stroke-width="1">
+<line x1="0" x2="1280" y1="40" y2="40"></line><line x1="0" x2="1280" y1="80" y2="80"></line>
+<line x1="0" x2="1280" y1="120" y2="120"></line><line x1="0" x2="1280" y1="160" y2="160"></line>
+<line x1="0" x2="1280" y1="200" y2="200"></line><line x1="0" x2="1280" y1="240" y2="240"></line>
+</g>
+</svg>
+</div>
+<div class="content-area">
+<blockquote>找一个舒服漂亮的地方，喝着咖啡，聊着天，让想法碰撞出火花，剩下的，交给 Agent。</blockquote>
+<div class="rule"></div>
+<cite>未来的工作方式 · 2026</cite>
+</div>
+<div class="scanlines"></div>
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide closing-slide" data-section="END">
+<div class="grid-floor">
+<svg preserveaspectratio="none" viewbox="0 0 1280 280">
+<g fill="none" stroke="rgba(255,113,206,0.3)" stroke-width="1">
+<line x1="0" x2="640" y1="280" y2="0"></line><line x1="128" x2="640" y1="280" y2="0"></line>
+<line x1="256" x2="640" y1="280" y2="0"></line><line x1="384" x2="640" y1="280" y2="0"></line>
+<line x1="512" x2="640" y1="280" y2="0"></line><line x1="640" x2="640" y1="280" y2="0"></line>
+<line x1="768" x2="640" y1="280" y2="0"></line><line x1="896" x2="640" y1="280" y2="0"></line>
+<line x1="1024" x2="640" y1="280" y2="0"></line><line x1="1152" x2="640" y1="280" y2="0"></line>
+<line x1="1280" x2="640" y1="280" y2="0"></line>
+</g>
+<g fill="none" stroke="rgba(1,205,254,0.3)" stroke-width="1">
+<line x1="0" x2="1280" y1="40" y2="40"></line><line x1="0" x2="1280" y1="80" y2="80"></line>
+<line x1="0" x2="1280" y1="120" y2="120"></line><line x1="0" x2="1280" y1="160" y2="160"></line>
+<line x1="0" x2="1280" y1="200" y2="200"></line><line x1="0" x2="1280" y1="240" y2="240"></line>
+</g>
+</svg>
+</div>
+<div class="content-area">
+<h2>想体验 Level 3?</h2>
+<div class="rule"></div>
+<p>用飞书扫码加入「智能体会」早鸟体验群</p>
+<div class="dots"><span></span><span></span><span></span></div>
+</div>
+<div class="scanlines"></div>
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section></div>
 <script>
   const slides = document.querySelectorAll('.slide');
-  const counter = document.getElementById('counter');
+  const total = slides.length;
   let current = 0;
+  slides.forEach((s, i) => { if (s.classList.contains('active')) current = i; });
+
+  function buildProgress() {
+    const sections = Array.from(slides).map(s => s.dataset.section || '');
+    document.querySelectorAll('.progress-strip').forEach(strip => {
+      let lastSection = null;
+      sections.forEach((section, i) => {
+        const seg = document.createElement('div');
+        seg.className = 'seg';
+        if (lastSection !== null && section !== lastSection) seg.classList.add('seg-gap');
+        strip.appendChild(seg);
+        lastSection = section;
+      });
+    });
+  }
+
+  function updateUI(idx) {
+    const sectionName = slides[idx].dataset.section || '';
+    const pageStr = String(idx + 1).padStart(2, '0') + ' / ' + String(total).padStart(2, '0');
+    document.querySelectorAll('.progress-bar').forEach(bar => {
+      const label = bar.querySelector('.pb-section');
+      const page = bar.querySelector('.pb-page');
+      if (label) label.textContent = sectionName;
+      if (page) page.textContent = pageStr;
+    });
+    document.querySelectorAll('.progress-strip').forEach(strip => {
+      strip.querySelectorAll('.seg').forEach((seg, i) => {
+        seg.classList.toggle('current', i === idx);
+        seg.classList.toggle('past', i < idx);
+      });
+    });
+  }
+
   function show(i) {
     slides[current].classList.remove('active');
-    current = (i + slides.length) % slides.length;
+    current = (i + total) % total;
     slides[current].classList.add('active');
-    counter.textContent = String(current + 1).padStart(2, '0') + ' / ' + String(slides.length).padStart(2, '0');
+    updateUI(current);
   }
+
   document.addEventListener('keydown', function(e) {
     if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); show(current + 1); }
     if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); show(current - 1); }
     if (e.key === 'Home') { e.preventDefault(); show(0); }
-    if (e.key === 'End') { e.preventDefault(); show(slides.length - 1); }
+    if (e.key === 'End') { e.preventDefault(); show(total - 1); }
   });
-</script>
-</body>
+
+  buildProgress();
+  updateUI(current);
+</script></body>
 </html>

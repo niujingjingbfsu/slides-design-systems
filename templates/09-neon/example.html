@@ -1,12 +1,13 @@
 <!DOCTYPE html>
+
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>NEON — Slide Template</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&amp;family=JetBrains+Mono:wght@400;700&amp;family=Noto+Sans+SC:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
 <style>
   :root {
     --bg-grad: linear-gradient(180deg, #1A0533 0%, #0D0221 60%, #05010F 100%);
@@ -169,156 +170,269 @@
   .slide > .footer { margin-top: auto; flex-shrink: 0; }
   .slide > .cards, .slide > .cols, .slide > .metrics, .slide > .body { flex-shrink: 1; min-height: 0; }
 
+
+  /* === Progress system === */
+  .slide { padding-bottom: 80px !important; }
+  .title-slide { padding-bottom: 90px !important; }
+  .progress-bar {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 56px; display: flex; align-items: center; justify-content: space-between;
+    padding: 0 60px; z-index: 50;
+    background: rgba(13,2,33,0.8);
+    border-top: 1px solid rgba(255,46,151,0.3);
+  }
+  .progress-bar .pb-section {
+    font-family: var(--font-mono); font-size: 12px; font-weight: 700;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--muted); min-width: 180px;
+  }
+  .progress-bar .pb-page {
+    font-family: var(--font-mono); font-size: 16px; font-weight: 700;
+    letter-spacing: 0.1em; color: var(--cyan);
+  }
+  .progress-strip {
+    position: absolute; top: -8px; left: 50%; transform: translateX(-50%);
+    display: flex; align-items: center; height: 14px;
+  }
+  .progress-strip .seg {
+    width: 36px; height: 3px; border-radius: 2px;
+    background: rgba(255,255,255,0.12);
+    
+    margin: 0 4px; transition: all 0.25s;
+    
+  }
+  .progress-strip .seg.past {
+    background: rgba(0,240,255,0.5);
+    
+  }
+  .progress-strip .seg.current {
+    background: var(--pink);
+    
+    height:4px;box-shadow:0 0 10px var(--pink);
+  }
+  .progress-strip .seg.seg-gap { margin-left: 22px; }
+  .nav-hint { display: none !important; }
 </style>
 </head>
 <body>
 <div class="deck">
 
-  <section class="slide title-slide active">
-    <div class="stars">
-      <div class="star" style="left:10%;top:15%"></div><div class="star" style="left:25%;top:8%"></div>
-      <div class="star" style="left:45%;top:20%"></div><div class="star" style="left:65%;top:12%"></div>
-      <div class="star" style="left:80%;top:25%"></div><div class="star" style="left:15%;top:35%"></div>
-      <div class="star" style="left:55%;top:5%"></div><div class="star" style="left:90%;top:40%"></div>
-    </div>
-    <div class="sun"></div>
-    <div class="grid-floor"></div>
-    <div class="label">// SYSTEM ONLINE — 1984</div>
-    <h1><span class="neon-grad">NEON</span></h1>
-    <div class="sub"><span class="pink">[SYNTHWAVE]</span> / RETRO-FUTURE PRESENTATION SYSTEM</div>
-    <div class="footer">
-      <span class="neon-tag">◆ NEON</span>
-      <span>01 / 07</span>
-    </div>
-  </section>
 
-  <section class="slide section-slide">
-    <div class="stars">
-      <div class="star" style="left:20%;top:20%"></div><div class="star" style="left:70%;top:15%"></div>
-      <div class="star" style="left:40%;top:30%"></div><div class="star" style="left:85%;top:35%"></div>
-    </div>
-    <div class="grid-floor"></div>
-    <div class="chapter">CHAPTER 02</div>
-    <h2><span class="neon-pink">RUN THE</span><br><span class="neon-cyan">GRID.</span></h2>
-    <p class="desc">Perspective lines, glowing type, and chrome dreams. The future never looked so retro.</p>
-    <div class="footer">
-      <span class="neon-tag">◆ NEON</span>
-      <span>02 / 07</span>
-    </div>
-  </section>
 
-  <section class="slide content-slide">
-    <div class="grid-floor" style="opacity:0.3"></div>
-    <div class="header">
-      <div class="label">// CORE PROTOCOLS</div>
-      <h2><span class="neon-pink">Three</span> <span class="neon-cyan">signals</span></h2>
-    </div>
-    <div class="cards">
-      <div class="card">
-        <div class="icon">◆</div>
-        <h3>GLOW TYPE</h3>
-        <p>Every heading carries a neon text-shadow. Pink and cyan are the only voices — no other colors allowed.</p>
-      </div>
-      <div class="card">
-        <div class="icon">◇</div>
-        <h3>GRID FLOOR</h3>
-        <p>A perspective grid anchors every slide in infinite space. It's the signature of the synthwave dimension.</p>
-      </div>
-      <div class="card">
-        <div class="icon">○</div>
-        <h3>DARK CANVAS</h3>
-        <p>Deep purple-to-black gradient. Neon only works when the room is dark enough to glow.</p>
-      </div>
-    </div>
-    <div class="footer">
-      <span class="neon-tag">◆ NEON</span>
-      <span>03 / 07</span>
-    </div>
-  </section>
 
-  <section class="slide two-col">
-    <div class="grid-floor" style="opacity:0.2"></div>
-    <div class="header">
-      <h2><span class="neon-pink">SIGNAL</span> / <span class="neon-cyan">CHANNEL</span></h2>
-    </div>
-    <div class="cols">
-      <div class="col a">
-        <div class="tag">[CYAN CHANNEL]</div>
-        <h3>Data mode</h3>
-        <p>Cyan glow for technical content, metrics, and system labels. Cold, precise, digital.</p>
-        <div class="stat">00F0FF</div>
-      </div>
-      <div class="col b">
-        <div class="tag">[PINK CHANNEL]</div>
-        <h3>Emotion mode</h3>
-        <p>Pink glow for titles, statements, and emphasis. Warm, electric, unforgettable.</p>
-        <div class="stat">FF2E97</div>
-      </div>
-    </div>
-    <div class="footer">
-      <span class="neon-tag">◆ NEON</span>
-      <span>04 / 07</span>
-    </div>
-  </section>
 
-  <section class="slide quote-slide">
-    <div class="stars">
-      <div class="star" style="left:15%;top:25%"></div><div class="star" style="left:80%;top:20%"></div>
-      <div class="star" style="left:50%;top:10%"></div><div class="star" style="left:30%;top:40%"></div>
-    </div>
-    <div class="grid-floor" style="opacity:0.25"></div>
-    <blockquote><span class="neon-pink">The future</span> is already here —<br>it's just not <span class="neon-cyan">evenly distributed</span>.</blockquote>
-    <cite>— WILLIAM GIBSON</cite>
-    <div class="footer">
-      <span class="neon-tag">◆ NEON</span>
-      <span>05 / 07</span>
-    </div>
-  </section>
 
-  <section class="slide data-slide">
-    <div class="grid-floor" style="opacity:0.2"></div>
-    <div class="header">
-      <h2><span class="neon-grad">SYSTEM STATS</span></h2>
-    </div>
-    <div class="metrics">
-      <div class="metric"><div class="value">2</div><div class="label">Neon colors</div></div>
-      <div class="metric"><div class="value">80s</div><div class="label">Reference era</div></div>
-      <div class="metric"><div class="value">∞</div><div class="label">Glow radius</div></div>
-      <div class="metric"><div class="value">60°</div><div class="label">Grid angle</div></div>
-    </div>
-    <div class="footer">
-      <span class="neon-tag">◆ NEON</span>
-      <span>06 / 07</span>
-    </div>
-  </section>
 
-  <section class="slide closing-slide">
-    <div class="stars">
-      <div class="star" style="left:20%;top:30%"></div><div class="star" style="left:75%;top:25%"></div>
-      <div class="star" style="left:50%;top:15%"></div>
-    </div>
-    <div class="sun" style="width:120px;height:120px;right:50%;top:15%;transform:translateX(50%);position:absolute"></div>
-    <div class="grid-floor"></div>
-    <h2><span class="neon-grad">GAME OVER</span></h2>
-    <p>INSERT COIN TO CONTINUE</p>
-    <div class="btn">▶ RETRY</div>
-    <div class="footer">
-      <span class="neon-tag">◆ NEON</span>
-      <span>07 / 07</span>
-    </div>
-  </section>
-
-  <div class="nav-hint">← → ARROWS TO NAVIGATE</div>
+<div class="nav-hint">← → ARROWS TO NAVIGATE</div>
+<section class="slide title-slide active" data-section="NEON">
+<div class="stars">
+<div class="star" style="left:10%;top:15%"></div><div class="star" style="left:25%;top:8%"></div>
+<div class="star" style="left:45%;top:20%"></div><div class="star" style="left:65%;top:12%"></div>
+<div class="star" style="left:80%;top:25%"></div><div class="star" style="left:15%;top:35%"></div>
+<div class="star" style="left:55%;top:5%"></div><div class="star" style="left:90%;top:40%"></div>
 </div>
+<div class="sun"></div>
+<div class="grid-floor"></div>
+<div class="label">// SYSTEM ONLINE — 1984</div>
+<h1><span class="neon-grad">NEON</span></h1>
+<div class="sub"><span class="pink">[SYNTHWAVE]</span> / RETRO-FUTURE PRESENTATION SYSTEM</div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide section-slide" data-section="信号">
+<div class="stars">
+<div class="star" style="left:20%;top:20%"></div><div class="star" style="left:70%;top:15%"></div>
+<div class="star" style="left:40%;top:30%"></div><div class="star" style="left:85%;top:35%"></div>
+</div>
+<div class="grid-floor"></div>
+<div class="chapter">CHAPTER 02</div>
+<h2><span class="neon-pink">RUN THE</span><br/><span class="neon-cyan">GRID.</span></h2>
+<p class="desc">Perspective lines, glowing type, and chrome dreams. The future never looked so retro.</p>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide content-slide" data-section="信号">
+<div class="grid-floor" style="opacity:0.3"></div>
+<div class="header">
+<div class="label">// CORE PROTOCOLS</div>
+<h2><span class="neon-pink">Three</span> <span class="neon-cyan">signals</span></h2>
+</div>
+<div class="cards">
+<div class="card">
+<div class="icon">◆</div>
+<h3>GLOW TYPE</h3>
+<p>Every heading carries a neon text-shadow. Pink and cyan are the only voices — no other colors allowed.</p>
+</div>
+<div class="card">
+<div class="icon">◇</div>
+<h3>GRID FLOOR</h3>
+<p>A perspective grid anchors every slide in infinite space. It's the signature of the synthwave dimension.</p>
+</div>
+<div class="card">
+<div class="icon">○</div>
+<h3>DARK CANVAS</h3>
+<p>Deep purple-to-black gradient. Neon only works when the room is dark enough to glow.</p>
+</div>
+</div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide two-col" data-section="信号">
+<div class="grid-floor" style="opacity:0.2"></div>
+<div class="header">
+<h2><span class="neon-pink">SIGNAL</span> / <span class="neon-cyan">CHANNEL</span></h2>
+</div>
+<div class="cols">
+<div class="col a">
+<div class="tag">[CYAN CHANNEL]</div>
+<h3>Data mode</h3>
+<p>Cyan glow for technical content, metrics, and system labels. Cold, precise, digital.</p>
+<div class="stat">00F0FF</div>
+</div>
+<div class="col b">
+<div class="tag">[PINK CHANNEL]</div>
+<h3>Emotion mode</h3>
+<p>Pink glow for titles, statements, and emphasis. Warm, electric, unforgettable.</p>
+<div class="stat">FF2E97</div>
+</div>
+</div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide section-slide" data-section="脉冲">
+<div class="stars">
+<div class="star" style="left:20%;top:20%"></div><div class="star" style="left:70%;top:15%"></div>
+<div class="star" style="left:40%;top:30%"></div><div class="star" style="left:85%;top:35%"></div>
+</div>
+<div class="grid-floor"></div>
+<div class="chapter">CHAPTER 03</div>
+<h2>脉冲</h2>
+<p class="desc">Perspective lines, glowing type, and chrome dreams. The future never looked so retro.</p>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide data-slide" data-section="脉冲">
+<div class="grid-floor" style="opacity:0.2"></div>
+<div class="header">
+<h2><span class="neon-grad">SYSTEM STATS</span></h2>
+</div>
+<div class="metrics">
+<div class="metric"><div class="value">2</div><div class="label">Neon colors</div></div>
+<div class="metric"><div class="value">80s</div><div class="label">Reference era</div></div>
+<div class="metric"><div class="value">∞</div><div class="label">Glow radius</div></div>
+<div class="metric"><div class="value">60°</div><div class="label">Grid angle</div></div>
+</div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide section-slide" data-section="余辉">
+<div class="stars">
+<div class="star" style="left:20%;top:20%"></div><div class="star" style="left:70%;top:15%"></div>
+<div class="star" style="left:40%;top:30%"></div><div class="star" style="left:85%;top:35%"></div>
+</div>
+<div class="grid-floor"></div>
+<div class="chapter">CHAPTER 03</div>
+<h2>余辉</h2>
+<p class="desc">Perspective lines, glowing type, and chrome dreams. The future never looked so retro.</p>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide quote-slide" data-section="余辉">
+<div class="stars">
+<div class="star" style="left:15%;top:25%"></div><div class="star" style="left:80%;top:20%"></div>
+<div class="star" style="left:50%;top:10%"></div><div class="star" style="left:30%;top:40%"></div>
+</div>
+<div class="grid-floor" style="opacity:0.25"></div>
+<blockquote><span class="neon-pink">The future</span> is already here —<br/>it's just not <span class="neon-cyan">evenly distributed</span>.</blockquote>
+<cite>— WILLIAM GIBSON</cite>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide closing-slide" data-section="END">
+<div class="stars">
+<div class="star" style="left:20%;top:30%"></div><div class="star" style="left:75%;top:25%"></div>
+<div class="star" style="left:50%;top:15%"></div>
+</div>
+<div class="sun" style="width:120px;height:120px;right:50%;top:15%;transform:translateX(50%);position:absolute"></div>
+<div class="grid-floor"></div>
+<h2><span class="neon-grad">GAME OVER</span></h2>
+<p>INSERT COIN TO CONTINUE</p>
+<div class="btn">▶ RETRY</div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section></div>
+
 <script>
-  const slides = document.querySelectorAll('.slide'); let current = 0;
-  function show(i) { slides[current].classList.remove('active'); current = (i + slides.length) % slides.length; slides[current].classList.add('active'); }
-  document.addEventListener('keydown', e => {
-    if (e.key==='ArrowRight'||e.key==='ArrowDown'||e.key===' ') { e.preventDefault(); show(current+1); }
-    if (e.key==='ArrowLeft'||e.key==='ArrowUp') { e.preventDefault(); show(current-1); }
-    if (e.key==='Home') { e.preventDefault(); show(0); }
-    if (e.key==='End') { e.preventDefault(); show(slides.length-1); }
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
+  let current = 0;
+  slides.forEach((s, i) => { if (s.classList.contains('active')) current = i; });
+
+  function buildProgress() {
+    const sections = Array.from(slides).map(s => s.dataset.section || '');
+    document.querySelectorAll('.progress-strip').forEach(strip => {
+      let lastSection = null;
+      sections.forEach((section, i) => {
+        const seg = document.createElement('div');
+        seg.className = 'seg';
+        if (lastSection !== null && section !== lastSection) seg.classList.add('seg-gap');
+        strip.appendChild(seg);
+        lastSection = section;
+      });
+    });
+  }
+
+  function updateUI(idx) {
+    const sectionName = slides[idx].dataset.section || '';
+    const pageStr = String(idx + 1).padStart(2, '0') + ' / ' + String(total).padStart(2, '0');
+    document.querySelectorAll('.progress-bar').forEach(bar => {
+      const label = bar.querySelector('.pb-section');
+      const page = bar.querySelector('.pb-page');
+      if (label) label.textContent = sectionName;
+      if (page) page.textContent = pageStr;
+    });
+    document.querySelectorAll('.progress-strip').forEach(strip => {
+      strip.querySelectorAll('.seg').forEach((seg, i) => {
+        seg.classList.toggle('current', i === idx);
+        seg.classList.toggle('past', i < idx);
+      });
+    });
+  }
+
+  function show(i) {
+    slides[current].classList.remove('active');
+    current = (i + total) % total;
+    slides[current].classList.add('active');
+    updateUI(current);
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); show(current + 1); }
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); show(current - 1); }
+    if (e.key === 'Home') { e.preventDefault(); show(0); }
+    if (e.key === 'End') { e.preventDefault(); show(total - 1); }
   });
-</script>
-</body>
+
+  buildProgress();
+  updateUI(current);
+</script></body>
 </html>

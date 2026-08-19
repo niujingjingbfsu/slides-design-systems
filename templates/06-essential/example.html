@@ -1,12 +1,13 @@
 <!DOCTYPE html>
+
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>ESSENTIAL — Slide Template</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&family=Noto+Serif+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&amp;family=Inter:wght@300;400;500&amp;family=Noto+Serif+SC:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
 <style>
   :root {
     --bg: #FFFFFF;
@@ -366,167 +367,266 @@
   .slide > .footer { margin-top: auto; flex-shrink: 0; }
   .slide > .cards, .slide > .cols, .slide > .metrics, .slide > .body { flex-shrink: 1; min-height: 0; }
 
+
+  /* === Progress system === */
+  .slide { padding-bottom: 80px !important; }
+  .title-slide { padding-bottom: 90px !important; }
+  .progress-bar {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 56px; display: flex; align-items: center; justify-content: space-between;
+    padding: 0 60px; z-index: 50;
+    background: transparent;
+    border-top: var(--faint);
+  }
+  .progress-bar .pb-section {
+    font-family: var(--font-sans); font-size: 12px; font-weight: 700;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--muted); min-width: 180px;
+  }
+  .progress-bar .pb-page {
+    font-family: var(--font-sans); font-size: 16px; font-weight: 700;
+    letter-spacing: 0.1em; color: var(--accent);
+  }
+  .progress-strip {
+    position: absolute; top: -8px; left: 50%; transform: translateX(-50%);
+    display: flex; align-items: center; height: 14px;
+  }
+  .progress-strip .seg {
+    width: 40px; height: 2px; border-radius: 0;
+    background: rgba(10,10,10,0.15);
+    
+    margin: 0 4px; transition: all 0.25s;
+    
+  }
+  .progress-strip .seg.past {
+    background: rgba(10,10,10,0.4);
+    
+  }
+  .progress-strip .seg.current {
+    background: var(--accent);
+    
+    height:3px;
+  }
+  .progress-strip .seg.seg-gap { margin-left: 24px; }
+  .nav-hint { display: none !important; }
 </style>
 </head>
 <body>
-
 <div class="deck">
+<!-- 1. Title -->
 
-  <!-- 1. Title -->
-  <section class="slide title-slide active">
-    <div class="top-meta">
-      <span class="index-label">ESSENTIAL — VOL. I</span>
-      <span class="index-label">MMXXVI</span>
-    </div>
-    <h1>Less,<br><span class="italic">but better.</span></h1>
-    <p class="subtitle">A gallery-grade presentation template built on extreme whitespace, refined serif typography, and a single deep-blue accent.</p>
-    <div class="accent-line"></div>
-    <div class="footer">
-      <span><span class="square"></span>ESSENTIAL</span>
-      <span>01 / 07</span>
-    </div>
-  </section>
+<!-- 2. Section -->
 
-  <!-- 2. Section -->
-  <section class="slide section-slide">
-    <div class="section-num">— II</div>
-    <h2>The discipline<br>of <span class="italic">less.</span></h2>
-    <p class="section-desc">Every element must justify its presence. If it can be removed, it should be.</p>
-    <div class="thin-rule"></div>
-    <div class="footer">
-      <span><span class="square"></span>ESSENTIAL</span>
-      <span>02 / 07</span>
-    </div>
-  </section>
+<!-- 3. Content -->
 
-  <!-- 3. Content -->
-  <section class="slide content-slide">
-    <div class="header">
-      <h2>Three <span class="italic">rules</span></h2>
-      <span class="index-label">03 — PRINCIPLES</span>
-    </div>
-    <div class="body">
-      <p class="lead">Design is not what you add.<br>It is what you <span class="italic">leave behind</span> — the quiet confidence of a slide that knows exactly what it wants to say.</p>
-      <ul>
-        <li>
-          <span class="num">01</span>
-          <div>
-            <h4>Whitespace is content</h4>
-            <p>Empty space is not wasted space. It gives weight to what remains and guides the eye without decoration.</p>
-          </div>
-        </li>
-        <li>
-          <span class="num">02</span>
-          <div>
-            <h4>Typography carries everything</h4>
-            <p>A single serif family at light weight does the work that colors and shapes do elsewhere.</p>
-          </div>
-        </li>
-        <li>
-          <span class="num">03</span>
-          <div>
-            <h4>One accent, used sparingly</h4>
-            <p>A deep-blue square appears only where attention must land. It never decorates.</p>
-          </div>
-        </li>
-      </ul>
-    </div>
-    <div class="footer">
-      <span><span class="square"></span>ESSENTIAL</span>
-      <span>03 / 07</span>
-    </div>
-  </section>
+<!-- 4. Two column -->
 
-  <!-- 4. Two column -->
-  <section class="slide two-col">
-    <div class="header">
-      <h2>Form & <span class="italic">restraint</span></h2>
-    </div>
-    <div class="cols">
-      <div class="col">
-        <div class="col-num">— 01</div>
-        <h3>Serif <span class="italic">as structure</span></h3>
-        <p>Cormorant Garamond at light weight provides elegance and authority without shouting. Its high contrast strokes create visual interest that no decoration could improve upon.</p>
-        <div class="divider"></div>
-        <p style="font-size:12px;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;">300 weight · 120px display</p>
-      </div>
-      <div class="col">
-        <div class="col-num">— 02</div>
-        <h3>Space <span class="italic">as voice</span></h3>
-        <p>Generous margins and sparse composition make every word feel deliberate. The audience does not work to find meaning — the layout presents it.</p>
-        <div class="divider"></div>
-        <p style="font-size:12px;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;">100px margin · 80px gaps</p>
-      </div>
-    </div>
-    <div class="footer">
-      <span><span class="square"></span>ESSENTIAL</span>
-      <span>04 / 07</span>
-    </div>
-  </section>
+<!-- 5. Quote -->
 
-  <!-- 5. Quote -->
-  <section class="slide quote-slide">
-    <div class="quote-mark">"</div>
-    <blockquote>Perfection is achieved not when there is nothing more to add, but when there is <span class="accent">nothing left to take away</span>.</blockquote>
-    <cite>— ANTOINE DE SAINT-EXUPÉRY</cite>
-    <div class="footer">
-      <span><span class="square"></span>ESSENTIAL</span>
-      <span>05 / 07</span>
-    </div>
-  </section>
+<!-- 6. Data -->
 
-  <!-- 6. Data -->
-  <section class="slide data-slide">
-    <div class="header">
-      <h2>By <span class="italic">subtraction</span></h2>
-    </div>
-    <div class="metrics">
-      <div class="metric">
-        <div class="value">1<span class="unit"> accent</span></div>
-        <div class="label">Deep blue square<br>used only for focus</div>
-      </div>
-      <div class="metric">
-        <div class="value">2<span class="unit"> families</span></div>
-        <div class="label">Cormorant serif<br>+ Inter sans</div>
-      </div>
-      <div class="metric">
-        <div class="value">70<span class="unit">%</span></div>
-        <div class="label">Of every slide<br>left empty</div>
-      </div>
-    </div>
-    <div class="footer">
-      <span><span class="square"></span>ESSENTIAL</span>
-      <span>06 / 07</span>
-    </div>
-  </section>
+<!-- 7. Closing -->
 
-  <!-- 7. Closing -->
-  <section class="slide closing-slide">
-    <div class="square-mark"></div>
-    <h2>Fin.</h2>
-    <p>Thank you</p>
-    <div class="footer">
-      <span><span class="square"></span>ESSENTIAL</span>
-      <span>07 / 07</span>
-    </div>
-  </section>
-
-  <div class="nav-hint">← → ARROWS TO NAVIGATE</div>
+<div class="nav-hint">← → ARROWS TO NAVIGATE</div>
+<section class="slide title-slide active" data-section="ESSENTIAL">
+<div class="top-meta">
+<span class="index-label">ESSENTIAL — VOL. I</span>
+<span class="index-label">MMXXVI</span>
 </div>
+<h1>Less,<br/><span class="italic">but better.</span></h1>
+<p class="subtitle">A gallery-grade presentation template built on extreme whitespace, refined serif typography, and a single deep-blue accent.</p>
+<div class="accent-line"></div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide section-slide" data-section="本质">
+<div class="section-num">— II</div>
+<h2>The discipline<br/>of <span class="italic">less.</span></h2>
+<p class="section-desc">Every element must justify its presence. If it can be removed, it should be.</p>
+<div class="thin-rule"></div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide content-slide" data-section="本质">
+<div class="header">
+<h2>Three <span class="italic">rules</span></h2>
+<span class="index-label">03 — PRINCIPLES</span>
+</div>
+<div class="body">
+<p class="lead">Design is not what you add.<br/>It is what you <span class="italic">leave behind</span> — the quiet confidence of a slide that knows exactly what it wants to say.</p>
+<ul>
+<li>
+<span class="num">01</span>
+<div>
+<h4>Whitespace is content</h4>
+<p>Empty space is not wasted space. It gives weight to what remains and guides the eye without decoration.</p>
+</div>
+</li>
+<li>
+<span class="num">02</span>
+<div>
+<h4>Typography carries everything</h4>
+<p>A single serif family at light weight does the work that colors and shapes do elsewhere.</p>
+</div>
+</li>
+<li>
+<span class="num">03</span>
+<div>
+<h4>One accent, used sparingly</h4>
+<p>A deep-blue square appears only where attention must land. It never decorates.</p>
+</div>
+</li>
+</ul>
+</div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide two-col" data-section="本质">
+<div class="header">
+<h2>Form &amp; <span class="italic">restraint</span></h2>
+</div>
+<div class="cols">
+<div class="col">
+<div class="col-num">— 01</div>
+<h3>Serif <span class="italic">as structure</span></h3>
+<p>Cormorant Garamond at light weight provides elegance and authority without shouting. Its high contrast strokes create visual interest that no decoration could improve upon.</p>
+<div class="divider"></div>
+<p style="font-size:12px;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;">300 weight · 120px display</p>
+</div>
+<div class="col">
+<div class="col-num">— 02</div>
+<h3>Space <span class="italic">as voice</span></h3>
+<p>Generous margins and sparse composition make every word feel deliberate. The audience does not work to find meaning — the layout presents it.</p>
+<div class="divider"></div>
+<p style="font-size:12px;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;">100px margin · 80px gaps</p>
+</div>
+</div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide section-slide" data-section="细节">
+<div class="section-num">— II</div>
+<h2>细节</h2>
+<p class="section-desc">Every element must justify its presence. If it can be removed, it should be.</p>
+<div class="thin-rule"></div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide data-slide" data-section="细节">
+<div class="header">
+<h2>By <span class="italic">subtraction</span></h2>
+</div>
+<div class="metrics">
+<div class="metric">
+<div class="value">1<span class="unit"> accent</span></div>
+<div class="label">Deep blue square<br/>used only for focus</div>
+</div>
+<div class="metric">
+<div class="value">2<span class="unit"> families</span></div>
+<div class="label">Cormorant serif<br/>+ Inter sans</div>
+</div>
+<div class="metric">
+<div class="value">70<span class="unit">%</span></div>
+<div class="label">Of every slide<br/>left empty</div>
+</div>
+</div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide section-slide" data-section="留白">
+<div class="section-num">— II</div>
+<h2>留白</h2>
+<p class="section-desc">Every element must justify its presence. If it can be removed, it should be.</p>
+<div class="thin-rule"></div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide quote-slide" data-section="留白">
+<div class="quote-mark">"</div>
+<blockquote>Perfection is achieved not when there is nothing more to add, but when there is <span class="accent">nothing left to take away</span>.</blockquote>
+<cite>— ANTOINE DE SAINT-EXUPÉRY</cite>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide closing-slide" data-section="END">
+<div class="square-mark"></div>
+<h2>Fin.</h2>
+<p>Thank you</p>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section></div>
+
 <script>
   const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
   let current = 0;
+  slides.forEach((s, i) => { if (s.classList.contains('active')) current = i; });
+
+  function buildProgress() {
+    const sections = Array.from(slides).map(s => s.dataset.section || '');
+    document.querySelectorAll('.progress-strip').forEach(strip => {
+      let lastSection = null;
+      sections.forEach((section, i) => {
+        const seg = document.createElement('div');
+        seg.className = 'seg';
+        if (lastSection !== null && section !== lastSection) seg.classList.add('seg-gap');
+        strip.appendChild(seg);
+        lastSection = section;
+      });
+    });
+  }
+
+  function updateUI(idx) {
+    const sectionName = slides[idx].dataset.section || '';
+    const pageStr = String(idx + 1).padStart(2, '0') + ' / ' + String(total).padStart(2, '0');
+    document.querySelectorAll('.progress-bar').forEach(bar => {
+      const label = bar.querySelector('.pb-section');
+      const page = bar.querySelector('.pb-page');
+      if (label) label.textContent = sectionName;
+      if (page) page.textContent = pageStr;
+    });
+    document.querySelectorAll('.progress-strip').forEach(strip => {
+      strip.querySelectorAll('.seg').forEach((seg, i) => {
+        seg.classList.toggle('current', i === idx);
+        seg.classList.toggle('past', i < idx);
+      });
+    });
+  }
+
   function show(i) {
     slides[current].classList.remove('active');
-    current = (i + slides.length) % slides.length;
+    current = (i + total) % total;
     slides[current].classList.add('active');
+    updateUI(current);
   }
-  document.addEventListener('keydown', (e) => {
+
+  document.addEventListener('keydown', function(e) {
     if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); show(current + 1); }
     if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); show(current - 1); }
     if (e.key === 'Home') { e.preventDefault(); show(0); }
-    if (e.key === 'End') { e.preventDefault(); show(slides.length - 1); }
+    if (e.key === 'End') { e.preventDefault(); show(total - 1); }
   });
-</script>
-</body>
+
+  buildProgress();
+  updateUI(current);
+</script></body>
 </html>

@@ -300,3 +300,173 @@ When changing a template's `example.html`:
 3. Re-screenshot all slide types of the modified template
 4. If the change affects a universal rule (footer, stage, fonts), check ALL 20 templates
 5. Do not hardcode colors or fonts that should be design tokens — use CSS variables
+
+---
+
+## 9. Progress System (mandatory for all decks)
+
+Every deck MUST include a progress indicator so viewers always know: total pages, current page, current section, and section boundaries.
+
+### 9.1 Standard page structure
+
+```
+1. Cover        (title-slide — special layout)
+2. Section 01   (section-slide — chapter divider)
+3. Content page (content-slide)
+4. Content page (two-col)
+5. Section 02   (section-slide — SAME layout as slide 2, different number/title)
+6. Data page    (data-slide)
+7. Section 03   (section-slide — SAME layout as slide 2)
+8. Quote page   (quote-slide)
+9. Closing      (closing-slide — special layout)
+```
+
+**Rules:**
+- Every `<section>` MUST have a `data-section="Section Name"` attribute
+- All section divider pages MUST use the same layout within a template — only the number, title, and accent decoration change
+- Cover and closing are special layouts, not section dividers
+- If content requires fewer sections, use fewer — but every section MUST have a divider page
+
+### 9.2 Progress bar HTML (identical in every slide)
+
+```html
+<div class="progress-bar">
+  <div class="progress-strip"></div>
+  <span class="pb-section"></span>
+  <span class="pb-page"></span>
+</div>
+```
+
+This replaces any old `.footer`, `.counter`, or `.page-num` elements. Do not keep both.
+
+### 9.3 Progress bar CSS requirements
+
+The structure is universal; the visual form adapts to each template's design language.
+
+**Mandatory properties:**
+```css
+.progress-bar {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 56px; display: flex; align-items: center; justify-content: space-between;
+  padding: 0 60px; z-index: 50;
+}
+.progress-strip {
+  position: absolute; top: -8px; left: 50%; transform: translateX(-50%);
+  display: flex; align-items: center;
+}
+.progress-strip .seg { margin: 0 4px; transition: all 0.25s; }
+.progress-strip .seg.seg-gap { margin-left: 24px; }  /* section boundary */
+.slide { padding-bottom: 80px !important; }           /* prevent content overlap */
+```
+
+**Segment visibility MINIMUMS (these have caused bugs):**
+- Future segments: background opacity ≥ 0.18 on light bg, ≥ 0.12 on dark bg; minimum size 8px in any dimension
+- Past segments: background opacity ≥ 0.35 on light bg, ≥ 0.4 on dark bg
+- Current segment: MUST use the template's accent color; MUST be visually larger or brighter than past segments
+- Segments MUST NOT be thinner than 2px or smaller than 8px — they become invisible at presentation scale
+- If using lines (2-3px tall), they MUST be visually separated from any border line on `.progress-bar` (use `top: -8px` minimum)
+
+**Shape choices by template personality:**
+- Geometric/technical (Systems, Brutal, Punk, Bauhaus): blocks
+- Minimal/luxury (Essential, Noir, Deco): thin lines or diamonds
+- Playful/rounded (Soft Space, Tropic, Pop, Wes Anderson): dots or pills
+- Neon/retro (Neon, Vaporwave): glowing lines
+- Japanese/Chinese (Sei, Mineral Strata, Ukiyo-e): dots or small squares
+
+### 9.4 JavaScript (use this exact pattern)
+
+```javascript
+const slides = document.querySelectorAll('.slide');
+const total = slides.length;
+let current = 0;
+slides.forEach((s, i) => { if (s.classList.contains('active')) current = i; });
+
+function buildProgress() {
+  // CRITICAL: build ALL segments for EACH strip — do NOT append one seg per slide
+  const sections = Array.from(slides).map(s => s.dataset.section || '');
+  document.querySelectorAll('.progress-strip').forEach(strip => {
+    let lastSection = null;
+    sections.forEach((section, i) => {
+      const seg = document.createElement('div');
+      seg.className = 'seg';
+      if (lastSection !== null && section !== lastSection) seg.classList.add('seg-gap');
+      strip.appendChild(seg);
+      lastSection = section;
+    });
+  });
+}
+
+function updateUI(idx) {
+  const sectionName = slides[idx].dataset.section || '';
+  const pageStr = String(idx + 1).padStart(2, '0') + ' / ' + String(total).padStart(2, '0');
+  document.querySelectorAll('.progress-bar').forEach(bar => {
+    bar.querySelector('.pb-section').textContent = sectionName;
+    bar.querySelector('.pb-page').textContent = pageStr;
+  });
+  document.querySelectorAll('.progress-strip').forEach(strip => {
+    strip.querySelectorAll('.seg').forEach((seg, i) => {
+      seg.classList.toggle('current', i === idx);
+      seg.classList.toggle('past', i < idx);
+    });
+  });
+}
+
+function show(i) {
+  slides[current].classList.remove('active');
+  current = (i + total) % total;
+  slides[current].classList.add('active');
+  updateUI(current);
+}
+// ... keyboard navigation ...
+buildProgress();
+updateUI(current);
+```
+
+**Known bug to avoid:** The first implementation iterated over slides and appended one segment to each slide's own strip per iteration, resulting in only ONE segment per strip instead of ALL segments. The correct pattern builds the full segment list from a sections array and populates every strip with all segments.
+
+### 9.5 Section naming
+
+- Cover: template name or short tagline (e.g., "SYSTEMS", "靜")
+- Content sections: short Chinese or English names (e.g., "框架", "数据", "哲思")
+- Closing: "END", "THANK YOU", or equivalent
+- Names should be 2-6 characters; they appear in the bottom-left at 12px
+
+### 9.6 What NOT to do
+
+- Do NOT show two page numbers (e.g., big center number + right-side counter) — pick one location
+- Do NOT let the progress strip blend into a border line (2px line on top of 1px border = invisible)
+- Do NOT use opacity below 0.12 for future segments — they disappear
+- Do NOT forget `padding-bottom` on `.slide` — content will overlap the progress bar
+- Do NOT keep old `.footer` elements alongside `.progress-bar` — duplicate info
+- Do NOT hide nav-hint outside the slide boundary — use `display: none` if not needed
+
+### 9.7 Templates with decorative bottom elements
+
+Some templates have their own decorative elements at the bottom (colored bands, SVG borders, wave patterns). The progress bar MUST NOT overlap these. Two strategies:
+
+**Strategy A — Integrate into the band** (e.g., 15-mineral-strata): If the template has a colored bottom band, make `.progress-bar` background transparent, use light text on the dark band, and set its height to match the band height per slide type. The progress strip sits at the top edge of the band.
+
+**Strategy B — Position above the decoration** (e.g., 16-iron-line-halo): If the template has a decorative border (32px SVG wave, etc.), set `.progress-bar { bottom: <decoration-height>px; }` so it sits above the decoration on the slide background. Increase `.slide { padding-bottom }` accordingly.
+
+**Always remove old navigation elements**: Before adding the progress system, scan for and remove any pre-existing `.bottom-bar`, `.counter`, `.footer`, `.page-num`, `.page-indicator` elements — they will overlap with the new progress bar. The migration script handles `.footer`/`.counter`/`.page-num` but templates may use custom class names (e.g., vaporwave's `.bottom-bar`).
+
+**Checklist before finishing a template:**
+1. No old bottom-bar/counter/footer elements remain in the HTML
+2. Progress bar does not overlap any decorative bottom band/border
+3. Progress segments are clearly visible (not blending into lines or patterns)
+4. Text colors have sufficient contrast against whatever is behind the progress bar
+5. Verify on cover, section, content, data, quote, and closing slides — band heights may differ
+
+### 9.8 Consistent frame across middle pages
+
+Cover and closing slides may have special layouts (larger bands, centered content). But ALL middle pages — section, content, two-col, data, quote — MUST share identical decorative frame dimensions:
+
+- Top band / border height: same value across all middle page types
+- Bottom band / border height: same value across all middle page types
+- Top decorative line position: same value
+- Bottom decorative line position: same value
+- Content area padding (top/bottom/left/right): same value
+
+If a template has `.section-slide .bottom-band { height: 60px }` but `.content-slide .bottom-band { height: 50px }`, the frame will visibly "jump" when navigating. Standardize to one value (typically the content slide's value, since it's the most common).
+
+Section pages are exempt from content alignment (they are centered by design), but their frame must match.

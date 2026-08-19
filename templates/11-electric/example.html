@@ -1,12 +1,13 @@
 <!DOCTYPE html>
+
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>ELECTRIC — Slide Template</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800;900&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800;900&amp;family=Noto+Sans+SC:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
 <style>
   :root {
     --grad: linear-gradient(135deg, #FF6B35 0%, #FF3D7F 40%, #7B2FF7 100%);
@@ -135,101 +136,227 @@
   .slide > .footer { margin-top: auto; flex-shrink: 0; }
   .slide > .cards, .slide > .cols, .slide > .metrics, .slide > .body { flex-shrink: 1; min-height: 0; }
 
+
+  /* === Progress system === */
+  .slide { padding-bottom: 80px !important; }
+  .title-slide { padding-bottom: 90px !important; }
+  .progress-bar {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 56px; display: flex; align-items: center; justify-content: space-between;
+    padding: 0 60px; z-index: 50;
+    background: rgba(0,0,0,0.3);
+    border-top: 1px solid rgba(255,255,255,0.15);
+  }
+  .progress-bar .pb-section {
+    font-family: var(--font-sans); font-size: 12px; font-weight: 700;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    color: rgba(255,255,255,0.7); min-width: 180px;
+  }
+  .progress-bar .pb-page {
+    font-family: var(--font-sans); font-size: 16px; font-weight: 700;
+    letter-spacing: 0.1em; color: #fff;
+  }
+  .progress-strip {
+    position: absolute; top: -8px; left: 50%; transform: translateX(-50%);
+    display: flex; align-items: center; height: 14px;
+  }
+  .progress-strip .seg {
+    width: 36px; height: 6px; border-radius: 3px;
+    background: rgba(255,255,255,0.15);
+    
+    margin: 0 4px; transition: all 0.25s;
+    
+  }
+  .progress-strip .seg.past {
+    background: rgba(255,255,255,0.5);
+    
+  }
+  .progress-strip .seg.current {
+    background: #fff;
+    
+    box-shadow:0 0 10px rgba(255,255,255,0.6);
+  }
+  .progress-strip .seg.seg-gap { margin-left: 22px; }
+  .nav-hint { display: none !important; }
 </style>
 </head>
 <body>
 <div class="deck">
 
-  <section class="slide title-slide active">
-    <div class="blob mesh1"></div><div class="blob mesh2"></div><div class="blob mesh3"></div>
-    <span class="pill">High Energy Design</span>
-    <h1>ELEC<br>TRIC</h1>
-    <p class="subtitle">A bold, gradient-drenched presentation template. Loud colors, clean type, zero apologies.</p>
-    <div class="float-card glass">
-      <div class="num">3</div>
-      <div class="lbl">Gradient hues</div>
-    </div>
-    <div class="footer"><span>ELECTRIC</span><span>01 / 07</span></div>
-  </section>
 
-  <section class="slide section-slide">
-    <div class="blob mesh1" style="width:600px;height:600px;opacity:0.5"></div>
-    <div class="num">CHAPTER 02</div>
-    <h2>LOUD<br>TYPE.</h2>
-    <p>Big, bold, and unapologetic. When the gradient speaks this loud, the type has to keep up.</p>
-    <div class="footer"><span>ELECTRIC</span><span>02 / 07</span></div>
-  </section>
 
-  <section class="slide content-slide">
-    <div class="blob mesh2" style="width:400px;height:400px;opacity:0.4"></div>
-    <div class="header"><span class="pill">Principles</span><h2>Three charges</h2></div>
-    <div class="cards">
-      <div class="card"><div class="icon">⚡</div><h3>Bold gradient</h3><p>Orange to pink to purple at 135 degrees. The gradient is the brand — not a background, but the statement.</p></div>
-      <div class="card"><div class="icon">◈</div><h3>Heavy type</h3><p>Sora at 800-900 weight. Tight letter spacing. Type should feel like it's pushing the edges of the slide.</p></div>
-      <div class="card"><div class="icon">◎</div><h3>Glass accents</h3><p>Frosted white cards float over the gradient. They organize content without dimming the energy.</p></div>
-    </div>
-    <div class="footer"><span>ELECTRIC</span><span>03 / 07</span></div>
-  </section>
 
-  <section class="slide two-col">
-    <div class="blob mesh3" style="width:350px;height:350px;opacity:0.3"></div>
-    <div class="header"><span class="pill">Compare</span><h2>Two voltages</h2></div>
-    <div class="cols">
-      <div class="col a">
-        <div class="tag">Glass mode</div>
-        <h3>Translucent</h3>
-        <p>Frosted panels over the gradient. Best for content-heavy slides where you need structure without losing energy.</p>
-        <div class="stat">12%</div>
-      </div>
-      <div class="col b">
-        <div class="tag">Solid mode</div>
-        <h3>White out</h3>
-        <p>Solid white panel with purple text. Maximum contrast for key numbers and featured callouts.</p>
-        <div class="stat">100%</div>
-      </div>
-    </div>
-    <div class="footer"><span>ELECTRIC</span><span>04 / 07</span></div>
-  </section>
 
-  <section class="slide quote-slide">
-    <div class="blob mesh1" style="width:500px;height:500px;opacity:0.3;top:20%;left:30%"></div>
-    <blockquote>If it doesn't make you<br>feel something, <span style="background:rgba(255,255,255,0.2);padding:0 12px;border-radius:8px">turn it up.</span></blockquote>
-    <cite>— ELECTRIC MANIFESTO</cite>
-    <div class="footer"><span>ELECTRIC</span><span>05 / 07</span></div>
-  </section>
 
-  <section class="slide data-slide">
-    <div class="blob mesh2" style="width:350px;height:350px;opacity:0.3"></div>
-    <div class="header"><span class="pill">Metrics</span><h2>Power grid</h2></div>
-    <div class="metrics">
-      <div class="metric"><div class="value">3</div><div class="label">Gradient stops</div></div>
-      <div class="metric"><div class="value">900</div><div class="label">Max font weight</div></div>
-      <div class="metric"><div class="value">20px</div><div class="label">Glass radius</div></div>
-      <div class="metric"><div class="value">135°</div><div class="label">Gradient angle</div></div>
-    </div>
-    <div class="footer"><span>ELECTRIC</span><span>06 / 07</span></div>
-  </section>
 
-  <section class="slide closing-slide">
-    <div class="blob mesh1" style="width:500px;height:500px;opacity:0.4"></div>
-    <div class="blob mesh2" style="width:400px;height:400px;opacity:0.4"></div>
-    <h2>PLUG IN.</h2>
-    <p>Stay charged. Stay bold.</p>
-    <div class="btn">Get started →</div>
-    <div class="footer"><span>ELECTRIC</span><span>07 / 07</span></div>
-  </section>
-
-  <div class="nav-hint">← → ARROWS TO NAVIGATE</div>
+<div class="nav-hint">← → ARROWS TO NAVIGATE</div>
+<section class="slide title-slide active" data-section="ELECTRIC">
+<div class="blob mesh1"></div><div class="blob mesh2"></div><div class="blob mesh3"></div>
+<span class="pill">High Energy Design</span>
+<h1>ELEC<br/>TRIC</h1>
+<p class="subtitle">A bold, gradient-drenched presentation template. Loud colors, clean type, zero apologies.</p>
+<div class="float-card glass">
+<div class="num">3</div>
+<div class="lbl">Gradient hues</div>
 </div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide section-slide" data-section="电流">
+<div class="blob mesh1" style="width:600px;height:600px;opacity:0.5"></div>
+<div class="num">CHAPTER 02</div>
+<h2>LOUD<br/>TYPE.</h2>
+<p>Big, bold, and unapologetic. When the gradient speaks this loud, the type has to keep up.</p>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide content-slide" data-section="电流">
+<div class="blob mesh2" style="width:400px;height:400px;opacity:0.4"></div>
+<div class="header"><span class="pill">Principles</span><h2>Three charges</h2></div>
+<div class="cards">
+<div class="card"><div class="icon">⚡</div><h3>Bold gradient</h3><p>Orange to pink to purple at 135 degrees. The gradient is the brand — not a background, but the statement.</p></div>
+<div class="card"><div class="icon">◈</div><h3>Heavy type</h3><p>Sora at 800-900 weight. Tight letter spacing. Type should feel like it's pushing the edges of the slide.</p></div>
+<div class="card"><div class="icon">◎</div><h3>Glass accents</h3><p>Frosted white cards float over the gradient. They organize content without dimming the energy.</p></div>
+</div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide two-col" data-section="电流">
+<div class="blob mesh3" style="width:350px;height:350px;opacity:0.3"></div>
+<div class="header"><span class="pill">Compare</span><h2>Two voltages</h2></div>
+<div class="cols">
+<div class="col a">
+<div class="tag">Glass mode</div>
+<h3>Translucent</h3>
+<p>Frosted panels over the gradient. Best for content-heavy slides where you need structure without losing energy.</p>
+<div class="stat">12%</div>
+</div>
+<div class="col b">
+<div class="tag">Solid mode</div>
+<h3>White out</h3>
+<p>Solid white panel with purple text. Maximum contrast for key numbers and featured callouts.</p>
+<div class="stat">100%</div>
+</div>
+</div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide section-slide" data-section="磁场">
+<div class="blob mesh1" style="width:600px;height:600px;opacity:0.5"></div>
+<div class="num">CHAPTER 03</div>
+<h2>磁场</h2>
+<p>Big, bold, and unapologetic. When the gradient speaks this loud, the type has to keep up.</p>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide data-slide" data-section="磁场">
+<div class="blob mesh2" style="width:350px;height:350px;opacity:0.3"></div>
+<div class="header"><span class="pill">Metrics</span><h2>Power grid</h2></div>
+<div class="metrics">
+<div class="metric"><div class="value">3</div><div class="label">Gradient stops</div></div>
+<div class="metric"><div class="value">900</div><div class="label">Max font weight</div></div>
+<div class="metric"><div class="value">20px</div><div class="label">Glass radius</div></div>
+<div class="metric"><div class="value">135°</div><div class="label">Gradient angle</div></div>
+</div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide section-slide" data-section="脉冲">
+<div class="blob mesh1" style="width:600px;height:600px;opacity:0.5"></div>
+<div class="num">CHAPTER 03</div>
+<h2>脉冲</h2>
+<p>Big, bold, and unapologetic. When the gradient speaks this loud, the type has to keep up.</p>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide quote-slide" data-section="脉冲">
+<div class="blob mesh1" style="width:500px;height:500px;opacity:0.3;top:20%;left:30%"></div>
+<blockquote>If it doesn't make you<br/>feel something, <span style="background:rgba(255,255,255,0.2);padding:0 12px;border-radius:8px">turn it up.</span></blockquote>
+<cite>— ELECTRIC MANIFESTO</cite>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section><section class="slide closing-slide" data-section="END">
+<div class="blob mesh1" style="width:500px;height:500px;opacity:0.4"></div>
+<div class="blob mesh2" style="width:400px;height:400px;opacity:0.4"></div>
+<h2>PLUG IN.</h2>
+<p>Stay charged. Stay bold.</p>
+<div class="btn">Get started →</div>
+
+<div class="progress-bar">
+<div class="progress-strip"></div>
+<span class="pb-section"></span>
+<span class="pb-page"></span>
+</div></section></div>
+
 <script>
-  const slides = document.querySelectorAll('.slide'); let current = 0;
-  function show(i) { slides[current].classList.remove('active'); current = (i + slides.length) % slides.length; slides[current].classList.add('active'); }
-  document.addEventListener('keydown', e => {
-    if (e.key==='ArrowRight'||e.key==='ArrowDown'||e.key===' ') { e.preventDefault(); show(current+1); }
-    if (e.key==='ArrowLeft'||e.key==='ArrowUp') { e.preventDefault(); show(current-1); }
-    if (e.key==='Home') { e.preventDefault(); show(0); }
-    if (e.key==='End') { e.preventDefault(); show(slides.length-1); }
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
+  let current = 0;
+  slides.forEach((s, i) => { if (s.classList.contains('active')) current = i; });
+
+  function buildProgress() {
+    const sections = Array.from(slides).map(s => s.dataset.section || '');
+    document.querySelectorAll('.progress-strip').forEach(strip => {
+      let lastSection = null;
+      sections.forEach((section, i) => {
+        const seg = document.createElement('div');
+        seg.className = 'seg';
+        if (lastSection !== null && section !== lastSection) seg.classList.add('seg-gap');
+        strip.appendChild(seg);
+        lastSection = section;
+      });
+    });
+  }
+
+  function updateUI(idx) {
+    const sectionName = slides[idx].dataset.section || '';
+    const pageStr = String(idx + 1).padStart(2, '0') + ' / ' + String(total).padStart(2, '0');
+    document.querySelectorAll('.progress-bar').forEach(bar => {
+      const label = bar.querySelector('.pb-section');
+      const page = bar.querySelector('.pb-page');
+      if (label) label.textContent = sectionName;
+      if (page) page.textContent = pageStr;
+    });
+    document.querySelectorAll('.progress-strip').forEach(strip => {
+      strip.querySelectorAll('.seg').forEach((seg, i) => {
+        seg.classList.toggle('current', i === idx);
+        seg.classList.toggle('past', i < idx);
+      });
+    });
+  }
+
+  function show(i) {
+    slides[current].classList.remove('active');
+    current = (i + total) % total;
+    slides[current].classList.add('active');
+    updateUI(current);
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); show(current + 1); }
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); show(current - 1); }
+    if (e.key === 'Home') { e.preventDefault(); show(0); }
+    if (e.key === 'End') { e.preventDefault(); show(total - 1); }
   });
-</script>
-</body>
+
+  buildProgress();
+  updateUI(current);
+</script></body>
 </html>
