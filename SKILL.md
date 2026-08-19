@@ -14,7 +14,7 @@ Create zero-dependency HTML presentations using one of 25 hand-crafted design sy
 3. **25 Design Systems, Not 25 Themes** — Each system has its own typography, palette, decorative vocabulary, and component grammar. Mixing systems breaks the design; stay inside one.
 4. **Fixed 16:9 Stage** — Every deck uses a 1280×720 slide canvas scaled as a whole to the viewport via `transform: scale()`. Slides stay 16:9 on every screen; content never reflows.
 5. **Design Tokens Are Law** — Each system's `DESIGN.md` contains YAML front-matter tokens (colors, fonts, spacing, radius, shadow, border). Read them and obey them. Do not invent colors, fonts, or radii.
-6. **Implementation Rules Are Mandatory** — Read `AGENT_GUIDE.md` before generating any deck. It contains CSS syntax rules, footer/band invariants, CJK typography rules, content length limits, and a verification checklist — all derived from real bugs. Each template's `DESIGN.md` also has a "实现注意事项" section with template-specific gotchas. Skip them and the deck will break.
+6. **Implementation Rules Are Mandatory** — Read `AGENT_GUIDE.md` before generating any deck. It contains CSS syntax rules, footer/band invariants, CJK typography rules, content length limits, a verification checklist, and **aesthetic quality standards (the Five Don'ts: 不乱/不花/不杂/不丑/不空)** — all derived from real bugs and user feedback. Each template's `DESIGN.md` also has a "实现注意事项" section with template-specific gotchas. Skip them and the deck will break or look ugly.
 
 ## The 25 Design Systems
 
