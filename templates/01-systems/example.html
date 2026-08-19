@@ -389,7 +389,7 @@
     height: 56px; display: flex; align-items: center; justify-content: space-between;
     padding: 0 60px; z-index: 50;
     background: var(--bg);
-    border-top: var(--line);
+    border-top: none;
   }
   .progress-bar .pb-section {
     font-family: var(--font-mono); font-size: 12px; font-weight: 700;
@@ -405,20 +405,19 @@
     display: flex; align-items: center; height: 14px;
   }
   .progress-strip .seg {
-    width: 44px; height: 5px; border-radius: 0;
-    background: rgba(26,26,26,0.15);
-    border: 1px solid rgba(26,26,26,0.2);
-    margin: 0 4px; transition: all 0.25s;
-    
+    width: 10px; height: 10px; border-radius: 0;
+    background: rgba(26,26,26,0.12);
+    border: 1px solid rgba(26,26,26,0.25);
+    margin: 0 5px; transition: all 0.25s;
   }
   .progress-strip .seg.past {
-    background: rgba(26,26,26,0.35);
-    border-color: rgba(26,26,26,0.35);
+    background: rgba(26,26,26,0.4);
+    border-color: rgba(26,26,26,0.4);
   }
   .progress-strip .seg.current {
     background: var(--accent);
     border-color: var(--accent);
-    
+    width: 12px; height: 12px;
   }
   .progress-strip .seg.seg-gap { margin-left: 4px; }
   .nav-hint { display: none !important; }

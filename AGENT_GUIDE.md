@@ -476,14 +476,14 @@ Section pages are exempt from content alignment (they are centered by design), b
 A progress bar that meets all functional specs can still be ugly. These rules prevent that.
 
 **Hard rules (never violate):**
-1. **No full-width heavy borders.** A `border-top: 3px solid black` spanning the entire slide width creates a "fence" effect that competes with content. Use `border-top: none` or at most `1px solid rgba(...,0.15)`.
+1. **No full-width border lines on light backgrounds.** A `border-top` spanning the entire slide width creates a visible horizontal "stiff line" that cuts across the design — even 1px solid is noticeable. On light/cream/white backgrounds where the progress bar background matches the slide, use `border-top: none`. Only use a border on dark backgrounds where it creates necessary separation (max `1px solid rgba(...,0.2)`). Heavy borders (2px+ solid) are never acceptable.
 2. **Progress segments must match the template's primary shape language.** If the template uses circles (soft-space, light-as-air), use circles. If it uses sharp squares (brutal, punk), use squares. Never import a shape that doesn't exist elsewhere in the template.
 3. **Progress bar visual weight ≤ 15% of content area.** The progress bar is navigation chrome, not a design feature. It should be noticed when needed, invisible when not.
 4. **Colors must come from the template's palette.** No generic gray. Use the template's accent color for "current", muted foreground for "past", and a very faint version of foreground for "future".
 5. **Typography must match.** Section label and page number must use fonts already defined in the template (display font for page number if the template has one, body font for section label).
 
 **Soft rules (strongly recommended):**
-- On light backgrounds, prefer transparent progress bar background + subtle 1px separator. On dark backgrounds, a semi-transparent dark bar (rgba(0,0,0,0.5-0.8)) works well.
+- On light backgrounds, use a transparent or matching background with NO border line — let the segments and text be the only visible elements. On dark backgrounds, a semi-transparent dark bar (rgba(0,0,0,0.5-0.8)) with a very subtle border (max rgba 0.2) works well.
 - The "current" segment should be 20-40% larger than future segments, with the template's accent color.
 - If the template has a signature effect (offset shadow in Memphis, glow in neon, gold shimmer in deco), apply it subtly to the current segment.
 - Page number format: current page in accent color, total in muted color (e.g., `<span class="cur">03</span> / 09`).

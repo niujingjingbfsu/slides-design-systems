@@ -52,11 +52,11 @@
   .title-slide .bottom-bar { height: 80px; }
 
   /* Progress strip */
-  .progress-strip { position: absolute; top: -10px; left: 60px; right: 60px; height: 6px; display: flex; align-items: center; justify-content: center; gap: 0; z-index: 6; pointer-events: none; }
-  .progress-strip .seg { width: 56px; height: 6px; background: rgba(245,241,232,0.25); border: 1px solid rgba(245,241,232,0.3); margin: 0 3px; transition: background 0.25s, border-color 0.25s; }
-  .progress-strip .seg.past { background: rgba(245,241,232,0.7); border-color: rgba(245,241,232,0.7); }
-  .progress-strip .seg.current { background: var(--yellow); border-color: var(--yellow); box-shadow: 0 0 8px rgba(244,211,94,0.5); }
-  .progress-strip .seg.seg-gap { margin-left: 3px; }
+  .progress-strip { position: absolute; top: -12px; left: 60px; right: 60px; height: 16px; display: flex; align-items: center; justify-content: center; gap: 0; z-index: 6; pointer-events: none; }
+  .progress-strip .seg { width: 12px; height: 12px; border-radius: 50%; background: rgba(245,241,232,0.2); border: 2px solid rgba(245,241,232,0.3); margin: 0 5px; transition: all 0.25s; }
+  .progress-strip .seg.past { background: var(--paper); border-color: var(--paper); }
+  .progress-strip .seg.current { background: var(--yellow); border-color: var(--yellow); width: 16px; height: 16px; box-shadow: 3px 3px 0 var(--red); }
+  .progress-strip .seg.seg-gap { margin-left: 5px; }
 
   /* Nav hint */
   .nav-hint { display: none; }
