@@ -188,22 +188,22 @@
     display: flex; align-items: center; height: 14px;
   }
   .progress-strip .seg {
-    width: 10px; height: 10px; border-radius: 50%;
-    background: rgba(30,80,160,0.12);
-    border: 1px solid rgba(30,80,160,0.2);
-    margin: 0 4px; transition: all 0.25s;
-    
+    width: 12px; height: 12px; border-radius: 50%;
+    background: transparent;
+    border: 2px solid rgba(30,80,160,0.25);
+    margin: 0 5px; transition: all 0.3s;
   }
   .progress-strip .seg.past {
-    background: rgba(30,80,160,0.4);
-    border-color: rgba(30,80,160,0.4);
-  }
-  .progress-strip .seg.current {
     background: var(--cobalt, #1E50A0);
     border-color: var(--cobalt, #1E50A0);
-    width:14px;height:14px;
   }
-  .progress-strip .seg.seg-gap { margin-left: 4px; }
+  .progress-strip .seg.current {
+    width: 18px; height: 18px;
+    background: radial-gradient(circle, var(--cobalt, #1E50A0) 0%, var(--cobalt, #1E50A0) 35%, #fff 36%, #fff 55%, var(--cobalt, #1E50A0) 56%);
+    border: 2px solid var(--cobalt, #1E50A0);
+    box-shadow: 0 0 0 1px rgba(30,80,160,0.15);
+  }
+  .progress-strip .seg.seg-gap { margin-left: 5px; }
   .nav-hint { display: none !important; }
 </style>
 </head>
