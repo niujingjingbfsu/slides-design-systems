@@ -355,7 +355,7 @@ The structure is universal; the visual form adapts to each template's design lan
   display: flex; align-items: center;
 }
 .progress-strip .seg { margin: 0 4px; transition: all 0.25s; }
-.progress-strip .seg.seg-gap { margin-left: 24px; }  /* section boundary */
+.progress-strip .seg.seg-gap { margin-left: 4px; }  /* uniform spacing — do NOT use larger gaps for section boundaries, it looks fragmented */
 .slide { padding-bottom: 80px !important; }           /* prevent content overlap */
 ```
 
