@@ -52,7 +52,7 @@
   .footer .seal { display: inline-flex; align-items: center; gap: 8px; }
   .slide > *:not(:where(.wood-frame)):not(:where(.footer)):not(:where(.deco)):not(:where(.wave-band)) { position: relative; z-index: 1; }
   .deco { position: absolute; z-index: 0; }
-  .wave-band { position: absolute; left: 0; right: 0; bottom: 0; z-index: 0; pointer-events: none; }
+  .wave-band { position: absolute; left: 0; right: 0; width: 100%; bottom: 0; z-index: 0; pointer-events: none; }
 
   .label { font-size: 14px; letter-spacing: 0.3em; color: var(--indigo-light); font-weight: 700; }
   .seal-stamp {
@@ -88,7 +88,7 @@
   .content-slide .header .seal-stamp { width: 36px; height: 36px; font-size: 14px; }
   .content-slide h2 { font-family: var(--font-display); font-size: 40px; font-weight: 800; color: var(--indigo); }
   .content-slide .cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; flex: 1; }
-  .content-slide .card { padding: 28px 24px; background: rgba(255,255,255,0.5); border: 1.5px solid var(--indigo); display: flex; flex-direction: column; position: relative; }
+  .content-slide .card { padding: 28px 24px; background: rgba(255,255,255,0.5); border: 1.5px solid var(--indigo); display: flex; flex-direction: column; justify-content: center; position: relative; }
   .content-slide .card::before { content:''; position: absolute; top: 4px; left: 4px; right: 4px; bottom: 4px; border: 0.5px solid var(--indigo); opacity: 0.2; pointer-events: none; }
   .content-slide .card .wave-icon { width: 48px; height: 32px; margin-bottom: 16px; }
   .content-slide .card h3 { font-family: var(--font-display); font-size: 22px; font-weight: 800; color: var(--indigo); margin-bottom: 10px; }
@@ -147,7 +147,7 @@
     .content-slide ul { gap: 4px; }
     .content-slide li { padding: 20px 0; }
     .two-col .col { padding: 36px 40px; }
-    .data-slide .metric { padding: 32px 28px; }
+    .data-slide .metric { padding: 56px 28px; }
     .content-slide .card, .two-col .col { margin-bottom: 0; }
   /* === Content overflow safeguards === */
   *, *::before, *::after { box-sizing: border-box; }
@@ -167,12 +167,12 @@
 
 
   /* === Progress system === */
-  .slide { padding-bottom: 80px !important; }
-  .title-slide { padding-bottom: 90px !important; }
+  .slide { padding-bottom: 104px !important; }
+  .title-slide { padding-bottom: 104px !important; }
   .progress-bar {
-    position: absolute; bottom: 0; left: 0; right: 0;
-    height: 56px; display: flex; align-items: center; justify-content: space-between;
-    padding: 0 60px; z-index: 50;
+    position: absolute; bottom: 28px; left: 0; right: 0;
+    height: 48px; display: flex; align-items: center; justify-content: space-between;
+    padding: 0 92px; z-index: 50;
     }
   .progress-bar .pb-section {
     font-family: var(--font-cn); font-size: 14px; font-weight: 700;
@@ -234,8 +234,8 @@
 <path d="M140 165 Q160 180 180 170 Q200 160 220 180" fill="none" opacity="0.5" stroke="#2C5F8A" stroke-width="1"></path>
 </svg>
 </div>
-<svg class="wave-band" preserveaspectratio="none" style="height:100px;bottom:40px;opacity:0.15;" viewbox="0 0 1280 120">
-<path d="M0 60 Q40 20 80 60 T160 60 T240 60 T320 60 T400 60 T480 60 T560 60 T640 60 T720 60 T800 60 T880 60 T960 60 T1040 60 T1120 60 T1200 60 T1280 60 V120 H0Z" fill="#1B3A6B"></path>
+<svg class="wave-band" preserveaspectratio="none" style="height:96px;bottom:84px;opacity:0.5;" viewbox="0 0 1280 120">
+<path d="M0 60 Q40 20 80 60 T160 60 T240 60 T320 60 T400 60 T480 60 T560 60 T640 60 T720 60 T800 60 T880 60 T960 60 T1040 60 T1120 60 T1200 60 T1280 60 V120 H0Z" fill="#5B8DB5"></path>
 </svg>
 <div class="label">第二十六章</div>
 <div class="title-row">
@@ -360,8 +360,8 @@
 <span class="pb-page"></span>
 </div></section><section class="slide quote-slide" data-section="世相">
 <div class="wood-frame"></div>
-<svg class="wave-band" preserveaspectratio="none" style="height:80px;top:60px;opacity:0.08;transform:scaleY(-1);" viewbox="0 0 1280 120">
-<path d="M0 60 Q40 20 80 60 T160 60 T240 60 T320 60 T400 60 T480 60 T560 60 T640 60 T720 60 T800 60 T880 60 T960 60 T1040 60 T1120 60 T1200 60 T1280 60 V120 H0Z" fill="#1B3A6B"></path>
+<svg class="wave-band" preserveaspectratio="none" style="height:80px;top:60px;opacity:0.25;transform:scaleY(-1);" viewbox="0 0 1280 120">
+<path d="M0 60 Q40 20 80 60 T160 60 T240 60 T320 60 T400 60 T480 60 T560 60 T640 60 T720 60 T800 60 T880 60 T960 60 T1040 60 T1120 60 T1200 60 T1280 60 V120 H0Z" fill="#5B8DB5"></path>
 </svg>
 <blockquote>
       波は<span class="red">繰り返す</span>が、<br/>
@@ -376,8 +376,8 @@
 <span class="pb-page"></span>
 </div></section><section class="slide closing-slide" data-section="END">
 <div class="wood-frame"></div>
-<svg class="wave-band" preserveaspectratio="none" style="height:100px;bottom:40px;opacity:0.12;" viewbox="0 0 1280 120">
-<path d="M0 60 Q40 20 80 60 T160 60 T240 60 T320 60 T400 60 T480 60 T560 60 T640 60 T720 60 T800 60 T880 60 T960 60 T1040 60 T1120 60 T1200 60 T1280 60 V120 H0Z" fill="#1B3A6B"></path>
+<svg class="wave-band" preserveaspectratio="none" style="height:96px;bottom:84px;opacity:0.45;" viewbox="0 0 1280 120">
+<path d="M0 60 Q40 20 80 60 T160 60 T240 60 T320 60 T400 60 T480 60 T560 60 T640 60 T720 60 T800 60 T880 60 T960 60 T1040 60 T1120 60 T1200 60 T1280 60 V120 H0Z" fill="#5B8DB5"></path>
 </svg>
 <h2>完</h2>
 <div class="divider"></div>

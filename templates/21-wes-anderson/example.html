@@ -40,10 +40,10 @@
   /* Frame */
   .frame { position: absolute; top: 28px; left: 28px; right: 28px; bottom: 28px; border: 1px solid var(--gold); z-index: 5; pointer-events: none; }
   .corner { position: absolute; width: 16px; height: 16px; border-color: var(--gold); border-style: solid; z-index: 6; }
-  .corner.tl { top: 27px; left: 27px; border-width: 2px 0 0 2px; }
-  .corner.tr { top: 27px; right: 27px; border-width: 2px 2px 0 0; }
-  .corner.bl { bottom: 27px; left: 27px; border-width: 0 0 2px 2px; }
-  .corner.br { bottom: 27px; right: 27px; border-width: 0 2px 2px 0; }
+  .corner.tl { top: 28px; left: 28px; border-width: 2px 0 0 2px; }
+  .corner.tr { top: 28px; right: 28px; border-width: 2px 2px 0 0; }
+  .corner.bl { bottom: 28px; left: 28px; border-width: 0 0 2px 2px; }
+  .corner.br { bottom: 28px; right: 28px; border-width: 0 2px 2px 0; }
 
   /* Content area */
   .content-area { position: relative; z-index: 2; flex: 1; padding: 72px 100px 60px; display: flex; flex-direction: column; }
@@ -70,7 +70,7 @@
   .title-slide .rule { width: 80px; height: 1px; background: var(--gold); margin: 24px auto; }
   .title-slide .meta { display: flex; gap: 48px; margin-top: 32px; font-family: var(--font-display); font-size: 12px; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; color: var(--brown-light); }
   .title-dot { width: 100px; height: 100px; border-radius: 50%; opacity: 0.5; position: absolute; z-index: 1; }
-  .title-dot.pink { background: var(--pink); top: 140px; }
+  .title-dot.pink { background: var(--pink); top: 68px; left: 50%; transform: translateX(-50%); width: 64px; height: 64px; }
   .title-dot.mint { background: var(--mint); bottom: 120px; left: 140px; width: 70px; height: 70px; }
   .title-dot.mustard { background: var(--mustard); bottom: 120px; right: 140px; width: 70px; height: 70px; }
 
@@ -85,7 +85,7 @@
   /* === CONTENT SLIDE === */
   .content-slide .header { margin-bottom: 40px; }
   .content-slide .body { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; flex: 1; }
-  .content-slide .card { background: var(--white); border: 1px solid var(--gold); padding: 32px 28px; display: flex; flex-direction: column; overflow: hidden; }
+  .content-slide .card { background: var(--white); border: 1px solid var(--gold); padding: 32px 28px; display: flex; flex-direction: column; justify-content: center; overflow: hidden; }
   .content-slide .card .card-num { font-family: var(--font-display); font-size: 12px; font-weight: 600; letter-spacing: 0.3em; color: var(--brown-light); margin-bottom: 16px; }
   .content-slide .card .card-dot { width: 36px; height: 36px; border-radius: 50%; margin-bottom: 20px; }
   .content-slide .card:nth-child(1) .card-dot { background: var(--pink); }
@@ -141,12 +141,12 @@
   .card .card-num, .col .col-num, .metric .label { white-space: nowrap; overflow-wrap: break-word; }
 
   /* === Progress system === */
-  .slide { padding-bottom: 80px !important; }
-  .title-slide { padding-bottom: 90px !important; }
+  .slide { padding-bottom: 104px !important; }
+  .title-slide { padding-bottom: 104px !important; }
   .progress-bar {
-    position: absolute; bottom: 0; left: 0; right: 0;
-    height: 56px; display: flex; align-items: center; justify-content: space-between;
-    padding: 0 60px; z-index: 50;
+    position: absolute; bottom: 34px; left: 0; right: 0;
+    height: 48px; display: flex; align-items: center; justify-content: space-between;
+    padding: 0 76px; z-index: 50;
     }
   .progress-bar .pb-section {
     font-family: var(--font-display); font-size: 14px; font-weight: 700;
@@ -206,7 +206,7 @@
 <h1>年度产品回顾</h1>
 <div class="rule"></div>
 <p class="subtitle">2026 · 飞书 AI Friendly</p>
-<div class="meta"><span>PRODUCT REVIEW</span><span>2026</span><span>01 / 07</span></div>
+<div class="meta"><span>PRODUCT REVIEW</span><span>2026</span><span>01 / 09</span></div>
 </div>
 <div class="progress-bar">
 <div class="progress-strip"></div>

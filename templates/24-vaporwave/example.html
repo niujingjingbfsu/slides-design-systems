@@ -52,7 +52,7 @@
   h1 { font-family: var(--font-display); font-size: 80px; font-weight: 900; color: #fff; line-height: 1.15; letter-spacing: 0.04em; text-shadow: 0 0 20px var(--pink), 0 0 40px rgba(255,113,206,0.5), 2px 2px 0 var(--purple); }
   h2 { font-family: var(--font-display); font-size: 44px; font-weight: 900; color: #fff; line-height: 1.2; letter-spacing: 0.02em; text-shadow: 0 0 16px var(--cyan), 0 0 32px rgba(1,205,254,0.4); }
   h3 { font-family: var(--font-display); font-size: 22px; font-weight: 700; color: #fff; line-height: 1.2; text-shadow: 0 0 10px currentColor; }
-  .subtitle { font-family: var(--font-cn); font-size: 17px; color: var(--yellow); line-height: 1.8; margin-top: 20px; font-weight: 400; text-shadow: 0 0 8px rgba(255,251,150,0.5); }
+  .subtitle { font-family: var(--font-cn); font-size: 17px; color: var(--cyan); line-height: 1.8; margin-top: 20px; font-weight: 400; letter-spacing: 0.15em; text-shadow: 0 0 8px rgba(1,205,254,0.5); }
   p, li { font-family: var(--font-cn); font-size: 16px; color: rgba(255,255,255,0.85); line-height: 1.8; }
 
   /* Bottom bar */
@@ -66,8 +66,8 @@
 
   /* === TITLE === */
   .title-slide .content-area { justify-content: center; align-items: center; text-align: center; }
-  .title-slide .sun { position: absolute; top: 60px; left: 50%; transform: translateX(-50%); width: 240px; height: 240px; border-radius: 50%; background: linear-gradient(180deg, var(--yellow) 0%, var(--pink) 100%); z-index: 2; box-shadow: 0 0 80px rgba(255,113,206,0.4); }
-  .title-slide .sun::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 90px; background: repeating-linear-gradient(0deg, transparent 0, transparent 10px, rgba(26,11,46,0.3) 10px, rgba(26,11,46,0.3) 14px); border-radius: 0 0 120px 120px; }
+  .title-slide .sun { position: absolute; top: 88px; left: 50%; transform: translateX(-50%); width: 220px; height: 220px; border-radius: 50%; background: linear-gradient(180deg, var(--yellow) 0%, var(--pink) 100%); z-index: 2; box-shadow: 0 0 80px rgba(255,113,206,0.4); }
+  .title-slide .sun::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 105px; background: repeating-linear-gradient(0deg, transparent 0, transparent 10px, rgba(13,5,32,0.5) 10px, rgba(13,5,32,0.5) 15px); border-radius: 0 0 120px 120px; }
   .title-slide h1 { font-size: 88px; margin-top: 200px; }
   .title-slide .palm { position: absolute; bottom: 50px; z-index: 3; opacity: 0.8; }
   .title-slide .palm.left { left: 40px; }
@@ -82,7 +82,7 @@
   /* === CONTENT === */
   .content-slide .header { margin-bottom: 40px; }
   .content-slide .body { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; flex: 1; }
-  .content-slide .card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,113,206,0.3); padding: 28px 24px; display: flex; flex-direction: column; overflow: hidden; backdrop-filter: blur(4px); }
+  .content-slide .card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,113,206,0.3); padding: 28px 24px; display: flex; flex-direction: column; justify-content: center; overflow: hidden; backdrop-filter: blur(4px); }
   .content-slide .card:nth-child(1) { border-color: rgba(255,113,206,0.5); box-shadow: 0 0 20px rgba(255,113,206,0.1); }
   .content-slide .card:nth-child(2) { border-color: rgba(1,205,254,0.5); box-shadow: 0 0 20px rgba(1,205,254,0.1); }
   .content-slide .card:nth-child(3) { border-color: rgba(185,103,255,0.5); box-shadow: 0 0 20px rgba(185,103,255,0.1); }
@@ -225,7 +225,7 @@
 </div>
 <div class="content-area">
 <div class="eyebrow">A E S T H E T I C</div>
-<h1>未来复古<br/>主义</h1>
+<h1>未来<br/>复古主义</h1>
 <p class="subtitle">VAPORWAVE · 2026</p>
 </div>
 <div class="scanlines"></div>

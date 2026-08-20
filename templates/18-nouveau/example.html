@@ -30,7 +30,7 @@
   @media (max-aspect-ratio: 16/9) { .slide { transform: translate(-50%, -50%) scale(calc(100vw / 1280)); } }
   @media (min-aspect-ratio: 16/9) { .slide { transform: translate(-50%, -50%) scale(calc(100vh / 720)); } }
 
-  .border-frame { position: absolute; top: 24px; left: 24px; right: 24px; bottom: 24px; border: 1.5px solid var(--gold); pointer-events: none; z-index: 2; }
+  .border-frame { position: absolute; top: 24px; left: 24px; right: 24px; bottom: 24px; border: 2px solid var(--gold); pointer-events: none; z-index: 2; }
   .border-frame::before { content:''; position: absolute; top: 6px; left: 6px; right: 6px; bottom: 6px; border: 0.5px solid var(--gold); opacity: 0.5; }
   .corner { position: absolute; width: 40px; height: 40px; z-index: 3; }
   .corner svg { width: 100%; height: 100%; }
@@ -54,19 +54,20 @@
   .label { font-family: var(--font-body); font-size: 14px; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); font-weight: 600; }
 
   .title-slide { justify-content: center; align-items: center; text-align: center; }
-  .title-slide .medallion { position: absolute; right: 60px; top: 50%; transform: translateY(-50%); width: 320px; height: 320px; z-index: 0; }
+  .title-slide .medallion { position: absolute; right: 64px; top: 50%; transform: translateY(-50%); width: 210px; height: 210px; z-index: 0; }
   .title-slide .medallion svg { width: 100%; height: 100%; }
   .title-slide .label { margin-bottom: 20px; }
-  .title-slide h1 { font-family: var(--font-display); font-size: 108px; font-weight: 900; line-height: 1.15; letter-spacing: 0.02em; color: var(--green); }
+  .title-slide h1 { font-family: var(--font-display); font-size: 108px; font-weight: 900; line-height: 1.15; letter-spacing: 0.02em; color: var(--green); align-self: center; margin-right: 220px; max-width: 880px; }
+  .title-slide .label, .title-slide .subtitle, .title-slide .ornament-divider { margin-right: 220px; }
   .title-slide h1 em { font-style: italic; font-weight: 400; color: var(--gold); }
   .title-slide .subtitle { margin-top: 20px; font-size: 18px; font-style: italic; color: var(--muted); max-width: 420px; line-height: 1.6; }
   .title-slide .ornament-divider { margin: 24px 0; width: 200px; }
 
   .section-slide { justify-content: center; align-items: center; text-align: center; }
   .section-slide .deco { left: 50%; top: 50%; transform: translate(-50%,-50%); width: 500px; height: 500px; opacity: 0.08; }
-  .section-slide .num { font-family: var(--font-body); font-size: 14px; letter-spacing: 0.4em; color: var(--gold); margin-bottom: 16px; }
+  .section-slide .num { font-family: var(--font-body); font-size: 14px; letter-spacing: 0.4em; color: var(--purple); font-weight: 600; margin-bottom: 16px; }
   .section-slide h2 { font-family: var(--font-display); font-size: 80px; font-weight: 700; line-height: 1.15; color: var(--green); }
-  .section-slide h2 em { font-style: italic; font-weight: 400; color: var(--purple); }
+  .section-slide h2 em { font-style: italic; font-weight: 400; color: var(--gold); }
   .section-slide .ornament-divider { margin: 20px 0; width: 160px; }
   .section-slide p { font-size: 17px; font-style: italic; color: var(--muted); max-width: 440px; line-height: 1.7; }
 
@@ -75,10 +76,10 @@
   .content-slide h2 { font-family: var(--font-display); font-size: 40px; font-weight: 700; color: var(--green); }
   .content-slide h2 em { font-style: italic; color: var(--gold); }
   .content-slide .cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 32px; flex: 1; }
-  .content-slide .card { text-align: center; padding: 32px 24px; display: flex; flex-direction: column; align-items: center; }
+  .content-slide .card { text-align: center; padding: 32px 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
   .content-slide .card .ornament-circle { width: 64px; height: 64px; border: 1.5px solid var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; color: var(--green); font-size: 24px; font-family: var(--font-display) }
   .content-slide .card h3 { font-family: var(--font-display); font-size: 22px; font-weight: 700; color: var(--green); margin-bottom: 10px; }
-  .content-slide .card h3 em { font-style: italic; color: var(--purple); }
+  .content-slide .card h3 em { font-style: italic; color: var(--gold); }
   .content-slide .card p { font-size: 16px; line-height: 1.7; color: var(--muted); }
   .content-slide .card .divider { width: 40px; height: 1px; background: var(--gold); margin: 16px 0; opacity: 0.5; }
 
@@ -89,7 +90,7 @@
   .two-col .col.a { border-right: 1px solid rgba(184,148,79,0.3); padding-right: 40px; }
   .two-col .col .tag { font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
   .two-col .col h3 { font-family: var(--font-display); font-size: 26px; font-weight: 700; color: var(--green); margin-bottom: 12px; }
-  .two-col .col h3 em { font-style: italic; color: var(--purple); }
+  .two-col .col h3 em { font-style: italic; color: var(--gold); }
   .two-col .col p { font-size: 16px; line-height: 1.8; color: var(--muted); }
   .two-col .col .stat { margin-top: auto; padding-top: 16px; font-family: var(--font-display); font-size: 48px; font-weight: 700; color: var(--gold); }
   .two-col .col .stat em { font-style: italic; font-weight: 400; font-size: 20px; color: var(--muted); }
@@ -149,12 +150,12 @@
 
 
   /* === Progress system === */
-  .slide { padding-bottom: 80px !important; }
-  .title-slide { padding-bottom: 90px !important; }
+  .slide { padding-bottom: 104px !important; }
+  .title-slide { padding-bottom: 104px !important; }
   .progress-bar {
-    position: absolute; bottom: 0; left: 0; right: 0;
-    height: 56px; display: flex; align-items: center; justify-content: space-between;
-    padding: 0 60px; z-index: 50;
+    position: absolute; bottom: 30px; left: 0; right: 0;
+    height: 48px; display: flex; align-items: center; justify-content: space-between;
+    padding: 0 96px; z-index: 50;
     }
   .progress-bar .pb-section {
     font-family: var(--font-serif, serif); font-size: 14px; font-weight: 700;
@@ -211,15 +212,15 @@
 <div class="corner br"><svg viewbox="0 0 40 40"><path d="M2 38 Q2 2 38 2" fill="none" stroke="#B8944F" stroke-width="1.5"></path><circle cx="2" cy="38" fill="#B8944F" r="3"></circle><path d="M8 32 Q8 8 32 8" fill="none" opacity="0.5" stroke="#B8944F" stroke-width="0.5"></path></svg></div>
 <div class="medallion">
 <svg viewbox="0 0 320 320">
-<circle cx="160" cy="160" fill="none" r="150" stroke="#B8944F" stroke-width="1.5"></circle>
+<circle cx="160" cy="160" fill="none" r="150" stroke="#B8944F" stroke-width="2"></circle>
 <circle cx="160" cy="160" fill="none" opacity="0.5" r="140" stroke="#B8944F" stroke-width="0.5"></circle>
-<path d="M160 20 Q180 80 160 160 Q140 80 160 20" fill="#2D4A3E" opacity="0.15"></path>
-<path d="M160 300 Q140 240 160 160 Q180 240 160 300" fill="#7D5A6E" opacity="0.15"></path>
-<path d="M20 160 Q80 140 160 160 Q80 180 20 160" fill="#2D4A3E" opacity="0.1"></path>
-<path d="M300 160 Q240 180 160 160 Q240 140 300 160" fill="#7D5A6E" opacity="0.1"></path>
+<path d="M160 20 Q180 80 160 160 Q140 80 160 20" fill="#2D4A3E" opacity="0.5"></path>
+<path d="M160 300 Q140 240 160 160 Q180 240 160 300" fill="#2D4A3E" opacity="0.5"></path>
+<path d="M20 160 Q80 140 160 160 Q80 180 20 160" fill="#B8944F" opacity="0.45"></path>
+<path d="M300 160 Q240 180 160 160 Q240 140 300 160" fill="#B8944F" opacity="0.45"></path>
 <circle cx="160" cy="160" fill="none" r="60" stroke="#B8944F" stroke-width="1"></circle>
-<path d="M160 100 Q200 130 160 160 Q120 130 160 100" fill="#B8944F" opacity="0.2"></path>
-<path d="M160 220 Q120 190 160 160 Q200 190 160 220" fill="#2D4A3E" opacity="0.15"></path>
+<path d="M160 100 Q200 130 160 160 Q120 130 160 100" fill="#B8944F" opacity="0.6"></path>
+<path d="M160 220 Q120 190 160 160 Q200 190 160 220" fill="#2D4A3E" opacity="0.55"></path>
 </svg>
 </div>
 <div class="label">Chapitre Vingt-Quatre</div>
@@ -233,8 +234,8 @@
 <span class="pb-page"></span>
 </div></section><section class="slide section-slide" data-section="藤蔓">
 <div class="border-frame"></div>
-<div class="deco"><svg viewbox="0 0 500 500"><circle cx="250" cy="250" fill="none" r="240" stroke="#2D4A3E" stroke-width="2"></circle><circle cx="250" cy="250" fill="none" r="200" stroke="#B8944F" stroke-width="1"></circle><path d="M250 10 Q300 150 250 250 Q200 150 250 10" fill="#2D4A3E" opacity="0.3"></path><path d="M250 490 Q200 350 250 250 Q300 350 250 490" fill="#7D5A6E" opacity="0.3"></path></svg></div>
-<div class="num">— II —</div>
+<div class="deco"><svg viewbox="0 0 500 500"><circle cx="250" cy="250" fill="none" r="240" stroke="#2D4A3E" stroke-width="2"></circle><circle cx="250" cy="250" fill="none" r="200" stroke="#B8944F" stroke-width="1"></circle><path d="M250 10 Q300 150 250 250 Q200 150 250 10" fill="#2D4A3E" opacity="0.3"></path><path d="M250 490 Q200 350 250 250 Q300 350 250 490" fill="#B8944F" opacity="0.3"></path></svg></div>
+<div class="num">— I —</div>
 <h2>The <em>Organic</em> Line</h2>
 <div class="ornament-divider">❦</div>
 <p>Every border is a vine. Every curve is a stem. Structure grows from nature, not from the grid.</p>
@@ -246,7 +247,7 @@
 </div></section><section class="slide content-slide" data-section="藤蔓">
 <div class="border-frame"></div>
 <div class="header">
-<div class="label">Principes</div>
+<div class="label">Principles</div>
 <h2>Three <em>ornaments</em></h2>
 </div>
 <div class="cards">
@@ -298,7 +299,7 @@
 <span class="pb-page"></span>
 </div></section><section class="slide section-slide" data-section="金花">
 <div class="border-frame"></div>
-<div class="deco"><svg viewbox="0 0 500 500"><circle cx="250" cy="250" fill="none" r="240" stroke="#2D4A3E" stroke-width="2"></circle><circle cx="250" cy="250" fill="none" r="200" stroke="#B8944F" stroke-width="1"></circle><path d="M250 10 Q300 150 250 250 Q200 150 250 10" fill="#2D4A3E" opacity="0.3"></path><path d="M250 490 Q200 350 250 250 Q300 350 250 490" fill="#7D5A6E" opacity="0.3"></path></svg></div>
+<div class="deco"><svg viewbox="0 0 500 500"><circle cx="250" cy="250" fill="none" r="240" stroke="#2D4A3E" stroke-width="2"></circle><circle cx="250" cy="250" fill="none" r="200" stroke="#B8944F" stroke-width="1"></circle><path d="M250 10 Q300 150 250 250 Q200 150 250 10" fill="#2D4A3E" opacity="0.3"></path><path d="M250 490 Q200 350 250 250 Q300 350 250 490" fill="#B8944F" opacity="0.3"></path></svg></div>
 <div class="num">— II —</div>
 <h2>金花</h2>
 <div class="ornament-divider">❦</div>
@@ -324,8 +325,8 @@
 <span class="pb-page"></span>
 </div></section><section class="slide section-slide" data-section="自然">
 <div class="border-frame"></div>
-<div class="deco"><svg viewbox="0 0 500 500"><circle cx="250" cy="250" fill="none" r="240" stroke="#2D4A3E" stroke-width="2"></circle><circle cx="250" cy="250" fill="none" r="200" stroke="#B8944F" stroke-width="1"></circle><path d="M250 10 Q300 150 250 250 Q200 150 250 10" fill="#2D4A3E" opacity="0.3"></path><path d="M250 490 Q200 350 250 250 Q300 350 250 490" fill="#7D5A6E" opacity="0.3"></path></svg></div>
-<div class="num">— II —</div>
+<div class="deco"><svg viewbox="0 0 500 500"><circle cx="250" cy="250" fill="none" r="240" stroke="#2D4A3E" stroke-width="2"></circle><circle cx="250" cy="250" fill="none" r="200" stroke="#B8944F" stroke-width="1"></circle><path d="M250 10 Q300 150 250 250 Q200 150 250 10" fill="#2D4A3E" opacity="0.3"></path><path d="M250 490 Q200 350 250 250 Q300 350 250 490" fill="#B8944F" opacity="0.3"></path></svg></div>
+<div class="num">— III —</div>
 <h2>自然</h2>
 <div class="ornament-divider">❦</div>
 <p>Every border is a vine. Every curve is a stem. Structure grows from nature, not from the grid.</p>
