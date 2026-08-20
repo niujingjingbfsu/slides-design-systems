@@ -439,6 +439,8 @@ updateUI(current);
 
 - Do NOT show two page numbers (e.g., big center number + right-side counter) — pick one location
 - Do NOT let the progress strip blend into a border line (2px line on top of 1px border = invisible)
+- Do NOT let the progress strip collide with content above it. A negative `top` lifts the strip INTO the content area — if cards/blocks/framed borders extend near the bottom, the dots will sit on top of a card border. Verify by screenshotting a content page, not just the cover. Safe pattern: keep the strip inside the bar (`top: 50%; transform: translateY(-50%)`) and reserve space with `.slide { padding-bottom: 96px !important; }`.
+- Do NOT put `pointer-events: none` on `.progress-strip` — it silently kills click-to-jump.
 - Do NOT use opacity below 0.12 for future segments — they disappear
 - Do NOT forget `padding-bottom` on `.slide` — content will overlap the progress bar
 - Do NOT keep old `.footer` elements alongside `.progress-bar` — duplicate info

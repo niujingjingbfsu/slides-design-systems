@@ -44,17 +44,20 @@ border:
   color: "#111111"
 
 progress_bar:
-  height: "56px"
+  height: "60px"
   background: "transparent"
   border_top: "none"
+  position: "strip inside the bar — top: 50%; transform: translateY(-50%); NOT negative top (dots would collide with card bottom borders)"
+  slide_padding_bottom: "96px"
   segments:
-    shape: "line"
-    size: "6px"
+    shape: "circle"
+    size: "12px (current 16px)"
     gap: "5px"
-    section_gap: "28px"
-    future: "light fill; 1px solid rgba(245,241,232,0.3); w=56px, h=6px"
-    past: "medium fill; rgba(245,241,232,0.7)"
-    current: "var(--yellow) fill; var(--yellow); shadow: 0 0 8px rgba(244,211,94,0.5)"
+    section_gap: "5px (uniform)"
+    future: "rgba(0,0,0,0.1) fill; 2px solid rgba(0,0,0,0.2)"
+    past: "var(--black) fill; var(--black) border"
+    current: "var(--yellow) fill; var(--black) border; 3px 3px 0 var(--red) offset shadow (Bauhaus signature)"
+  clickable: "yes — each segment jumps to its page; never set pointer-events:none"
 
 ---
 
