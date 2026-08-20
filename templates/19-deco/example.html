@@ -59,12 +59,12 @@
 
   /* Title */
   .title-slide { justify-content: center; align-items: center; text-align: center; }
-  .title-slide .sunburst { right: -100px; bottom: -100px; width: 600px; height: 600px; opacity: 0.15; }
-  .title-slide .pyramid { position: absolute; top: 60px; left: 50%; transform: translateX(-50%); width: 200px; height: 80px; z-index: 0; opacity: 0.2; }
+  .title-slide .sunburst { left: 50%; top: 50%; transform: translate(-50%,-50%); width: 620px; height: 620px; opacity: 0.12; }
+  .title-slide .pyramid { position: absolute; top: 60px; left: 50%; transform: translateX(-50%); width: 200px; height: 80px; z-index: 0; opacity: 0.35; }
   .title-slide .label { margin-bottom: 24px; }
   .title-slide h1 { font-family: var(--font-display); font-size: 120px; color: var(--gold-bright); line-height: 1.15; letter-spacing: 0.05em; }
   .title-slide .gold-rule { margin: 28px auto; }
-  .title-slide .subtitle { font-size: 16px; color: var(--muted); letter-spacing: 0.15em; text-transform: uppercase; font-weight: 300; max-width: 480px; line-height: 1.8; }
+  .title-slide .subtitle { font-size: 16px; color: var(--muted); letter-spacing: 0.15em; text-transform: uppercase; font-weight: 300; max-width: 760px; line-height: 1.8; }
 
   /* Section */
   .section-slide { justify-content: center; align-items: center; text-align: center; }
@@ -78,7 +78,7 @@
   .content-slide .header { text-align: center; margin-bottom: 40px; }
   .content-slide .label { margin-bottom: 12px; }
   .content-slide h2 { font-family: var(--font-display); font-size: 36px; color: var(--gold-bright); letter-spacing: 0.04em; }
-  .content-slide .cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 0; flex: 1; }
+  .content-slide .cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 0; flex: 0 0 auto; margin-top: auto; margin-bottom: auto; }
   .content-slide .card { text-align: center; padding: 36px 28px; position: relative; display: flex; flex-direction: column; align-items: center; }
   .content-slide .card:not(:last-child)::after { content:''; position: absolute; right: 0; top: 15%; bottom: 15%; width: 1px; background: var(--gold-dim); }
   .content-slide .card .icon-frame { width: 72px; height: 72px; border: 1px solid var(--gold); display: flex; align-items: center; justify-content: center; margin-bottom: 24px; position: relative; }
@@ -432,6 +432,25 @@
     if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); show(current - 1); }
     if (e.key === 'Home') { e.preventDefault(); show(0); }
     if (e.key === 'End') { e.preventDefault(); show(total - 1); }
+  });
+
+  // Art Deco sunburst rays (generated for every sunburst on every slide)
+  document.querySelectorAll('.sunburst g[id^="rays"]').forEach(function(g) {
+    const vb = g.closest('svg').viewBox.baseVal;
+    const R = Math.min(vb.width, vb.height) / 2;
+    const r0 = R * 0.32, r1 = R * 0.96;
+    for (let i = 0; i < 36; i++) {
+      const a = i * 10 * Math.PI / 180;
+      const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      line.setAttribute('x1', (Math.cos(a) * r0).toFixed(1));
+      line.setAttribute('y1', (Math.sin(a) * r0).toFixed(1));
+      line.setAttribute('x2', (Math.cos(a) * r1).toFixed(1));
+      line.setAttribute('y2', (Math.sin(a) * r1).toFixed(1));
+      line.setAttribute('stroke', '#C9A961');
+      line.setAttribute('stroke-width', i % 3 === 0 ? '1' : '0.5');
+      line.setAttribute('opacity', i % 3 === 0 ? '0.9' : '0.55');
+      g.appendChild(line);
+    }
   });
 
   buildProgress();

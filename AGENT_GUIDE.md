@@ -601,3 +601,59 @@ These are the most common aesthetic failures. Check every page against these.
 - Data pages with only 1 metric look sparse. Use at least 2-3, or make the single metric very large and prominent.
 
 **Quick test:** After finishing a page, squint at it (or zoom out to 50%). If you can't tell what's the most important element, or if your eye bounces around with no clear path, the page needs simplification.
+
+---
+
+## 11. Content Fidelity & Empty States (from reviewing real agent-generated decks)
+
+Every rule below was violated by an actual agent-generated deck in `examples/feishu-agent/`. Sections 6 and 10 tell you how much content fits and what looks good — this section covers what to do when the content you have doesn't match the layout you picked.
+
+### 11.1 Never render an empty component
+
+If a slot has no real content, the component must not exist in the DOM. An empty stat card / blank pill / icon-less tile reads as a rendering bug, not as minimalism.
+
+- Cover with 0 stats → no stat cards at all (don't render hollow pills).
+- 3-column layout with only 2 items → switch to the 2-column layout, don't leave a ghost column.
+- Data page with 1 metric → make that metric the hero (per §10.4-⑤), don't pad with placeholders.
+
+**Degrade the layout to fit the content. Never pad the content to fit the layout.**
+
+### 11.2 Exactly one page-number source
+
+A deck has two possible page indicators: the slide-level footer (`01 / 09`) and the deck-level chrome (counter / nav-hint). Pick the one the template already uses. Never show both — double page numbers on one screen is the most common tell of a generated deck.
+
+If the template ships a deck-level counter, the slide footer carries only the deck name / section label.
+
+### 11.3 Framed templates: everything lives inside the frame
+
+For any template with a decorative border/frame (Nouveau, Ukiyo-e, Wes Anderson, Deco...):
+
+- All chrome — footer, page dots, counter, nav-hint — sits fully inside the frame with ≥ 40px clearance from the frame line.
+- No text may be crossed by a frame line, corner ornament, or decorative band (waves, meander, etc.). Decorative bands never cover text: if a band and the footer occupy the same zone, move the footer up, never layer them.
+- After generating, check all four corners of every slide at 100% zoom.
+
+### 11.4 Token fidelity: no invented colors
+
+Every color in the output must come from the template's DESIGN.md token table (plus pure white/black only where the tokens already use them). If you feel a need for a new hue, you picked the wrong template. Audit: extract every hex/rgb in your generated CSS and diff against the token list — zero unknowns allowed.
+
+### 11.5 Adapt demo decorations to the content
+
+Template examples ship topic-specific demo icons/motifs (a flower, a wave, a mountain). When filling real content:
+
+- Either swap each icon for one that matches the actual content, or
+- Replace with the template's neutral geometry (circle / rule / seal / square).
+
+Leaving the demo flower icon on a slide about API latency reads as template residue. Icons are content, not chrome.
+
+### 11.6 Badges and labels hug their text
+
+Eyebrow badges, tags and pills are `width: fit-content` (or inline-flex). Never let a flex/grid parent stretch a badge to full row width — a 1100px-wide pill around a 200px label reads as a layout bug. If the template's own example stretches it, that's a template bug (fixed as of this revision), not a pattern to follow.
+
+### 11.7 Short content sits centered, not top-stranded
+
+Fixed-height cards with 2 lines of text in the top third and a void below read as unfinished (§10.4-⑤). When card content is shorter than ~60% of the card:
+
+- vertically center the card's inner content, or
+- let the card shrink to content height (then align the row's cards to top).
+
+Choose per template family and keep it consistent across all pages of the deck.

@@ -72,12 +72,12 @@
 
   /* === TITLE === */
   .title-slide .content-area { justify-content: center; }
-  .title-slide .block-pink { top: 0; left: 0; width: 45%; height: 100%; background: var(--pink); opacity: 0.8; mix-blend-mode: multiply; transform: translate(-4px, 3px); }
-  .title-slide .block-blue { top: 0; right: 0; width: 40%; height: 100%; background: var(--blue); opacity: 0.7; mix-blend-mode: multiply; transform: translate(4px, -3px); }
-  .title-slide .block-yellow { bottom: 80px; left: 50%; transform: translateX(-50%); width: 300px; height: 120px; background: var(--yellow); opacity: 0.6; mix-blend-mode: multiply; }
+  .title-slide .block-pink { top: 0; left: 0; width: 55%; height: 100%; background: var(--pink); opacity: 0.8; mix-blend-mode: multiply; transform: translate(-4px, 3px); }
+  .title-slide .block-blue { top: 0; right: 0; width: 33%; height: 100%; background: var(--blue); opacity: 0.7; mix-blend-mode: multiply; transform: translate(4px, -3px); }
   .title-slide .content-inner { position: relative; z-index: 3; }
   .title-slide h1 { font-size: 96px; }
-  .title-slide .edition { font-family: var(--font-mono); font-size: 14px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; margin-top: 28px; display: inline-block; background: var(--paper); padding: 8px 18px; border: 2px solid var(--black); }
+  .title-slide .edition { font-family: var(--font-mono); font-size: 14px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; margin-top: 28px; display: inline-block; background: var(--paper); padding: 8px 18px; border: 2px solid var(--black); position: relative; }
+  .title-slide .edition::before { content: ''; position: absolute; inset: -2px; transform: translate(5px, 5px); background: var(--yellow); z-index: -1; }
 
   /* === SECTION === */
   .section-slide .content-area { justify-content: center; align-items: flex-start; }
@@ -89,7 +89,7 @@
   /* === CONTENT === */
   .content-slide .header { margin-bottom: 40px; }
   .content-slide .body { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; flex: 1; }
-  .content-slide .card { background: var(--paper); border: 2px solid var(--black); padding: 28px 24px; display: flex; flex-direction: column; overflow: hidden; position: relative; }
+  .content-slide .card { background: var(--paper); border: 2px solid var(--black); padding: 28px 24px; display: flex; flex-direction: column; justify-content: center; overflow: hidden; position: relative; }
   .content-slide .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 8px; }
   .content-slide .card:nth-child(1)::before { background: var(--pink); }
   .content-slide .card:nth-child(2)::before { background: var(--blue); }
@@ -198,7 +198,6 @@
 <section class="slide title-slide active" data-section="RISOGRAPH">
 <div class="color-block block-pink"></div>
 <div class="color-block block-blue"></div>
-<div class="color-block block-yellow"></div>
 <div class="tex"></div>
 <div class="reg tl"></div><div class="reg tr"></div><div class="reg bl"></div><div class="reg br"></div>
 <div class="content-area">

@@ -81,6 +81,7 @@
 
   .tag {
     display: inline-flex;
+    width: fit-content;
     align-items: center;
     gap: 8px;
     padding: 7px 16px;
@@ -104,10 +105,10 @@
   .title-slide { justify-content: center; }
   .title-slide .organic-shape {
     position: absolute;
-    top: -60px;
-    left: -40px;
-    width: 280px;
-    height: 280px;
+    top: -80px;
+    right: -80px;
+    width: 240px;
+    height: 240px;
     background: var(--sage-light);
     border-radius: 60% 40% 50% 50% / 50% 60% 40% 50%;
     z-index: 0;
@@ -122,14 +123,14 @@
     z-index: 0;
     opacity: 0.7;
   }
-  .title-slide .tag { margin-bottom: 28px; }
+  .title-slide .tag { margin-bottom: 28px; align-self: flex-start; }
   .title-slide h1 {
     font-size: 104px;
     font-weight: 800;
     letter-spacing: -0.04em;
     line-height: 1.15;
   }
-  .title-slide h1 .light { font-weight: 300; color: var(--sage-deep); }
+  .title-slide h1 .light { font-weight: 300; color: #567856; }
   .title-slide .subtitle {
     margin-top: 24px;
     font-size: 17px;
@@ -209,6 +210,7 @@
     grid-template-columns: 1fr 1fr;
     gap: 56px;
     flex: 1;
+    align-items: center;
   }
   .content-slide .lead {
     font-size: 18px;
@@ -411,7 +413,7 @@
     font-weight: 800;
     letter-spacing: -0.035em;
   }
-  .closing-slide h2 .light { font-weight: 300; color: var(--sage-deep); }
+  .closing-slide h2 .light { font-weight: 300; color: #567856; }
   .closing-slide p {
     margin-top: 16px;
     font-size: 16px;

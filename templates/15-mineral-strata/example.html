@@ -94,7 +94,7 @@
   .content-slide h2 { font-family: var(--font-cn); font-size: 40px; font-weight: 900; color: var(--azurite); letter-spacing: 0.03em; }
   .content-slide .cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 28px; flex: 1; }
   .content-slide .card { padding: 28px 24px; border-top: 2px solid var(--gold); background: rgba(255,255,255,0.4); display: flex; flex-direction: column; }
-  .content-slide .card .num-cn { font-family: var(--font-cn); font-size: 14px; color: var(--gold); font-weight: 700; margin-bottom: 12px; letter-spacing: 0.1em; }
+  .content-slide .card .num-cn { font-family: var(--font-cn); font-size: 14px; color: var(--gold); font-weight: 700; margin-top: auto; margin-bottom: 12px; letter-spacing: 0.1em; }
   .content-slide .card h3 { font-family: var(--font-cn); font-size: 22px; font-weight: 700; color: var(--azurite); margin-bottom: 10px; }
   .content-slide .card p { font-size: 14px; line-height: 1.8; color: var(--muted); }
   .content-slide .card .en-term { font-family: var(--font-en); font-size: 14px; color: var(--malachite); letter-spacing: 0.1em; margin-top: auto; padding-top: 12px; font-weight: 600; }
@@ -253,20 +253,17 @@
 <div class="gold-line gold-line-2"></div>
 <div class="mountains">
 <svg preserveaspectratio="none" style="height:180px;" viewbox="0 0 1280 200">
-<polygon fill="#2E5A88" opacity="0.85" points="680,200 820,40 960,200"></polygon>
-<polygon fill="#F5F0E6" points="820,40 860,80 820,70 780,80"></polygon>
-<polygon fill="#4A8B6F" opacity="0.6" points="500,200 620,80 740,200"></polygon>
-<line stroke="#C9A227" stroke-width="1.5" x1="680" x2="820" y1="200" y2="40"></line>
-<line stroke="#C9A227" stroke-width="1.5" x1="960" x2="820" y1="200" y2="40"></line>
-<line opacity="0.5" stroke="#C9A227" stroke-width="1" x1="500" x2="620" y1="200" y2="80"></line>
-<line opacity="0.5" stroke="#C9A227" stroke-width="1" x1="740" x2="620" y1="200" y2="80"></line>
+<polygon fill="#4A8B6F" points="500,200 620,80 740,200"></polygon>
+<path d="M500,200 L620,80 L740,200" fill="none" opacity="0.6" stroke="#C9A227" stroke-width="1"></path>
+<polygon fill="#2E5A88" points="680,200 820,40 960,200"></polygon>
+<path d="M680,200 L820,40 L960,200" fill="none" stroke="#C9A227" stroke-width="1.5"></path>
 </svg>
 </div>
 <div class="halo">
 <svg viewbox="0 0 180 180">
-<circle cx="90" cy="90" fill="none" r="80" stroke="#C9A227" stroke-width="1"></circle>
-<circle cx="90" cy="90" fill="none" opacity="0.5" r="68" stroke="#C9A227" stroke-width="0.5"></circle>
-<circle cx="90" cy="90" fill="none" opacity="0.3" r="56" stroke="#C9A227" stroke-width="0.5"></circle>
+<circle cx="90" cy="90" fill="none" r="80" stroke="#C9A227" stroke-width="1.5"></circle>
+<circle cx="90" cy="90" fill="none" opacity="0.65" r="68" stroke="#C9A227" stroke-width="1"></circle>
+<circle cx="90" cy="90" fill="none" opacity="0.45" r="56" stroke="#C9A227" stroke-width="1"></circle>
 </svg>
 </div>
 <div class="content-area">

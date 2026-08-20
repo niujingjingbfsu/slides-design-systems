@@ -44,16 +44,17 @@
   .slide > *:not(:where(.blob)):not(:where(.footer)) { position: relative; z-index: 1; }
 
   .glass { background: rgba(255,255,255,0.12); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.2); border-radius: 20px; }
-  .pill { display: inline-flex; align-items: center; gap: 8px; padding: 8px 18px; background: rgba(255,255,255,0.15); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.25); border-radius: 100px; font-size: 14px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+  .pill { display: inline-flex; width: fit-content; align-self: flex-start; align-items: center; gap: 8px; padding: 8px 18px; background: rgba(255,255,255,0.15); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.25); border-radius: 100px; font-size: 14px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
   .pill::before { content:''; width:8px; height:8px; border-radius:50%; background:#fff; box-shadow:0 0 8px #fff; }
 
   /* Title */
   .title-slide { justify-content: center; }
   .title-slide h1 { font-size: 130px; font-weight: 900; line-height: 1.15; letter-spacing: -0.04em; text-transform: uppercase; }
   .title-slide .subtitle { margin-top: 24px; font-size: 18px; color: var(--muted); font-weight: 400; max-width: 500px; line-height: 1.6; }
-  .title-slide .float-card { position: absolute; right: 80px; bottom: 120px; padding: 24px 28px; width: 240px; }
-  .title-slide .float-card .num { font-size: 36px; font-weight: 800; }
-  .title-slide .float-card .lbl { font-size: 14px; color: var(--muted); margin-top: 4px; font-weight: 600; }
+  .title-slide .float-card { position: absolute; right: 80px; bottom: 138px; padding: 24px 32px; display: flex; align-items: center; gap: 28px; }
+  .title-slide .float-card .fc-div { width: 1px; height: 46px; background: rgba(255,255,255,0.25); }
+  .title-slide .float-card .num { font-size: 36px; font-weight: 800; line-height: 1; }
+  .title-slide .float-card .lbl { font-size: 14px; color: var(--muted); margin-top: 6px; font-weight: 600; }
 
   /* Section */
   .section-slide { justify-content: center; align-items: center; text-align: center; }
@@ -65,7 +66,7 @@
   .content-slide .header { margin-bottom: 36px; }
   .content-slide h2 { font-size: 44px; font-weight: 800; letter-spacing: -0.025em; margin-top: 14px; }
   .content-slide .cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; flex: 1; }
-  .content-slide .card { padding: 32px; border-radius: 20px; background: rgba(255,255,255,0.1); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.18); display: flex; flex-direction: column; }
+  .content-slide .card { padding: 32px; border-radius: 20px; background: rgba(255,255,255,0.1); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.18); display: flex; flex-direction: column; justify-content: center; }
   .content-slide .card .icon { width: 52px; height: 52px; border-radius: 16px; background: rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 20px; }
   .content-slide .card h3 { font-size: 20px; font-weight: 700; margin-bottom: 10px; }
   .content-slide .card p { font-size: 14px; line-height: 1.7; color: var(--muted); }
@@ -198,8 +199,9 @@
 <h1>ELEC<br/>TRIC</h1>
 <p class="subtitle">A bold, gradient-drenched presentation template. Loud colors, clean type, zero apologies.</p>
 <div class="float-card glass">
-<div class="num">3</div>
-<div class="lbl">Gradient hues</div>
+<div class="fc-item"><div class="num">3</div><div class="lbl">Gradient hues</div></div>
+<div class="fc-div"></div>
+<div class="fc-item"><div class="num">900</div><div class="lbl">Max weight</div></div>
 </div>
 
 <div class="progress-bar">
